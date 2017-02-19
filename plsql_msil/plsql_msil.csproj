@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D29F5AA-F96F-4011-A9E3-4298375089E5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>plsql_msil</RootNamespace>
+    <AssemblyName>plsql_msil</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AstNodes\BasicNode.cs" />
+    <Compile Include="AstNodes\ClassNodes\ClassDefNode.cs" />
+    <Compile Include="AstNodes\ClassNodes\ClassDeclNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\DoWhileNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\AssignNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\MemberCallNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\ReturnNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\IndexNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\WhileNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\IfNode.cs" />
+    <Compile Include="AstNodes\DeclareBlockNode.cs" />
+    <Compile Include="AstNodes\EntryPointNode.cs" />
+    <Compile Include="AstNodes\MathNodes\BinaryOperator.cs" />
+    <Compile Include="AstNodes\MathNodes\AndNode.cs" />
+    <Compile Include="AstNodes\MathNodes\NotNode.cs" />
+    <Compile Include="AstNodes\MathNodes\OrNode.cs" />
+    <Compile Include="AstNodes\MathNodes\ModNode.cs" />
+    <Compile Include="AstNodes\MathNodes\MinusNode.cs" />
+    <Compile Include="AstNodes\MathNodes\DivNode.cs" />
+    <Compile Include="AstNodes\MathNodes\GreaterNode.cs" />
+    <Compile Include="AstNodes\MathNodes\LessNode.cs" />
+    <Compile Include="AstNodes\MathNodes\GreaterOrEqualNode.cs" />
+    <Compile Include="AstNodes\MathNodes\LessOrEqualNode.cs" />
+    <Compile Include="AstNodes\MathNodes\EqualNode.cs" />
+    <Compile Include="AstNodes\MathNodes\NotEqualNode.cs" />
+    <Compile Include="AstNodes\MathNodes\MultNode.cs" />
+    <Compile Include="AstNodes\MathNodes\ExpressionNode.cs" />
+    <Compile Include="AstNodes\MathNodes\PlusNode.cs" />
+    <Compile Include="AstNodes\MethodNodes\CreateInstanceNode.cs" />
+    <Compile Include="AstNodes\MethodNodes\MethodCallNode.cs" />
+    <Compile Include="AstNodes\MethodNodes\MethodDefNode.cs" />
+    <Compile Include="AstNodes\MethodNodes\MethodDeclNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\BoolNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\FloatNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\RealNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\IntegerNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\CharNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\CodeBlockNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\SelfNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\StringNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\PackageNameNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\VarNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\VarDefNode.cs" />
+    <Compile Include="AstNodes\PackageNodes\PackageDefNode.cs" />
+    <Compile Include="AstNodes\PackageNodes\PackageDeclNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\RecordNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\TableNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\VoidNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\TypeNode.cs" />
+    <Compile Include="ASTPrinter.cs" />
+    <Compile Include="Codegeneration\Builders\Builder.cs" />
+    <Compile Include="Codegeneration\Builders\ClassBuilder.cs" />
+    <Compile Include="Codegeneration\Builders\CommandBuilder.cs" />
+    <Compile Include="Codegeneration\Builders\ConstructorBuilder.cs" />
+    <Compile Include="Codegeneration\Builders\EntryPointBuilder.cs" />
+    <Compile Include="Codegeneration\Builders\IBuilder.cs" />
+    <Compile Include="Codegeneration\Codegen.cs" />
+    <Compile Include="Codegeneration\Builders\MethodBuilder.cs" />
+    <Compile Include="Codegeneration\Builders\ModuleBuilder.cs" />
+    <Compile Include="Codegeneration\Builders\PackageBuilder.cs" />
+    <Compile Include="Codegeneration\Codegenerator.cs" />
+    <Compile Include="Codegeneration\Command.cs" />
+    <Compile Include="Codegeneration\CommandNames.cs" />
+    <Compile Include="Codegeneration\GenericType.cs" />
+    <Compile Include="Codegeneration\IPreGenPass.cs" />
+    <Compile Include="Codegeneration\NameConvertor.cs" />
+    <Compile Include="Codegeneration\AssignPass.cs" />
+    <Compile Include="Codegeneration\SpecialNodes\AssignIndexNode.cs" />
+    <Compile Include="Codegeneration\SpecialNodes\MemberCallNode.cs" />
+    <Compile Include="Codegeneration\SpecialNodes\CallvirtNode.cs" />
+    <Compile Include="Codegeneration\SpecialNodes\VarNode.cs" />
+    <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="Loggers\FileLogger.cs" />
+    <Compile Include="PlsqlLexer.cs" />
+    <Compile Include="PlsqlParser.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Loggers\ConsoleLogger.cs" />
+    <Compile Include="Semantic\Analyser.cs" />
+    <Compile Include="Semantic\Context.cs" />
+    <Compile Include="Semantic\Passes\DefinitionAnalyser.cs" />
+    <Compile Include="Loggers\ILogger.cs" />
+    <Compile Include="Semantic\IPass.cs" />
+    <Compile Include="Semantic\SemanticAnalyser.cs" />
+    <Compile Include="StandardLibraryTypesLoader.cs" />
+    <Compile Include="Semantic\Passes\TypeAnalyser.cs" />
+    <Compile Include="Semantic\TypeDescriptor.cs" />
+    <Compile Include="Semantic\VarTable.cs" />
+    <Compile Include="Types\ClassType.cs" />
+    <Compile Include="Types\LibraryInfo.cs" />
+    <Compile Include="Types\ConstructorInfo.cs" />
+    <Compile Include="Types\MethodInfo.cs" />
+    <Compile Include="Types\PackageType.cs" />
+    <Compile Include="Types\SimpeType.cs" />
+    <Compile Include="Types\RecordType.cs" />
+    <Compile Include="Types\TableType.cs" />
+    <Compile Include="Types\TypeInfo.cs" />
+    <Compile Include="Types\TypeStorage.cs" />
+    <Compile Include="Types\VarInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Plsql.g" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="example.c" />
+    <Content Include="lib.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
