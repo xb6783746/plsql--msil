@@ -79,7 +79,7 @@ namespace plsql_msil.Semantic
                         node.Ret.TypeName),
                     node);
 
-                type = SimpeType.Undefined;
+                type = SimpleType.Undefined;
             }
 
             var args = new List<VarStruct>();

@@ -129,7 +129,10 @@
     <Compile Include="Loggers\ILogger.cs" />
     <Compile Include="Semantic\IPass.cs" />
     <Compile Include="Semantic\SemanticAnalyser.cs" />
-    <Compile Include="StandardLibraryTypesLoader.cs" />
+    <Compile Include="TypeLoader\AbstractTypeLoader.cs" />
+    <Compile Include="TypeLoader\ClassLoader.cs" />
+    <Compile Include="TypeLoader\PackageLoader.cs" />
+    <Compile Include="TypeLoader\StandardLibraryTypesLoader.cs" />
     <Compile Include="Semantic\Passes\TypeAnalyser.cs" />
     <Compile Include="Semantic\TypeDescriptor.cs" />
     <Compile Include="Semantic\VarTable.cs" />
@@ -154,6 +157,9 @@
     <Content Include="lib.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>ilasm.bat</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

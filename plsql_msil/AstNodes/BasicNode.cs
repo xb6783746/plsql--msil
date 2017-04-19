@@ -11,13 +11,13 @@ namespace plsql_msil.AstNodes
 {
     abstract class BasicNode :CommonTree
     {
-
-        public BasicNode(CommonTree node)
+        protected BasicNode(CommonTree node)
             : base(node)
         {
 
         }
-        public BasicNode(IToken t)
+
+        protected BasicNode(IToken t)
             : base(t)
         {
 

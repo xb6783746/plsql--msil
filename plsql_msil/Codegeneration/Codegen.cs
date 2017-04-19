@@ -119,37 +119,37 @@ namespace plsql_msil.Codegeneration
         {
             builder.LoadBool(node.Value);
 
-            return SimpeType.Bool;
+            return SimpleType.Bool;
         }
         private TypeInfo Visit(CharNode node, MethodBuilder builder)
         {
             builder.LoadChar(node.Value);
 
-            return SimpeType.Char;
+            return SimpleType.Char;
         }      
         private TypeInfo Visit(FloatNode node, MethodBuilder builder)
         {
             builder.LoadFloat(node.Value);
 
-            return SimpeType.Float;
+            return SimpleType.Float;
         }
         private TypeInfo Visit(IntegerNode node, MethodBuilder builder)
         {
             builder.LoadInt(node.Value);
 
-            return SimpeType.Int;
+            return SimpleType.Int;
         }
         private TypeInfo Visit(RealNode node, MethodBuilder builder)
         {
             builder.LoadDouble(node.Value);
 
-            return SimpeType.Double;
+            return SimpleType.Double;
         }
         private TypeInfo Visit(StringNode node, MethodBuilder builder)
         {
             builder.LoadString(node.Value);
 
-            return SimpeType.String;
+            return SimpleType.String;
         }
 
         private void Visit(CodeBlockNode node, MethodBuilder builder)
@@ -197,7 +197,7 @@ namespace plsql_msil.Codegeneration
 
             var classType = node.TypeInfo as ClassType;
 
-            builder.Construct(classType, classType.Fields.Select(x => x.Type).ToList());
+            builder.Construct(classType, node.Constructor);
 
             return classType;
         }

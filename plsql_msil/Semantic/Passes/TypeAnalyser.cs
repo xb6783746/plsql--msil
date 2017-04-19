@@ -75,7 +75,7 @@ namespace plsql_msil.Semantic
 
             if (!exists)
             {
-                types.AddType(new ClassType(node.ClassName), true);
+                types.AddType(new ClassType(node.ClassName));
             }
             else
             {
@@ -90,7 +90,7 @@ namespace plsql_msil.Semantic
 
             if (!exists)
             {
-                types.AddType(new PackageType(node.PackageName), true);
+                types.AddType(new PackageType(node.PackageName));
 
                 CollectPackageTypes(node);
             }
@@ -150,7 +150,7 @@ namespace plsql_msil.Semantic
             var record = new RecordType(packageType.Name, node.Name, vars);
 
             bool ok = packageType.AddType(record);
-            types.AddType(record, false);
+            types.AddType(record);
 
             if (!ok)
             {
@@ -167,7 +167,7 @@ namespace plsql_msil.Semantic
                                 packageType.Name, node.Name, types.GetType(node.TypeNode.TypeName));
 
             bool ok = packageType.AddType(tableType);
-            types.AddType(tableType, false);
+            types.AddType(tableType);
 
             if (!ok)
             {

@@ -26,9 +26,9 @@ namespace plsql_msil.Codegeneration
 
         public static string Convert(TypeInfo type)
         {
-            if(type is SimpeType)
+            if(type is SimpleType)
             {
-                return SimpleTypes(type as SimpeType);
+                return SimpleTypes(type as SimpleType);
             }
 
             if (type is TableType)
@@ -56,9 +56,9 @@ namespace plsql_msil.Codegeneration
             throw new Exception();
         }
 
-        private static string SimpleTypes(SimpeType type)
+        private static string SimpleTypes(SimpleType type)
         {
-            return simpleTypes[type.SimpleType];
+            return simpleTypes[type.SType];
         }
 
         private static string ClassType(ClassType type)

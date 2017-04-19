@@ -26,7 +26,6 @@ namespace plsql_msil.Semantic
             context = new Context(types);
         }
 
-        private List<TypeInfo> declaredTypes;
         private Context context;
 
         public bool Check(CommonTree tree, ILogger logger)
@@ -39,18 +38,19 @@ namespace plsql_msil.Semantic
                 || x is PackageDefNode
                 || x is EntryPointNode;
 
-            declaredTypes = new List<TypeInfo>(context.Types.DeclaredTypes);
 
             foreach (dynamic item in tree.Children.Where(predicate))
             {
                 Visit(item);
             }
 
-            if (declaredTypes.Count != 0)
+            var notImplemented = context.Types.Types.Where(x => !x.IsImplemented);
+
+            if (notImplemented.Count() != 0)
             {
                 string names = "";
 
-                foreach (var item in declaredTypes)
+                foreach (var item in notImplemented)
                 {
                     names += item.ToString() + " ";
                 }
@@ -85,14 +85,12 @@ namespace plsql_msil.Semantic
                 return null;
             }
 
-            if (!declaredTypes.Exists(x => x.Type == Types.Type.Class && x.Name == node.ClassName))
+            if (type.IsImplemented)
             {
                 Log(String.Format("Класс {0} уже определил тело", node.ClassName), node);
 
                 return null;
             }
-
-            declaredTypes.RemoveAll(x => x.Type == Types.Type.Class && x.Name == node.ClassName);
 
             context.EnterClass(type);
 
@@ -122,9 +120,18 @@ namespace plsql_msil.Semantic
 
             context.ExitClass();
 
+            type.IsImplemented = true;
+
+            var constructor = new ConstructorInfo(false, type);
+
+            foreach (var item in type.Fields)
+            {
+                constructor.AddArg(item.Name, item.Type);
+            }
+
+            type.AddConstructor(constructor);
+
             return null;
-
-
         }
         private TypeDescriptor Visit(PackageDefNode node)
         {
@@ -132,12 +139,17 @@ namespace plsql_msil.Semantic
 
             if (type == null)
             {
-                Log(String.Format("Пакет {0} опрделяет тело, но не определяет интерфейс", node.PackageName), node);
+                Log(String.Format("Пакет {0} определяет тело, но не определяет интерфейс", node.PackageName), node);
 
                 return null;
             }
 
-            declaredTypes.RemoveAll(x => x.Type == Types.Type.Package && x.Name == node.PackageName);
+            if (type.IsImplemented)
+            {
+                Log(String.Format("Пакет {0} уже определил тело", node.PackageName), node);
+
+                return null;
+            }
 
             List<MethodInfo> allMethods = new List<MethodInfo>(type.Methods);
 
@@ -162,6 +174,8 @@ namespace plsql_msil.Semantic
 
                 Log(String.Format("В пакете {0} методы {1} объявлены, но не реализованы", node.PackageName, methods), node);
             }
+
+            type.IsImplemented = true;
 
             return null;
 
@@ -330,7 +344,7 @@ namespace plsql_msil.Semantic
                 typeList.Add(Visit(item).Type);
             }
 
-            if(!TypeInfo.Compare(typeList, type.Fields.Select(x => x.Type))) //!!!!!!!!!!
+            if(!type.ContainsConstructor(typeList))
             {
                 Log(String.Format("У класса {0} нет конструктора, принимающего данные аргументы", node.TypeName), node);
 
@@ -338,6 +352,7 @@ namespace plsql_msil.Semantic
             }
 
             node.TypeInfo = type;
+            node.Constructor = typeList;
 
             return new TypeDescriptor(false, type, true);
         }
@@ -601,9 +616,9 @@ namespace plsql_msil.Semantic
                 return TypeDescriptor.Undefined;
             }
 
-            var indexType = index.Type as SimpeType;
+            var indexType = index.Type as SimpleType;
 
-            if (indexType == null || indexType.SimpleType != SimpleTypeEnum.Int)
+            if (indexType == null || indexType.SType != SimpleTypeEnum.Int)
             {
                 Log("Индексом может быть только целое число", node);
 
@@ -687,17 +702,17 @@ namespace plsql_msil.Semantic
                 SimpleTypeEnum.Int,
             };
 
-            var simpleType = type as SimpeType;
+            var simpleType = type as SimpleType;
 
             return simpleType != null
-                && types.Contains(simpleType.SimpleType);
+                && types.Contains(simpleType.SType);
         }
         private bool IsBoolType(TypeInfo type)
         {
-            var boolType = type as SimpeType;
+            var boolType = type as SimpleType;
 
             return boolType != null
-                && boolType.SimpleType == SimpleTypeEnum.Bool;
+                && boolType.SType == SimpleTypeEnum.Bool;
         }
 
     }

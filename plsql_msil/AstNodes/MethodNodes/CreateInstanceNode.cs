@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types;
 
 namespace plsql_msil.AstNodes.MethodNodes
 {
@@ -54,5 +55,7 @@ namespace plsql_msil.AstNodes.MethodNodes
                 return res;
             }
         }
+
+        public List<TypeInfo> Constructor { get; set; }
     }
 }

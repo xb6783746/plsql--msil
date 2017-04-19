@@ -11,12 +11,12 @@ namespace plsql_msil.Types
         Int, Char, Bool, String, Double, Float, Void, Null, Undefined
     }
 
-    class SimpeType :TypeInfo
+    class SimpleType :TypeInfo
     {
 
-        public SimpeType(SimpleTypeEnum type) :base(type.ToString().ToLower())
+        public SimpleType(SimpleTypeEnum type) :base(type.ToString().ToLower(), true)
         {
-            this.SimpleType = type;
+            this.SType = type;
         }
 
         public override Type Type
@@ -24,7 +24,7 @@ namespace plsql_msil.Types
             get { return Type.Simple; }
         }
 
-        public SimpleTypeEnum SimpleType
+        public SimpleTypeEnum SType
         {
             get;
             private set;

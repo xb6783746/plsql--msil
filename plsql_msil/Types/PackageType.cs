@@ -8,8 +8,8 @@ namespace plsql_msil.Types
 {
     class PackageType : ClassType
     {
-        public PackageType(string libName, string namespace_, string name)
-            : base(libName, namespace_, name)
+        public PackageType(string libName, string namespace_, string name, bool isImplemented = false)
+            : base(libName, namespace_, name, isImplemented)
         {
         }
         public PackageType(string name) :base(name)

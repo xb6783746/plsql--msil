@@ -9,7 +9,7 @@ namespace plsql_msil.Types
     class TableType :ClassType
     {
         public TableType(string packageName, string name, TypeInfo itemsType)
-            : base(packageName + "." + name)
+            : base(packageName + "." + name, true)
         {
             ItemsType = itemsType;
         }

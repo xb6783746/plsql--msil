@@ -16,7 +16,7 @@ namespace plsql_msil.Types
             IsLibClass = true;
         }
         public RecordType(string packageName, string name, List<VarInfo> vars)
-            : base(packageName + "." + name)
+            : base(packageName + "." + name, true)
         {
 
             PackageName = packageName;

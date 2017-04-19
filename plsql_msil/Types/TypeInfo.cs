@@ -13,16 +13,19 @@ namespace plsql_msil.Types
 
     abstract class TypeInfo
     {
-        public TypeInfo(string name)
+        public TypeInfo(string name, bool isImplemented = false)
         {
             Name = name;
+            IsImplemented = isImplemented;
         }
 
         public string Name { get; protected set; }
         public virtual Type Type { get; protected set; }
+        public virtual List<ConstructorInfo> Constructors { get { return null; } }
         public virtual List<MethodInfo> Methods { get { return null;} }
-        public virtual List<VarInfo> Fields { get { return null; } }
+        public virtual List<VarInfo> Fields { get { return null; } }      
         public virtual List<TypeInfo> Types { get { return null; } }
+        public bool IsImplemented { get; set; }
 
         public virtual string LibName { get; protected set; }
         public virtual string Namespace { get; protected set; }
@@ -46,6 +49,11 @@ namespace plsql_msil.Types
             return null;
         }
 
+        public virtual bool ContainsConstructor(List<TypeInfo> args)
+        {
+            return false;
+        }
+
         public override bool Equals(object obj)
         {
             var type = obj as TypeInfo;
@@ -57,15 +65,15 @@ namespace plsql_msil.Types
             return Type.ToString() + "." + Name;
         }
 
-        private static TypeInfo bool_ = new SimpeType(SimpleTypeEnum.Bool);
-        private static TypeInfo int_ = new SimpeType(SimpleTypeEnum.Int);
-        private static TypeInfo char_ = new SimpeType(SimpleTypeEnum.Char);
-        private static TypeInfo double_ = new SimpeType(SimpleTypeEnum.Double);
-        private static TypeInfo string_ = new SimpeType(SimpleTypeEnum.String);
-        private static TypeInfo float_ = new SimpeType(SimpleTypeEnum.Float);
-        private static TypeInfo null_ = new SimpeType(SimpleTypeEnum.Null);
-        private static TypeInfo void_ = new SimpeType(SimpleTypeEnum.Void);
-        private static TypeInfo undefined = new SimpeType(SimpleTypeEnum.Undefined);
+        private static TypeInfo bool_ = new SimpleType(SimpleTypeEnum.Bool);
+        private static TypeInfo int_ = new SimpleType(SimpleTypeEnum.Int);
+        private static TypeInfo char_ = new SimpleType(SimpleTypeEnum.Char);
+        private static TypeInfo double_ = new SimpleType(SimpleTypeEnum.Double);
+        private static TypeInfo string_ = new SimpleType(SimpleTypeEnum.String);
+        private static TypeInfo float_ = new SimpleType(SimpleTypeEnum.Float);
+        private static TypeInfo null_ = new SimpleType(SimpleTypeEnum.Null);
+        private static TypeInfo void_ = new SimpleType(SimpleTypeEnum.Void);
+        private static TypeInfo undefined = new SimpleType(SimpleTypeEnum.Undefined);
 
         public static TypeInfo Bool
         {

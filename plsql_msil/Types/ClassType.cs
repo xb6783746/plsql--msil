@@ -9,19 +9,20 @@ namespace plsql_msil.Types
     class ClassType :TypeInfo
     {
 
-        public ClassType(string libName, string namespace_, string name)
-            : base(name)
+        public ClassType(string libName, string namespace_, string name, bool isImplemented = false)
+            : base(name, isImplemented)
         {
             LibName = libName;
             Namespace = namespace_;
             IsLibClass = true;
         }
-        public ClassType(string name) :base(name)
+        public ClassType(string name, bool isImplemented = false) :base(name, isImplemented)
         {
         }
 
         protected List<MethodInfo> innerMethods = new List<MethodInfo>();
         protected List<VarInfo> innerVars = new List<VarInfo>();
+        private List<ConstructorInfo> constructors = new List<ConstructorInfo>();
 
         public override Type Type
         {
@@ -41,19 +42,9 @@ namespace plsql_msil.Types
                 return innerVars;
             }
         }
-        public List<ConstructorInfo> Constructors
+        public override List<ConstructorInfo> Constructors
         {
-            get
-            {
-                var constructorInfo = new ConstructorInfo(false, this);
-
-                foreach (var item in Fields)
-                {
-                    constructorInfo.AddArg(item.Name, item.Type);
-                }
-
-                return new List<ConstructorInfo>() { constructorInfo };
-            }
+            get { return constructors; }
         }
 
         public override VarInfo GetField(string memberName)
@@ -86,6 +77,23 @@ namespace plsql_msil.Types
             if (ok)
             {
                 innerMethods.Add(method);
+            }
+
+            return ok;
+        }
+
+        public override bool ContainsConstructor(List<TypeInfo> args)
+        {
+            return constructors.Exists(x => TypeInfo.Compare(x.ArgTypes, args));
+        }
+
+        public bool AddConstructor(ConstructorInfo constructor)
+        {
+            bool ok = !ContainsConstructor(constructor.ArgTypes);
+
+            if (ok)
+            {
+                constructors.Add(constructor);
             }
 
             return ok;

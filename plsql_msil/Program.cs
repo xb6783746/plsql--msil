@@ -128,7 +128,7 @@ namespace plsql_msil
 
                 }
 
-                logger.Log(String.Format("--------", path));
+                logger.Log(string.Format("--------", path));
 
             }
         }
