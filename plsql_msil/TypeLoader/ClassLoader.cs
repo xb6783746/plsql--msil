@@ -31,9 +31,9 @@ namespace plsql_msil.TypeLoader
         private void BuildConstructor(ClassType classType, System.Reflection.ConstructorInfo constructorInfo)
         {
             var args = constructorInfo.GetParameters().Select(
-                x => new { Type = storage.GetType(ConvertMSILNames(x.ParameterType)), Name = x.Name }).ToList();
+                x => new { Type = storage.GetType(ConvertMSILNames(x.ParameterType)), Name = x.Name });
 
-            if (!args.Exists(x => x.Type == null))
+            if (!args.Any(x => x.Type == null))
             {
                 var constructor = new ConstructorInfo(false, classType);
 

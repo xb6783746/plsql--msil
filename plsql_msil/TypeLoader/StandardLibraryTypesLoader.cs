@@ -1,18 +1,19 @@
-﻿using plsql_msil.TypeLoader;
-using plsql_msil.Types;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using plsql_msil.Types;
 
-namespace plsql_msil.Semantic
+namespace plsql_msil.TypeLoader
 {
     class StandardLibraryTypesLoader
     {
-
         public TypeStorage Load(List<string> libs)
+        {
+
+            var assemblies = libs.Select(Assembly.LoadFrom).ToList();
+            return Load(assemblies);
+        }
+        public TypeStorage Load(List<Assembly> libs)
         {
             storage = new TypeStorage();
             GetSimpleTypes(storage);
@@ -26,7 +27,6 @@ namespace plsql_msil.Semantic
         }
 
         private TypeStorage storage;
-        private List<System.Type> libTypes = new List<System.Type>();
 
         private ClassLoader classLoader;
         private PackageLoader packageLoader;
@@ -44,7 +44,7 @@ namespace plsql_msil.Semantic
         }
 
 
-        private void LoadTypes(List<string> libs)
+        private void LoadTypes(List<Assembly> libs)
         {
             foreach (var item in libs)
             {
@@ -52,9 +52,8 @@ namespace plsql_msil.Semantic
             }
         }
 
-        private void LoadTypes(string path)
+        private void LoadTypes(Assembly assembly)
         {
-            var assembly = Assembly.LoadFrom(path);
 
             storage.Libs.Add(
                 new LibraryInfo(
@@ -66,8 +65,6 @@ namespace plsql_msil.Semantic
             var types = assembly
                 .GetTypes()
                 .Where(x => x.IsClass && x.IsPublic);
-
-            libTypes.AddRange(types);
 
             foreach (var item in types)
             {
@@ -82,18 +79,10 @@ namespace plsql_msil.Semantic
 
         private plsql_msil.Types.TypeInfo GetTypeInfo(System.Type type)
         {
-            plsql_msil.Types.TypeInfo typeInfo;
 
-            if(type.IsAbstract)
-            {
-                typeInfo = new PackageType(type.Assembly.GetName().Name, type.Namespace, type.Name, true);
-            }
-            else
-            {
-                typeInfo = new ClassType(type.Assembly.GetName().Name, type.Namespace, type.Name, true);
-            }
-
-            return typeInfo;
+            return type.IsAbstract ? 
+                  new PackageType(type.Assembly.GetName().Name, type.Namespace, type.Name, true) 
+                : new ClassType(type.Assembly.GetName().Name, type.Namespace, type.Name, true);
         }
 
         private void BuildType(System.Type type)
@@ -109,40 +98,6 @@ namespace plsql_msil.Semantic
                 classLoader.Build(typeInfo as ClassType, type);
             }
         }
-
-        //private void BuildPackage(PackageType packageType, System.Type type)
-        //{
-        //    var fields = type.GetFields().Where(x => x.IsPublic && x.IsStatic && IsSimpleType(x.FieldType));
-
-        //    foreach (var field in fields)
-        //    {
-        //        var fieldType = storage.GetType(ConvertMSILNames(field.FieldType));
-
-        //        packageType.AddField(field.Name, fieldType);
-        //    }
-
-        //    var methods = type.GetMethods().Where(x => 
-        //        x.IsPublic && x.IsStatic 
-        //        && IsSimpleType(x.ReturnType) 
-        //        && x.GetParameters().ToList().TrueForAll(y => IsSimpleType(y.ParameterType)));
-
-        //    foreach (var method in methods)
-        //    {
-        //        var retType = storage.GetType(ConvertMSILNames(method.ReturnType));
-
-        //        var methodInfo = new plsql_msil.Types.MethodInfo(method.Name, retType, true, packageType);
-
-        //        foreach (var item in method.GetParameters())
-        //        {
-        //            var varType = storage.GetType(ConvertMSILNames(item.ParameterType));
-
-        //            methodInfo.AddArg(item.Name, varType);
-        //        }
-
-        //        packageType.AddMethod(methodInfo);
-        //    }
-
-        //}
 
 
     }

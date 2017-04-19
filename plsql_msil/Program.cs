@@ -10,6 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.TypeLoader;
+
 /*
 using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.AstNodes.CommandNodes;

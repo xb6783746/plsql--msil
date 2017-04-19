@@ -48,34 +48,25 @@ namespace plsql_msil.TypeLoader
         }
         protected void BuildMethod(ClassType classType, System.Reflection.MethodInfo methodInfo)
         {
-            var retType = storage.GetType(ConvertMSILNames(methodInfo.ReturnType));
+            var retType = storage.GetType(ConvertMSILNames(methodInfo.ReturnType));          
 
-            if(retType == null)
+            var args =
+                methodInfo.GetParameters()
+                    .ToList()
+                    .Select(x => new {Type = storage.GetType(ConvertMSILNames(x.ParameterType)), Name = x.Name});
+
+            if (!args.Any(x => x.Type == null))
             {
-                return;
-            }
+                var method = new plsql_msil.Types.MethodInfo(methodInfo.Name, retType, methodInfo.IsStatic, classType);
 
-            var method = new plsql_msil.Types.MethodInfo(methodInfo.Name, retType, methodInfo.IsStatic, classType);
-
-            bool error = false;
-
-            foreach (var item in methodInfo.GetParameters())
-            {
-                var varType = storage.GetType(ConvertMSILNames(item.ParameterType));
-
-                if(varType == null)
+                foreach (var item in args)
                 {
-                    error = true;
-                    break;
+                    method.AddArg(item.Name, item.Type);
                 }
 
-                method.AddArg(item.Name, varType);
-            }
-
-            if(!error)
-            {
                 classType.AddMethod(method);
             }
+
         }
 
         private static Dictionary<string, string> primitiveTypes = new Dictionary<string, string>()
