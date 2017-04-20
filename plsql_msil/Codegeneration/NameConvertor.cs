@@ -13,6 +13,7 @@ namespace plsql_msil.Codegeneration
         private static Dictionary<SimpleTypeEnum, string> simpleTypes = new Dictionary<SimpleTypeEnum, string>()
         {
             {SimpleTypeEnum.Int, "int32"},
+            {SimpleTypeEnum.Byte, "uint8"},
             {SimpleTypeEnum.Char, "char"},
             {SimpleTypeEnum.Double, "float64"},
             {SimpleTypeEnum.Float, "float32"},

@@ -18,7 +18,8 @@ namespace plsql_msil.Semantic
             this.types = types;
 
 
-            passList.Add(new TypeAnalyser(types));
+            passList.Add(new TypeCollector(types));
+            passList.Add(new TypeBuilder(types));
             passList.Add(new DefinitionAnalyser(types));
         }
 

@@ -183,6 +183,8 @@ type
 	|   BOOL -> BOOL<TypeNode>
 	|   ID '.' ID
 	->  ^(TypeName<TypeNode> ID ID)
+	|	TABLE '(' type ')'
+	->  ^(TypeName<TableTypeNode> type)
 	|   ID -> ID<TypeNode>
 	;
 
@@ -471,6 +473,8 @@ methodCall
 createInstance
 	: ID '(' expressionList ')'
 	-> ^(CreateInstance<CreateInstanceNode> ID expressionList)
+	| TABLE '(' type ')'
+	-> ^(CreateInstance<CreateTableNode> type)
 	;
 
 quant

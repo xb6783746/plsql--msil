@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.AstNodes.ClassNodes;
 
 namespace plsql_msil.AstNodes.PackageNodes
 {
-    class PackageDefNode :BasicNode
+    class PackageDefNode : ClassDefNode
     {
         public PackageDefNode(CommonTree node)
             : base(node)
@@ -33,27 +34,6 @@ namespace plsql_msil.AstNodes.PackageNodes
             return new PackageDefNode(Token);
         }
 
-        public string PackageName
-        {
-            get
-            {
-                return GetChild(0).Text;
-            }
-        }
 
-        public List<MethodDefNode> PackageDefs
-        {
-            get
-            {
-                List<MethodDefNode> res = new List<MethodDefNode>();
-
-                for (int i = 1; i < ChildCount; i++)
-                {
-                    res.Add(GetChild(i) as MethodDefNode);
-                }
-
-                return res;
-            }
-        }
     }
 }

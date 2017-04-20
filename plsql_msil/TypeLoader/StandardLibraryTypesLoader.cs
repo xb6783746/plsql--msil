@@ -35,6 +35,7 @@ namespace plsql_msil.TypeLoader
         {
 
             storage.AddType(Types.TypeInfo.Int);
+            storage.AddType(Types.TypeInfo.Byte);
             storage.AddType(Types.TypeInfo.Char);
             storage.AddType(Types.TypeInfo.Double);
             storage.AddType(Types.TypeInfo.Bool);

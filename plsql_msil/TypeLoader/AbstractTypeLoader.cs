@@ -72,6 +72,7 @@ namespace plsql_msil.TypeLoader
         private static Dictionary<string, string> primitiveTypes = new Dictionary<string, string>()
         {
             {"Int32", "int"},
+            {"Byte", "byte"},
             {"Char", "char"},
             {"Double", "double"},
             {"Float", "float"},

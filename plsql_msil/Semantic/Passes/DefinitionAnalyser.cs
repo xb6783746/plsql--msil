@@ -10,6 +10,7 @@ using plsql_msil.AstNodes.MathNodes;
 using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
 using plsql_msil.AstNodes.PackageNodes;
+using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Loggers;
 using plsql_msil.Types;
 using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
@@ -78,18 +79,18 @@ namespace plsql_msil.Semantic.Passes
 
         private TypeDescriptor Visit(ClassDefNode node)
         {
-            var type = context.GetType(node.ClassName) as ClassType;
+            var type = context.GetType(node.Name) as ClassType;
 
             if (type == null)
             {
-                Log(String.Format("Класс {0} определяет тело, но не определяет интерфейс", node.ClassName), node);
+                Log(String.Format("Класс {0} определяет тело, но не определяет интерфейс", node.Name), node);
 
                 return null;
             }
 
             if (type.IsImplemented)
             {
-                Log(String.Format("Класс {0} уже определил тело", node.ClassName), node);
+                Log(String.Format("Класс {0} уже определил тело", node.Name), node);
 
                 return null;
             }
@@ -98,7 +99,7 @@ namespace plsql_msil.Semantic.Passes
 
             List<MethodInfo> allMethods = new List<MethodInfo>(type.Methods);
 
-            foreach (var item in node.ClassDefs)
+            foreach (var item in node.Defs)
             {
                 var method = Visit(item, type);
 
@@ -117,7 +118,7 @@ namespace plsql_msil.Semantic.Passes
                     methods += item.Name + " ";
                 }
 
-                Log(String.Format("В классе {0} методы {1}объявлены, но не реализованы", node.ClassName, methods), node);
+                Log(String.Format("В классе {0} методы {1}объявлены, но не реализованы", node.Name, methods), node);
             }
 
             context.ExitClass();
@@ -137,25 +138,25 @@ namespace plsql_msil.Semantic.Passes
         }
         private TypeDescriptor Visit(PackageDefNode node)
         {
-            var type = context.GetType(node.PackageName) as PackageType;
+            var type = context.GetType(node.Name) as PackageType;
 
             if (type == null)
             {
-                Log(String.Format("Пакет {0} определяет тело, но не определяет интерфейс", node.PackageName), node);
+                Log(String.Format("Пакет {0} определяет тело, но не определяет интерфейс", node.Name), node);
 
                 return null;
             }
 
             if (type.IsImplemented)
             {
-                Log(String.Format("Пакет {0} уже определил тело", node.PackageName), node);
+                Log(String.Format("Пакет {0} уже определил тело", node.Name), node);
 
                 return null;
             }
 
             List<MethodInfo> allMethods = new List<MethodInfo>(type.Methods);
 
-            foreach (var item in node.PackageDefs)
+            foreach (var item in node.Defs)
             {
                 var method = Visit(item, type);
 
@@ -174,7 +175,7 @@ namespace plsql_msil.Semantic.Passes
                     methods += item.Name + " ";
                 }
 
-                Log(String.Format("В пакете {0} методы {1} объявлены, но не реализованы", node.PackageName, methods), node);
+                Log(String.Format("В пакете {0} методы {1} объявлены, но не реализованы", node.Name, methods), node);
             }
 
             type.IsImplemented = true;
@@ -334,7 +335,7 @@ namespace plsql_msil.Semantic.Passes
 
             if(type == null || type.Type != Types.Type.Class)
             {
-                Log(String.Format("Класса {0} не существует", node.TypeName), node);
+                Log(String.Format("Класс {0} не существует", node.TypeName), node);
 
                 return TypeDescriptor.Undefined;
             }
@@ -357,6 +358,12 @@ namespace plsql_msil.Semantic.Passes
             node.Constructor = typeList;
 
             return new TypeDescriptor(false, type, true);
+        }
+        private TypeDescriptor Visit(CreateTableNode node)
+        {
+            node.TableType = context.GetType(string.Format("table({0})", node.TypeNode.TypeName));
+
+            return new TypeDescriptor(false, node.TableType, true);
         }
         private TypeDescriptor Visit(MethodCallNode node)
         {
@@ -758,6 +765,7 @@ namespace plsql_msil.Semantic.Passes
         {
             SimpleTypeEnum[] types = new SimpleTypeEnum[]
             {
+                SimpleTypeEnum.Byte,
                 SimpleTypeEnum.Char,
                 SimpleTypeEnum.Double,
                 SimpleTypeEnum.Float,

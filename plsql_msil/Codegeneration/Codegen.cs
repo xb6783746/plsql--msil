@@ -63,22 +63,22 @@ namespace plsql_msil.Codegeneration
         }
         private void Visit(ClassDefNode node)
         {
-            var type = types.GetType(node.ClassName) as ClassType;
+            var type = types.GetType(node.Name) as ClassType;
 
             var classBuilder = builder.BuildClass(type);
 
-            foreach (var item in node.ClassDefs)
+            foreach (var item in node.Defs)
             {
                 Visit(item, classBuilder);
             }
         }
         private void Visit(PackageDefNode node)
         {
-            var packageType = types.GetType(node.PackageName) as PackageType;
+            var packageType = types.GetType(node.Name) as PackageType;
 
             var packageBuilder = builder.BuildPackage(packageType);
 
-            foreach(var item in node.PackageDefs)
+            foreach(var item in node.Defs)
             {
                 Visit(item, packageBuilder);
             }
@@ -203,6 +203,14 @@ namespace plsql_msil.Codegeneration
             builder.Construct(classType, node.Constructor);
 
             return classType;
+        }
+        private TypeInfo Visit(CreateTableNode node, MethodBuilder builder)
+        {
+
+
+            builder.DefaultConstructor(node.TableType);
+
+            return node.TableType;
         }
         private TypeInfo Visit(MethodCallNode node, MethodBuilder builder)
         {

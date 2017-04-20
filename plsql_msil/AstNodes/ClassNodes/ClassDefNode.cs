@@ -33,7 +33,7 @@ namespace plsql_msil.AstNodes.ClassNodes
             return new ClassDefNode(Token);
         }
 
-        public string ClassName
+        public string Name
         {
             get
             {
@@ -41,7 +41,7 @@ namespace plsql_msil.AstNodes.ClassNodes
             }
         }
 
-        public List<MethodDefNode> ClassDefs
+        public virtual List<MethodDefNode> Defs
         {
             get
             {

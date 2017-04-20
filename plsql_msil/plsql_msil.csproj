@@ -74,6 +74,7 @@
     <Compile Include="AstNodes\MathNodes\MultNode.cs" />
     <Compile Include="AstNodes\MathNodes\ExpressionNode.cs" />
     <Compile Include="AstNodes\MathNodes\PlusNode.cs" />
+    <Compile Include="AstNodes\MethodNodes\CreateTableNode.cs" />
     <Compile Include="AstNodes\MethodNodes\CreateInstanceNode.cs" />
     <Compile Include="AstNodes\MethodNodes\MethodCallNode.cs" />
     <Compile Include="AstNodes\MethodNodes\MethodDefNode.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="AstNodes\PackageNodes\PackageDefNode.cs" />
     <Compile Include="AstNodes\PackageNodes\PackageDeclNode.cs" />
     <Compile Include="AstNodes\TypeNodes\RecordNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\TableTypeNode.cs" />
     <Compile Include="AstNodes\TypeNodes\TableNode.cs" />
     <Compile Include="AstNodes\TypeNodes\VoidNode.cs" />
     <Compile Include="AstNodes\TypeNodes\TypeNode.cs" />
@@ -131,12 +133,13 @@
     <Compile Include="Semantic\Passes\DefinitionAnalyser.cs" />
     <Compile Include="Loggers\ILogger.cs" />
     <Compile Include="Semantic\IPass.cs" />
+    <Compile Include="Semantic\Passes\TypeCollector.cs" />
     <Compile Include="Semantic\SemanticAnalyser.cs" />
     <Compile Include="TypeLoader\AbstractTypeLoader.cs" />
     <Compile Include="TypeLoader\ClassLoader.cs" />
     <Compile Include="TypeLoader\PackageLoader.cs" />
     <Compile Include="TypeLoader\StandardLibraryTypesLoader.cs" />
-    <Compile Include="Semantic\Passes\TypeAnalyser.cs" />
+    <Compile Include="Semantic\Passes\TypeBuilder.cs" />
     <Compile Include="Semantic\TypeDescriptor.cs" />
     <Compile Include="Semantic\VarTable.cs" />
     <Compile Include="Types\ClassType.cs" />
