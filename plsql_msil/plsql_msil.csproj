@@ -53,6 +53,7 @@
     <Compile Include="AstNodes\CommandNodes\MemberCallNode.cs" />
     <Compile Include="AstNodes\CommandNodes\ReturnNode.cs" />
     <Compile Include="AstNodes\CommandNodes\IndexNode.cs" />
+    <Compile Include="AstNodes\CommandNodes\ForNode.cs" />
     <Compile Include="AstNodes\CommandNodes\WhileNode.cs" />
     <Compile Include="AstNodes\CommandNodes\IfNode.cs" />
     <Compile Include="AstNodes\DeclareBlockNode.cs" />

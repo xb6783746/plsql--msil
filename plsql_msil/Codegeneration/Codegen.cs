@@ -58,6 +58,7 @@ namespace plsql_msil.Codegeneration
 
             Visit(node.CodeBlock, entryPointBuilder);
 
+            entryPointBuilder.ClearStack();
             entryPointBuilder.Ret();
         }
         private void Visit(ClassDefNode node)
@@ -340,13 +341,33 @@ namespace plsql_msil.Codegeneration
 
             builder.Assign(lastType, lastVar);
         }
+        private void Visit(ForNode node, MethodBuilder builder)
+        {
+            Visit(node.Init as dynamic, builder);
+
+            int l1 = builder.PrepareJump(false);
+
+            int nop2 = builder.Nop();
+
+            Visit(node.CodeBlock as dynamic, builder);
+
+            Visit(node.Iteration as dynamic, builder);
+
+            int nop1 = builder.Nop();
+            builder.MakeJump(l1, nop1, Jump.Always);
+
+            Visit(node.Condition as dynamic, builder);
+
+            int l2 = builder.PrepareJump(true);
+            builder.MakeJump(l2, nop2, Jump.IfTrue);
+        }
         private void Visit(WhileNode node, MethodBuilder builder)
         {
             int start = builder.Nop();
 
             Visit(node.Condition, builder);
 
-            int exit = builder.PrepareJump();
+            int exit = builder.PrepareJump(true);
 
             Visit(node.Command, builder);
 
@@ -363,20 +384,20 @@ namespace plsql_msil.Codegeneration
             Visit(node.Command, builder);
             Visit(node.Condition, builder);
 
-            int jmp = builder.PrepareJump();
+            int jmp = builder.PrepareJump(true);
             builder.MakeJump(jmp, nop, Jump.IfFalse);
         }
         private void Visit(IfNode node, MethodBuilder builder)
         {
             Visit(node.Condition, builder);
 
-            int label1 = builder.PrepareJump();
+            int label1 = builder.PrepareJump(true);
 
             Visit(node.IfTrue, builder);
 
             if (node.IfFalse != null)
             {
-                int label2 = builder.PrepareJump();
+                int label2 = builder.PrepareJump(false);
                 int elseLabel = builder.Nop();
 
                 builder.MakeJump(label1, elseLabel, Jump.IfFalse);

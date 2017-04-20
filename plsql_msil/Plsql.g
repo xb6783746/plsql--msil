@@ -179,6 +179,7 @@ type
 	|	BYTE -> BYTE<TypeNode>
 	|	CHAR -> CHAR<TypeNode>
 	|	DOUBLE -> DOUBLE<TypeNode>
+	|	STRING -> STRING<TypeNode>
 	|   BOOL -> BOOL<TypeNode>
 	|   ID '.' ID
 	->  ^(TypeName<TypeNode> ID ID)
@@ -378,8 +379,14 @@ cycle
 	-> ^(WHILE<WhileNode> expression codeBlock)
 	| LOOP codeBlock EXIT WHEN expression END LOOP
 	-> ^(DO<DoWhileNode> expression codeBlock)
+	|	FOR '(' assignOrExpression ';' expression ';' assignOrExpression ')' codeBlock END FOR
+	-> ^(FOR<ForNode> assignOrExpression expression assignOrExpression codeBlock)
 	;
 
+assignOrExpression
+	: assign
+	| expression
+	;
 
 expressionList
 	: ( expr_ ( ',' expr_)* )?

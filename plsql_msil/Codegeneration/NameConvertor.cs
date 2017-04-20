@@ -45,7 +45,7 @@ namespace plsql_msil.Codegeneration
             {
                 var recordType = type as RecordType;
 
-                return "commands." + recordType.PackageName + "/" + recordType.RecordName; 
+                return "class commands." + recordType.PackageName + "/" + recordType.RecordName; 
             }
 
             if(type is GenericType)
@@ -65,11 +65,11 @@ namespace plsql_msil.Codegeneration
         {
             if(type.IsLibClass)
             {
-                return String.Format("[{0}]{1}.{2}", type.LibName, type.Namespace, type.Name);
+                return String.Format("class [{0}]{1}.{2}", type.LibName, type.Namespace, type.Name);
             }
             else
             {
-                return String.Format("commands.{0}", type.Name);
+                return String.Format("class commands.{0}", type.Name);
             }
         }
         private static string TableType(TableType type)

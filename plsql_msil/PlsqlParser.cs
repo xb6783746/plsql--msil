@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Plsql.g 2017-04-20 14:53:25
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Plsql.g 2017-04-20 16:38:50
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -151,9 +151,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				false, // invalid decision
 				false, false, false, false, false, false, false, false, false, false, 
 				false, false, false, false, false, false, false, false, false, false, 
-				false, false, false, false, false, true, false, false, false, false, 
-				false, false, false, false, false, false, true, false, true, false, 
-				false, true, false, true, , 
+				false, false, false, false, false, true, false, false, false, true, 
+				false, false, false, false, false, false, false, true, false, true, 
+				false, false, true, false, true, , 
 			};
 	#else
 		private static readonly bool[] decisionCanBacktrack = new bool[0];
@@ -809,7 +809,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_type();
 
 	// $ANTLR start "type"
-	// Plsql.g:177:1: type : ( INT -> INT | BYTE -> BYTE | CHAR -> CHAR | DOUBLE -> DOUBLE | BOOL -> BOOL | ID '.' ID -> ^( TypeName ID ID ) | ID -> ID );
+	// Plsql.g:177:1: type : ( INT -> INT | BYTE -> BYTE | CHAR -> CHAR | DOUBLE -> DOUBLE | STRING -> STRING | BOOL -> BOOL | ID '.' ID -> ^( TypeName ID ID ) | ID -> ID );
 	[GrammarRule("type")]
 	private PlsqlParser.type_return type()
 	{
@@ -825,95 +825,48 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		IToken BYTE11=null;
 		IToken CHAR12=null;
 		IToken DOUBLE13=null;
-		IToken BOOL14=null;
-		IToken ID15=null;
-		IToken char_literal16=null;
-		IToken ID17=null;
+		IToken STRING14=null;
+		IToken BOOL15=null;
+		IToken ID16=null;
+		IToken char_literal17=null;
 		IToken ID18=null;
+		IToken ID19=null;
 
 		object INT10_tree=null;
 		object BYTE11_tree=null;
 		object CHAR12_tree=null;
 		object DOUBLE13_tree=null;
-		object BOOL14_tree=null;
-		object ID15_tree=null;
-		object char_literal16_tree=null;
-		object ID17_tree=null;
+		object STRING14_tree=null;
+		object BOOL15_tree=null;
+		object ID16_tree=null;
+		object char_literal17_tree=null;
 		object ID18_tree=null;
+		object ID19_tree=null;
 		RewriteRuleITokenStream stream_CHAR=new RewriteRuleITokenStream(adaptor,"token CHAR");
 		RewriteRuleITokenStream stream_DOUBLE=new RewriteRuleITokenStream(adaptor,"token DOUBLE");
 		RewriteRuleITokenStream stream_BYTE=new RewriteRuleITokenStream(adaptor,"token BYTE");
 		RewriteRuleITokenStream stream_INT=new RewriteRuleITokenStream(adaptor,"token INT");
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleITokenStream stream_100=new RewriteRuleITokenStream(adaptor,"token 100");
+		RewriteRuleITokenStream stream_STRING=new RewriteRuleITokenStream(adaptor,"token STRING");
 		RewriteRuleITokenStream stream_BOOL=new RewriteRuleITokenStream(adaptor,"token BOOL");
 
 		try { DebugEnterRule(GrammarFileName, "type");
 		DebugLocation(177, 1);
 		try
 		{
-			// Plsql.g:178:2: ( INT -> INT | BYTE -> BYTE | CHAR -> CHAR | DOUBLE -> DOUBLE | BOOL -> BOOL | ID '.' ID -> ^( TypeName ID ID ) | ID -> ID )
-			int alt3=7;
+			// Plsql.g:178:2: ( INT -> INT | BYTE -> BYTE | CHAR -> CHAR | DOUBLE -> DOUBLE | STRING -> STRING | BOOL -> BOOL | ID '.' ID -> ^( TypeName ID ID ) | ID -> ID )
+			int alt3=8;
 			try { DebugEnterDecision(3, decisionCanBacktrack[3]);
-			switch (input.LA(1))
+			try
 			{
-			case INT:
-				{
-				alt3=1;
-				}
-				break;
-			case BYTE:
-				{
-				alt3=2;
-				}
-				break;
-			case CHAR:
-				{
-				alt3=3;
-				}
-				break;
-			case DOUBLE:
-				{
-				alt3=4;
-				}
-				break;
-			case BOOL:
-				{
-				alt3=5;
-				}
-				break;
-			case ID:
-				{
-				int LA3_6 = input.LA(2);
-
-				if ((LA3_6==100))
-				{
-					alt3=6;
-				}
-				else if ((LA3_6==EOF||LA3_6==IS||LA3_6==101||(LA3_6>=103 && LA3_6<=104)))
-				{
-					alt3=7;
-				}
-				else
-				{
-					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 3, 6, input);
-
-					DebugRecognitionException(nvae);
-					throw nvae;
-				}
-				}
-				break;
-			default:
-				{
-					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 3, 0, input);
-
-					DebugRecognitionException(nvae);
-					throw nvae;
-				}
+				alt3 = dfa3.Predict(input);
 			}
-
+			catch (NoViableAltException nvae)
+			{
+				DebugRecognitionException(nvae);
+				throw;
+			}
 			} finally { DebugExitDecision(3); }
 			switch (alt3)
 			{
@@ -1063,11 +1016,47 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// Plsql.g:182:6: BOOL
+				// Plsql.g:182:4: STRING
 				{
-				DebugLocation(182, 6);
-				BOOL14=(IToken)Match(input,BOOL,Follow._BOOL_in_type980); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_BOOL.Add(BOOL14);
+				DebugLocation(182, 4);
+				STRING14=(IToken)Match(input,STRING,Follow._STRING_in_type978); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_STRING.Add(STRING14);
+
+
+
+				{
+				// AST REWRITE
+				// elements: STRING
+				// token labels: 
+				// rule labels: retval
+				// token list labels: 
+				// rule list labels: 
+				// wildcard labels: 
+				if ( state.backtracking == 0 ) {
+				retval.Tree = root_0;
+				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
+
+				root_0 = (object)adaptor.Nil();
+				// 182:11: -> STRING
+				{
+					DebugLocation(182, 14);
+					adaptor.AddChild(root_0, new TypeNode(stream_STRING.NextToken()));
+
+				}
+
+				retval.Tree = root_0;
+				}
+				}
+
+				}
+				break;
+			case 6:
+				DebugEnterAlt(6);
+				// Plsql.g:183:6: BOOL
+				{
+				DebugLocation(183, 6);
+				BOOL15=(IToken)Match(input,BOOL,Follow._BOOL_in_type992); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_BOOL.Add(BOOL15);
 
 
 
@@ -1084,9 +1073,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 182:11: -> BOOL
+				// 183:11: -> BOOL
 				{
-					DebugLocation(182, 14);
+					DebugLocation(183, 14);
 					adaptor.AddChild(root_0, new TypeNode(stream_BOOL.NextToken()));
 
 				}
@@ -1097,21 +1086,21 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 				}
 				break;
-			case 6:
-				DebugEnterAlt(6);
-				// Plsql.g:183:6: ID '.' ID
+			case 7:
+				DebugEnterAlt(7);
+				// Plsql.g:184:6: ID '.' ID
 				{
-				DebugLocation(183, 6);
-				ID15=(IToken)Match(input,ID,Follow._ID_in_type994); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_ID.Add(ID15);
+				DebugLocation(184, 6);
+				ID16=(IToken)Match(input,ID,Follow._ID_in_type1006); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_ID.Add(ID16);
 
-				DebugLocation(183, 9);
-				char_literal16=(IToken)Match(input,100,Follow._100_in_type996); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_100.Add(char_literal16);
+				DebugLocation(184, 9);
+				char_literal17=(IToken)Match(input,100,Follow._100_in_type1008); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_100.Add(char_literal17);
 
-				DebugLocation(183, 13);
-				ID17=(IToken)Match(input,ID,Follow._ID_in_type998); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_ID.Add(ID17);
+				DebugLocation(184, 13);
+				ID18=(IToken)Match(input,ID,Follow._ID_in_type1010); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_ID.Add(ID18);
 
 
 
@@ -1128,18 +1117,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 184:2: -> ^( TypeName ID ID )
+				// 185:2: -> ^( TypeName ID ID )
 				{
-					DebugLocation(184, 6);
-					// Plsql.g:184:6: ^( TypeName ID ID )
+					DebugLocation(185, 6);
+					// Plsql.g:185:6: ^( TypeName ID ID )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(184, 8);
+					DebugLocation(185, 8);
 					root_1 = (object)adaptor.BecomeRoot(new TypeNode(TypeName), root_1);
 
-					DebugLocation(184, 27);
+					DebugLocation(185, 27);
 					adaptor.AddChild(root_1, stream_ID.NextNode());
-					DebugLocation(184, 30);
+					DebugLocation(185, 30);
 					adaptor.AddChild(root_1, stream_ID.NextNode());
 
 					adaptor.AddChild(root_0, root_1);
@@ -1153,13 +1142,13 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 				}
 				break;
-			case 7:
-				DebugEnterAlt(7);
-				// Plsql.g:185:6: ID
+			case 8:
+				DebugEnterAlt(8);
+				// Plsql.g:186:6: ID
 				{
-				DebugLocation(185, 6);
-				ID18=(IToken)Match(input,ID,Follow._ID_in_type1020); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_ID.Add(ID18);
+				DebugLocation(186, 6);
+				ID19=(IToken)Match(input,ID,Follow._ID_in_type1032); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_ID.Add(ID19);
 
 
 
@@ -1176,9 +1165,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 185:9: -> ID
+				// 186:9: -> ID
 				{
-					DebugLocation(185, 12);
+					DebugLocation(186, 12);
 					adaptor.AddChild(root_0, new TypeNode(stream_ID.NextToken()));
 
 				}
@@ -1212,7 +1201,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("type", 6);
 			Leave_type();
 		}
-		DebugLocation(186, 1);
+		DebugLocation(187, 1);
 		} finally { DebugExitRule(GrammarFileName, "type"); }
 		return retval;
 
@@ -1229,7 +1218,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_program();
 
 	// $ANTLR start "program"
-	// Plsql.g:188:8: public program : ( objOrPack )* entryPoint -> ^( Program ( objOrPack )* entryPoint ) ;
+	// Plsql.g:189:8: public program : ( objOrPack )* entryPoint -> ^( Program ( objOrPack )* entryPoint ) ;
 	[GrammarRule("program")]
 	public PlsqlParser.program_return program()
 	{
@@ -1241,21 +1230,21 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		PlsqlParser.objOrPack_return objOrPack19 = default(PlsqlParser.objOrPack_return);
-		PlsqlParser.entryPoint_return entryPoint20 = default(PlsqlParser.entryPoint_return);
+		PlsqlParser.objOrPack_return objOrPack20 = default(PlsqlParser.objOrPack_return);
+		PlsqlParser.entryPoint_return entryPoint21 = default(PlsqlParser.entryPoint_return);
 
 		RewriteRuleSubtreeStream stream_objOrPack=new RewriteRuleSubtreeStream(adaptor,"rule objOrPack");
 		RewriteRuleSubtreeStream stream_entryPoint=new RewriteRuleSubtreeStream(adaptor,"rule entryPoint");
 		try { DebugEnterRule(GrammarFileName, "program");
-		DebugLocation(188, 1);
+		DebugLocation(189, 1);
 		try
 		{
-			// Plsql.g:189:2: ( ( objOrPack )* entryPoint -> ^( Program ( objOrPack )* entryPoint ) )
+			// Plsql.g:190:2: ( ( objOrPack )* entryPoint -> ^( Program ( objOrPack )* entryPoint ) )
 			DebugEnterAlt(1);
-			// Plsql.g:189:4: ( objOrPack )* entryPoint
+			// Plsql.g:190:4: ( objOrPack )* entryPoint
 			{
-			DebugLocation(189, 4);
-			// Plsql.g:189:4: ( objOrPack )*
+			DebugLocation(190, 4);
+			// Plsql.g:190:4: ( objOrPack )*
 			try { DebugEnterSubRule(4);
 			while (true)
 			{
@@ -1276,12 +1265,12 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 					DebugEnterAlt(1);
 					// Plsql.g:0:0: objOrPack
 					{
-					DebugLocation(189, 4);
-					PushFollow(Follow._objOrPack_in_program1040);
-					objOrPack19=objOrPack();
+					DebugLocation(190, 4);
+					PushFollow(Follow._objOrPack_in_program1052);
+					objOrPack20=objOrPack();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) stream_objOrPack.Add(objOrPack19.Tree);
+					if ( state.backtracking == 0 ) stream_objOrPack.Add(objOrPack20.Tree);
 
 					}
 					break;
@@ -1296,12 +1285,12 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 			} finally { DebugExitSubRule(4); }
 
-			DebugLocation(189, 15);
-			PushFollow(Follow._entryPoint_in_program1043);
-			entryPoint20=entryPoint();
+			DebugLocation(190, 15);
+			PushFollow(Follow._entryPoint_in_program1055);
+			entryPoint21=entryPoint();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_entryPoint.Add(entryPoint20.Tree);
+			if ( state.backtracking == 0 ) stream_entryPoint.Add(entryPoint21.Tree);
 
 
 			{
@@ -1317,25 +1306,25 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 190:2: -> ^( Program ( objOrPack )* entryPoint )
+			// 191:2: -> ^( Program ( objOrPack )* entryPoint )
 			{
-				DebugLocation(190, 5);
-				// Plsql.g:190:5: ^( Program ( objOrPack )* entryPoint )
+				DebugLocation(191, 5);
+				// Plsql.g:191:5: ^( Program ( objOrPack )* entryPoint )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(190, 7);
+				DebugLocation(191, 7);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(Program, "Program"), root_1);
 
-				DebugLocation(190, 15);
-				// Plsql.g:190:15: ( objOrPack )*
+				DebugLocation(191, 15);
+				// Plsql.g:191:15: ( objOrPack )*
 				while ( stream_objOrPack.HasNext )
 				{
-					DebugLocation(190, 15);
+					DebugLocation(191, 15);
 					adaptor.AddChild(root_1, stream_objOrPack.NextTree());
 
 				}
 				stream_objOrPack.Reset();
-				DebugLocation(190, 26);
+				DebugLocation(191, 26);
 				adaptor.AddChild(root_1, stream_entryPoint.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -1370,7 +1359,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("program", 7);
 			Leave_program();
 		}
-		DebugLocation(191, 1);
+		DebugLocation(192, 1);
 		} finally { DebugExitRule(GrammarFileName, "program"); }
 		return retval;
 
@@ -1387,7 +1376,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_objOrPack();
 
 	// $ANTLR start "objOrPack"
-	// Plsql.g:193:1: objOrPack : ( object_ | package_ );
+	// Plsql.g:194:1: objOrPack : ( object_ | package_ );
 	[GrammarRule("objOrPack")]
 	private PlsqlParser.objOrPack_return objOrPack()
 	{
@@ -1399,15 +1388,15 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		PlsqlParser.object__return object_21 = default(PlsqlParser.object__return);
-		PlsqlParser.package__return package_22 = default(PlsqlParser.package__return);
+		PlsqlParser.object__return object_22 = default(PlsqlParser.object__return);
+		PlsqlParser.package__return package_23 = default(PlsqlParser.package__return);
 
 
 		try { DebugEnterRule(GrammarFileName, "objOrPack");
-		DebugLocation(193, 1);
+		DebugLocation(194, 1);
 		try
 		{
-			// Plsql.g:194:2: ( object_ | package_ )
+			// Plsql.g:195:2: ( object_ | package_ )
 			int alt5=2;
 			try { DebugEnterDecision(5, decisionCanBacktrack[5]);
 			int LA5_0 = input.LA(1);
@@ -1446,31 +1435,31 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:194:4: object_
+				// Plsql.g:195:4: object_
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(194, 4);
-				PushFollow(Follow._object__in_objOrPack1066);
-				object_21=object_();
+				DebugLocation(195, 4);
+				PushFollow(Follow._object__in_objOrPack1078);
+				object_22=object_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, object_21.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, object_22.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:195:4: package_
+				// Plsql.g:196:4: package_
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(195, 4);
-				PushFollow(Follow._package__in_objOrPack1072);
-				package_22=package_();
+				DebugLocation(196, 4);
+				PushFollow(Follow._package__in_objOrPack1084);
+				package_23=package_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, package_22.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, package_23.Tree);
 
 				}
 				break;
@@ -1497,7 +1486,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("objOrPack", 8);
 			Leave_objOrPack();
 		}
-		DebugLocation(196, 1);
+		DebugLocation(197, 1);
 		} finally { DebugExitRule(GrammarFileName, "objOrPack"); }
 		return retval;
 
@@ -1514,7 +1503,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_isOrAs();
 
 	// $ANTLR start "isOrAs"
-	// Plsql.g:198:1: isOrAs : ( IS | AS );
+	// Plsql.g:199:1: isOrAs : ( IS | AS );
 	[GrammarRule("isOrAs")]
 	private PlsqlParser.isOrAs_return isOrAs()
 	{
@@ -1526,26 +1515,26 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken set23=null;
+		IToken set24=null;
 
-		object set23_tree=null;
+		object set24_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "isOrAs");
-		DebugLocation(198, 1);
+		DebugLocation(199, 1);
 		try
 		{
-			// Plsql.g:199:2: ( IS | AS )
+			// Plsql.g:200:2: ( IS | AS )
 			DebugEnterAlt(1);
 			// Plsql.g:
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(199, 2);
-			set23=(IToken)input.LT(1);
+			DebugLocation(200, 2);
+			set24=(IToken)input.LT(1);
 			if ((input.LA(1)>=IS && input.LA(1)<=AS))
 			{
 				input.Consume();
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, (object)adaptor.Create(set23));
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, (object)adaptor.Create(set24));
 				state.errorRecovery=false;state.failed=false;
 			}
 			else
@@ -1580,7 +1569,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("isOrAs", 9);
 			Leave_isOrAs();
 		}
-		DebugLocation(201, 1);
+		DebugLocation(202, 1);
 		} finally { DebugExitRule(GrammarFileName, "isOrAs"); }
 		return retval;
 
@@ -1597,7 +1586,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_equalityOperator();
 
 	// $ANTLR start "equalityOperator"
-	// Plsql.g:205:1: equalityOperator : ( EQUAL -> EQUAL | NEQUAL -> NEQUAL );
+	// Plsql.g:206:1: equalityOperator : ( EQUAL -> EQUAL | NEQUAL -> NEQUAL );
 	[GrammarRule("equalityOperator")]
 	private PlsqlParser.equalityOperator_return equalityOperator()
 	{
@@ -1609,19 +1598,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken EQUAL24=null;
-		IToken NEQUAL25=null;
+		IToken EQUAL25=null;
+		IToken NEQUAL26=null;
 
-		object EQUAL24_tree=null;
-		object NEQUAL25_tree=null;
+		object EQUAL25_tree=null;
+		object NEQUAL26_tree=null;
 		RewriteRuleITokenStream stream_NEQUAL=new RewriteRuleITokenStream(adaptor,"token NEQUAL");
 		RewriteRuleITokenStream stream_EQUAL=new RewriteRuleITokenStream(adaptor,"token EQUAL");
 
 		try { DebugEnterRule(GrammarFileName, "equalityOperator");
-		DebugLocation(205, 1);
+		DebugLocation(206, 1);
 		try
 		{
-			// Plsql.g:206:2: ( EQUAL -> EQUAL | NEQUAL -> NEQUAL )
+			// Plsql.g:207:2: ( EQUAL -> EQUAL | NEQUAL -> NEQUAL )
 			int alt6=2;
 			try { DebugEnterDecision(6, decisionCanBacktrack[6]);
 			int LA6_0 = input.LA(1);
@@ -1647,11 +1636,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:206:4: EQUAL
+				// Plsql.g:207:4: EQUAL
 				{
-				DebugLocation(206, 4);
-				EQUAL24=(IToken)Match(input,EQUAL,Follow._EQUAL_in_equalityOperator1102); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_EQUAL.Add(EQUAL24);
+				DebugLocation(207, 4);
+				EQUAL25=(IToken)Match(input,EQUAL,Follow._EQUAL_in_equalityOperator1114); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_EQUAL.Add(EQUAL25);
 
 
 
@@ -1668,9 +1657,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 206:10: -> EQUAL
+				// 207:10: -> EQUAL
 				{
-					DebugLocation(206, 13);
+					DebugLocation(207, 13);
 					adaptor.AddChild(root_0, new EqualNode(stream_EQUAL.NextToken()));
 
 				}
@@ -1683,11 +1672,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:207:4: NEQUAL
+				// Plsql.g:208:4: NEQUAL
 				{
-				DebugLocation(207, 4);
-				NEQUAL25=(IToken)Match(input,NEQUAL,Follow._NEQUAL_in_equalityOperator1114); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_NEQUAL.Add(NEQUAL25);
+				DebugLocation(208, 4);
+				NEQUAL26=(IToken)Match(input,NEQUAL,Follow._NEQUAL_in_equalityOperator1126); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_NEQUAL.Add(NEQUAL26);
 
 
 
@@ -1704,9 +1693,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 207:11: -> NEQUAL
+				// 208:11: -> NEQUAL
 				{
-					DebugLocation(207, 14);
+					DebugLocation(208, 14);
 					adaptor.AddChild(root_0, new NotEqualNode(stream_NEQUAL.NextToken()));
 
 				}
@@ -1740,7 +1729,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("equalityOperator", 10);
 			Leave_equalityOperator();
 		}
-		DebugLocation(208, 1);
+		DebugLocation(209, 1);
 		} finally { DebugExitRule(GrammarFileName, "equalityOperator"); }
 		return retval;
 
@@ -1757,7 +1746,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_ineqOperator();
 
 	// $ANTLR start "ineqOperator"
-	// Plsql.g:210:1: ineqOperator : ( MORE -> MORE | LESS -> LESS | MOREEQ -> MOREEQ | LESSEQ -> LESSEQ );
+	// Plsql.g:211:1: ineqOperator : ( MORE -> MORE | LESS -> LESS | MOREEQ -> MOREEQ | LESSEQ -> LESSEQ );
 	[GrammarRule("ineqOperator")]
 	private PlsqlParser.ineqOperator_return ineqOperator()
 	{
@@ -1769,25 +1758,25 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken MORE26=null;
-		IToken LESS27=null;
-		IToken MOREEQ28=null;
-		IToken LESSEQ29=null;
+		IToken MORE27=null;
+		IToken LESS28=null;
+		IToken MOREEQ29=null;
+		IToken LESSEQ30=null;
 
-		object MORE26_tree=null;
-		object LESS27_tree=null;
-		object MOREEQ28_tree=null;
-		object LESSEQ29_tree=null;
+		object MORE27_tree=null;
+		object LESS28_tree=null;
+		object MOREEQ29_tree=null;
+		object LESSEQ30_tree=null;
 		RewriteRuleITokenStream stream_MOREEQ=new RewriteRuleITokenStream(adaptor,"token MOREEQ");
 		RewriteRuleITokenStream stream_LESSEQ=new RewriteRuleITokenStream(adaptor,"token LESSEQ");
 		RewriteRuleITokenStream stream_MORE=new RewriteRuleITokenStream(adaptor,"token MORE");
 		RewriteRuleITokenStream stream_LESS=new RewriteRuleITokenStream(adaptor,"token LESS");
 
 		try { DebugEnterRule(GrammarFileName, "ineqOperator");
-		DebugLocation(210, 1);
+		DebugLocation(211, 1);
 		try
 		{
-			// Plsql.g:211:2: ( MORE -> MORE | LESS -> LESS | MOREEQ -> MOREEQ | LESSEQ -> LESSEQ )
+			// Plsql.g:212:2: ( MORE -> MORE | LESS -> LESS | MOREEQ -> MOREEQ | LESSEQ -> LESSEQ )
 			int alt7=4;
 			try { DebugEnterDecision(7, decisionCanBacktrack[7]);
 			switch (input.LA(1))
@@ -1827,11 +1816,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:211:4: MORE
+				// Plsql.g:212:4: MORE
 				{
-				DebugLocation(211, 4);
-				MORE26=(IToken)Match(input,MORE,Follow._MORE_in_ineqOperator1132); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_MORE.Add(MORE26);
+				DebugLocation(212, 4);
+				MORE27=(IToken)Match(input,MORE,Follow._MORE_in_ineqOperator1144); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_MORE.Add(MORE27);
 
 
 
@@ -1848,9 +1837,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 211:9: -> MORE
+				// 212:9: -> MORE
 				{
-					DebugLocation(211, 12);
+					DebugLocation(212, 12);
 					adaptor.AddChild(root_0, new GreaterNode(stream_MORE.NextToken()));
 
 				}
@@ -1863,11 +1852,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:212:4: LESS
+				// Plsql.g:213:4: LESS
 				{
-				DebugLocation(212, 4);
-				LESS27=(IToken)Match(input,LESS,Follow._LESS_in_ineqOperator1144); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_LESS.Add(LESS27);
+				DebugLocation(213, 4);
+				LESS28=(IToken)Match(input,LESS,Follow._LESS_in_ineqOperator1156); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_LESS.Add(LESS28);
 
 
 
@@ -1884,9 +1873,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 212:9: -> LESS
+				// 213:9: -> LESS
 				{
-					DebugLocation(212, 12);
+					DebugLocation(213, 12);
 					adaptor.AddChild(root_0, new LessNode(stream_LESS.NextToken()));
 
 				}
@@ -1899,11 +1888,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// Plsql.g:213:4: MOREEQ
+				// Plsql.g:214:4: MOREEQ
 				{
-				DebugLocation(213, 4);
-				MOREEQ28=(IToken)Match(input,MOREEQ,Follow._MOREEQ_in_ineqOperator1156); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_MOREEQ.Add(MOREEQ28);
+				DebugLocation(214, 4);
+				MOREEQ29=(IToken)Match(input,MOREEQ,Follow._MOREEQ_in_ineqOperator1168); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_MOREEQ.Add(MOREEQ29);
 
 
 
@@ -1920,9 +1909,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 213:11: -> MOREEQ
+				// 214:11: -> MOREEQ
 				{
-					DebugLocation(213, 14);
+					DebugLocation(214, 14);
 					adaptor.AddChild(root_0, new GreaterOrEqualNode(stream_MOREEQ.NextToken()));
 
 				}
@@ -1935,11 +1924,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// Plsql.g:214:4: LESSEQ
+				// Plsql.g:215:4: LESSEQ
 				{
-				DebugLocation(214, 4);
-				LESSEQ29=(IToken)Match(input,LESSEQ,Follow._LESSEQ_in_ineqOperator1168); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_LESSEQ.Add(LESSEQ29);
+				DebugLocation(215, 4);
+				LESSEQ30=(IToken)Match(input,LESSEQ,Follow._LESSEQ_in_ineqOperator1180); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_LESSEQ.Add(LESSEQ30);
 
 
 
@@ -1956,9 +1945,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 214:11: -> LESSEQ
+				// 215:11: -> LESSEQ
 				{
-					DebugLocation(214, 14);
+					DebugLocation(215, 14);
 					adaptor.AddChild(root_0, new LessOrEqualNode(stream_LESSEQ.NextToken()));
 
 				}
@@ -1992,7 +1981,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("ineqOperator", 11);
 			Leave_ineqOperator();
 		}
-		DebugLocation(215, 1);
+		DebugLocation(216, 1);
 		} finally { DebugExitRule(GrammarFileName, "ineqOperator"); }
 		return retval;
 
@@ -2009,7 +1998,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_addOperator();
 
 	// $ANTLR start "addOperator"
-	// Plsql.g:217:1: addOperator : ( PLUS -> PLUS | MINUS -> MINUS );
+	// Plsql.g:218:1: addOperator : ( PLUS -> PLUS | MINUS -> MINUS );
 	[GrammarRule("addOperator")]
 	private PlsqlParser.addOperator_return addOperator()
 	{
@@ -2021,19 +2010,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken PLUS30=null;
-		IToken MINUS31=null;
+		IToken PLUS31=null;
+		IToken MINUS32=null;
 
-		object PLUS30_tree=null;
-		object MINUS31_tree=null;
+		object PLUS31_tree=null;
+		object MINUS32_tree=null;
 		RewriteRuleITokenStream stream_PLUS=new RewriteRuleITokenStream(adaptor,"token PLUS");
 		RewriteRuleITokenStream stream_MINUS=new RewriteRuleITokenStream(adaptor,"token MINUS");
 
 		try { DebugEnterRule(GrammarFileName, "addOperator");
-		DebugLocation(217, 1);
+		DebugLocation(218, 1);
 		try
 		{
-			// Plsql.g:218:2: ( PLUS -> PLUS | MINUS -> MINUS )
+			// Plsql.g:219:2: ( PLUS -> PLUS | MINUS -> MINUS )
 			int alt8=2;
 			try { DebugEnterDecision(8, decisionCanBacktrack[8]);
 			int LA8_0 = input.LA(1);
@@ -2059,11 +2048,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:218:4: PLUS
+				// Plsql.g:219:4: PLUS
 				{
-				DebugLocation(218, 4);
-				PLUS30=(IToken)Match(input,PLUS,Follow._PLUS_in_addOperator1186); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_PLUS.Add(PLUS30);
+				DebugLocation(219, 4);
+				PLUS31=(IToken)Match(input,PLUS,Follow._PLUS_in_addOperator1198); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_PLUS.Add(PLUS31);
 
 
 
@@ -2080,9 +2069,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 218:9: -> PLUS
+				// 219:9: -> PLUS
 				{
-					DebugLocation(218, 12);
+					DebugLocation(219, 12);
 					adaptor.AddChild(root_0, new PlusNode(stream_PLUS.NextToken()));
 
 				}
@@ -2095,11 +2084,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:219:4: MINUS
+				// Plsql.g:220:4: MINUS
 				{
-				DebugLocation(219, 4);
-				MINUS31=(IToken)Match(input,MINUS,Follow._MINUS_in_addOperator1198); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_MINUS.Add(MINUS31);
+				DebugLocation(220, 4);
+				MINUS32=(IToken)Match(input,MINUS,Follow._MINUS_in_addOperator1210); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_MINUS.Add(MINUS32);
 
 
 
@@ -2116,9 +2105,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 219:10: -> MINUS
+				// 220:10: -> MINUS
 				{
-					DebugLocation(219, 13);
+					DebugLocation(220, 13);
 					adaptor.AddChild(root_0, new MinusNode(stream_MINUS.NextToken()));
 
 				}
@@ -2152,7 +2141,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("addOperator", 12);
 			Leave_addOperator();
 		}
-		DebugLocation(220, 1);
+		DebugLocation(221, 1);
 		} finally { DebugExitRule(GrammarFileName, "addOperator"); }
 		return retval;
 
@@ -2169,7 +2158,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_multOperator();
 
 	// $ANTLR start "multOperator"
-	// Plsql.g:222:1: multOperator : ( MULT -> MULT | DIVIDE -> DIVIDE | MOD -> MOD );
+	// Plsql.g:223:1: multOperator : ( MULT -> MULT | DIVIDE -> DIVIDE | MOD -> MOD );
 	[GrammarRule("multOperator")]
 	private PlsqlParser.multOperator_return multOperator()
 	{
@@ -2181,22 +2170,22 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken MULT32=null;
-		IToken DIVIDE33=null;
-		IToken MOD34=null;
+		IToken MULT33=null;
+		IToken DIVIDE34=null;
+		IToken MOD35=null;
 
-		object MULT32_tree=null;
-		object DIVIDE33_tree=null;
-		object MOD34_tree=null;
+		object MULT33_tree=null;
+		object DIVIDE34_tree=null;
+		object MOD35_tree=null;
 		RewriteRuleITokenStream stream_MULT=new RewriteRuleITokenStream(adaptor,"token MULT");
 		RewriteRuleITokenStream stream_MOD=new RewriteRuleITokenStream(adaptor,"token MOD");
 		RewriteRuleITokenStream stream_DIVIDE=new RewriteRuleITokenStream(adaptor,"token DIVIDE");
 
 		try { DebugEnterRule(GrammarFileName, "multOperator");
-		DebugLocation(222, 1);
+		DebugLocation(223, 1);
 		try
 		{
-			// Plsql.g:223:2: ( MULT -> MULT | DIVIDE -> DIVIDE | MOD -> MOD )
+			// Plsql.g:224:2: ( MULT -> MULT | DIVIDE -> DIVIDE | MOD -> MOD )
 			int alt9=3;
 			try { DebugEnterDecision(9, decisionCanBacktrack[9]);
 			switch (input.LA(1))
@@ -2231,11 +2220,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:223:4: MULT
+				// Plsql.g:224:4: MULT
 				{
-				DebugLocation(223, 4);
-				MULT32=(IToken)Match(input,MULT,Follow._MULT_in_multOperator1216); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_MULT.Add(MULT32);
+				DebugLocation(224, 4);
+				MULT33=(IToken)Match(input,MULT,Follow._MULT_in_multOperator1228); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_MULT.Add(MULT33);
 
 
 
@@ -2252,9 +2241,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 223:9: -> MULT
+				// 224:9: -> MULT
 				{
-					DebugLocation(223, 12);
+					DebugLocation(224, 12);
 					adaptor.AddChild(root_0, new MultNode(stream_MULT.NextToken()));
 
 				}
@@ -2267,11 +2256,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:224:4: DIVIDE
+				// Plsql.g:225:4: DIVIDE
 				{
-				DebugLocation(224, 4);
-				DIVIDE33=(IToken)Match(input,DIVIDE,Follow._DIVIDE_in_multOperator1228); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_DIVIDE.Add(DIVIDE33);
+				DebugLocation(225, 4);
+				DIVIDE34=(IToken)Match(input,DIVIDE,Follow._DIVIDE_in_multOperator1240); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_DIVIDE.Add(DIVIDE34);
 
 
 
@@ -2288,9 +2277,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 224:11: -> DIVIDE
+				// 225:11: -> DIVIDE
 				{
-					DebugLocation(224, 14);
+					DebugLocation(225, 14);
 					adaptor.AddChild(root_0, new DivNode(stream_DIVIDE.NextToken()));
 
 				}
@@ -2303,11 +2292,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// Plsql.g:225:4: MOD
+				// Plsql.g:226:4: MOD
 				{
-				DebugLocation(225, 4);
-				MOD34=(IToken)Match(input,MOD,Follow._MOD_in_multOperator1240); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_MOD.Add(MOD34);
+				DebugLocation(226, 4);
+				MOD35=(IToken)Match(input,MOD,Follow._MOD_in_multOperator1252); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_MOD.Add(MOD35);
 
 
 
@@ -2324,9 +2313,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 225:8: -> MOD
+				// 226:8: -> MOD
 				{
-					DebugLocation(225, 11);
+					DebugLocation(226, 11);
 					adaptor.AddChild(root_0, new ModNode(stream_MOD.NextToken()));
 
 				}
@@ -2360,7 +2349,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("multOperator", 13);
 			Leave_multOperator();
 		}
-		DebugLocation(226, 1);
+		DebugLocation(227, 1);
 		} finally { DebugExitRule(GrammarFileName, "multOperator"); }
 		return retval;
 
@@ -2377,7 +2366,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_assignOperator();
 
 	// $ANTLR start "assignOperator"
-	// Plsql.g:228:1: assignOperator : ( ASSIGN | PLUSASSIGN | MINUSASSIGN | MULTASSIGN | DIVASSIGN );
+	// Plsql.g:229:1: assignOperator : ( ASSIGN | PLUSASSIGN | MINUSASSIGN | MULTASSIGN | DIVASSIGN );
 	[GrammarRule("assignOperator")]
 	private PlsqlParser.assignOperator_return assignOperator()
 	{
@@ -2389,26 +2378,26 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken set35=null;
+		IToken set36=null;
 
-		object set35_tree=null;
+		object set36_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "assignOperator");
-		DebugLocation(228, 1);
+		DebugLocation(229, 1);
 		try
 		{
-			// Plsql.g:229:2: ( ASSIGN | PLUSASSIGN | MINUSASSIGN | MULTASSIGN | DIVASSIGN )
+			// Plsql.g:230:2: ( ASSIGN | PLUSASSIGN | MINUSASSIGN | MULTASSIGN | DIVASSIGN )
 			DebugEnterAlt(1);
 			// Plsql.g:
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(229, 2);
-			set35=(IToken)input.LT(1);
+			DebugLocation(230, 2);
+			set36=(IToken)input.LT(1);
 			if ((input.LA(1)>=ASSIGN && input.LA(1)<=DIVASSIGN))
 			{
 				input.Consume();
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, (object)adaptor.Create(set35));
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, (object)adaptor.Create(set36));
 				state.errorRecovery=false;state.failed=false;
 			}
 			else
@@ -2443,7 +2432,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("assignOperator", 14);
 			Leave_assignOperator();
 		}
-		DebugLocation(234, 1);
+		DebugLocation(235, 1);
 		} finally { DebugExitRule(GrammarFileName, "assignOperator"); }
 		return retval;
 
@@ -2460,7 +2449,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_unaryOperator();
 
 	// $ANTLR start "unaryOperator"
-	// Plsql.g:236:1: unaryOperator : ( MINUS -> MINUS | NOT -> NOT );
+	// Plsql.g:237:1: unaryOperator : ( MINUS -> MINUS | NOT -> NOT );
 	[GrammarRule("unaryOperator")]
 	private PlsqlParser.unaryOperator_return unaryOperator()
 	{
@@ -2472,19 +2461,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken MINUS36=null;
-		IToken NOT37=null;
+		IToken MINUS37=null;
+		IToken NOT38=null;
 
-		object MINUS36_tree=null;
-		object NOT37_tree=null;
+		object MINUS37_tree=null;
+		object NOT38_tree=null;
 		RewriteRuleITokenStream stream_NOT=new RewriteRuleITokenStream(adaptor,"token NOT");
 		RewriteRuleITokenStream stream_MINUS=new RewriteRuleITokenStream(adaptor,"token MINUS");
 
 		try { DebugEnterRule(GrammarFileName, "unaryOperator");
-		DebugLocation(236, 1);
+		DebugLocation(237, 1);
 		try
 		{
-			// Plsql.g:237:2: ( MINUS -> MINUS | NOT -> NOT )
+			// Plsql.g:238:2: ( MINUS -> MINUS | NOT -> NOT )
 			int alt10=2;
 			try { DebugEnterDecision(10, decisionCanBacktrack[10]);
 			int LA10_0 = input.LA(1);
@@ -2510,11 +2499,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:237:4: MINUS
+				// Plsql.g:238:4: MINUS
 				{
-				DebugLocation(237, 4);
-				MINUS36=(IToken)Match(input,MINUS,Follow._MINUS_in_unaryOperator1289); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_MINUS.Add(MINUS36);
+				DebugLocation(238, 4);
+				MINUS37=(IToken)Match(input,MINUS,Follow._MINUS_in_unaryOperator1301); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_MINUS.Add(MINUS37);
 
 
 
@@ -2531,9 +2520,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 237:10: -> MINUS
+				// 238:10: -> MINUS
 				{
-					DebugLocation(237, 13);
+					DebugLocation(238, 13);
 					adaptor.AddChild(root_0, new MinusNode(stream_MINUS.NextToken()));
 
 				}
@@ -2546,11 +2535,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:238:4: NOT
+				// Plsql.g:239:4: NOT
 				{
-				DebugLocation(238, 4);
-				NOT37=(IToken)Match(input,NOT,Follow._NOT_in_unaryOperator1301); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_NOT.Add(NOT37);
+				DebugLocation(239, 4);
+				NOT38=(IToken)Match(input,NOT,Follow._NOT_in_unaryOperator1313); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_NOT.Add(NOT38);
 
 
 
@@ -2567,9 +2556,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 238:8: -> NOT
+				// 239:8: -> NOT
 				{
-					DebugLocation(238, 11);
+					DebugLocation(239, 11);
 					adaptor.AddChild(root_0, new NotNode(stream_NOT.NextToken()));
 
 				}
@@ -2603,7 +2592,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("unaryOperator", 15);
 			Leave_unaryOperator();
 		}
-		DebugLocation(239, 1);
+		DebugLocation(240, 1);
 		} finally { DebugExitRule(GrammarFileName, "unaryOperator"); }
 		return retval;
 
@@ -2620,7 +2609,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_varDef();
 
 	// $ANTLR start "varDef"
-	// Plsql.g:244:1: varDef : ID type -> ^( VarDef ID type ) ;
+	// Plsql.g:245:1: varDef : ID type -> ^( VarDef ID type ) ;
 	[GrammarRule("varDef")]
 	private PlsqlParser.varDef_return varDef()
 	{
@@ -2632,35 +2621,35 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken ID38=null;
-		PlsqlParser.type_return type39 = default(PlsqlParser.type_return);
+		IToken ID39=null;
+		PlsqlParser.type_return type40 = default(PlsqlParser.type_return);
 
-		object ID38_tree=null;
+		object ID39_tree=null;
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		try { DebugEnterRule(GrammarFileName, "varDef");
-		DebugLocation(244, 1);
+		DebugLocation(245, 1);
 		try
 		{
-			// Plsql.g:245:2: ( ID type -> ^( VarDef ID type ) )
+			// Plsql.g:246:2: ( ID type -> ^( VarDef ID type ) )
 			DebugEnterAlt(1);
-			// Plsql.g:245:4: ID type
+			// Plsql.g:246:4: ID type
 			{
-			DebugLocation(245, 4);
-			ID38=(IToken)Match(input,ID,Follow._ID_in_varDef1322); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID38);
+			DebugLocation(246, 4);
+			ID39=(IToken)Match(input,ID,Follow._ID_in_varDef1334); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID39);
 
-			DebugLocation(245, 7);
-			PushFollow(Follow._type_in_varDef1324);
-			type39=type();
+			DebugLocation(246, 7);
+			PushFollow(Follow._type_in_varDef1336);
+			type40=type();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_type.Add(type39.Tree);
+			if ( state.backtracking == 0 ) stream_type.Add(type40.Tree);
 
 
 			{
 			// AST REWRITE
-			// elements: ID, type
+			// elements: type, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -2671,18 +2660,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 246:2: -> ^( VarDef ID type )
+			// 247:2: -> ^( VarDef ID type )
 			{
-				DebugLocation(246, 5);
-				// Plsql.g:246:5: ^( VarDef ID type )
+				DebugLocation(247, 5);
+				// Plsql.g:247:5: ^( VarDef ID type )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(246, 7);
+				DebugLocation(247, 7);
 				root_1 = (object)adaptor.BecomeRoot(new VarDefNode(VarDef), root_1);
 
-				DebugLocation(246, 26);
+				DebugLocation(247, 26);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(246, 29);
+				DebugLocation(247, 29);
 				adaptor.AddChild(root_1, stream_type.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -2717,7 +2706,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("varDef", 16);
 			Leave_varDef();
 		}
-		DebugLocation(247, 1);
+		DebugLocation(248, 1);
 		} finally { DebugExitRule(GrammarFileName, "varDef"); }
 		return retval;
 
@@ -2734,7 +2723,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_varList();
 
 	// $ANTLR start "varList"
-	// Plsql.g:249:1: varList : ( varDef ( ',' varDef )* )? -> ^( VarList ( varDef )* ) ;
+	// Plsql.g:250:1: varList : ( varDef ( ',' varDef )* )? -> ^( VarList ( varDef )* ) ;
 	[GrammarRule("varList")]
 	private PlsqlParser.varList_return varList()
 	{
@@ -2746,23 +2735,23 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken char_literal41=null;
-		PlsqlParser.varDef_return varDef40 = default(PlsqlParser.varDef_return);
-		PlsqlParser.varDef_return varDef42 = default(PlsqlParser.varDef_return);
+		IToken char_literal42=null;
+		PlsqlParser.varDef_return varDef41 = default(PlsqlParser.varDef_return);
+		PlsqlParser.varDef_return varDef43 = default(PlsqlParser.varDef_return);
 
-		object char_literal41_tree=null;
+		object char_literal42_tree=null;
 		RewriteRuleITokenStream stream_101=new RewriteRuleITokenStream(adaptor,"token 101");
 		RewriteRuleSubtreeStream stream_varDef=new RewriteRuleSubtreeStream(adaptor,"rule varDef");
 		try { DebugEnterRule(GrammarFileName, "varList");
-		DebugLocation(249, 1);
+		DebugLocation(250, 1);
 		try
 		{
-			// Plsql.g:250:2: ( ( varDef ( ',' varDef )* )? -> ^( VarList ( varDef )* ) )
+			// Plsql.g:251:2: ( ( varDef ( ',' varDef )* )? -> ^( VarList ( varDef )* ) )
 			DebugEnterAlt(1);
-			// Plsql.g:250:4: ( varDef ( ',' varDef )* )?
+			// Plsql.g:251:4: ( varDef ( ',' varDef )* )?
 			{
-			DebugLocation(250, 4);
-			// Plsql.g:250:4: ( varDef ( ',' varDef )* )?
+			DebugLocation(251, 4);
+			// Plsql.g:251:4: ( varDef ( ',' varDef )* )?
 			int alt12=2;
 			try { DebugEnterSubRule(12);
 			try { DebugEnterDecision(12, decisionCanBacktrack[12]);
@@ -2777,16 +2766,16 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:250:6: varDef ( ',' varDef )*
+				// Plsql.g:251:6: varDef ( ',' varDef )*
 				{
-				DebugLocation(250, 6);
-				PushFollow(Follow._varDef_in_varList1352);
-				varDef40=varDef();
+				DebugLocation(251, 6);
+				PushFollow(Follow._varDef_in_varList1364);
+				varDef41=varDef();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_varDef.Add(varDef40.Tree);
-				DebugLocation(250, 13);
-				// Plsql.g:250:13: ( ',' varDef )*
+				if ( state.backtracking == 0 ) stream_varDef.Add(varDef41.Tree);
+				DebugLocation(251, 13);
+				// Plsql.g:251:13: ( ',' varDef )*
 				try { DebugEnterSubRule(11);
 				while (true)
 				{
@@ -2805,18 +2794,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// Plsql.g:250:15: ',' varDef
+						// Plsql.g:251:15: ',' varDef
 						{
-						DebugLocation(250, 15);
-						char_literal41=(IToken)Match(input,101,Follow._101_in_varList1356); if (state.failed) return retval; 
-						if ( state.backtracking == 0 ) stream_101.Add(char_literal41);
+						DebugLocation(251, 15);
+						char_literal42=(IToken)Match(input,101,Follow._101_in_varList1368); if (state.failed) return retval; 
+						if ( state.backtracking == 0 ) stream_101.Add(char_literal42);
 
-						DebugLocation(250, 19);
-						PushFollow(Follow._varDef_in_varList1358);
-						varDef42=varDef();
+						DebugLocation(251, 19);
+						PushFollow(Follow._varDef_in_varList1370);
+						varDef43=varDef();
 						PopFollow();
 						if (state.failed) return retval;
-						if ( state.backtracking == 0 ) stream_varDef.Add(varDef42.Tree);
+						if ( state.backtracking == 0 ) stream_varDef.Add(varDef43.Tree);
 
 						}
 						break;
@@ -2853,20 +2842,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 251:2: -> ^( VarList ( varDef )* )
+			// 252:2: -> ^( VarList ( varDef )* )
 			{
-				DebugLocation(251, 5);
-				// Plsql.g:251:5: ^( VarList ( varDef )* )
+				DebugLocation(252, 5);
+				// Plsql.g:252:5: ^( VarList ( varDef )* )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(251, 7);
+				DebugLocation(252, 7);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(VarList, "VarList"), root_1);
 
-				DebugLocation(251, 15);
-				// Plsql.g:251:15: ( varDef )*
+				DebugLocation(252, 15);
+				// Plsql.g:252:15: ( varDef )*
 				while ( stream_varDef.HasNext )
 				{
-					DebugLocation(251, 15);
+					DebugLocation(252, 15);
 					adaptor.AddChild(root_1, stream_varDef.NextTree());
 
 				}
@@ -2904,7 +2893,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("varList", 17);
 			Leave_varList();
 		}
-		DebugLocation(252, 1);
+		DebugLocation(253, 1);
 		} finally { DebugExitRule(GrammarFileName, "varList"); }
 		return retval;
 
@@ -2921,7 +2910,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_methodDecl();
 
 	// $ANTLR start "methodDecl"
-	// Plsql.g:254:1: methodDecl : ( procDecl | funcDecl );
+	// Plsql.g:255:1: methodDecl : ( procDecl | funcDecl );
 	[GrammarRule("methodDecl")]
 	private PlsqlParser.methodDecl_return methodDecl()
 	{
@@ -2933,15 +2922,15 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		PlsqlParser.procDecl_return procDecl43 = default(PlsqlParser.procDecl_return);
-		PlsqlParser.funcDecl_return funcDecl44 = default(PlsqlParser.funcDecl_return);
+		PlsqlParser.procDecl_return procDecl44 = default(PlsqlParser.procDecl_return);
+		PlsqlParser.funcDecl_return funcDecl45 = default(PlsqlParser.funcDecl_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "methodDecl");
-		DebugLocation(254, 1);
+		DebugLocation(255, 1);
 		try
 		{
-			// Plsql.g:255:2: ( procDecl | funcDecl )
+			// Plsql.g:256:2: ( procDecl | funcDecl )
 			int alt13=2;
 			try { DebugEnterDecision(13, decisionCanBacktrack[13]);
 			switch (input.LA(1))
@@ -3015,31 +3004,31 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:255:4: procDecl
+				// Plsql.g:256:4: procDecl
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(255, 4);
-				PushFollow(Follow._procDecl_in_methodDecl1384);
-				procDecl43=procDecl();
+				DebugLocation(256, 4);
+				PushFollow(Follow._procDecl_in_methodDecl1396);
+				procDecl44=procDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, procDecl43.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, procDecl44.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:256:4: funcDecl
+				// Plsql.g:257:4: funcDecl
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(256, 4);
-				PushFollow(Follow._funcDecl_in_methodDecl1389);
-				funcDecl44=funcDecl();
+				DebugLocation(257, 4);
+				PushFollow(Follow._funcDecl_in_methodDecl1401);
+				funcDecl45=funcDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, funcDecl44.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, funcDecl45.Tree);
 
 				}
 				break;
@@ -3066,7 +3055,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("methodDecl", 18);
 			Leave_methodDecl();
 		}
-		DebugLocation(257, 1);
+		DebugLocation(258, 1);
 		} finally { DebugExitRule(GrammarFileName, "methodDecl"); }
 		return retval;
 
@@ -3083,7 +3072,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_methodModifier();
 
 	// $ANTLR start "methodModifier"
-	// Plsql.g:259:1: methodModifier : ( MEMBER | STATIC | -> STATIC );
+	// Plsql.g:260:1: methodModifier : ( MEMBER | STATIC | -> STATIC );
 	[GrammarRule("methodModifier")]
 	private PlsqlParser.methodModifier_return methodModifier()
 	{
@@ -3095,17 +3084,17 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken MEMBER45=null;
-		IToken STATIC46=null;
+		IToken MEMBER46=null;
+		IToken STATIC47=null;
 
-		object MEMBER45_tree=null;
-		object STATIC46_tree=null;
+		object MEMBER46_tree=null;
+		object STATIC47_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "methodModifier");
-		DebugLocation(259, 1);
+		DebugLocation(260, 1);
 		try
 		{
-			// Plsql.g:260:2: ( MEMBER | STATIC | -> STATIC )
+			// Plsql.g:261:2: ( MEMBER | STATIC | -> STATIC )
 			int alt14=3;
 			try { DebugEnterDecision(14, decisionCanBacktrack[14]);
 			switch (input.LA(1))
@@ -3141,37 +3130,37 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:260:4: MEMBER
+				// Plsql.g:261:4: MEMBER
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(260, 4);
-				MEMBER45=(IToken)Match(input,MEMBER,Follow._MEMBER_in_methodModifier1400); if (state.failed) return retval;
+				DebugLocation(261, 4);
+				MEMBER46=(IToken)Match(input,MEMBER,Follow._MEMBER_in_methodModifier1412); if (state.failed) return retval;
 				if ( state.backtracking==0 ) {
-				MEMBER45_tree = (object)adaptor.Create(MEMBER45);
-				adaptor.AddChild(root_0, MEMBER45_tree);
+				MEMBER46_tree = (object)adaptor.Create(MEMBER46);
+				adaptor.AddChild(root_0, MEMBER46_tree);
 				}
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:261:4: STATIC
+				// Plsql.g:262:4: STATIC
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(261, 4);
-				STATIC46=(IToken)Match(input,STATIC,Follow._STATIC_in_methodModifier1405); if (state.failed) return retval;
+				DebugLocation(262, 4);
+				STATIC47=(IToken)Match(input,STATIC,Follow._STATIC_in_methodModifier1417); if (state.failed) return retval;
 				if ( state.backtracking==0 ) {
-				STATIC46_tree = (object)adaptor.Create(STATIC46);
-				adaptor.AddChild(root_0, STATIC46_tree);
+				STATIC47_tree = (object)adaptor.Create(STATIC47);
+				adaptor.AddChild(root_0, STATIC47_tree);
 				}
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// Plsql.g:262:4: 
+				// Plsql.g:263:4: 
 				{
 
 				{
@@ -3187,9 +3176,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 262:4: -> STATIC
+				// 263:4: -> STATIC
 				{
-					DebugLocation(262, 7);
+					DebugLocation(263, 7);
 					adaptor.AddChild(root_0, (object)adaptor.Create(STATIC, "STATIC"));
 
 				}
@@ -3223,7 +3212,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("methodModifier", 19);
 			Leave_methodModifier();
 		}
-		DebugLocation(263, 1);
+		DebugLocation(264, 1);
 		} finally { DebugExitRule(GrammarFileName, "methodModifier"); }
 		return retval;
 
@@ -3240,7 +3229,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_procDecl();
 
 	// $ANTLR start "procDecl"
-	// Plsql.g:265:1: procDecl : methodModifier PROCEDURE ID '(' varList ')' -> ^( MethodDecl ID varList Void methodModifier ) ;
+	// Plsql.g:266:1: procDecl : methodModifier PROCEDURE ID '(' varList ')' -> ^( MethodDecl ID varList Void methodModifier ) ;
 	[GrammarRule("procDecl")]
 	private PlsqlParser.procDecl_return procDecl()
 	{
@@ -3252,17 +3241,17 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken PROCEDURE48=null;
-		IToken ID49=null;
-		IToken char_literal50=null;
-		IToken char_literal52=null;
-		PlsqlParser.methodModifier_return methodModifier47 = default(PlsqlParser.methodModifier_return);
-		PlsqlParser.varList_return varList51 = default(PlsqlParser.varList_return);
+		IToken PROCEDURE49=null;
+		IToken ID50=null;
+		IToken char_literal51=null;
+		IToken char_literal53=null;
+		PlsqlParser.methodModifier_return methodModifier48 = default(PlsqlParser.methodModifier_return);
+		PlsqlParser.varList_return varList52 = default(PlsqlParser.varList_return);
 
-		object PROCEDURE48_tree=null;
-		object ID49_tree=null;
-		object char_literal50_tree=null;
-		object char_literal52_tree=null;
+		object PROCEDURE49_tree=null;
+		object ID50_tree=null;
+		object char_literal51_tree=null;
+		object char_literal53_tree=null;
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleITokenStream stream_PROCEDURE=new RewriteRuleITokenStream(adaptor,"token PROCEDURE");
 		RewriteRuleITokenStream stream_103=new RewriteRuleITokenStream(adaptor,"token 103");
@@ -3270,46 +3259,46 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_methodModifier=new RewriteRuleSubtreeStream(adaptor,"rule methodModifier");
 		RewriteRuleSubtreeStream stream_varList=new RewriteRuleSubtreeStream(adaptor,"rule varList");
 		try { DebugEnterRule(GrammarFileName, "procDecl");
-		DebugLocation(265, 1);
+		DebugLocation(266, 1);
 		try
 		{
-			// Plsql.g:266:2: ( methodModifier PROCEDURE ID '(' varList ')' -> ^( MethodDecl ID varList Void methodModifier ) )
+			// Plsql.g:267:2: ( methodModifier PROCEDURE ID '(' varList ')' -> ^( MethodDecl ID varList Void methodModifier ) )
 			DebugEnterAlt(1);
-			// Plsql.g:266:4: methodModifier PROCEDURE ID '(' varList ')'
+			// Plsql.g:267:4: methodModifier PROCEDURE ID '(' varList ')'
 			{
-			DebugLocation(266, 4);
-			PushFollow(Follow._methodModifier_in_procDecl1423);
-			methodModifier47=methodModifier();
+			DebugLocation(267, 4);
+			PushFollow(Follow._methodModifier_in_procDecl1435);
+			methodModifier48=methodModifier();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_methodModifier.Add(methodModifier47.Tree);
-			DebugLocation(266, 19);
-			PROCEDURE48=(IToken)Match(input,PROCEDURE,Follow._PROCEDURE_in_procDecl1425); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_PROCEDURE.Add(PROCEDURE48);
+			if ( state.backtracking == 0 ) stream_methodModifier.Add(methodModifier48.Tree);
+			DebugLocation(267, 19);
+			PROCEDURE49=(IToken)Match(input,PROCEDURE,Follow._PROCEDURE_in_procDecl1437); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_PROCEDURE.Add(PROCEDURE49);
 
-			DebugLocation(266, 29);
-			ID49=(IToken)Match(input,ID,Follow._ID_in_procDecl1427); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID49);
+			DebugLocation(267, 29);
+			ID50=(IToken)Match(input,ID,Follow._ID_in_procDecl1439); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID50);
 
-			DebugLocation(266, 32);
-			char_literal50=(IToken)Match(input,102,Follow._102_in_procDecl1429); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_102.Add(char_literal50);
+			DebugLocation(267, 32);
+			char_literal51=(IToken)Match(input,102,Follow._102_in_procDecl1441); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_102.Add(char_literal51);
 
-			DebugLocation(266, 36);
-			PushFollow(Follow._varList_in_procDecl1431);
-			varList51=varList();
+			DebugLocation(267, 36);
+			PushFollow(Follow._varList_in_procDecl1443);
+			varList52=varList();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_varList.Add(varList51.Tree);
-			DebugLocation(266, 44);
-			char_literal52=(IToken)Match(input,103,Follow._103_in_procDecl1433); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_103.Add(char_literal52);
+			if ( state.backtracking == 0 ) stream_varList.Add(varList52.Tree);
+			DebugLocation(267, 44);
+			char_literal53=(IToken)Match(input,103,Follow._103_in_procDecl1445); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_103.Add(char_literal53);
 
 
 
 			{
 			// AST REWRITE
-			// elements: ID, varList, methodModifier
+			// elements: varList, ID, methodModifier
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3320,22 +3309,22 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 267:2: -> ^( MethodDecl ID varList Void methodModifier )
+			// 268:2: -> ^( MethodDecl ID varList Void methodModifier )
 			{
-				DebugLocation(267, 5);
-				// Plsql.g:267:5: ^( MethodDecl ID varList Void methodModifier )
+				DebugLocation(268, 5);
+				// Plsql.g:268:5: ^( MethodDecl ID varList Void methodModifier )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(267, 7);
+				DebugLocation(268, 7);
 				root_1 = (object)adaptor.BecomeRoot(new MethodDeclNode(MethodDecl), root_1);
 
-				DebugLocation(267, 34);
+				DebugLocation(268, 34);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(267, 37);
+				DebugLocation(268, 37);
 				adaptor.AddChild(root_1, stream_varList.NextTree());
-				DebugLocation(267, 45);
+				DebugLocation(268, 45);
 				adaptor.AddChild(root_1, new VoidNode(Void));
-				DebugLocation(267, 60);
+				DebugLocation(268, 60);
 				adaptor.AddChild(root_1, stream_methodModifier.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -3370,7 +3359,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("procDecl", 20);
 			Leave_procDecl();
 		}
-		DebugLocation(268, 1);
+		DebugLocation(269, 1);
 		} finally { DebugExitRule(GrammarFileName, "procDecl"); }
 		return retval;
 
@@ -3387,7 +3376,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_funcDecl();
 
 	// $ANTLR start "funcDecl"
-	// Plsql.g:270:1: funcDecl : methodModifier FUNCTION ID '(' varList ')' RETURN type -> ^( MethodDecl ID varList type methodModifier ) ;
+	// Plsql.g:271:1: funcDecl : methodModifier FUNCTION ID '(' varList ')' RETURN type -> ^( MethodDecl ID varList type methodModifier ) ;
 	[GrammarRule("funcDecl")]
 	private PlsqlParser.funcDecl_return funcDecl()
 	{
@@ -3399,20 +3388,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken FUNCTION54=null;
-		IToken ID55=null;
-		IToken char_literal56=null;
-		IToken char_literal58=null;
-		IToken RETURN59=null;
-		PlsqlParser.methodModifier_return methodModifier53 = default(PlsqlParser.methodModifier_return);
-		PlsqlParser.varList_return varList57 = default(PlsqlParser.varList_return);
-		PlsqlParser.type_return type60 = default(PlsqlParser.type_return);
+		IToken FUNCTION55=null;
+		IToken ID56=null;
+		IToken char_literal57=null;
+		IToken char_literal59=null;
+		IToken RETURN60=null;
+		PlsqlParser.methodModifier_return methodModifier54 = default(PlsqlParser.methodModifier_return);
+		PlsqlParser.varList_return varList58 = default(PlsqlParser.varList_return);
+		PlsqlParser.type_return type61 = default(PlsqlParser.type_return);
 
-		object FUNCTION54_tree=null;
-		object ID55_tree=null;
-		object char_literal56_tree=null;
-		object char_literal58_tree=null;
-		object RETURN59_tree=null;
+		object FUNCTION55_tree=null;
+		object ID56_tree=null;
+		object char_literal57_tree=null;
+		object char_literal59_tree=null;
+		object RETURN60_tree=null;
 		RewriteRuleITokenStream stream_FUNCTION=new RewriteRuleITokenStream(adaptor,"token FUNCTION");
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleITokenStream stream_103=new RewriteRuleITokenStream(adaptor,"token 103");
@@ -3422,56 +3411,56 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		RewriteRuleSubtreeStream stream_varList=new RewriteRuleSubtreeStream(adaptor,"rule varList");
 		try { DebugEnterRule(GrammarFileName, "funcDecl");
-		DebugLocation(270, 1);
+		DebugLocation(271, 1);
 		try
 		{
-			// Plsql.g:271:2: ( methodModifier FUNCTION ID '(' varList ')' RETURN type -> ^( MethodDecl ID varList type methodModifier ) )
+			// Plsql.g:272:2: ( methodModifier FUNCTION ID '(' varList ')' RETURN type -> ^( MethodDecl ID varList type methodModifier ) )
 			DebugEnterAlt(1);
-			// Plsql.g:271:4: methodModifier FUNCTION ID '(' varList ')' RETURN type
+			// Plsql.g:272:4: methodModifier FUNCTION ID '(' varList ')' RETURN type
 			{
-			DebugLocation(271, 4);
-			PushFollow(Follow._methodModifier_in_funcDecl1465);
-			methodModifier53=methodModifier();
+			DebugLocation(272, 4);
+			PushFollow(Follow._methodModifier_in_funcDecl1477);
+			methodModifier54=methodModifier();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_methodModifier.Add(methodModifier53.Tree);
-			DebugLocation(271, 19);
-			FUNCTION54=(IToken)Match(input,FUNCTION,Follow._FUNCTION_in_funcDecl1467); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_FUNCTION.Add(FUNCTION54);
+			if ( state.backtracking == 0 ) stream_methodModifier.Add(methodModifier54.Tree);
+			DebugLocation(272, 19);
+			FUNCTION55=(IToken)Match(input,FUNCTION,Follow._FUNCTION_in_funcDecl1479); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_FUNCTION.Add(FUNCTION55);
 
-			DebugLocation(271, 28);
-			ID55=(IToken)Match(input,ID,Follow._ID_in_funcDecl1469); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID55);
+			DebugLocation(272, 28);
+			ID56=(IToken)Match(input,ID,Follow._ID_in_funcDecl1481); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID56);
 
-			DebugLocation(271, 31);
-			char_literal56=(IToken)Match(input,102,Follow._102_in_funcDecl1471); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_102.Add(char_literal56);
+			DebugLocation(272, 31);
+			char_literal57=(IToken)Match(input,102,Follow._102_in_funcDecl1483); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_102.Add(char_literal57);
 
-			DebugLocation(271, 35);
-			PushFollow(Follow._varList_in_funcDecl1473);
-			varList57=varList();
+			DebugLocation(272, 35);
+			PushFollow(Follow._varList_in_funcDecl1485);
+			varList58=varList();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_varList.Add(varList57.Tree);
-			DebugLocation(271, 43);
-			char_literal58=(IToken)Match(input,103,Follow._103_in_funcDecl1475); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_103.Add(char_literal58);
+			if ( state.backtracking == 0 ) stream_varList.Add(varList58.Tree);
+			DebugLocation(272, 43);
+			char_literal59=(IToken)Match(input,103,Follow._103_in_funcDecl1487); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_103.Add(char_literal59);
 
-			DebugLocation(271, 47);
-			RETURN59=(IToken)Match(input,RETURN,Follow._RETURN_in_funcDecl1477); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_RETURN.Add(RETURN59);
+			DebugLocation(272, 47);
+			RETURN60=(IToken)Match(input,RETURN,Follow._RETURN_in_funcDecl1489); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_RETURN.Add(RETURN60);
 
-			DebugLocation(271, 54);
-			PushFollow(Follow._type_in_funcDecl1479);
-			type60=type();
+			DebugLocation(272, 54);
+			PushFollow(Follow._type_in_funcDecl1491);
+			type61=type();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_type.Add(type60.Tree);
+			if ( state.backtracking == 0 ) stream_type.Add(type61.Tree);
 
 
 			{
 			// AST REWRITE
-			// elements: ID, type, varList, methodModifier
+			// elements: varList, type, methodModifier, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3482,22 +3471,22 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 272:2: -> ^( MethodDecl ID varList type methodModifier )
+			// 273:2: -> ^( MethodDecl ID varList type methodModifier )
 			{
-				DebugLocation(272, 5);
-				// Plsql.g:272:5: ^( MethodDecl ID varList type methodModifier )
+				DebugLocation(273, 5);
+				// Plsql.g:273:5: ^( MethodDecl ID varList type methodModifier )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(272, 7);
+				DebugLocation(273, 7);
 				root_1 = (object)adaptor.BecomeRoot(new MethodDeclNode(MethodDecl), root_1);
 
-				DebugLocation(272, 34);
+				DebugLocation(273, 34);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(272, 37);
+				DebugLocation(273, 37);
 				adaptor.AddChild(root_1, stream_varList.NextTree());
-				DebugLocation(272, 45);
+				DebugLocation(273, 45);
 				adaptor.AddChild(root_1, stream_type.NextTree());
-				DebugLocation(272, 50);
+				DebugLocation(273, 50);
 				adaptor.AddChild(root_1, stream_methodModifier.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -3532,7 +3521,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("funcDecl", 21);
 			Leave_funcDecl();
 		}
-		DebugLocation(273, 1);
+		DebugLocation(274, 1);
 		} finally { DebugExitRule(GrammarFileName, "funcDecl"); }
 		return retval;
 
@@ -3549,7 +3538,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_methodDef();
 
 	// $ANTLR start "methodDef"
-	// Plsql.g:275:1: methodDef : methodDecl IS declareBlock BEGIN codeBlock END -> ^( MethodDef declareBlock methodDecl codeBlock ) ;
+	// Plsql.g:276:1: methodDef : methodDecl IS declareBlock BEGIN codeBlock END -> ^( MethodDef declareBlock methodDecl codeBlock ) ;
 	[GrammarRule("methodDef")]
 	private PlsqlParser.methodDef_return methodDef()
 	{
@@ -3561,16 +3550,16 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken IS62=null;
-		IToken BEGIN64=null;
-		IToken END66=null;
-		PlsqlParser.methodDecl_return methodDecl61 = default(PlsqlParser.methodDecl_return);
-		PlsqlParser.declareBlock_return declareBlock63 = default(PlsqlParser.declareBlock_return);
-		PlsqlParser.codeBlock_return codeBlock65 = default(PlsqlParser.codeBlock_return);
+		IToken IS63=null;
+		IToken BEGIN65=null;
+		IToken END67=null;
+		PlsqlParser.methodDecl_return methodDecl62 = default(PlsqlParser.methodDecl_return);
+		PlsqlParser.declareBlock_return declareBlock64 = default(PlsqlParser.declareBlock_return);
+		PlsqlParser.codeBlock_return codeBlock66 = default(PlsqlParser.codeBlock_return);
 
-		object IS62_tree=null;
-		object BEGIN64_tree=null;
-		object END66_tree=null;
+		object IS63_tree=null;
+		object BEGIN65_tree=null;
+		object END67_tree=null;
 		RewriteRuleITokenStream stream_END=new RewriteRuleITokenStream(adaptor,"token END");
 		RewriteRuleITokenStream stream_IS=new RewriteRuleITokenStream(adaptor,"token IS");
 		RewriteRuleITokenStream stream_BEGIN=new RewriteRuleITokenStream(adaptor,"token BEGIN");
@@ -3578,48 +3567,48 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_codeBlock=new RewriteRuleSubtreeStream(adaptor,"rule codeBlock");
 		RewriteRuleSubtreeStream stream_declareBlock=new RewriteRuleSubtreeStream(adaptor,"rule declareBlock");
 		try { DebugEnterRule(GrammarFileName, "methodDef");
-		DebugLocation(275, 1);
+		DebugLocation(276, 1);
 		try
 		{
-			// Plsql.g:276:2: ( methodDecl IS declareBlock BEGIN codeBlock END -> ^( MethodDef declareBlock methodDecl codeBlock ) )
+			// Plsql.g:277:2: ( methodDecl IS declareBlock BEGIN codeBlock END -> ^( MethodDef declareBlock methodDecl codeBlock ) )
 			DebugEnterAlt(1);
-			// Plsql.g:276:4: methodDecl IS declareBlock BEGIN codeBlock END
+			// Plsql.g:277:4: methodDecl IS declareBlock BEGIN codeBlock END
 			{
-			DebugLocation(276, 4);
-			PushFollow(Follow._methodDecl_in_methodDef1508);
-			methodDecl61=methodDecl();
+			DebugLocation(277, 4);
+			PushFollow(Follow._methodDecl_in_methodDef1520);
+			methodDecl62=methodDecl();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_methodDecl.Add(methodDecl61.Tree);
-			DebugLocation(276, 15);
-			IS62=(IToken)Match(input,IS,Follow._IS_in_methodDef1510); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_IS.Add(IS62);
+			if ( state.backtracking == 0 ) stream_methodDecl.Add(methodDecl62.Tree);
+			DebugLocation(277, 15);
+			IS63=(IToken)Match(input,IS,Follow._IS_in_methodDef1522); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_IS.Add(IS63);
 
-			DebugLocation(276, 18);
-			PushFollow(Follow._declareBlock_in_methodDef1512);
-			declareBlock63=declareBlock();
+			DebugLocation(277, 18);
+			PushFollow(Follow._declareBlock_in_methodDef1524);
+			declareBlock64=declareBlock();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_declareBlock.Add(declareBlock63.Tree);
-			DebugLocation(276, 31);
-			BEGIN64=(IToken)Match(input,BEGIN,Follow._BEGIN_in_methodDef1514); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_BEGIN.Add(BEGIN64);
+			if ( state.backtracking == 0 ) stream_declareBlock.Add(declareBlock64.Tree);
+			DebugLocation(277, 31);
+			BEGIN65=(IToken)Match(input,BEGIN,Follow._BEGIN_in_methodDef1526); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_BEGIN.Add(BEGIN65);
 
-			DebugLocation(276, 37);
-			PushFollow(Follow._codeBlock_in_methodDef1516);
-			codeBlock65=codeBlock();
+			DebugLocation(277, 37);
+			PushFollow(Follow._codeBlock_in_methodDef1528);
+			codeBlock66=codeBlock();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock65.Tree);
-			DebugLocation(276, 47);
-			END66=(IToken)Match(input,END,Follow._END_in_methodDef1518); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_END.Add(END66);
+			if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock66.Tree);
+			DebugLocation(277, 47);
+			END67=(IToken)Match(input,END,Follow._END_in_methodDef1530); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_END.Add(END67);
 
 
 
 			{
 			// AST REWRITE
-			// elements: codeBlock, methodDecl, declareBlock
+			// elements: codeBlock, declareBlock, methodDecl
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3630,20 +3619,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 277:2: -> ^( MethodDef declareBlock methodDecl codeBlock )
+			// 278:2: -> ^( MethodDef declareBlock methodDecl codeBlock )
 			{
-				DebugLocation(277, 5);
-				// Plsql.g:277:5: ^( MethodDef declareBlock methodDecl codeBlock )
+				DebugLocation(278, 5);
+				// Plsql.g:278:5: ^( MethodDef declareBlock methodDecl codeBlock )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(277, 7);
+				DebugLocation(278, 7);
 				root_1 = (object)adaptor.BecomeRoot(new MethodDefNode(MethodDef), root_1);
 
-				DebugLocation(277, 32);
+				DebugLocation(278, 32);
 				adaptor.AddChild(root_1, stream_declareBlock.NextTree());
-				DebugLocation(277, 45);
+				DebugLocation(278, 45);
 				adaptor.AddChild(root_1, stream_methodDecl.NextTree());
-				DebugLocation(277, 56);
+				DebugLocation(278, 56);
 				adaptor.AddChild(root_1, stream_codeBlock.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -3678,7 +3667,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("methodDef", 22);
 			Leave_methodDef();
 		}
-		DebugLocation(278, 1);
+		DebugLocation(279, 1);
 		} finally { DebugExitRule(GrammarFileName, "methodDef"); }
 		return retval;
 
@@ -3695,7 +3684,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_typeDecl();
 
 	// $ANTLR start "typeDecl"
-	// Plsql.g:280:1: typeDecl : ( TYPE ID IS TABLE OF type -> ^( Table ID type ) | TYPE ID IS RECORD '(' varList ')' -> ^( Record ID varList ) );
+	// Plsql.g:281:1: typeDecl : ( TYPE ID IS TABLE OF type -> ^( Table ID type ) | TYPE ID IS RECORD '(' varList ')' -> ^( Record ID varList ) );
 	[GrammarRule("typeDecl")]
 	private PlsqlParser.typeDecl_return typeDecl()
 	{
@@ -3707,31 +3696,31 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken TYPE67=null;
-		IToken ID68=null;
-		IToken IS69=null;
-		IToken TABLE70=null;
-		IToken OF71=null;
-		IToken TYPE73=null;
-		IToken ID74=null;
-		IToken IS75=null;
-		IToken RECORD76=null;
-		IToken char_literal77=null;
-		IToken char_literal79=null;
-		PlsqlParser.type_return type72 = default(PlsqlParser.type_return);
-		PlsqlParser.varList_return varList78 = default(PlsqlParser.varList_return);
+		IToken TYPE68=null;
+		IToken ID69=null;
+		IToken IS70=null;
+		IToken TABLE71=null;
+		IToken OF72=null;
+		IToken TYPE74=null;
+		IToken ID75=null;
+		IToken IS76=null;
+		IToken RECORD77=null;
+		IToken char_literal78=null;
+		IToken char_literal80=null;
+		PlsqlParser.type_return type73 = default(PlsqlParser.type_return);
+		PlsqlParser.varList_return varList79 = default(PlsqlParser.varList_return);
 
-		object TYPE67_tree=null;
-		object ID68_tree=null;
-		object IS69_tree=null;
-		object TABLE70_tree=null;
-		object OF71_tree=null;
-		object TYPE73_tree=null;
-		object ID74_tree=null;
-		object IS75_tree=null;
-		object RECORD76_tree=null;
-		object char_literal77_tree=null;
-		object char_literal79_tree=null;
+		object TYPE68_tree=null;
+		object ID69_tree=null;
+		object IS70_tree=null;
+		object TABLE71_tree=null;
+		object OF72_tree=null;
+		object TYPE74_tree=null;
+		object ID75_tree=null;
+		object IS76_tree=null;
+		object RECORD77_tree=null;
+		object char_literal78_tree=null;
+		object char_literal80_tree=null;
 		RewriteRuleITokenStream stream_TABLE=new RewriteRuleITokenStream(adaptor,"token TABLE");
 		RewriteRuleITokenStream stream_RECORD=new RewriteRuleITokenStream(adaptor,"token RECORD");
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
@@ -3743,10 +3732,10 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		RewriteRuleSubtreeStream stream_varList=new RewriteRuleSubtreeStream(adaptor,"rule varList");
 		try { DebugEnterRule(GrammarFileName, "typeDecl");
-		DebugLocation(280, 1);
+		DebugLocation(281, 1);
 		try
 		{
-			// Plsql.g:281:2: ( TYPE ID IS TABLE OF type -> ^( Table ID type ) | TYPE ID IS RECORD '(' varList ')' -> ^( Record ID varList ) )
+			// Plsql.g:282:2: ( TYPE ID IS TABLE OF type -> ^( Table ID type ) | TYPE ID IS RECORD '(' varList ')' -> ^( Record ID varList ) )
 			int alt15=2;
 			try { DebugEnterDecision(15, decisionCanBacktrack[15]);
 			int LA15_0 = input.LA(1);
@@ -3811,34 +3800,34 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:281:4: TYPE ID IS TABLE OF type
+				// Plsql.g:282:4: TYPE ID IS TABLE OF type
 				{
-				DebugLocation(281, 4);
-				TYPE67=(IToken)Match(input,TYPE,Follow._TYPE_in_typeDecl1545); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE67);
+				DebugLocation(282, 4);
+				TYPE68=(IToken)Match(input,TYPE,Follow._TYPE_in_typeDecl1557); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE68);
 
-				DebugLocation(281, 9);
-				ID68=(IToken)Match(input,ID,Follow._ID_in_typeDecl1547); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_ID.Add(ID68);
+				DebugLocation(282, 9);
+				ID69=(IToken)Match(input,ID,Follow._ID_in_typeDecl1559); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_ID.Add(ID69);
 
-				DebugLocation(281, 12);
-				IS69=(IToken)Match(input,IS,Follow._IS_in_typeDecl1549); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_IS.Add(IS69);
+				DebugLocation(282, 12);
+				IS70=(IToken)Match(input,IS,Follow._IS_in_typeDecl1561); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_IS.Add(IS70);
 
-				DebugLocation(281, 15);
-				TABLE70=(IToken)Match(input,TABLE,Follow._TABLE_in_typeDecl1551); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_TABLE.Add(TABLE70);
+				DebugLocation(282, 15);
+				TABLE71=(IToken)Match(input,TABLE,Follow._TABLE_in_typeDecl1563); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_TABLE.Add(TABLE71);
 
-				DebugLocation(281, 21);
-				OF71=(IToken)Match(input,OF,Follow._OF_in_typeDecl1553); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_OF.Add(OF71);
+				DebugLocation(282, 21);
+				OF72=(IToken)Match(input,OF,Follow._OF_in_typeDecl1565); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_OF.Add(OF72);
 
-				DebugLocation(281, 24);
-				PushFollow(Follow._type_in_typeDecl1555);
-				type72=type();
+				DebugLocation(282, 24);
+				PushFollow(Follow._type_in_typeDecl1567);
+				type73=type();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_type.Add(type72.Tree);
+				if ( state.backtracking == 0 ) stream_type.Add(type73.Tree);
 
 
 				{
@@ -3854,18 +3843,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 282:2: -> ^( Table ID type )
+				// 283:2: -> ^( Table ID type )
 				{
-					DebugLocation(282, 5);
-					// Plsql.g:282:5: ^( Table ID type )
+					DebugLocation(283, 5);
+					// Plsql.g:283:5: ^( Table ID type )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(282, 7);
+					DebugLocation(283, 7);
 					root_1 = (object)adaptor.BecomeRoot(new TableNode(Table), root_1);
 
-					DebugLocation(282, 24);
+					DebugLocation(283, 24);
 					adaptor.AddChild(root_1, stream_ID.NextNode());
-					DebugLocation(282, 27);
+					DebugLocation(283, 27);
 					adaptor.AddChild(root_1, stream_type.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -3881,37 +3870,37 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:283:4: TYPE ID IS RECORD '(' varList ')'
+				// Plsql.g:284:4: TYPE ID IS RECORD '(' varList ')'
 				{
-				DebugLocation(283, 4);
-				TYPE73=(IToken)Match(input,TYPE,Follow._TYPE_in_typeDecl1574); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE73);
+				DebugLocation(284, 4);
+				TYPE74=(IToken)Match(input,TYPE,Follow._TYPE_in_typeDecl1586); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE74);
 
-				DebugLocation(283, 9);
-				ID74=(IToken)Match(input,ID,Follow._ID_in_typeDecl1576); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_ID.Add(ID74);
+				DebugLocation(284, 9);
+				ID75=(IToken)Match(input,ID,Follow._ID_in_typeDecl1588); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_ID.Add(ID75);
 
-				DebugLocation(283, 12);
-				IS75=(IToken)Match(input,IS,Follow._IS_in_typeDecl1578); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_IS.Add(IS75);
+				DebugLocation(284, 12);
+				IS76=(IToken)Match(input,IS,Follow._IS_in_typeDecl1590); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_IS.Add(IS76);
 
-				DebugLocation(283, 15);
-				RECORD76=(IToken)Match(input,RECORD,Follow._RECORD_in_typeDecl1580); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_RECORD.Add(RECORD76);
+				DebugLocation(284, 15);
+				RECORD77=(IToken)Match(input,RECORD,Follow._RECORD_in_typeDecl1592); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_RECORD.Add(RECORD77);
 
-				DebugLocation(283, 22);
-				char_literal77=(IToken)Match(input,102,Follow._102_in_typeDecl1582); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_102.Add(char_literal77);
+				DebugLocation(284, 22);
+				char_literal78=(IToken)Match(input,102,Follow._102_in_typeDecl1594); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_102.Add(char_literal78);
 
-				DebugLocation(283, 26);
-				PushFollow(Follow._varList_in_typeDecl1584);
-				varList78=varList();
+				DebugLocation(284, 26);
+				PushFollow(Follow._varList_in_typeDecl1596);
+				varList79=varList();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_varList.Add(varList78.Tree);
-				DebugLocation(283, 34);
-				char_literal79=(IToken)Match(input,103,Follow._103_in_typeDecl1586); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_103.Add(char_literal79);
+				if ( state.backtracking == 0 ) stream_varList.Add(varList79.Tree);
+				DebugLocation(284, 34);
+				char_literal80=(IToken)Match(input,103,Follow._103_in_typeDecl1598); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_103.Add(char_literal80);
 
 
 
@@ -3928,18 +3917,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 284:2: -> ^( Record ID varList )
+				// 285:2: -> ^( Record ID varList )
 				{
-					DebugLocation(284, 5);
-					// Plsql.g:284:5: ^( Record ID varList )
+					DebugLocation(285, 5);
+					// Plsql.g:285:5: ^( Record ID varList )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(284, 7);
+					DebugLocation(285, 7);
 					root_1 = (object)adaptor.BecomeRoot(new RecordNode(Record), root_1);
 
-					DebugLocation(284, 26);
+					DebugLocation(285, 26);
 					adaptor.AddChild(root_1, stream_ID.NextNode());
-					DebugLocation(284, 29);
+					DebugLocation(285, 29);
 					adaptor.AddChild(root_1, stream_varList.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -3976,7 +3965,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("typeDecl", 23);
 			Leave_typeDecl();
 		}
-		DebugLocation(285, 1);
+		DebugLocation(286, 1);
 		} finally { DebugExitRule(GrammarFileName, "typeDecl"); }
 		return retval;
 
@@ -3993,7 +3982,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_object_();
 
 	// $ANTLR start "object_"
-	// Plsql.g:289:1: object_ : ( objectDecl | objectBody );
+	// Plsql.g:290:1: object_ : ( objectDecl | objectBody );
 	[GrammarRule("object_")]
 	private PlsqlParser.object__return object_()
 	{
@@ -4005,15 +3994,15 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		PlsqlParser.objectDecl_return objectDecl80 = default(PlsqlParser.objectDecl_return);
-		PlsqlParser.objectBody_return objectBody81 = default(PlsqlParser.objectBody_return);
+		PlsqlParser.objectDecl_return objectDecl81 = default(PlsqlParser.objectDecl_return);
+		PlsqlParser.objectBody_return objectBody82 = default(PlsqlParser.objectBody_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "object_");
-		DebugLocation(289, 1);
+		DebugLocation(290, 1);
 		try
 		{
-			// Plsql.g:290:2: ( objectDecl | objectBody )
+			// Plsql.g:291:2: ( objectDecl | objectBody )
 			int alt16=2;
 			try { DebugEnterDecision(16, decisionCanBacktrack[16]);
 			int LA16_0 = input.LA(1);
@@ -4065,31 +4054,31 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:290:4: objectDecl
+				// Plsql.g:291:4: objectDecl
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(290, 4);
-				PushFollow(Follow._objectDecl_in_object_1613);
-				objectDecl80=objectDecl();
+				DebugLocation(291, 4);
+				PushFollow(Follow._objectDecl_in_object_1625);
+				objectDecl81=objectDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, objectDecl80.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, objectDecl81.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:291:4: objectBody
+				// Plsql.g:292:4: objectBody
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(291, 4);
-				PushFollow(Follow._objectBody_in_object_1618);
-				objectBody81=objectBody();
+				DebugLocation(292, 4);
+				PushFollow(Follow._objectBody_in_object_1630);
+				objectBody82=objectBody();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, objectBody81.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, objectBody82.Tree);
 
 				}
 				break;
@@ -4116,7 +4105,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("object_", 24);
 			Leave_object_();
 		}
-		DebugLocation(292, 1);
+		DebugLocation(293, 1);
 		} finally { DebugExitRule(GrammarFileName, "object_"); }
 		return retval;
 
@@ -4133,7 +4122,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_objectDecl();
 
 	// $ANTLR start "objectDecl"
-	// Plsql.g:294:1: objectDecl : CREATE TYPE ID isOrAs OBJECT '(' ( objectDeclItem )+ ')' ';' -> ^( ClassDecl ID ( objectDeclItem )+ ) ;
+	// Plsql.g:295:1: objectDecl : CREATE TYPE ID isOrAs OBJECT '(' ( objectDeclItem )+ ')' ';' -> ^( ClassDecl ID ( objectDeclItem )+ ) ;
 	[GrammarRule("objectDecl")]
 	private PlsqlParser.objectDecl_return objectDecl()
 	{
@@ -4145,23 +4134,23 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken CREATE82=null;
-		IToken TYPE83=null;
-		IToken ID84=null;
-		IToken OBJECT86=null;
-		IToken char_literal87=null;
-		IToken char_literal89=null;
+		IToken CREATE83=null;
+		IToken TYPE84=null;
+		IToken ID85=null;
+		IToken OBJECT87=null;
+		IToken char_literal88=null;
 		IToken char_literal90=null;
-		PlsqlParser.isOrAs_return isOrAs85 = default(PlsqlParser.isOrAs_return);
-		PlsqlParser.objectDeclItem_return objectDeclItem88 = default(PlsqlParser.objectDeclItem_return);
+		IToken char_literal91=null;
+		PlsqlParser.isOrAs_return isOrAs86 = default(PlsqlParser.isOrAs_return);
+		PlsqlParser.objectDeclItem_return objectDeclItem89 = default(PlsqlParser.objectDeclItem_return);
 
-		object CREATE82_tree=null;
-		object TYPE83_tree=null;
-		object ID84_tree=null;
-		object OBJECT86_tree=null;
-		object char_literal87_tree=null;
-		object char_literal89_tree=null;
+		object CREATE83_tree=null;
+		object TYPE84_tree=null;
+		object ID85_tree=null;
+		object OBJECT87_tree=null;
+		object char_literal88_tree=null;
 		object char_literal90_tree=null;
+		object char_literal91_tree=null;
 		RewriteRuleITokenStream stream_CREATE=new RewriteRuleITokenStream(adaptor,"token CREATE");
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleITokenStream stream_OBJECT=new RewriteRuleITokenStream(adaptor,"token OBJECT");
@@ -4172,41 +4161,41 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_objectDeclItem=new RewriteRuleSubtreeStream(adaptor,"rule objectDeclItem");
 		RewriteRuleSubtreeStream stream_isOrAs=new RewriteRuleSubtreeStream(adaptor,"rule isOrAs");
 		try { DebugEnterRule(GrammarFileName, "objectDecl");
-		DebugLocation(294, 1);
+		DebugLocation(295, 1);
 		try
 		{
-			// Plsql.g:295:2: ( CREATE TYPE ID isOrAs OBJECT '(' ( objectDeclItem )+ ')' ';' -> ^( ClassDecl ID ( objectDeclItem )+ ) )
+			// Plsql.g:296:2: ( CREATE TYPE ID isOrAs OBJECT '(' ( objectDeclItem )+ ')' ';' -> ^( ClassDecl ID ( objectDeclItem )+ ) )
 			DebugEnterAlt(1);
-			// Plsql.g:295:4: CREATE TYPE ID isOrAs OBJECT '(' ( objectDeclItem )+ ')' ';'
+			// Plsql.g:296:4: CREATE TYPE ID isOrAs OBJECT '(' ( objectDeclItem )+ ')' ';'
 			{
-			DebugLocation(295, 4);
-			CREATE82=(IToken)Match(input,CREATE,Follow._CREATE_in_objectDecl1629); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE82);
+			DebugLocation(296, 4);
+			CREATE83=(IToken)Match(input,CREATE,Follow._CREATE_in_objectDecl1641); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE83);
 
-			DebugLocation(295, 11);
-			TYPE83=(IToken)Match(input,TYPE,Follow._TYPE_in_objectDecl1631); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE83);
+			DebugLocation(296, 11);
+			TYPE84=(IToken)Match(input,TYPE,Follow._TYPE_in_objectDecl1643); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE84);
 
-			DebugLocation(295, 16);
-			ID84=(IToken)Match(input,ID,Follow._ID_in_objectDecl1633); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID84);
+			DebugLocation(296, 16);
+			ID85=(IToken)Match(input,ID,Follow._ID_in_objectDecl1645); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID85);
 
-			DebugLocation(295, 19);
-			PushFollow(Follow._isOrAs_in_objectDecl1635);
-			isOrAs85=isOrAs();
+			DebugLocation(296, 19);
+			PushFollow(Follow._isOrAs_in_objectDecl1647);
+			isOrAs86=isOrAs();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs85.Tree);
-			DebugLocation(295, 26);
-			OBJECT86=(IToken)Match(input,OBJECT,Follow._OBJECT_in_objectDecl1637); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_OBJECT.Add(OBJECT86);
+			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs86.Tree);
+			DebugLocation(296, 26);
+			OBJECT87=(IToken)Match(input,OBJECT,Follow._OBJECT_in_objectDecl1649); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_OBJECT.Add(OBJECT87);
 
-			DebugLocation(295, 33);
-			char_literal87=(IToken)Match(input,102,Follow._102_in_objectDecl1639); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_102.Add(char_literal87);
+			DebugLocation(296, 33);
+			char_literal88=(IToken)Match(input,102,Follow._102_in_objectDecl1651); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_102.Add(char_literal88);
 
-			DebugLocation(295, 37);
-			// Plsql.g:295:37: ( objectDeclItem )+
+			DebugLocation(296, 37);
+			// Plsql.g:296:37: ( objectDeclItem )+
 			int cnt17=0;
 			try { DebugEnterSubRule(17);
 			while (true)
@@ -4228,12 +4217,12 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 					DebugEnterAlt(1);
 					// Plsql.g:0:0: objectDeclItem
 					{
-					DebugLocation(295, 37);
-					PushFollow(Follow._objectDeclItem_in_objectDecl1641);
-					objectDeclItem88=objectDeclItem();
+					DebugLocation(296, 37);
+					PushFollow(Follow._objectDeclItem_in_objectDecl1653);
+					objectDeclItem89=objectDeclItem();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) stream_objectDeclItem.Add(objectDeclItem88.Tree);
+					if ( state.backtracking == 0 ) stream_objectDeclItem.Add(objectDeclItem89.Tree);
 
 					}
 					break;
@@ -4254,19 +4243,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 			} finally { DebugExitSubRule(17); }
 
-			DebugLocation(295, 53);
-			char_literal89=(IToken)Match(input,103,Follow._103_in_objectDecl1644); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_103.Add(char_literal89);
+			DebugLocation(296, 53);
+			char_literal90=(IToken)Match(input,103,Follow._103_in_objectDecl1656); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_103.Add(char_literal90);
 
-			DebugLocation(295, 57);
-			char_literal90=(IToken)Match(input,104,Follow._104_in_objectDecl1646); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_104.Add(char_literal90);
+			DebugLocation(296, 57);
+			char_literal91=(IToken)Match(input,104,Follow._104_in_objectDecl1658); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_104.Add(char_literal91);
 
 
 
 			{
 			// AST REWRITE
-			// elements: objectDeclItem, ID
+			// elements: ID, objectDeclItem
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -4277,25 +4266,25 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 296:2: -> ^( ClassDecl ID ( objectDeclItem )+ )
+			// 297:2: -> ^( ClassDecl ID ( objectDeclItem )+ )
 			{
-				DebugLocation(296, 5);
-				// Plsql.g:296:5: ^( ClassDecl ID ( objectDeclItem )+ )
+				DebugLocation(297, 5);
+				// Plsql.g:297:5: ^( ClassDecl ID ( objectDeclItem )+ )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(296, 7);
+				DebugLocation(297, 7);
 				root_1 = (object)adaptor.BecomeRoot(new ClassDeclNode(ClassDecl), root_1);
 
-				DebugLocation(296, 32);
+				DebugLocation(297, 32);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(296, 35);
+				DebugLocation(297, 35);
 				if ( !(stream_objectDeclItem.HasNext) )
 				{
 					throw new RewriteEarlyExitException();
 				}
 				while ( stream_objectDeclItem.HasNext )
 				{
-					DebugLocation(296, 35);
+					DebugLocation(297, 35);
 					adaptor.AddChild(root_1, stream_objectDeclItem.NextTree());
 
 				}
@@ -4333,7 +4322,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("objectDecl", 25);
 			Leave_objectDecl();
 		}
-		DebugLocation(297, 1);
+		DebugLocation(298, 1);
 		} finally { DebugExitRule(GrammarFileName, "objectDecl"); }
 		return retval;
 
@@ -4350,7 +4339,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_objectBody();
 
 	// $ANTLR start "objectBody"
-	// Plsql.g:299:1: objectBody : CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )+ END ';' -> ^( ClassDef ID ( methodDef )+ ) ;
+	// Plsql.g:300:1: objectBody : CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )+ END ';' -> ^( ClassDef ID ( methodDef )+ ) ;
 	[GrammarRule("objectBody")]
 	private PlsqlParser.objectBody_return objectBody()
 	{
@@ -4362,25 +4351,25 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken CREATE91=null;
-		IToken TYPE92=null;
-		IToken BODY93=null;
-		IToken ID94=null;
-		IToken OBJECT96=null;
-		IToken char_literal98=null;
-		IToken END99=null;
-		IToken char_literal100=null;
-		PlsqlParser.isOrAs_return isOrAs95 = default(PlsqlParser.isOrAs_return);
-		PlsqlParser.methodDef_return methodDef97 = default(PlsqlParser.methodDef_return);
+		IToken CREATE92=null;
+		IToken TYPE93=null;
+		IToken BODY94=null;
+		IToken ID95=null;
+		IToken OBJECT97=null;
+		IToken char_literal99=null;
+		IToken END100=null;
+		IToken char_literal101=null;
+		PlsqlParser.isOrAs_return isOrAs96 = default(PlsqlParser.isOrAs_return);
+		PlsqlParser.methodDef_return methodDef98 = default(PlsqlParser.methodDef_return);
 
-		object CREATE91_tree=null;
-		object TYPE92_tree=null;
-		object BODY93_tree=null;
-		object ID94_tree=null;
-		object OBJECT96_tree=null;
-		object char_literal98_tree=null;
-		object END99_tree=null;
-		object char_literal100_tree=null;
+		object CREATE92_tree=null;
+		object TYPE93_tree=null;
+		object BODY94_tree=null;
+		object ID95_tree=null;
+		object OBJECT97_tree=null;
+		object char_literal99_tree=null;
+		object END100_tree=null;
+		object char_literal101_tree=null;
 		RewriteRuleITokenStream stream_CREATE=new RewriteRuleITokenStream(adaptor,"token CREATE");
 		RewriteRuleITokenStream stream_BODY=new RewriteRuleITokenStream(adaptor,"token BODY");
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
@@ -4391,41 +4380,41 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_methodDef=new RewriteRuleSubtreeStream(adaptor,"rule methodDef");
 		RewriteRuleSubtreeStream stream_isOrAs=new RewriteRuleSubtreeStream(adaptor,"rule isOrAs");
 		try { DebugEnterRule(GrammarFileName, "objectBody");
-		DebugLocation(299, 1);
+		DebugLocation(300, 1);
 		try
 		{
-			// Plsql.g:300:2: ( CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )+ END ';' -> ^( ClassDef ID ( methodDef )+ ) )
+			// Plsql.g:301:2: ( CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )+ END ';' -> ^( ClassDef ID ( methodDef )+ ) )
 			DebugEnterAlt(1);
-			// Plsql.g:300:4: CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )+ END ';'
+			// Plsql.g:301:4: CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )+ END ';'
 			{
-			DebugLocation(300, 4);
-			CREATE91=(IToken)Match(input,CREATE,Follow._CREATE_in_objectBody1672); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE91);
+			DebugLocation(301, 4);
+			CREATE92=(IToken)Match(input,CREATE,Follow._CREATE_in_objectBody1684); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE92);
 
-			DebugLocation(300, 11);
-			TYPE92=(IToken)Match(input,TYPE,Follow._TYPE_in_objectBody1674); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE92);
+			DebugLocation(301, 11);
+			TYPE93=(IToken)Match(input,TYPE,Follow._TYPE_in_objectBody1686); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_TYPE.Add(TYPE93);
 
-			DebugLocation(300, 16);
-			BODY93=(IToken)Match(input,BODY,Follow._BODY_in_objectBody1676); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_BODY.Add(BODY93);
+			DebugLocation(301, 16);
+			BODY94=(IToken)Match(input,BODY,Follow._BODY_in_objectBody1688); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_BODY.Add(BODY94);
 
-			DebugLocation(300, 21);
-			ID94=(IToken)Match(input,ID,Follow._ID_in_objectBody1678); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID94);
+			DebugLocation(301, 21);
+			ID95=(IToken)Match(input,ID,Follow._ID_in_objectBody1690); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID95);
 
-			DebugLocation(300, 24);
-			PushFollow(Follow._isOrAs_in_objectBody1680);
-			isOrAs95=isOrAs();
+			DebugLocation(301, 24);
+			PushFollow(Follow._isOrAs_in_objectBody1692);
+			isOrAs96=isOrAs();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs95.Tree);
-			DebugLocation(300, 31);
-			OBJECT96=(IToken)Match(input,OBJECT,Follow._OBJECT_in_objectBody1682); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_OBJECT.Add(OBJECT96);
+			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs96.Tree);
+			DebugLocation(301, 31);
+			OBJECT97=(IToken)Match(input,OBJECT,Follow._OBJECT_in_objectBody1694); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_OBJECT.Add(OBJECT97);
 
-			DebugLocation(300, 38);
-			// Plsql.g:300:38: ( methodDef ';' )+
+			DebugLocation(301, 38);
+			// Plsql.g:301:38: ( methodDef ';' )+
 			int cnt18=0;
 			try { DebugEnterSubRule(18);
 			while (true)
@@ -4445,17 +4434,17 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:300:40: methodDef ';'
+					// Plsql.g:301:40: methodDef ';'
 					{
-					DebugLocation(300, 40);
-					PushFollow(Follow._methodDef_in_objectBody1686);
-					methodDef97=methodDef();
+					DebugLocation(301, 40);
+					PushFollow(Follow._methodDef_in_objectBody1698);
+					methodDef98=methodDef();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) stream_methodDef.Add(methodDef97.Tree);
-					DebugLocation(300, 50);
-					char_literal98=(IToken)Match(input,104,Follow._104_in_objectBody1688); if (state.failed) return retval; 
-					if ( state.backtracking == 0 ) stream_104.Add(char_literal98);
+					if ( state.backtracking == 0 ) stream_methodDef.Add(methodDef98.Tree);
+					DebugLocation(301, 50);
+					char_literal99=(IToken)Match(input,104,Follow._104_in_objectBody1700); if (state.failed) return retval; 
+					if ( state.backtracking == 0 ) stream_104.Add(char_literal99);
 
 
 					}
@@ -4477,13 +4466,13 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 			} finally { DebugExitSubRule(18); }
 
-			DebugLocation(300, 57);
-			END99=(IToken)Match(input,END,Follow._END_in_objectBody1693); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_END.Add(END99);
+			DebugLocation(301, 57);
+			END100=(IToken)Match(input,END,Follow._END_in_objectBody1705); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_END.Add(END100);
 
-			DebugLocation(300, 61);
-			char_literal100=(IToken)Match(input,104,Follow._104_in_objectBody1695); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_104.Add(char_literal100);
+			DebugLocation(301, 61);
+			char_literal101=(IToken)Match(input,104,Follow._104_in_objectBody1707); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_104.Add(char_literal101);
 
 
 
@@ -4500,25 +4489,25 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 301:2: -> ^( ClassDef ID ( methodDef )+ )
+			// 302:2: -> ^( ClassDef ID ( methodDef )+ )
 			{
-				DebugLocation(301, 5);
-				// Plsql.g:301:5: ^( ClassDef ID ( methodDef )+ )
+				DebugLocation(302, 5);
+				// Plsql.g:302:5: ^( ClassDef ID ( methodDef )+ )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(301, 7);
+				DebugLocation(302, 7);
 				root_1 = (object)adaptor.BecomeRoot(new ClassDefNode(ClassDef), root_1);
 
-				DebugLocation(301, 30);
+				DebugLocation(302, 30);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(301, 33);
+				DebugLocation(302, 33);
 				if ( !(stream_methodDef.HasNext) )
 				{
 					throw new RewriteEarlyExitException();
 				}
 				while ( stream_methodDef.HasNext )
 				{
-					DebugLocation(301, 33);
+					DebugLocation(302, 33);
 					adaptor.AddChild(root_1, stream_methodDef.NextTree());
 
 				}
@@ -4556,7 +4545,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("objectBody", 26);
 			Leave_objectBody();
 		}
-		DebugLocation(302, 1);
+		DebugLocation(303, 1);
 		} finally { DebugExitRule(GrammarFileName, "objectBody"); }
 		return retval;
 
@@ -4573,7 +4562,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_objectDeclItem();
 
 	// $ANTLR start "objectDeclItem"
-	// Plsql.g:304:1: objectDeclItem : ( varDef ';' | methodDecl ';' );
+	// Plsql.g:305:1: objectDeclItem : ( varDef ';' | methodDecl ';' );
 	[GrammarRule("objectDeclItem")]
 	private PlsqlParser.objectDeclItem_return objectDeclItem()
 	{
@@ -4585,19 +4574,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken char_literal102=null;
-		IToken char_literal104=null;
-		PlsqlParser.varDef_return varDef101 = default(PlsqlParser.varDef_return);
-		PlsqlParser.methodDecl_return methodDecl103 = default(PlsqlParser.methodDecl_return);
+		IToken char_literal103=null;
+		IToken char_literal105=null;
+		PlsqlParser.varDef_return varDef102 = default(PlsqlParser.varDef_return);
+		PlsqlParser.methodDecl_return methodDecl104 = default(PlsqlParser.methodDecl_return);
 
-		object char_literal102_tree=null;
-		object char_literal104_tree=null;
+		object char_literal103_tree=null;
+		object char_literal105_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "objectDeclItem");
-		DebugLocation(304, 1);
+		DebugLocation(305, 1);
 		try
 		{
-			// Plsql.g:305:2: ( varDef ';' | methodDecl ';' )
+			// Plsql.g:306:2: ( varDef ';' | methodDecl ';' )
 			int alt19=2;
 			try { DebugEnterDecision(19, decisionCanBacktrack[19]);
 			int LA19_0 = input.LA(1);
@@ -4623,35 +4612,35 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:305:4: varDef ';'
+				// Plsql.g:306:4: varDef ';'
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(305, 4);
-				PushFollow(Follow._varDef_in_objectDeclItem1721);
-				varDef101=varDef();
+				DebugLocation(306, 4);
+				PushFollow(Follow._varDef_in_objectDeclItem1733);
+				varDef102=varDef();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, varDef101.Tree);
-				DebugLocation(305, 14);
-				char_literal102=(IToken)Match(input,104,Follow._104_in_objectDeclItem1723); if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, varDef102.Tree);
+				DebugLocation(306, 14);
+				char_literal103=(IToken)Match(input,104,Follow._104_in_objectDeclItem1735); if (state.failed) return retval;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:306:4: methodDecl ';'
+				// Plsql.g:307:4: methodDecl ';'
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(306, 4);
-				PushFollow(Follow._methodDecl_in_objectDeclItem1729);
-				methodDecl103=methodDecl();
+				DebugLocation(307, 4);
+				PushFollow(Follow._methodDecl_in_objectDeclItem1741);
+				methodDecl104=methodDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodDecl103.Tree);
-				DebugLocation(306, 18);
-				char_literal104=(IToken)Match(input,104,Follow._104_in_objectDeclItem1731); if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodDecl104.Tree);
+				DebugLocation(307, 18);
+				char_literal105=(IToken)Match(input,104,Follow._104_in_objectDeclItem1743); if (state.failed) return retval;
 
 				}
 				break;
@@ -4678,7 +4667,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("objectDeclItem", 27);
 			Leave_objectDeclItem();
 		}
-		DebugLocation(307, 1);
+		DebugLocation(308, 1);
 		} finally { DebugExitRule(GrammarFileName, "objectDeclItem"); }
 		return retval;
 
@@ -4695,7 +4684,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_package_();
 
 	// $ANTLR start "package_"
-	// Plsql.g:312:1: package_ : ( packageDecl | packageDef );
+	// Plsql.g:313:1: package_ : ( packageDecl | packageDef );
 	[GrammarRule("package_")]
 	private PlsqlParser.package__return package_()
 	{
@@ -4707,15 +4696,15 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		PlsqlParser.packageDecl_return packageDecl105 = default(PlsqlParser.packageDecl_return);
-		PlsqlParser.packageDef_return packageDef106 = default(PlsqlParser.packageDef_return);
+		PlsqlParser.packageDecl_return packageDecl106 = default(PlsqlParser.packageDecl_return);
+		PlsqlParser.packageDef_return packageDef107 = default(PlsqlParser.packageDef_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "package_");
-		DebugLocation(312, 1);
+		DebugLocation(313, 1);
 		try
 		{
-			// Plsql.g:313:2: ( packageDecl | packageDef )
+			// Plsql.g:314:2: ( packageDecl | packageDef )
 			int alt20=2;
 			try { DebugEnterDecision(20, decisionCanBacktrack[20]);
 			int LA20_0 = input.LA(1);
@@ -4767,31 +4756,31 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:313:4: packageDecl
+				// Plsql.g:314:4: packageDecl
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(313, 4);
-				PushFollow(Follow._packageDecl_in_package_1746);
-				packageDecl105=packageDecl();
+				DebugLocation(314, 4);
+				PushFollow(Follow._packageDecl_in_package_1758);
+				packageDecl106=packageDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, packageDecl105.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, packageDecl106.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:314:4: packageDef
+				// Plsql.g:315:4: packageDef
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(314, 4);
-				PushFollow(Follow._packageDef_in_package_1751);
-				packageDef106=packageDef();
+				DebugLocation(315, 4);
+				PushFollow(Follow._packageDef_in_package_1763);
+				packageDef107=packageDef();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, packageDef106.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, packageDef107.Tree);
 
 				}
 				break;
@@ -4818,7 +4807,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("package_", 28);
 			Leave_package_();
 		}
-		DebugLocation(315, 1);
+		DebugLocation(316, 1);
 		} finally { DebugExitRule(GrammarFileName, "package_"); }
 		return retval;
 
@@ -4835,7 +4824,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_packageDecl();
 
 	// $ANTLR start "packageDecl"
-	// Plsql.g:317:1: packageDecl : CREATE PACKAGE ID isOrAs ( packageDeclItem )+ END ';' -> ^( PackageDecl ID ( packageDeclItem )+ ) ;
+	// Plsql.g:318:1: packageDecl : CREATE PACKAGE ID isOrAs ( packageDeclItem )+ END ';' -> ^( PackageDecl ID ( packageDeclItem )+ ) ;
 	[GrammarRule("packageDecl")]
 	private PlsqlParser.packageDecl_return packageDecl()
 	{
@@ -4847,19 +4836,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken CREATE107=null;
-		IToken PACKAGE108=null;
-		IToken ID109=null;
-		IToken END112=null;
-		IToken char_literal113=null;
-		PlsqlParser.isOrAs_return isOrAs110 = default(PlsqlParser.isOrAs_return);
-		PlsqlParser.packageDeclItem_return packageDeclItem111 = default(PlsqlParser.packageDeclItem_return);
+		IToken CREATE108=null;
+		IToken PACKAGE109=null;
+		IToken ID110=null;
+		IToken END113=null;
+		IToken char_literal114=null;
+		PlsqlParser.isOrAs_return isOrAs111 = default(PlsqlParser.isOrAs_return);
+		PlsqlParser.packageDeclItem_return packageDeclItem112 = default(PlsqlParser.packageDeclItem_return);
 
-		object CREATE107_tree=null;
-		object PACKAGE108_tree=null;
-		object ID109_tree=null;
-		object END112_tree=null;
-		object char_literal113_tree=null;
+		object CREATE108_tree=null;
+		object PACKAGE109_tree=null;
+		object ID110_tree=null;
+		object END113_tree=null;
+		object char_literal114_tree=null;
 		RewriteRuleITokenStream stream_PACKAGE=new RewriteRuleITokenStream(adaptor,"token PACKAGE");
 		RewriteRuleITokenStream stream_CREATE=new RewriteRuleITokenStream(adaptor,"token CREATE");
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
@@ -4868,33 +4857,33 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_packageDeclItem=new RewriteRuleSubtreeStream(adaptor,"rule packageDeclItem");
 		RewriteRuleSubtreeStream stream_isOrAs=new RewriteRuleSubtreeStream(adaptor,"rule isOrAs");
 		try { DebugEnterRule(GrammarFileName, "packageDecl");
-		DebugLocation(317, 1);
+		DebugLocation(318, 1);
 		try
 		{
-			// Plsql.g:318:2: ( CREATE PACKAGE ID isOrAs ( packageDeclItem )+ END ';' -> ^( PackageDecl ID ( packageDeclItem )+ ) )
+			// Plsql.g:319:2: ( CREATE PACKAGE ID isOrAs ( packageDeclItem )+ END ';' -> ^( PackageDecl ID ( packageDeclItem )+ ) )
 			DebugEnterAlt(1);
-			// Plsql.g:318:4: CREATE PACKAGE ID isOrAs ( packageDeclItem )+ END ';'
+			// Plsql.g:319:4: CREATE PACKAGE ID isOrAs ( packageDeclItem )+ END ';'
 			{
-			DebugLocation(318, 4);
-			CREATE107=(IToken)Match(input,CREATE,Follow._CREATE_in_packageDecl1762); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE107);
+			DebugLocation(319, 4);
+			CREATE108=(IToken)Match(input,CREATE,Follow._CREATE_in_packageDecl1774); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE108);
 
-			DebugLocation(318, 11);
-			PACKAGE108=(IToken)Match(input,PACKAGE,Follow._PACKAGE_in_packageDecl1764); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_PACKAGE.Add(PACKAGE108);
+			DebugLocation(319, 11);
+			PACKAGE109=(IToken)Match(input,PACKAGE,Follow._PACKAGE_in_packageDecl1776); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_PACKAGE.Add(PACKAGE109);
 
-			DebugLocation(318, 19);
-			ID109=(IToken)Match(input,ID,Follow._ID_in_packageDecl1766); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID109);
+			DebugLocation(319, 19);
+			ID110=(IToken)Match(input,ID,Follow._ID_in_packageDecl1778); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID110);
 
-			DebugLocation(318, 22);
-			PushFollow(Follow._isOrAs_in_packageDecl1768);
-			isOrAs110=isOrAs();
+			DebugLocation(319, 22);
+			PushFollow(Follow._isOrAs_in_packageDecl1780);
+			isOrAs111=isOrAs();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs110.Tree);
-			DebugLocation(318, 29);
-			// Plsql.g:318:29: ( packageDeclItem )+
+			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs111.Tree);
+			DebugLocation(319, 29);
+			// Plsql.g:319:29: ( packageDeclItem )+
 			int cnt21=0;
 			try { DebugEnterSubRule(21);
 			while (true)
@@ -4916,12 +4905,12 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 					DebugEnterAlt(1);
 					// Plsql.g:0:0: packageDeclItem
 					{
-					DebugLocation(318, 29);
-					PushFollow(Follow._packageDeclItem_in_packageDecl1770);
-					packageDeclItem111=packageDeclItem();
+					DebugLocation(319, 29);
+					PushFollow(Follow._packageDeclItem_in_packageDecl1782);
+					packageDeclItem112=packageDeclItem();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) stream_packageDeclItem.Add(packageDeclItem111.Tree);
+					if ( state.backtracking == 0 ) stream_packageDeclItem.Add(packageDeclItem112.Tree);
 
 					}
 					break;
@@ -4942,13 +4931,13 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 			} finally { DebugExitSubRule(21); }
 
-			DebugLocation(318, 46);
-			END112=(IToken)Match(input,END,Follow._END_in_packageDecl1773); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_END.Add(END112);
+			DebugLocation(319, 46);
+			END113=(IToken)Match(input,END,Follow._END_in_packageDecl1785); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_END.Add(END113);
 
-			DebugLocation(318, 50);
-			char_literal113=(IToken)Match(input,104,Follow._104_in_packageDecl1775); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_104.Add(char_literal113);
+			DebugLocation(319, 50);
+			char_literal114=(IToken)Match(input,104,Follow._104_in_packageDecl1787); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_104.Add(char_literal114);
 
 
 
@@ -4965,25 +4954,25 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 319:2: -> ^( PackageDecl ID ( packageDeclItem )+ )
+			// 320:2: -> ^( PackageDecl ID ( packageDeclItem )+ )
 			{
-				DebugLocation(319, 5);
-				// Plsql.g:319:5: ^( PackageDecl ID ( packageDeclItem )+ )
+				DebugLocation(320, 5);
+				// Plsql.g:320:5: ^( PackageDecl ID ( packageDeclItem )+ )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(319, 7);
+				DebugLocation(320, 7);
 				root_1 = (object)adaptor.BecomeRoot(new PackageDeclNode(PackageDecl), root_1);
 
-				DebugLocation(319, 36);
+				DebugLocation(320, 36);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(319, 39);
+				DebugLocation(320, 39);
 				if ( !(stream_packageDeclItem.HasNext) )
 				{
 					throw new RewriteEarlyExitException();
 				}
 				while ( stream_packageDeclItem.HasNext )
 				{
-					DebugLocation(319, 39);
+					DebugLocation(320, 39);
 					adaptor.AddChild(root_1, stream_packageDeclItem.NextTree());
 
 				}
@@ -5021,7 +5010,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("packageDecl", 29);
 			Leave_packageDecl();
 		}
-		DebugLocation(320, 1);
+		DebugLocation(321, 1);
 		} finally { DebugExitRule(GrammarFileName, "packageDecl"); }
 		return retval;
 
@@ -5038,7 +5027,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_packageDef();
 
 	// $ANTLR start "packageDef"
-	// Plsql.g:322:1: packageDef : CREATE PACKAGE BODY ID isOrAs ( packageBodyItem )+ END ';' -> ^( PackageDef ID ( packageBodyItem )+ ) ;
+	// Plsql.g:323:1: packageDef : CREATE PACKAGE BODY ID isOrAs ( packageBodyItem )+ END ';' -> ^( PackageDef ID ( packageBodyItem )+ ) ;
 	[GrammarRule("packageDef")]
 	private PlsqlParser.packageDef_return packageDef()
 	{
@@ -5050,21 +5039,21 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken CREATE114=null;
-		IToken PACKAGE115=null;
-		IToken BODY116=null;
-		IToken ID117=null;
-		IToken END120=null;
-		IToken char_literal121=null;
-		PlsqlParser.isOrAs_return isOrAs118 = default(PlsqlParser.isOrAs_return);
-		PlsqlParser.packageBodyItem_return packageBodyItem119 = default(PlsqlParser.packageBodyItem_return);
+		IToken CREATE115=null;
+		IToken PACKAGE116=null;
+		IToken BODY117=null;
+		IToken ID118=null;
+		IToken END121=null;
+		IToken char_literal122=null;
+		PlsqlParser.isOrAs_return isOrAs119 = default(PlsqlParser.isOrAs_return);
+		PlsqlParser.packageBodyItem_return packageBodyItem120 = default(PlsqlParser.packageBodyItem_return);
 
-		object CREATE114_tree=null;
-		object PACKAGE115_tree=null;
-		object BODY116_tree=null;
-		object ID117_tree=null;
-		object END120_tree=null;
-		object char_literal121_tree=null;
+		object CREATE115_tree=null;
+		object PACKAGE116_tree=null;
+		object BODY117_tree=null;
+		object ID118_tree=null;
+		object END121_tree=null;
+		object char_literal122_tree=null;
 		RewriteRuleITokenStream stream_PACKAGE=new RewriteRuleITokenStream(adaptor,"token PACKAGE");
 		RewriteRuleITokenStream stream_CREATE=new RewriteRuleITokenStream(adaptor,"token CREATE");
 		RewriteRuleITokenStream stream_BODY=new RewriteRuleITokenStream(adaptor,"token BODY");
@@ -5074,37 +5063,37 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_packageBodyItem=new RewriteRuleSubtreeStream(adaptor,"rule packageBodyItem");
 		RewriteRuleSubtreeStream stream_isOrAs=new RewriteRuleSubtreeStream(adaptor,"rule isOrAs");
 		try { DebugEnterRule(GrammarFileName, "packageDef");
-		DebugLocation(322, 1);
+		DebugLocation(323, 1);
 		try
 		{
-			// Plsql.g:323:2: ( CREATE PACKAGE BODY ID isOrAs ( packageBodyItem )+ END ';' -> ^( PackageDef ID ( packageBodyItem )+ ) )
+			// Plsql.g:324:2: ( CREATE PACKAGE BODY ID isOrAs ( packageBodyItem )+ END ';' -> ^( PackageDef ID ( packageBodyItem )+ ) )
 			DebugEnterAlt(1);
-			// Plsql.g:323:4: CREATE PACKAGE BODY ID isOrAs ( packageBodyItem )+ END ';'
+			// Plsql.g:324:4: CREATE PACKAGE BODY ID isOrAs ( packageBodyItem )+ END ';'
 			{
-			DebugLocation(323, 4);
-			CREATE114=(IToken)Match(input,CREATE,Follow._CREATE_in_packageDef1802); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE114);
+			DebugLocation(324, 4);
+			CREATE115=(IToken)Match(input,CREATE,Follow._CREATE_in_packageDef1814); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_CREATE.Add(CREATE115);
 
-			DebugLocation(323, 11);
-			PACKAGE115=(IToken)Match(input,PACKAGE,Follow._PACKAGE_in_packageDef1804); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_PACKAGE.Add(PACKAGE115);
+			DebugLocation(324, 11);
+			PACKAGE116=(IToken)Match(input,PACKAGE,Follow._PACKAGE_in_packageDef1816); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_PACKAGE.Add(PACKAGE116);
 
-			DebugLocation(323, 19);
-			BODY116=(IToken)Match(input,BODY,Follow._BODY_in_packageDef1806); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_BODY.Add(BODY116);
+			DebugLocation(324, 19);
+			BODY117=(IToken)Match(input,BODY,Follow._BODY_in_packageDef1818); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_BODY.Add(BODY117);
 
-			DebugLocation(323, 24);
-			ID117=(IToken)Match(input,ID,Follow._ID_in_packageDef1808); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID117);
+			DebugLocation(324, 24);
+			ID118=(IToken)Match(input,ID,Follow._ID_in_packageDef1820); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID118);
 
-			DebugLocation(323, 27);
-			PushFollow(Follow._isOrAs_in_packageDef1810);
-			isOrAs118=isOrAs();
+			DebugLocation(324, 27);
+			PushFollow(Follow._isOrAs_in_packageDef1822);
+			isOrAs119=isOrAs();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs118.Tree);
-			DebugLocation(323, 34);
-			// Plsql.g:323:34: ( packageBodyItem )+
+			if ( state.backtracking == 0 ) stream_isOrAs.Add(isOrAs119.Tree);
+			DebugLocation(324, 34);
+			// Plsql.g:324:34: ( packageBodyItem )+
 			int cnt22=0;
 			try { DebugEnterSubRule(22);
 			while (true)
@@ -5126,12 +5115,12 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 					DebugEnterAlt(1);
 					// Plsql.g:0:0: packageBodyItem
 					{
-					DebugLocation(323, 34);
-					PushFollow(Follow._packageBodyItem_in_packageDef1812);
-					packageBodyItem119=packageBodyItem();
+					DebugLocation(324, 34);
+					PushFollow(Follow._packageBodyItem_in_packageDef1824);
+					packageBodyItem120=packageBodyItem();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) stream_packageBodyItem.Add(packageBodyItem119.Tree);
+					if ( state.backtracking == 0 ) stream_packageBodyItem.Add(packageBodyItem120.Tree);
 
 					}
 					break;
@@ -5152,13 +5141,13 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 			} finally { DebugExitSubRule(22); }
 
-			DebugLocation(323, 51);
-			END120=(IToken)Match(input,END,Follow._END_in_packageDef1815); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_END.Add(END120);
+			DebugLocation(324, 51);
+			END121=(IToken)Match(input,END,Follow._END_in_packageDef1827); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_END.Add(END121);
 
-			DebugLocation(323, 55);
-			char_literal121=(IToken)Match(input,104,Follow._104_in_packageDef1817); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_104.Add(char_literal121);
+			DebugLocation(324, 55);
+			char_literal122=(IToken)Match(input,104,Follow._104_in_packageDef1829); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_104.Add(char_literal122);
 
 
 
@@ -5175,25 +5164,25 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 324:2: -> ^( PackageDef ID ( packageBodyItem )+ )
+			// 325:2: -> ^( PackageDef ID ( packageBodyItem )+ )
 			{
-				DebugLocation(324, 5);
-				// Plsql.g:324:5: ^( PackageDef ID ( packageBodyItem )+ )
+				DebugLocation(325, 5);
+				// Plsql.g:325:5: ^( PackageDef ID ( packageBodyItem )+ )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(324, 7);
+				DebugLocation(325, 7);
 				root_1 = (object)adaptor.BecomeRoot(new PackageDefNode(PackageDef), root_1);
 
-				DebugLocation(324, 34);
+				DebugLocation(325, 34);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(324, 37);
+				DebugLocation(325, 37);
 				if ( !(stream_packageBodyItem.HasNext) )
 				{
 					throw new RewriteEarlyExitException();
 				}
 				while ( stream_packageBodyItem.HasNext )
 				{
-					DebugLocation(324, 37);
+					DebugLocation(325, 37);
 					adaptor.AddChild(root_1, stream_packageBodyItem.NextTree());
 
 				}
@@ -5231,7 +5220,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("packageDef", 30);
 			Leave_packageDef();
 		}
-		DebugLocation(325, 1);
+		DebugLocation(326, 1);
 		} finally { DebugExitRule(GrammarFileName, "packageDef"); }
 		return retval;
 
@@ -5248,7 +5237,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_packageDeclItem();
 
 	// $ANTLR start "packageDeclItem"
-	// Plsql.g:327:1: packageDeclItem : ( varDef ';' | typeDecl ';' | methodDecl ';' );
+	// Plsql.g:328:1: packageDeclItem : ( varDef ';' | typeDecl ';' | methodDecl ';' );
 	[GrammarRule("packageDeclItem")]
 	private PlsqlParser.packageDeclItem_return packageDeclItem()
 	{
@@ -5260,22 +5249,22 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken char_literal123=null;
-		IToken char_literal125=null;
-		IToken char_literal127=null;
-		PlsqlParser.varDef_return varDef122 = default(PlsqlParser.varDef_return);
-		PlsqlParser.typeDecl_return typeDecl124 = default(PlsqlParser.typeDecl_return);
-		PlsqlParser.methodDecl_return methodDecl126 = default(PlsqlParser.methodDecl_return);
+		IToken char_literal124=null;
+		IToken char_literal126=null;
+		IToken char_literal128=null;
+		PlsqlParser.varDef_return varDef123 = default(PlsqlParser.varDef_return);
+		PlsqlParser.typeDecl_return typeDecl125 = default(PlsqlParser.typeDecl_return);
+		PlsqlParser.methodDecl_return methodDecl127 = default(PlsqlParser.methodDecl_return);
 
-		object char_literal123_tree=null;
-		object char_literal125_tree=null;
-		object char_literal127_tree=null;
+		object char_literal124_tree=null;
+		object char_literal126_tree=null;
+		object char_literal128_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "packageDeclItem");
-		DebugLocation(327, 1);
+		DebugLocation(328, 1);
 		try
 		{
-			// Plsql.g:328:2: ( varDef ';' | typeDecl ';' | methodDecl ';' )
+			// Plsql.g:329:2: ( varDef ';' | typeDecl ';' | methodDecl ';' )
 			int alt23=3;
 			try { DebugEnterDecision(23, decisionCanBacktrack[23]);
 			switch (input.LA(1))
@@ -5313,52 +5302,52 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:328:4: varDef ';'
+				// Plsql.g:329:4: varDef ';'
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(328, 4);
-				PushFollow(Follow._varDef_in_packageDeclItem1843);
-				varDef122=varDef();
+				DebugLocation(329, 4);
+				PushFollow(Follow._varDef_in_packageDeclItem1855);
+				varDef123=varDef();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, varDef122.Tree);
-				DebugLocation(328, 14);
-				char_literal123=(IToken)Match(input,104,Follow._104_in_packageDeclItem1845); if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, varDef123.Tree);
+				DebugLocation(329, 14);
+				char_literal124=(IToken)Match(input,104,Follow._104_in_packageDeclItem1857); if (state.failed) return retval;
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:329:4: typeDecl ';'
+				// Plsql.g:330:4: typeDecl ';'
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(329, 4);
-				PushFollow(Follow._typeDecl_in_packageDeclItem1851);
-				typeDecl124=typeDecl();
+				DebugLocation(330, 4);
+				PushFollow(Follow._typeDecl_in_packageDeclItem1863);
+				typeDecl125=typeDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, typeDecl124.Tree);
-				DebugLocation(329, 16);
-				char_literal125=(IToken)Match(input,104,Follow._104_in_packageDeclItem1853); if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, typeDecl125.Tree);
+				DebugLocation(330, 16);
+				char_literal126=(IToken)Match(input,104,Follow._104_in_packageDeclItem1865); if (state.failed) return retval;
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// Plsql.g:330:4: methodDecl ';'
+				// Plsql.g:331:4: methodDecl ';'
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(330, 4);
-				PushFollow(Follow._methodDecl_in_packageDeclItem1859);
-				methodDecl126=methodDecl();
+				DebugLocation(331, 4);
+				PushFollow(Follow._methodDecl_in_packageDeclItem1871);
+				methodDecl127=methodDecl();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodDecl126.Tree);
-				DebugLocation(330, 18);
-				char_literal127=(IToken)Match(input,104,Follow._104_in_packageDeclItem1861); if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodDecl127.Tree);
+				DebugLocation(331, 18);
+				char_literal128=(IToken)Match(input,104,Follow._104_in_packageDeclItem1873); if (state.failed) return retval;
 
 				}
 				break;
@@ -5385,7 +5374,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("packageDeclItem", 31);
 			Leave_packageDeclItem();
 		}
-		DebugLocation(331, 1);
+		DebugLocation(332, 1);
 		} finally { DebugExitRule(GrammarFileName, "packageDeclItem"); }
 		return retval;
 
@@ -5402,7 +5391,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_packageBodyItem();
 
 	// $ANTLR start "packageBodyItem"
-	// Plsql.g:333:1: packageBodyItem : methodDef ';' ;
+	// Plsql.g:334:1: packageBodyItem : methodDef ';' ;
 	[GrammarRule("packageBodyItem")]
 	private PlsqlParser.packageBodyItem_return packageBodyItem()
 	{
@@ -5414,29 +5403,29 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken char_literal129=null;
-		PlsqlParser.methodDef_return methodDef128 = default(PlsqlParser.methodDef_return);
+		IToken char_literal130=null;
+		PlsqlParser.methodDef_return methodDef129 = default(PlsqlParser.methodDef_return);
 
-		object char_literal129_tree=null;
+		object char_literal130_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "packageBodyItem");
-		DebugLocation(333, 1);
+		DebugLocation(334, 1);
 		try
 		{
-			// Plsql.g:334:2: ( methodDef ';' )
+			// Plsql.g:335:2: ( methodDef ';' )
 			DebugEnterAlt(1);
-			// Plsql.g:334:4: methodDef ';'
+			// Plsql.g:335:4: methodDef ';'
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(334, 4);
-			PushFollow(Follow._methodDef_in_packageBodyItem1873);
-			methodDef128=methodDef();
+			DebugLocation(335, 4);
+			PushFollow(Follow._methodDef_in_packageBodyItem1885);
+			methodDef129=methodDef();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodDef128.Tree);
-			DebugLocation(334, 17);
-			char_literal129=(IToken)Match(input,104,Follow._104_in_packageBodyItem1875); if (state.failed) return retval;
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodDef129.Tree);
+			DebugLocation(335, 17);
+			char_literal130=(IToken)Match(input,104,Follow._104_in_packageBodyItem1887); if (state.failed) return retval;
 
 			}
 
@@ -5461,7 +5450,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("packageBodyItem", 32);
 			Leave_packageBodyItem();
 		}
-		DebugLocation(335, 1);
+		DebugLocation(336, 1);
 		} finally { DebugExitRule(GrammarFileName, "packageBodyItem"); }
 		return retval;
 
@@ -5478,7 +5467,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_entryPoint();
 
 	// $ANTLR start "entryPoint"
-	// Plsql.g:340:1: entryPoint : DECLARE declareBlock BEGIN codeBlock END ';' -> ^( EntryPoint declareBlock codeBlock ) ;
+	// Plsql.g:341:1: entryPoint : DECLARE declareBlock BEGIN codeBlock END ';' -> ^( EntryPoint declareBlock codeBlock ) ;
 	[GrammarRule("entryPoint")]
 	private PlsqlParser.entryPoint_return entryPoint()
 	{
@@ -5490,17 +5479,17 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken DECLARE130=null;
-		IToken BEGIN132=null;
-		IToken END134=null;
-		IToken char_literal135=null;
-		PlsqlParser.declareBlock_return declareBlock131 = default(PlsqlParser.declareBlock_return);
-		PlsqlParser.codeBlock_return codeBlock133 = default(PlsqlParser.codeBlock_return);
+		IToken DECLARE131=null;
+		IToken BEGIN133=null;
+		IToken END135=null;
+		IToken char_literal136=null;
+		PlsqlParser.declareBlock_return declareBlock132 = default(PlsqlParser.declareBlock_return);
+		PlsqlParser.codeBlock_return codeBlock134 = default(PlsqlParser.codeBlock_return);
 
-		object DECLARE130_tree=null;
-		object BEGIN132_tree=null;
-		object END134_tree=null;
-		object char_literal135_tree=null;
+		object DECLARE131_tree=null;
+		object BEGIN133_tree=null;
+		object END135_tree=null;
+		object char_literal136_tree=null;
 		RewriteRuleITokenStream stream_DECLARE=new RewriteRuleITokenStream(adaptor,"token DECLARE");
 		RewriteRuleITokenStream stream_END=new RewriteRuleITokenStream(adaptor,"token END");
 		RewriteRuleITokenStream stream_104=new RewriteRuleITokenStream(adaptor,"token 104");
@@ -5508,40 +5497,40 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_codeBlock=new RewriteRuleSubtreeStream(adaptor,"rule codeBlock");
 		RewriteRuleSubtreeStream stream_declareBlock=new RewriteRuleSubtreeStream(adaptor,"rule declareBlock");
 		try { DebugEnterRule(GrammarFileName, "entryPoint");
-		DebugLocation(340, 1);
+		DebugLocation(341, 1);
 		try
 		{
-			// Plsql.g:341:2: ( DECLARE declareBlock BEGIN codeBlock END ';' -> ^( EntryPoint declareBlock codeBlock ) )
+			// Plsql.g:342:2: ( DECLARE declareBlock BEGIN codeBlock END ';' -> ^( EntryPoint declareBlock codeBlock ) )
 			DebugEnterAlt(1);
-			// Plsql.g:341:4: DECLARE declareBlock BEGIN codeBlock END ';'
+			// Plsql.g:342:4: DECLARE declareBlock BEGIN codeBlock END ';'
 			{
-			DebugLocation(341, 4);
-			DECLARE130=(IToken)Match(input,DECLARE,Follow._DECLARE_in_entryPoint1890); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_DECLARE.Add(DECLARE130);
+			DebugLocation(342, 4);
+			DECLARE131=(IToken)Match(input,DECLARE,Follow._DECLARE_in_entryPoint1902); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_DECLARE.Add(DECLARE131);
 
-			DebugLocation(341, 12);
-			PushFollow(Follow._declareBlock_in_entryPoint1892);
-			declareBlock131=declareBlock();
+			DebugLocation(342, 12);
+			PushFollow(Follow._declareBlock_in_entryPoint1904);
+			declareBlock132=declareBlock();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_declareBlock.Add(declareBlock131.Tree);
-			DebugLocation(341, 25);
-			BEGIN132=(IToken)Match(input,BEGIN,Follow._BEGIN_in_entryPoint1894); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_BEGIN.Add(BEGIN132);
+			if ( state.backtracking == 0 ) stream_declareBlock.Add(declareBlock132.Tree);
+			DebugLocation(342, 25);
+			BEGIN133=(IToken)Match(input,BEGIN,Follow._BEGIN_in_entryPoint1906); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_BEGIN.Add(BEGIN133);
 
-			DebugLocation(341, 31);
-			PushFollow(Follow._codeBlock_in_entryPoint1896);
-			codeBlock133=codeBlock();
+			DebugLocation(342, 31);
+			PushFollow(Follow._codeBlock_in_entryPoint1908);
+			codeBlock134=codeBlock();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock133.Tree);
-			DebugLocation(341, 41);
-			END134=(IToken)Match(input,END,Follow._END_in_entryPoint1898); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_END.Add(END134);
+			if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock134.Tree);
+			DebugLocation(342, 41);
+			END135=(IToken)Match(input,END,Follow._END_in_entryPoint1910); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_END.Add(END135);
 
-			DebugLocation(341, 45);
-			char_literal135=(IToken)Match(input,104,Follow._104_in_entryPoint1900); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_104.Add(char_literal135);
+			DebugLocation(342, 45);
+			char_literal136=(IToken)Match(input,104,Follow._104_in_entryPoint1912); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_104.Add(char_literal136);
 
 
 
@@ -5558,18 +5547,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 342:2: -> ^( EntryPoint declareBlock codeBlock )
+			// 343:2: -> ^( EntryPoint declareBlock codeBlock )
 			{
-				DebugLocation(342, 5);
-				// Plsql.g:342:5: ^( EntryPoint declareBlock codeBlock )
+				DebugLocation(343, 5);
+				// Plsql.g:343:5: ^( EntryPoint declareBlock codeBlock )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(342, 7);
+				DebugLocation(343, 7);
 				root_1 = (object)adaptor.BecomeRoot(new EntryPointNode(EntryPoint), root_1);
 
-				DebugLocation(342, 34);
+				DebugLocation(343, 34);
 				adaptor.AddChild(root_1, stream_declareBlock.NextTree());
-				DebugLocation(342, 47);
+				DebugLocation(343, 47);
 				adaptor.AddChild(root_1, stream_codeBlock.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -5604,7 +5593,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("entryPoint", 33);
 			Leave_entryPoint();
 		}
-		DebugLocation(343, 1);
+		DebugLocation(344, 1);
 		} finally { DebugExitRule(GrammarFileName, "entryPoint"); }
 		return retval;
 
@@ -5621,7 +5610,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_declareBlock();
 
 	// $ANTLR start "declareBlock"
-	// Plsql.g:346:1: declareBlock : ( declareItem )* -> ^( DeclareBlock ( declareItem )* ) ;
+	// Plsql.g:347:1: declareBlock : ( declareItem )* -> ^( DeclareBlock ( declareItem )* ) ;
 	[GrammarRule("declareBlock")]
 	private PlsqlParser.declareBlock_return declareBlock()
 	{
@@ -5633,19 +5622,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		PlsqlParser.declareItem_return declareItem136 = default(PlsqlParser.declareItem_return);
+		PlsqlParser.declareItem_return declareItem137 = default(PlsqlParser.declareItem_return);
 
 		RewriteRuleSubtreeStream stream_declareItem=new RewriteRuleSubtreeStream(adaptor,"rule declareItem");
 		try { DebugEnterRule(GrammarFileName, "declareBlock");
-		DebugLocation(346, 1);
+		DebugLocation(347, 1);
 		try
 		{
-			// Plsql.g:347:2: ( ( declareItem )* -> ^( DeclareBlock ( declareItem )* ) )
+			// Plsql.g:348:2: ( ( declareItem )* -> ^( DeclareBlock ( declareItem )* ) )
 			DebugEnterAlt(1);
-			// Plsql.g:347:4: ( declareItem )*
+			// Plsql.g:348:4: ( declareItem )*
 			{
-			DebugLocation(347, 4);
-			// Plsql.g:347:4: ( declareItem )*
+			DebugLocation(348, 4);
+			// Plsql.g:348:4: ( declareItem )*
 			try { DebugEnterSubRule(24);
 			while (true)
 			{
@@ -5666,12 +5655,12 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 					DebugEnterAlt(1);
 					// Plsql.g:0:0: declareItem
 					{
-					DebugLocation(347, 4);
-					PushFollow(Follow._declareItem_in_declareBlock1926);
-					declareItem136=declareItem();
+					DebugLocation(348, 4);
+					PushFollow(Follow._declareItem_in_declareBlock1938);
+					declareItem137=declareItem();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) stream_declareItem.Add(declareItem136.Tree);
+					if ( state.backtracking == 0 ) stream_declareItem.Add(declareItem137.Tree);
 
 					}
 					break;
@@ -5701,20 +5690,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 348:2: -> ^( DeclareBlock ( declareItem )* )
+			// 349:2: -> ^( DeclareBlock ( declareItem )* )
 			{
-				DebugLocation(348, 5);
-				// Plsql.g:348:5: ^( DeclareBlock ( declareItem )* )
+				DebugLocation(349, 5);
+				// Plsql.g:349:5: ^( DeclareBlock ( declareItem )* )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(348, 7);
+				DebugLocation(349, 7);
 				root_1 = (object)adaptor.BecomeRoot(new DeclareBlockNode(DeclareBlock), root_1);
 
-				DebugLocation(348, 38);
-				// Plsql.g:348:38: ( declareItem )*
+				DebugLocation(349, 38);
+				// Plsql.g:349:38: ( declareItem )*
 				while ( stream_declareItem.HasNext )
 				{
-					DebugLocation(348, 38);
+					DebugLocation(349, 38);
 					adaptor.AddChild(root_1, stream_declareItem.NextTree());
 
 				}
@@ -5752,7 +5741,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("declareBlock", 34);
 			Leave_declareBlock();
 		}
-		DebugLocation(349, 1);
+		DebugLocation(350, 1);
 		} finally { DebugExitRule(GrammarFileName, "declareBlock"); }
 		return retval;
 
@@ -5769,7 +5758,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_declareItem();
 
 	// $ANTLR start "declareItem"
-	// Plsql.g:351:1: declareItem : varDef ';' ;
+	// Plsql.g:352:1: declareItem : varDef ';' ;
 	[GrammarRule("declareItem")]
 	private PlsqlParser.declareItem_return declareItem()
 	{
@@ -5781,29 +5770,29 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken char_literal138=null;
-		PlsqlParser.varDef_return varDef137 = default(PlsqlParser.varDef_return);
+		IToken char_literal139=null;
+		PlsqlParser.varDef_return varDef138 = default(PlsqlParser.varDef_return);
 
-		object char_literal138_tree=null;
+		object char_literal139_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "declareItem");
-		DebugLocation(351, 1);
+		DebugLocation(352, 1);
 		try
 		{
-			// Plsql.g:352:2: ( varDef ';' )
+			// Plsql.g:353:2: ( varDef ';' )
 			DebugEnterAlt(1);
-			// Plsql.g:352:4: varDef ';'
+			// Plsql.g:353:4: varDef ';'
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(352, 4);
-			PushFollow(Follow._varDef_in_declareItem1951);
-			varDef137=varDef();
+			DebugLocation(353, 4);
+			PushFollow(Follow._varDef_in_declareItem1963);
+			varDef138=varDef();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, varDef137.Tree);
-			DebugLocation(352, 14);
-			char_literal138=(IToken)Match(input,104,Follow._104_in_declareItem1953); if (state.failed) return retval;
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, varDef138.Tree);
+			DebugLocation(353, 14);
+			char_literal139=(IToken)Match(input,104,Follow._104_in_declareItem1965); if (state.failed) return retval;
 
 			}
 
@@ -5828,7 +5817,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("declareItem", 35);
 			Leave_declareItem();
 		}
-		DebugLocation(353, 1);
+		DebugLocation(354, 1);
 		} finally { DebugExitRule(GrammarFileName, "declareItem"); }
 		return retval;
 
@@ -5845,7 +5834,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_codeBlock();
 
 	// $ANTLR start "codeBlock"
-	// Plsql.g:355:1: codeBlock : ( command ';' )* -> ^( CodeBlock ( command )* ) ;
+	// Plsql.g:356:1: codeBlock : ( command ';' )* -> ^( CodeBlock ( command )* ) ;
 	[GrammarRule("codeBlock")]
 	private PlsqlParser.codeBlock_return codeBlock()
 	{
@@ -5857,22 +5846,22 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken char_literal140=null;
-		PlsqlParser.command_return command139 = default(PlsqlParser.command_return);
+		IToken char_literal141=null;
+		PlsqlParser.command_return command140 = default(PlsqlParser.command_return);
 
-		object char_literal140_tree=null;
+		object char_literal141_tree=null;
 		RewriteRuleITokenStream stream_104=new RewriteRuleITokenStream(adaptor,"token 104");
 		RewriteRuleSubtreeStream stream_command=new RewriteRuleSubtreeStream(adaptor,"rule command");
 		try { DebugEnterRule(GrammarFileName, "codeBlock");
-		DebugLocation(355, 1);
+		DebugLocation(356, 1);
 		try
 		{
-			// Plsql.g:356:2: ( ( command ';' )* -> ^( CodeBlock ( command )* ) )
+			// Plsql.g:357:2: ( ( command ';' )* -> ^( CodeBlock ( command )* ) )
 			DebugEnterAlt(1);
-			// Plsql.g:356:4: ( command ';' )*
+			// Plsql.g:357:4: ( command ';' )*
 			{
-			DebugLocation(356, 4);
-			// Plsql.g:356:4: ( command ';' )*
+			DebugLocation(357, 4);
+			// Plsql.g:357:4: ( command ';' )*
 			try { DebugEnterSubRule(25);
 			while (true)
 			{
@@ -5880,7 +5869,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(25, decisionCanBacktrack[25]);
 				int LA25_0 = input.LA(1);
 
-				if ((LA25_0==IF||(LA25_0>=WHILE && LA25_0<=LOOP)||LA25_0==SELF||(LA25_0>=TRUE && LA25_0<=RETURN)||LA25_0==MINUS||LA25_0==NOT||(LA25_0>=ID && LA25_0<=QUOTED_CHAR)||LA25_0==102))
+				if ((LA25_0==IF||(LA25_0>=WHILE && LA25_0<=LOOP)||LA25_0==FOR||LA25_0==SELF||(LA25_0>=TRUE && LA25_0<=RETURN)||LA25_0==MINUS||LA25_0==NOT||(LA25_0>=ID && LA25_0<=QUOTED_CHAR)||LA25_0==102))
 				{
 					alt25=1;
 				}
@@ -5891,17 +5880,17 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:356:6: command ';'
+					// Plsql.g:357:6: command ';'
 					{
-					DebugLocation(356, 6);
-					PushFollow(Follow._command_in_codeBlock1967);
-					command139=command();
+					DebugLocation(357, 6);
+					PushFollow(Follow._command_in_codeBlock1979);
+					command140=command();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) stream_command.Add(command139.Tree);
-					DebugLocation(356, 14);
-					char_literal140=(IToken)Match(input,104,Follow._104_in_codeBlock1969); if (state.failed) return retval; 
-					if ( state.backtracking == 0 ) stream_104.Add(char_literal140);
+					if ( state.backtracking == 0 ) stream_command.Add(command140.Tree);
+					DebugLocation(357, 14);
+					char_literal141=(IToken)Match(input,104,Follow._104_in_codeBlock1981); if (state.failed) return retval; 
+					if ( state.backtracking == 0 ) stream_104.Add(char_literal141);
 
 
 					}
@@ -5932,20 +5921,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 357:2: -> ^( CodeBlock ( command )* )
+			// 358:2: -> ^( CodeBlock ( command )* )
 			{
-				DebugLocation(357, 5);
-				// Plsql.g:357:5: ^( CodeBlock ( command )* )
+				DebugLocation(358, 5);
+				// Plsql.g:358:5: ^( CodeBlock ( command )* )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(357, 7);
+				DebugLocation(358, 7);
 				root_1 = (object)adaptor.BecomeRoot(new CodeBlockNode(CodeBlock), root_1);
 
-				DebugLocation(357, 32);
-				// Plsql.g:357:32: ( command )*
+				DebugLocation(358, 32);
+				// Plsql.g:358:32: ( command )*
 				while ( stream_command.HasNext )
 				{
-					DebugLocation(357, 32);
+					DebugLocation(358, 32);
 					adaptor.AddChild(root_1, stream_command.NextTree());
 
 				}
@@ -5983,7 +5972,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("codeBlock", 36);
 			Leave_codeBlock();
 		}
-		DebugLocation(358, 1);
+		DebugLocation(359, 1);
 		} finally { DebugExitRule(GrammarFileName, "codeBlock"); }
 		return retval;
 
@@ -6000,7 +5989,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_command();
 
 	// $ANTLR start "command"
-	// Plsql.g:360:1: command : ( assign | if_ | cycle | expression | RETURN expression );
+	// Plsql.g:361:1: command : ( assign | if_ | cycle | expression | RETURN expression );
 	[GrammarRule("command")]
 	private PlsqlParser.command_return command()
 	{
@@ -6012,20 +6001,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken RETURN145=null;
-		PlsqlParser.assign_return assign141 = default(PlsqlParser.assign_return);
-		PlsqlParser.if__return if_142 = default(PlsqlParser.if__return);
-		PlsqlParser.cycle_return cycle143 = default(PlsqlParser.cycle_return);
-		PlsqlParser.expression_return expression144 = default(PlsqlParser.expression_return);
-		PlsqlParser.expression_return expression146 = default(PlsqlParser.expression_return);
+		IToken RETURN146=null;
+		PlsqlParser.assign_return assign142 = default(PlsqlParser.assign_return);
+		PlsqlParser.if__return if_143 = default(PlsqlParser.if__return);
+		PlsqlParser.cycle_return cycle144 = default(PlsqlParser.cycle_return);
+		PlsqlParser.expression_return expression145 = default(PlsqlParser.expression_return);
+		PlsqlParser.expression_return expression147 = default(PlsqlParser.expression_return);
 
-		object RETURN145_tree=null;
+		object RETURN146_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "command");
-		DebugLocation(360, 1);
+		DebugLocation(361, 1);
 		try
 		{
-			// Plsql.g:361:2: ( assign | if_ | cycle | expression | RETURN expression )
+			// Plsql.g:362:2: ( assign | if_ | cycle | expression | RETURN expression )
 			int alt26=5;
 			try { DebugEnterDecision(26, decisionCanBacktrack[26]);
 			try
@@ -6042,82 +6031,82 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:361:4: assign
+				// Plsql.g:362:4: assign
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(361, 4);
-				PushFollow(Follow._assign_in_command1995);
-				assign141=assign();
+				DebugLocation(362, 4);
+				PushFollow(Follow._assign_in_command2007);
+				assign142=assign();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, assign141.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, assign142.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:362:4: if_
+				// Plsql.g:363:4: if_
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(362, 4);
-				PushFollow(Follow._if__in_command2000);
-				if_142=if_();
+				DebugLocation(363, 4);
+				PushFollow(Follow._if__in_command2012);
+				if_143=if_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, if_142.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, if_143.Tree);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// Plsql.g:363:4: cycle
+				// Plsql.g:364:4: cycle
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(363, 4);
-				PushFollow(Follow._cycle_in_command2005);
-				cycle143=cycle();
+				DebugLocation(364, 4);
+				PushFollow(Follow._cycle_in_command2017);
+				cycle144=cycle();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, cycle143.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, cycle144.Tree);
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// Plsql.g:364:4: expression
+				// Plsql.g:365:4: expression
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(364, 4);
-				PushFollow(Follow._expression_in_command2010);
-				expression144=expression();
+				DebugLocation(365, 4);
+				PushFollow(Follow._expression_in_command2022);
+				expression145=expression();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression144.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression145.Tree);
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// Plsql.g:365:4: RETURN expression
+				// Plsql.g:366:4: RETURN expression
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(365, 22);
-				RETURN145=(IToken)Match(input,RETURN,Follow._RETURN_in_command2015); if (state.failed) return retval;
+				DebugLocation(366, 22);
+				RETURN146=(IToken)Match(input,RETURN,Follow._RETURN_in_command2027); if (state.failed) return retval;
 				if ( state.backtracking == 0 ) {
-				RETURN145_tree = new ReturnNode(RETURN145) ;
-				root_0 = (object)adaptor.BecomeRoot(RETURN145_tree, root_0);
+				RETURN146_tree = new ReturnNode(RETURN146) ;
+				root_0 = (object)adaptor.BecomeRoot(RETURN146_tree, root_0);
 				}
-				DebugLocation(365, 24);
-				PushFollow(Follow._expression_in_command2021);
-				expression146=expression();
+				DebugLocation(366, 24);
+				PushFollow(Follow._expression_in_command2033);
+				expression147=expression();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression146.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression147.Tree);
 
 				}
 				break;
@@ -6144,7 +6133,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("command", 37);
 			Leave_command();
 		}
-		DebugLocation(366, 1);
+		DebugLocation(367, 1);
 		} finally { DebugExitRule(GrammarFileName, "command"); }
 		return retval;
 
@@ -6161,7 +6150,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_assign();
 
 	// $ANTLR start "assign"
-	// Plsql.g:368:1: assign : expression ASSIGN ( NULL | expression ) ;
+	// Plsql.g:369:1: assign : expression ASSIGN ( NULL | expression ) ;
 	[GrammarRule("assign")]
 	private PlsqlParser.assign_return assign()
 	{
@@ -6173,38 +6162,38 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken ASSIGN148=null;
-		IToken NULL149=null;
-		PlsqlParser.expression_return expression147 = default(PlsqlParser.expression_return);
-		PlsqlParser.expression_return expression150 = default(PlsqlParser.expression_return);
+		IToken ASSIGN149=null;
+		IToken NULL150=null;
+		PlsqlParser.expression_return expression148 = default(PlsqlParser.expression_return);
+		PlsqlParser.expression_return expression151 = default(PlsqlParser.expression_return);
 
-		object ASSIGN148_tree=null;
-		object NULL149_tree=null;
+		object ASSIGN149_tree=null;
+		object NULL150_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "assign");
-		DebugLocation(368, 1);
+		DebugLocation(369, 1);
 		try
 		{
-			// Plsql.g:369:2: ( expression ASSIGN ( NULL | expression ) )
+			// Plsql.g:370:2: ( expression ASSIGN ( NULL | expression ) )
 			DebugEnterAlt(1);
-			// Plsql.g:369:4: expression ASSIGN ( NULL | expression )
+			// Plsql.g:370:4: expression ASSIGN ( NULL | expression )
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(369, 4);
-			PushFollow(Follow._expression_in_assign2032);
-			expression147=expression();
+			DebugLocation(370, 4);
+			PushFollow(Follow._expression_in_assign2044);
+			expression148=expression();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression147.Tree);
-			DebugLocation(369, 33);
-			ASSIGN148=(IToken)Match(input,ASSIGN,Follow._ASSIGN_in_assign2034); if (state.failed) return retval;
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression148.Tree);
+			DebugLocation(370, 33);
+			ASSIGN149=(IToken)Match(input,ASSIGN,Follow._ASSIGN_in_assign2046); if (state.failed) return retval;
 			if ( state.backtracking == 0 ) {
-			ASSIGN148_tree = new AssignNode(ASSIGN148) ;
-			root_0 = (object)adaptor.BecomeRoot(ASSIGN148_tree, root_0);
+			ASSIGN149_tree = new AssignNode(ASSIGN149) ;
+			root_0 = (object)adaptor.BecomeRoot(ASSIGN149_tree, root_0);
 			}
-			DebugLocation(369, 35);
-			// Plsql.g:369:35: ( NULL | expression )
+			DebugLocation(370, 35);
+			// Plsql.g:370:35: ( NULL | expression )
 			int alt27=2;
 			try { DebugEnterSubRule(27);
 			try { DebugEnterDecision(27, decisionCanBacktrack[27]);
@@ -6231,27 +6220,27 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:369:37: NULL
+				// Plsql.g:370:37: NULL
 				{
-				DebugLocation(369, 37);
-				NULL149=(IToken)Match(input,NULL,Follow._NULL_in_assign2042); if (state.failed) return retval;
+				DebugLocation(370, 37);
+				NULL150=(IToken)Match(input,NULL,Follow._NULL_in_assign2054); if (state.failed) return retval;
 				if ( state.backtracking==0 ) {
-				NULL149_tree = new TypeNode(NULL149) ;
-				adaptor.AddChild(root_0, NULL149_tree);
+				NULL150_tree = new TypeNode(NULL150) ;
+				adaptor.AddChild(root_0, NULL150_tree);
 				}
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:369:54: expression
+				// Plsql.g:370:54: expression
 				{
-				DebugLocation(369, 54);
-				PushFollow(Follow._expression_in_assign2049);
-				expression150=expression();
+				DebugLocation(370, 54);
+				PushFollow(Follow._expression_in_assign2061);
+				expression151=expression();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression150.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression151.Tree);
 
 				}
 				break;
@@ -6283,7 +6272,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("assign", 38);
 			Leave_assign();
 		}
-		DebugLocation(370, 1);
+		DebugLocation(371, 1);
 		} finally { DebugExitRule(GrammarFileName, "assign"); }
 		return retval;
 
@@ -6300,7 +6289,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_if_();
 
 	// $ANTLR start "if_"
-	// Plsql.g:372:1: if_ : IF expression THEN codeBlock ( ELSE codeBlock )? END IF -> ^( IF expression codeBlock ( codeBlock )? ) ;
+	// Plsql.g:373:1: if_ : IF expression THEN codeBlock ( ELSE codeBlock )? END IF -> ^( IF expression codeBlock ( codeBlock )? ) ;
 	[GrammarRule("if_")]
 	private PlsqlParser.if__return if_()
 	{
@@ -6312,20 +6301,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken IF151=null;
-		IToken THEN153=null;
-		IToken ELSE155=null;
-		IToken END157=null;
-		IToken IF158=null;
-		PlsqlParser.expression_return expression152 = default(PlsqlParser.expression_return);
-		PlsqlParser.codeBlock_return codeBlock154 = default(PlsqlParser.codeBlock_return);
-		PlsqlParser.codeBlock_return codeBlock156 = default(PlsqlParser.codeBlock_return);
+		IToken IF152=null;
+		IToken THEN154=null;
+		IToken ELSE156=null;
+		IToken END158=null;
+		IToken IF159=null;
+		PlsqlParser.expression_return expression153 = default(PlsqlParser.expression_return);
+		PlsqlParser.codeBlock_return codeBlock155 = default(PlsqlParser.codeBlock_return);
+		PlsqlParser.codeBlock_return codeBlock157 = default(PlsqlParser.codeBlock_return);
 
-		object IF151_tree=null;
-		object THEN153_tree=null;
-		object ELSE155_tree=null;
-		object END157_tree=null;
-		object IF158_tree=null;
+		object IF152_tree=null;
+		object THEN154_tree=null;
+		object ELSE156_tree=null;
+		object END158_tree=null;
+		object IF159_tree=null;
 		RewriteRuleITokenStream stream_THEN=new RewriteRuleITokenStream(adaptor,"token THEN");
 		RewriteRuleITokenStream stream_END=new RewriteRuleITokenStream(adaptor,"token END");
 		RewriteRuleITokenStream stream_IF=new RewriteRuleITokenStream(adaptor,"token IF");
@@ -6333,35 +6322,35 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
 		RewriteRuleSubtreeStream stream_codeBlock=new RewriteRuleSubtreeStream(adaptor,"rule codeBlock");
 		try { DebugEnterRule(GrammarFileName, "if_");
-		DebugLocation(372, 1);
+		DebugLocation(373, 1);
 		try
 		{
-			// Plsql.g:372:5: ( IF expression THEN codeBlock ( ELSE codeBlock )? END IF -> ^( IF expression codeBlock ( codeBlock )? ) )
+			// Plsql.g:373:5: ( IF expression THEN codeBlock ( ELSE codeBlock )? END IF -> ^( IF expression codeBlock ( codeBlock )? ) )
 			DebugEnterAlt(1);
-			// Plsql.g:372:7: IF expression THEN codeBlock ( ELSE codeBlock )? END IF
+			// Plsql.g:373:7: IF expression THEN codeBlock ( ELSE codeBlock )? END IF
 			{
-			DebugLocation(372, 7);
-			IF151=(IToken)Match(input,IF,Follow._IF_in_if_2060); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_IF.Add(IF151);
+			DebugLocation(373, 7);
+			IF152=(IToken)Match(input,IF,Follow._IF_in_if_2072); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_IF.Add(IF152);
 
-			DebugLocation(372, 10);
-			PushFollow(Follow._expression_in_if_2062);
-			expression152=expression();
+			DebugLocation(373, 10);
+			PushFollow(Follow._expression_in_if_2074);
+			expression153=expression();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_expression.Add(expression152.Tree);
-			DebugLocation(372, 21);
-			THEN153=(IToken)Match(input,THEN,Follow._THEN_in_if_2064); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_THEN.Add(THEN153);
+			if ( state.backtracking == 0 ) stream_expression.Add(expression153.Tree);
+			DebugLocation(373, 21);
+			THEN154=(IToken)Match(input,THEN,Follow._THEN_in_if_2076); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_THEN.Add(THEN154);
 
-			DebugLocation(372, 26);
-			PushFollow(Follow._codeBlock_in_if_2066);
-			codeBlock154=codeBlock();
+			DebugLocation(373, 26);
+			PushFollow(Follow._codeBlock_in_if_2078);
+			codeBlock155=codeBlock();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock154.Tree);
-			DebugLocation(372, 36);
-			// Plsql.g:372:36: ( ELSE codeBlock )?
+			if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock155.Tree);
+			DebugLocation(373, 36);
+			// Plsql.g:373:36: ( ELSE codeBlock )?
 			int alt28=2;
 			try { DebugEnterSubRule(28);
 			try { DebugEnterDecision(28, decisionCanBacktrack[28]);
@@ -6376,18 +6365,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:372:37: ELSE codeBlock
+				// Plsql.g:373:37: ELSE codeBlock
 				{
-				DebugLocation(372, 37);
-				ELSE155=(IToken)Match(input,ELSE,Follow._ELSE_in_if_2069); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_ELSE.Add(ELSE155);
+				DebugLocation(373, 37);
+				ELSE156=(IToken)Match(input,ELSE,Follow._ELSE_in_if_2081); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_ELSE.Add(ELSE156);
 
-				DebugLocation(372, 42);
-				PushFollow(Follow._codeBlock_in_if_2071);
-				codeBlock156=codeBlock();
+				DebugLocation(373, 42);
+				PushFollow(Follow._codeBlock_in_if_2083);
+				codeBlock157=codeBlock();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock156.Tree);
+				if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock157.Tree);
 
 				}
 				break;
@@ -6395,19 +6384,19 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			}
 			} finally { DebugExitSubRule(28); }
 
-			DebugLocation(372, 54);
-			END157=(IToken)Match(input,END,Follow._END_in_if_2075); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_END.Add(END157);
+			DebugLocation(373, 54);
+			END158=(IToken)Match(input,END,Follow._END_in_if_2087); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_END.Add(END158);
 
-			DebugLocation(372, 58);
-			IF158=(IToken)Match(input,IF,Follow._IF_in_if_2077); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_IF.Add(IF158);
+			DebugLocation(373, 58);
+			IF159=(IToken)Match(input,IF,Follow._IF_in_if_2089); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_IF.Add(IF159);
 
 
 
 			{
 			// AST REWRITE
-			// elements: expression, codeBlock, IF, codeBlock
+			// elements: expression, IF, codeBlock, codeBlock
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -6418,24 +6407,24 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 373:2: -> ^( IF expression codeBlock ( codeBlock )? )
+			// 374:2: -> ^( IF expression codeBlock ( codeBlock )? )
 			{
-				DebugLocation(373, 5);
-				// Plsql.g:373:5: ^( IF expression codeBlock ( codeBlock )? )
+				DebugLocation(374, 5);
+				// Plsql.g:374:5: ^( IF expression codeBlock ( codeBlock )? )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(373, 7);
+				DebugLocation(374, 7);
 				root_1 = (object)adaptor.BecomeRoot(new IfNode(stream_IF.NextToken()), root_1);
 
-				DebugLocation(373, 18);
+				DebugLocation(374, 18);
 				adaptor.AddChild(root_1, stream_expression.NextTree());
-				DebugLocation(373, 29);
+				DebugLocation(374, 29);
 				adaptor.AddChild(root_1, stream_codeBlock.NextTree());
-				DebugLocation(373, 39);
-				// Plsql.g:373:39: ( codeBlock )?
+				DebugLocation(374, 39);
+				// Plsql.g:374:39: ( codeBlock )?
 				if ( stream_codeBlock.HasNext )
 				{
-					DebugLocation(373, 39);
+					DebugLocation(374, 39);
 					adaptor.AddChild(root_1, stream_codeBlock.NextTree());
 
 				}
@@ -6473,7 +6462,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("if_", 39);
 			Leave_if_();
 		}
-		DebugLocation(374, 1);
+		DebugLocation(375, 1);
 		} finally { DebugExitRule(GrammarFileName, "if_"); }
 		return retval;
 
@@ -6490,7 +6479,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_cycle();
 
 	// $ANTLR start "cycle"
-	// Plsql.g:376:1: cycle : ( WHILE expression LOOP codeBlock END LOOP -> ^( WHILE expression codeBlock ) | LOOP codeBlock EXIT WHEN expression END LOOP -> ^( DO expression codeBlock ) );
+	// Plsql.g:377:1: cycle : ( WHILE expression LOOP codeBlock END LOOP -> ^( WHILE expression codeBlock ) | LOOP codeBlock EXIT WHEN expression END LOOP -> ^( DO expression codeBlock ) | FOR '(' assignOrExpression ';' expression ';' assignOrExpression ')' codeBlock END FOR -> ^( FOR assignOrExpression expression assignOrExpression codeBlock ) );
 	[GrammarRule("cycle")]
 	private PlsqlParser.cycle_return cycle()
 	{
@@ -6502,101 +6491,133 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 		object root_0 = null;
 
-		IToken WHILE159=null;
-		IToken LOOP161=null;
-		IToken END163=null;
-		IToken LOOP164=null;
+		IToken WHILE160=null;
+		IToken LOOP162=null;
+		IToken END164=null;
 		IToken LOOP165=null;
-		IToken EXIT167=null;
-		IToken WHEN168=null;
-		IToken END170=null;
-		IToken LOOP171=null;
-		PlsqlParser.expression_return expression160 = default(PlsqlParser.expression_return);
-		PlsqlParser.codeBlock_return codeBlock162 = default(PlsqlParser.codeBlock_return);
-		PlsqlParser.codeBlock_return codeBlock166 = default(PlsqlParser.codeBlock_return);
-		PlsqlParser.expression_return expression169 = default(PlsqlParser.expression_return);
+		IToken LOOP166=null;
+		IToken EXIT168=null;
+		IToken WHEN169=null;
+		IToken END171=null;
+		IToken LOOP172=null;
+		IToken FOR173=null;
+		IToken char_literal174=null;
+		IToken char_literal176=null;
+		IToken char_literal178=null;
+		IToken char_literal180=null;
+		IToken END182=null;
+		IToken FOR183=null;
+		PlsqlParser.expression_return expression161 = default(PlsqlParser.expression_return);
+		PlsqlParser.codeBlock_return codeBlock163 = default(PlsqlParser.codeBlock_return);
+		PlsqlParser.codeBlock_return codeBlock167 = default(PlsqlParser.codeBlock_return);
+		PlsqlParser.expression_return expression170 = default(PlsqlParser.expression_return);
+		PlsqlParser.assignOrExpression_return assignOrExpression175 = default(PlsqlParser.assignOrExpression_return);
+		PlsqlParser.expression_return expression177 = default(PlsqlParser.expression_return);
+		PlsqlParser.assignOrExpression_return assignOrExpression179 = default(PlsqlParser.assignOrExpression_return);
+		PlsqlParser.codeBlock_return codeBlock181 = default(PlsqlParser.codeBlock_return);
 
-		object WHILE159_tree=null;
-		object LOOP161_tree=null;
-		object END163_tree=null;
-		object LOOP164_tree=null;
+		object WHILE160_tree=null;
+		object LOOP162_tree=null;
+		object END164_tree=null;
 		object LOOP165_tree=null;
-		object EXIT167_tree=null;
-		object WHEN168_tree=null;
-		object END170_tree=null;
-		object LOOP171_tree=null;
+		object LOOP166_tree=null;
+		object EXIT168_tree=null;
+		object WHEN169_tree=null;
+		object END171_tree=null;
+		object LOOP172_tree=null;
+		object FOR173_tree=null;
+		object char_literal174_tree=null;
+		object char_literal176_tree=null;
+		object char_literal178_tree=null;
+		object char_literal180_tree=null;
+		object END182_tree=null;
+		object FOR183_tree=null;
 		RewriteRuleITokenStream stream_EXIT=new RewriteRuleITokenStream(adaptor,"token EXIT");
+		RewriteRuleITokenStream stream_FOR=new RewriteRuleITokenStream(adaptor,"token FOR");
 		RewriteRuleITokenStream stream_WHILE=new RewriteRuleITokenStream(adaptor,"token WHILE");
 		RewriteRuleITokenStream stream_END=new RewriteRuleITokenStream(adaptor,"token END");
+		RewriteRuleITokenStream stream_104=new RewriteRuleITokenStream(adaptor,"token 104");
 		RewriteRuleITokenStream stream_WHEN=new RewriteRuleITokenStream(adaptor,"token WHEN");
+		RewriteRuleITokenStream stream_103=new RewriteRuleITokenStream(adaptor,"token 103");
+		RewriteRuleITokenStream stream_102=new RewriteRuleITokenStream(adaptor,"token 102");
 		RewriteRuleITokenStream stream_LOOP=new RewriteRuleITokenStream(adaptor,"token LOOP");
 		RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
+		RewriteRuleSubtreeStream stream_assignOrExpression=new RewriteRuleSubtreeStream(adaptor,"rule assignOrExpression");
 		RewriteRuleSubtreeStream stream_codeBlock=new RewriteRuleSubtreeStream(adaptor,"rule codeBlock");
 		try { DebugEnterRule(GrammarFileName, "cycle");
-		DebugLocation(376, 1);
+		DebugLocation(377, 1);
 		try
 		{
-			// Plsql.g:377:2: ( WHILE expression LOOP codeBlock END LOOP -> ^( WHILE expression codeBlock ) | LOOP codeBlock EXIT WHEN expression END LOOP -> ^( DO expression codeBlock ) )
-			int alt29=2;
+			// Plsql.g:378:2: ( WHILE expression LOOP codeBlock END LOOP -> ^( WHILE expression codeBlock ) | LOOP codeBlock EXIT WHEN expression END LOOP -> ^( DO expression codeBlock ) | FOR '(' assignOrExpression ';' expression ';' assignOrExpression ')' codeBlock END FOR -> ^( FOR assignOrExpression expression assignOrExpression codeBlock ) )
+			int alt29=3;
 			try { DebugEnterDecision(29, decisionCanBacktrack[29]);
-			int LA29_0 = input.LA(1);
-
-			if ((LA29_0==WHILE))
+			switch (input.LA(1))
 			{
+			case WHILE:
+				{
 				alt29=1;
-			}
-			else if ((LA29_0==LOOP))
-			{
+				}
+				break;
+			case LOOP:
+				{
 				alt29=2;
-			}
-			else
-			{
-				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 29, 0, input);
+				}
+				break;
+			case FOR:
+				{
+				alt29=3;
+				}
+				break;
+			default:
+				{
+					if (state.backtracking>0) {state.failed=true; return retval;}
+					NoViableAltException nvae = new NoViableAltException("", 29, 0, input);
 
-				DebugRecognitionException(nvae);
-				throw nvae;
+					DebugRecognitionException(nvae);
+					throw nvae;
+				}
 			}
+
 			} finally { DebugExitDecision(29); }
 			switch (alt29)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:377:4: WHILE expression LOOP codeBlock END LOOP
+				// Plsql.g:378:4: WHILE expression LOOP codeBlock END LOOP
 				{
-				DebugLocation(377, 4);
-				WHILE159=(IToken)Match(input,WHILE,Follow._WHILE_in_cycle2108); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_WHILE.Add(WHILE159);
+				DebugLocation(378, 4);
+				WHILE160=(IToken)Match(input,WHILE,Follow._WHILE_in_cycle2120); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_WHILE.Add(WHILE160);
 
-				DebugLocation(377, 10);
-				PushFollow(Follow._expression_in_cycle2110);
-				expression160=expression();
+				DebugLocation(378, 10);
+				PushFollow(Follow._expression_in_cycle2122);
+				expression161=expression();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_expression.Add(expression160.Tree);
-				DebugLocation(377, 21);
-				LOOP161=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2112); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP161);
+				if ( state.backtracking == 0 ) stream_expression.Add(expression161.Tree);
+				DebugLocation(378, 21);
+				LOOP162=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2124); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP162);
 
-				DebugLocation(377, 26);
-				PushFollow(Follow._codeBlock_in_cycle2114);
-				codeBlock162=codeBlock();
+				DebugLocation(378, 26);
+				PushFollow(Follow._codeBlock_in_cycle2126);
+				codeBlock163=codeBlock();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock162.Tree);
-				DebugLocation(377, 36);
-				END163=(IToken)Match(input,END,Follow._END_in_cycle2116); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_END.Add(END163);
+				if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock163.Tree);
+				DebugLocation(378, 36);
+				END164=(IToken)Match(input,END,Follow._END_in_cycle2128); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_END.Add(END164);
 
-				DebugLocation(377, 40);
-				LOOP164=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2118); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP164);
+				DebugLocation(378, 40);
+				LOOP165=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2130); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP165);
 
 
 
 				{
 				// AST REWRITE
-				// elements: codeBlock, expression, WHILE
+				// elements: WHILE, codeBlock, expression
 				// token labels: 
 				// rule labels: retval
 				// token list labels: 
@@ -6607,18 +6628,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 378:2: -> ^( WHILE expression codeBlock )
+				// 379:2: -> ^( WHILE expression codeBlock )
 				{
-					DebugLocation(378, 5);
-					// Plsql.g:378:5: ^( WHILE expression codeBlock )
+					DebugLocation(379, 5);
+					// Plsql.g:379:5: ^( WHILE expression codeBlock )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(378, 7);
+					DebugLocation(379, 7);
 					root_1 = (object)adaptor.BecomeRoot(new WhileNode(stream_WHILE.NextToken()), root_1);
 
-					DebugLocation(378, 24);
+					DebugLocation(379, 24);
 					adaptor.AddChild(root_1, stream_expression.NextTree());
-					DebugLocation(378, 35);
+					DebugLocation(379, 35);
 					adaptor.AddChild(root_1, stream_codeBlock.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -6634,39 +6655,39 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:379:4: LOOP codeBlock EXIT WHEN expression END LOOP
+				// Plsql.g:380:4: LOOP codeBlock EXIT WHEN expression END LOOP
 				{
-				DebugLocation(379, 4);
-				LOOP165=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2137); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP165);
+				DebugLocation(380, 4);
+				LOOP166=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2149); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP166);
 
-				DebugLocation(379, 9);
-				PushFollow(Follow._codeBlock_in_cycle2139);
-				codeBlock166=codeBlock();
+				DebugLocation(380, 9);
+				PushFollow(Follow._codeBlock_in_cycle2151);
+				codeBlock167=codeBlock();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock166.Tree);
-				DebugLocation(379, 19);
-				EXIT167=(IToken)Match(input,EXIT,Follow._EXIT_in_cycle2141); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_EXIT.Add(EXIT167);
+				if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock167.Tree);
+				DebugLocation(380, 19);
+				EXIT168=(IToken)Match(input,EXIT,Follow._EXIT_in_cycle2153); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_EXIT.Add(EXIT168);
 
-				DebugLocation(379, 24);
-				WHEN168=(IToken)Match(input,WHEN,Follow._WHEN_in_cycle2143); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_WHEN.Add(WHEN168);
+				DebugLocation(380, 24);
+				WHEN169=(IToken)Match(input,WHEN,Follow._WHEN_in_cycle2155); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_WHEN.Add(WHEN169);
 
-				DebugLocation(379, 29);
-				PushFollow(Follow._expression_in_cycle2145);
-				expression169=expression();
+				DebugLocation(380, 29);
+				PushFollow(Follow._expression_in_cycle2157);
+				expression170=expression();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_expression.Add(expression169.Tree);
-				DebugLocation(379, 40);
-				END170=(IToken)Match(input,END,Follow._END_in_cycle2147); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_END.Add(END170);
+				if ( state.backtracking == 0 ) stream_expression.Add(expression170.Tree);
+				DebugLocation(380, 40);
+				END171=(IToken)Match(input,END,Follow._END_in_cycle2159); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_END.Add(END171);
 
-				DebugLocation(379, 44);
-				LOOP171=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2149); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP171);
+				DebugLocation(380, 44);
+				LOOP172=(IToken)Match(input,LOOP,Follow._LOOP_in_cycle2161); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_LOOP.Add(LOOP172);
 
 
 
@@ -6683,18 +6704,118 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 380:2: -> ^( DO expression codeBlock )
+				// 381:2: -> ^( DO expression codeBlock )
 				{
-					DebugLocation(380, 5);
-					// Plsql.g:380:5: ^( DO expression codeBlock )
+					DebugLocation(381, 5);
+					// Plsql.g:381:5: ^( DO expression codeBlock )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(380, 7);
+					DebugLocation(381, 7);
 					root_1 = (object)adaptor.BecomeRoot(new DoWhileNode(DO), root_1);
 
-					DebugLocation(380, 23);
+					DebugLocation(381, 23);
 					adaptor.AddChild(root_1, stream_expression.NextTree());
-					DebugLocation(380, 34);
+					DebugLocation(381, 34);
+					adaptor.AddChild(root_1, stream_codeBlock.NextTree());
+
+					adaptor.AddChild(root_0, root_1);
+					}
+
+				}
+
+				retval.Tree = root_0;
+				}
+				}
+
+				}
+				break;
+			case 3:
+				DebugEnterAlt(3);
+				// Plsql.g:382:4: FOR '(' assignOrExpression ';' expression ';' assignOrExpression ')' codeBlock END FOR
+				{
+				DebugLocation(382, 4);
+				FOR173=(IToken)Match(input,FOR,Follow._FOR_in_cycle2180); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_FOR.Add(FOR173);
+
+				DebugLocation(382, 8);
+				char_literal174=(IToken)Match(input,102,Follow._102_in_cycle2182); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_102.Add(char_literal174);
+
+				DebugLocation(382, 12);
+				PushFollow(Follow._assignOrExpression_in_cycle2184);
+				assignOrExpression175=assignOrExpression();
+				PopFollow();
+				if (state.failed) return retval;
+				if ( state.backtracking == 0 ) stream_assignOrExpression.Add(assignOrExpression175.Tree);
+				DebugLocation(382, 31);
+				char_literal176=(IToken)Match(input,104,Follow._104_in_cycle2186); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_104.Add(char_literal176);
+
+				DebugLocation(382, 35);
+				PushFollow(Follow._expression_in_cycle2188);
+				expression177=expression();
+				PopFollow();
+				if (state.failed) return retval;
+				if ( state.backtracking == 0 ) stream_expression.Add(expression177.Tree);
+				DebugLocation(382, 46);
+				char_literal178=(IToken)Match(input,104,Follow._104_in_cycle2190); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_104.Add(char_literal178);
+
+				DebugLocation(382, 50);
+				PushFollow(Follow._assignOrExpression_in_cycle2192);
+				assignOrExpression179=assignOrExpression();
+				PopFollow();
+				if (state.failed) return retval;
+				if ( state.backtracking == 0 ) stream_assignOrExpression.Add(assignOrExpression179.Tree);
+				DebugLocation(382, 69);
+				char_literal180=(IToken)Match(input,103,Follow._103_in_cycle2194); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_103.Add(char_literal180);
+
+				DebugLocation(382, 73);
+				PushFollow(Follow._codeBlock_in_cycle2196);
+				codeBlock181=codeBlock();
+				PopFollow();
+				if (state.failed) return retval;
+				if ( state.backtracking == 0 ) stream_codeBlock.Add(codeBlock181.Tree);
+				DebugLocation(382, 83);
+				END182=(IToken)Match(input,END,Follow._END_in_cycle2198); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_END.Add(END182);
+
+				DebugLocation(382, 87);
+				FOR183=(IToken)Match(input,FOR,Follow._FOR_in_cycle2200); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_FOR.Add(FOR183);
+
+
+
+				{
+				// AST REWRITE
+				// elements: FOR, assignOrExpression, assignOrExpression, expression, codeBlock
+				// token labels: 
+				// rule labels: retval
+				// token list labels: 
+				// rule list labels: 
+				// wildcard labels: 
+				if ( state.backtracking == 0 ) {
+				retval.Tree = root_0;
+				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
+
+				root_0 = (object)adaptor.Nil();
+				// 383:2: -> ^( FOR assignOrExpression expression assignOrExpression codeBlock )
+				{
+					DebugLocation(383, 5);
+					// Plsql.g:383:5: ^( FOR assignOrExpression expression assignOrExpression codeBlock )
+					{
+					object root_1 = (object)adaptor.Nil();
+					DebugLocation(383, 7);
+					root_1 = (object)adaptor.BecomeRoot(new ForNode(stream_FOR.NextToken()), root_1);
+
+					DebugLocation(383, 20);
+					adaptor.AddChild(root_1, stream_assignOrExpression.NextTree());
+					DebugLocation(383, 39);
+					adaptor.AddChild(root_1, stream_expression.NextTree());
+					DebugLocation(383, 50);
+					adaptor.AddChild(root_1, stream_assignOrExpression.NextTree());
+					DebugLocation(383, 69);
 					adaptor.AddChild(root_1, stream_codeBlock.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -6731,12 +6852,117 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			LeaveRule("cycle", 40);
 			Leave_cycle();
 		}
-		DebugLocation(381, 1);
+		DebugLocation(384, 1);
 		} finally { DebugExitRule(GrammarFileName, "cycle"); }
 		return retval;
 
 	}
 	// $ANTLR end "cycle"
+
+	public class assignOrExpression_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
+	{
+		private object _tree;
+		public object Tree { get { return _tree; } set { _tree = value; } }
+	}
+
+	partial void Enter_assignOrExpression();
+	partial void Leave_assignOrExpression();
+
+	// $ANTLR start "assignOrExpression"
+	// Plsql.g:386:1: assignOrExpression : ( assign | expression );
+	[GrammarRule("assignOrExpression")]
+	private PlsqlParser.assignOrExpression_return assignOrExpression()
+	{
+		Enter_assignOrExpression();
+		EnterRule("assignOrExpression", 41);
+		TraceIn("assignOrExpression", 41);
+		PlsqlParser.assignOrExpression_return retval = new PlsqlParser.assignOrExpression_return();
+		retval.Start = (IToken)input.LT(1);
+
+		object root_0 = null;
+
+		PlsqlParser.assign_return assign184 = default(PlsqlParser.assign_return);
+		PlsqlParser.expression_return expression185 = default(PlsqlParser.expression_return);
+
+
+		try { DebugEnterRule(GrammarFileName, "assignOrExpression");
+		DebugLocation(386, 1);
+		try
+		{
+			// Plsql.g:387:2: ( assign | expression )
+			int alt30=2;
+			try { DebugEnterDecision(30, decisionCanBacktrack[30]);
+			try
+			{
+				alt30 = dfa30.Predict(input);
+			}
+			catch (NoViableAltException nvae)
+			{
+				DebugRecognitionException(nvae);
+				throw;
+			}
+			} finally { DebugExitDecision(30); }
+			switch (alt30)
+			{
+			case 1:
+				DebugEnterAlt(1);
+				// Plsql.g:387:4: assign
+				{
+				root_0 = (object)adaptor.Nil();
+
+				DebugLocation(387, 4);
+				PushFollow(Follow._assign_in_assignOrExpression2229);
+				assign184=assign();
+				PopFollow();
+				if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, assign184.Tree);
+
+				}
+				break;
+			case 2:
+				DebugEnterAlt(2);
+				// Plsql.g:388:4: expression
+				{
+				root_0 = (object)adaptor.Nil();
+
+				DebugLocation(388, 4);
+				PushFollow(Follow._expression_in_assignOrExpression2234);
+				expression185=expression();
+				PopFollow();
+				if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression185.Tree);
+
+				}
+				break;
+
+			}
+			retval.Stop = (IToken)input.LT(-1);
+
+			if ( state.backtracking == 0 ) {
+
+			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
+			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
+			}
+		}
+		catch (RecognitionException re)
+		{
+			ReportError(re);
+			Recover(input,re);
+		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
+
+		}
+		finally
+		{
+			TraceOut("assignOrExpression", 41);
+			LeaveRule("assignOrExpression", 41);
+			Leave_assignOrExpression();
+		}
+		DebugLocation(389, 1);
+		} finally { DebugExitRule(GrammarFileName, "assignOrExpression"); }
+		return retval;
+
+	}
+	// $ANTLR end "assignOrExpression"
 
 	public class expressionList_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
 	{
@@ -6748,109 +6974,109 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_expressionList();
 
 	// $ANTLR start "expressionList"
-	// Plsql.g:384:1: expressionList : ( expr_ ( ',' expr_ )* )? -> ^( ExpressionList ( expr_ )* ) ;
+	// Plsql.g:391:1: expressionList : ( expr_ ( ',' expr_ )* )? -> ^( ExpressionList ( expr_ )* ) ;
 	[GrammarRule("expressionList")]
 	private PlsqlParser.expressionList_return expressionList()
 	{
 		Enter_expressionList();
-		EnterRule("expressionList", 41);
-		TraceIn("expressionList", 41);
+		EnterRule("expressionList", 42);
+		TraceIn("expressionList", 42);
 		PlsqlParser.expressionList_return retval = new PlsqlParser.expressionList_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken char_literal173=null;
-		PlsqlParser.expr__return expr_172 = default(PlsqlParser.expr__return);
-		PlsqlParser.expr__return expr_174 = default(PlsqlParser.expr__return);
+		IToken char_literal187=null;
+		PlsqlParser.expr__return expr_186 = default(PlsqlParser.expr__return);
+		PlsqlParser.expr__return expr_188 = default(PlsqlParser.expr__return);
 
-		object char_literal173_tree=null;
+		object char_literal187_tree=null;
 		RewriteRuleITokenStream stream_101=new RewriteRuleITokenStream(adaptor,"token 101");
 		RewriteRuleSubtreeStream stream_expr_=new RewriteRuleSubtreeStream(adaptor,"rule expr_");
 		try { DebugEnterRule(GrammarFileName, "expressionList");
-		DebugLocation(384, 1);
+		DebugLocation(391, 1);
 		try
 		{
-			// Plsql.g:385:2: ( ( expr_ ( ',' expr_ )* )? -> ^( ExpressionList ( expr_ )* ) )
+			// Plsql.g:392:2: ( ( expr_ ( ',' expr_ )* )? -> ^( ExpressionList ( expr_ )* ) )
 			DebugEnterAlt(1);
-			// Plsql.g:385:4: ( expr_ ( ',' expr_ )* )?
+			// Plsql.g:392:4: ( expr_ ( ',' expr_ )* )?
 			{
-			DebugLocation(385, 4);
-			// Plsql.g:385:4: ( expr_ ( ',' expr_ )* )?
-			int alt31=2;
-			try { DebugEnterSubRule(31);
-			try { DebugEnterDecision(31, decisionCanBacktrack[31]);
-			int LA31_0 = input.LA(1);
+			DebugLocation(392, 4);
+			// Plsql.g:392:4: ( expr_ ( ',' expr_ )* )?
+			int alt32=2;
+			try { DebugEnterSubRule(32);
+			try { DebugEnterDecision(32, decisionCanBacktrack[32]);
+			int LA32_0 = input.LA(1);
 
-			if ((LA31_0==SELF||(LA31_0>=TRUE && LA31_0<=FALSE)||LA31_0==MINUS||LA31_0==NOT||(LA31_0>=ID && LA31_0<=QUOTED_CHAR)||LA31_0==102))
+			if ((LA32_0==SELF||(LA32_0>=TRUE && LA32_0<=FALSE)||LA32_0==MINUS||LA32_0==NOT||(LA32_0>=ID && LA32_0<=QUOTED_CHAR)||LA32_0==102))
 			{
-				alt31=1;
+				alt32=1;
 			}
-			} finally { DebugExitDecision(31); }
-			switch (alt31)
+			} finally { DebugExitDecision(32); }
+			switch (alt32)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:385:6: expr_ ( ',' expr_ )*
+				// Plsql.g:392:6: expr_ ( ',' expr_ )*
 				{
-				DebugLocation(385, 6);
-				PushFollow(Follow._expr__in_expressionList2177);
-				expr_172=expr_();
+				DebugLocation(392, 6);
+				PushFollow(Follow._expr__in_expressionList2247);
+				expr_186=expr_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_expr_.Add(expr_172.Tree);
-				DebugLocation(385, 12);
-				// Plsql.g:385:12: ( ',' expr_ )*
-				try { DebugEnterSubRule(30);
+				if ( state.backtracking == 0 ) stream_expr_.Add(expr_186.Tree);
+				DebugLocation(392, 12);
+				// Plsql.g:392:12: ( ',' expr_ )*
+				try { DebugEnterSubRule(31);
 				while (true)
 				{
-					int alt30=2;
-					try { DebugEnterDecision(30, decisionCanBacktrack[30]);
-					int LA30_0 = input.LA(1);
+					int alt31=2;
+					try { DebugEnterDecision(31, decisionCanBacktrack[31]);
+					int LA31_0 = input.LA(1);
 
-					if ((LA30_0==101))
+					if ((LA31_0==101))
 					{
-						alt30=1;
+						alt31=1;
 					}
 
 
-					} finally { DebugExitDecision(30); }
-					switch ( alt30 )
+					} finally { DebugExitDecision(31); }
+					switch ( alt31 )
 					{
 					case 1:
 						DebugEnterAlt(1);
-						// Plsql.g:385:14: ',' expr_
+						// Plsql.g:392:14: ',' expr_
 						{
-						DebugLocation(385, 14);
-						char_literal173=(IToken)Match(input,101,Follow._101_in_expressionList2181); if (state.failed) return retval; 
-						if ( state.backtracking == 0 ) stream_101.Add(char_literal173);
+						DebugLocation(392, 14);
+						char_literal187=(IToken)Match(input,101,Follow._101_in_expressionList2251); if (state.failed) return retval; 
+						if ( state.backtracking == 0 ) stream_101.Add(char_literal187);
 
-						DebugLocation(385, 18);
-						PushFollow(Follow._expr__in_expressionList2183);
-						expr_174=expr_();
+						DebugLocation(392, 18);
+						PushFollow(Follow._expr__in_expressionList2253);
+						expr_188=expr_();
 						PopFollow();
 						if (state.failed) return retval;
-						if ( state.backtracking == 0 ) stream_expr_.Add(expr_174.Tree);
+						if ( state.backtracking == 0 ) stream_expr_.Add(expr_188.Tree);
 
 						}
 						break;
 
 					default:
-						goto loop30;
+						goto loop31;
 					}
 				}
 
-				loop30:
+				loop31:
 					;
 
-				} finally { DebugExitSubRule(30); }
+				} finally { DebugExitSubRule(31); }
 
 
 				}
 				break;
 
 			}
-			} finally { DebugExitSubRule(31); }
+			} finally { DebugExitSubRule(32); }
 
 
 
@@ -6867,20 +7093,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 386:2: -> ^( ExpressionList ( expr_ )* )
+			// 393:2: -> ^( ExpressionList ( expr_ )* )
 			{
-				DebugLocation(386, 5);
-				// Plsql.g:386:5: ^( ExpressionList ( expr_ )* )
+				DebugLocation(393, 5);
+				// Plsql.g:393:5: ^( ExpressionList ( expr_ )* )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(386, 7);
+				DebugLocation(393, 7);
 				root_1 = (object)adaptor.BecomeRoot((object)adaptor.Create(ExpressionList, "ExpressionList"), root_1);
 
-				DebugLocation(386, 22);
-				// Plsql.g:386:22: ( expr_ )*
+				DebugLocation(393, 22);
+				// Plsql.g:393:22: ( expr_ )*
 				while ( stream_expr_.HasNext )
 				{
-					DebugLocation(386, 22);
+					DebugLocation(393, 22);
 					adaptor.AddChild(root_1, stream_expr_.NextTree());
 
 				}
@@ -6914,11 +7140,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("expressionList", 41);
-			LeaveRule("expressionList", 41);
+			TraceOut("expressionList", 42);
+			LeaveRule("expressionList", 42);
 			Leave_expressionList();
 		}
-		DebugLocation(387, 1);
+		DebugLocation(394, 1);
 		} finally { DebugExitRule(GrammarFileName, "expressionList"); }
 		return retval;
 
@@ -6935,35 +7161,35 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_expression();
 
 	// $ANTLR start "expression"
-	// Plsql.g:392:1: expression : expr_ -> ^( Expression expr_ ) ;
+	// Plsql.g:399:1: expression : expr_ -> ^( Expression expr_ ) ;
 	[GrammarRule("expression")]
 	private PlsqlParser.expression_return expression()
 	{
 		Enter_expression();
-		EnterRule("expression", 42);
-		TraceIn("expression", 42);
+		EnterRule("expression", 43);
+		TraceIn("expression", 43);
 		PlsqlParser.expression_return retval = new PlsqlParser.expression_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.expr__return expr_175 = default(PlsqlParser.expr__return);
+		PlsqlParser.expr__return expr_189 = default(PlsqlParser.expr__return);
 
 		RewriteRuleSubtreeStream stream_expr_=new RewriteRuleSubtreeStream(adaptor,"rule expr_");
 		try { DebugEnterRule(GrammarFileName, "expression");
-		DebugLocation(392, 1);
+		DebugLocation(399, 1);
 		try
 		{
-			// Plsql.g:393:2: ( expr_ -> ^( Expression expr_ ) )
+			// Plsql.g:400:2: ( expr_ -> ^( Expression expr_ ) )
 			DebugEnterAlt(1);
-			// Plsql.g:393:4: expr_
+			// Plsql.g:400:4: expr_
 			{
-			DebugLocation(393, 4);
-			PushFollow(Follow._expr__in_expression2212);
-			expr_175=expr_();
+			DebugLocation(400, 4);
+			PushFollow(Follow._expr__in_expression2282);
+			expr_189=expr_();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_expr_.Add(expr_175.Tree);
+			if ( state.backtracking == 0 ) stream_expr_.Add(expr_189.Tree);
 
 
 			{
@@ -6979,16 +7205,16 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 394:2: -> ^( Expression expr_ )
+			// 401:2: -> ^( Expression expr_ )
 			{
-				DebugLocation(394, 5);
-				// Plsql.g:394:5: ^( Expression expr_ )
+				DebugLocation(401, 5);
+				// Plsql.g:401:5: ^( Expression expr_ )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(394, 7);
+				DebugLocation(401, 7);
 				root_1 = (object)adaptor.BecomeRoot(new ExpressionNode(Expression), root_1);
 
-				DebugLocation(394, 34);
+				DebugLocation(401, 34);
 				adaptor.AddChild(root_1, stream_expr_.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -7019,11 +7245,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("expression", 42);
-			LeaveRule("expression", 42);
+			TraceOut("expression", 43);
+			LeaveRule("expression", 43);
 			Leave_expression();
 		}
-		DebugLocation(395, 1);
+		DebugLocation(402, 1);
 		} finally { DebugExitRule(GrammarFileName, "expression"); }
 		return retval;
 
@@ -7040,157 +7266,34 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_expr_();
 
 	// $ANTLR start "expr_"
-	// Plsql.g:397:1: expr_ : ( logicOr )+ ;
+	// Plsql.g:404:1: expr_ : ( logicOr )+ ;
 	[GrammarRule("expr_")]
 	private PlsqlParser.expr__return expr_()
 	{
 		Enter_expr_();
-		EnterRule("expr_", 43);
-		TraceIn("expr_", 43);
+		EnterRule("expr_", 44);
+		TraceIn("expr_", 44);
 		PlsqlParser.expr__return retval = new PlsqlParser.expr__return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.logicOr_return logicOr176 = default(PlsqlParser.logicOr_return);
+		PlsqlParser.logicOr_return logicOr190 = default(PlsqlParser.logicOr_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "expr_");
-		DebugLocation(397, 1);
+		DebugLocation(404, 1);
 		try
 		{
-			// Plsql.g:398:2: ( ( logicOr )+ )
+			// Plsql.g:405:2: ( ( logicOr )+ )
 			DebugEnterAlt(1);
-			// Plsql.g:398:4: ( logicOr )+
+			// Plsql.g:405:4: ( logicOr )+
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(398, 4);
-			// Plsql.g:398:4: ( logicOr )+
-			int cnt32=0;
-			try { DebugEnterSubRule(32);
-			while (true)
-			{
-				int alt32=2;
-				try { DebugEnterDecision(32, decisionCanBacktrack[32]);
-				int LA32_0 = input.LA(1);
-
-				if ((LA32_0==SELF||(LA32_0>=TRUE && LA32_0<=FALSE)||LA32_0==MINUS||LA32_0==NOT||(LA32_0>=ID && LA32_0<=QUOTED_CHAR)||LA32_0==102))
-				{
-					alt32=1;
-				}
-
-
-				} finally { DebugExitDecision(32); }
-				switch (alt32)
-				{
-				case 1:
-					DebugEnterAlt(1);
-					// Plsql.g:0:0: logicOr
-					{
-					DebugLocation(398, 4);
-					PushFollow(Follow._logicOr_in_expr_2235);
-					logicOr176=logicOr();
-					PopFollow();
-					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logicOr176.Tree);
-
-					}
-					break;
-
-				default:
-					if (cnt32 >= 1)
-						goto loop32;
-
-					if (state.backtracking>0) {state.failed=true; return retval;}
-					EarlyExitException eee32 = new EarlyExitException( 32, input );
-					DebugRecognitionException(eee32);
-					throw eee32;
-				}
-				cnt32++;
-			}
-			loop32:
-				;
-
-			} finally { DebugExitSubRule(32); }
-
-
-			}
-
-			retval.Stop = (IToken)input.LT(-1);
-
-			if ( state.backtracking == 0 ) {
-
-			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
-			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
-			}
-		}
-		catch (RecognitionException re)
-		{
-			ReportError(re);
-			Recover(input,re);
-		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
-
-		}
-		finally
-		{
-			TraceOut("expr_", 43);
-			LeaveRule("expr_", 43);
-			Leave_expr_();
-		}
-		DebugLocation(399, 1);
-		} finally { DebugExitRule(GrammarFileName, "expr_"); }
-		return retval;
-
-	}
-	// $ANTLR end "expr_"
-
-	public class logicOr_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
-	{
-		private object _tree;
-		public object Tree { get { return _tree; } set { _tree = value; } }
-	}
-
-	partial void Enter_logicOr();
-	partial void Leave_logicOr();
-
-	// $ANTLR start "logicOr"
-	// Plsql.g:401:1: logicOr : logicAnd ( OR logicAnd )* ;
-	[GrammarRule("logicOr")]
-	private PlsqlParser.logicOr_return logicOr()
-	{
-		Enter_logicOr();
-		EnterRule("logicOr", 44);
-		TraceIn("logicOr", 44);
-		PlsqlParser.logicOr_return retval = new PlsqlParser.logicOr_return();
-		retval.Start = (IToken)input.LT(1);
-
-		object root_0 = null;
-
-		IToken OR178=null;
-		PlsqlParser.logicAnd_return logicAnd177 = default(PlsqlParser.logicAnd_return);
-		PlsqlParser.logicAnd_return logicAnd179 = default(PlsqlParser.logicAnd_return);
-
-		object OR178_tree=null;
-
-		try { DebugEnterRule(GrammarFileName, "logicOr");
-		DebugLocation(401, 1);
-		try
-		{
-			// Plsql.g:402:2: ( logicAnd ( OR logicAnd )* )
-			DebugEnterAlt(1);
-			// Plsql.g:402:4: logicAnd ( OR logicAnd )*
-			{
-			root_0 = (object)adaptor.Nil();
-
-			DebugLocation(402, 4);
-			PushFollow(Follow._logicAnd_in_logicOr2247);
-			logicAnd177=logicAnd();
-			PopFollow();
-			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logicAnd177.Tree);
-			DebugLocation(402, 13);
-			// Plsql.g:402:13: ( OR logicAnd )*
+			DebugLocation(405, 4);
+			// Plsql.g:405:4: ( logicOr )+
+			int cnt33=0;
 			try { DebugEnterSubRule(33);
 			while (true)
 			{
@@ -7198,40 +7301,40 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(33, decisionCanBacktrack[33]);
 				int LA33_0 = input.LA(1);
 
-				if ((LA33_0==OR))
+				if ((LA33_0==SELF||(LA33_0>=TRUE && LA33_0<=FALSE)||LA33_0==MINUS||LA33_0==NOT||(LA33_0>=ID && LA33_0<=QUOTED_CHAR)||LA33_0==102))
 				{
 					alt33=1;
 				}
 
 
 				} finally { DebugExitDecision(33); }
-				switch ( alt33 )
+				switch (alt33)
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:402:15: OR logicAnd
+					// Plsql.g:0:0: logicOr
 					{
-					DebugLocation(402, 25);
-					OR178=(IToken)Match(input,OR,Follow._OR_in_logicOr2251); if (state.failed) return retval;
-					if ( state.backtracking == 0 ) {
-					OR178_tree = new OrNode(OR178) ;
-					root_0 = (object)adaptor.BecomeRoot(OR178_tree, root_0);
-					}
-					DebugLocation(402, 27);
-					PushFollow(Follow._logicAnd_in_logicOr2257);
-					logicAnd179=logicAnd();
+					DebugLocation(405, 4);
+					PushFollow(Follow._logicOr_in_expr_2305);
+					logicOr190=logicOr();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logicAnd179.Tree);
+					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logicOr190.Tree);
 
 					}
 					break;
 
 				default:
-					goto loop33;
-				}
-			}
+					if (cnt33 >= 1)
+						goto loop33;
 
+					if (state.backtracking>0) {state.failed=true; return retval;}
+					EarlyExitException eee33 = new EarlyExitException( 33, input );
+					DebugRecognitionException(eee33);
+					throw eee33;
+				}
+				cnt33++;
+			}
 			loop33:
 				;
 
@@ -7257,63 +7360,63 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("logicOr", 44);
-			LeaveRule("logicOr", 44);
-			Leave_logicOr();
+			TraceOut("expr_", 44);
+			LeaveRule("expr_", 44);
+			Leave_expr_();
 		}
-		DebugLocation(403, 1);
-		} finally { DebugExitRule(GrammarFileName, "logicOr"); }
+		DebugLocation(406, 1);
+		} finally { DebugExitRule(GrammarFileName, "expr_"); }
 		return retval;
 
 	}
-	// $ANTLR end "logicOr"
+	// $ANTLR end "expr_"
 
-	public class logicAnd_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
+	public class logicOr_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
 	{
 		private object _tree;
 		public object Tree { get { return _tree; } set { _tree = value; } }
 	}
 
-	partial void Enter_logicAnd();
-	partial void Leave_logicAnd();
+	partial void Enter_logicOr();
+	partial void Leave_logicOr();
 
-	// $ANTLR start "logicAnd"
-	// Plsql.g:405:1: logicAnd : equality ( AND equality )* ;
-	[GrammarRule("logicAnd")]
-	private PlsqlParser.logicAnd_return logicAnd()
+	// $ANTLR start "logicOr"
+	// Plsql.g:408:1: logicOr : logicAnd ( OR logicAnd )* ;
+	[GrammarRule("logicOr")]
+	private PlsqlParser.logicOr_return logicOr()
 	{
-		Enter_logicAnd();
-		EnterRule("logicAnd", 45);
-		TraceIn("logicAnd", 45);
-		PlsqlParser.logicAnd_return retval = new PlsqlParser.logicAnd_return();
+		Enter_logicOr();
+		EnterRule("logicOr", 45);
+		TraceIn("logicOr", 45);
+		PlsqlParser.logicOr_return retval = new PlsqlParser.logicOr_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken AND181=null;
-		PlsqlParser.equality_return equality180 = default(PlsqlParser.equality_return);
-		PlsqlParser.equality_return equality182 = default(PlsqlParser.equality_return);
+		IToken OR192=null;
+		PlsqlParser.logicAnd_return logicAnd191 = default(PlsqlParser.logicAnd_return);
+		PlsqlParser.logicAnd_return logicAnd193 = default(PlsqlParser.logicAnd_return);
 
-		object AND181_tree=null;
+		object OR192_tree=null;
 
-		try { DebugEnterRule(GrammarFileName, "logicAnd");
-		DebugLocation(405, 1);
+		try { DebugEnterRule(GrammarFileName, "logicOr");
+		DebugLocation(408, 1);
 		try
 		{
-			// Plsql.g:406:2: ( equality ( AND equality )* )
+			// Plsql.g:409:2: ( logicAnd ( OR logicAnd )* )
 			DebugEnterAlt(1);
-			// Plsql.g:406:4: equality ( AND equality )*
+			// Plsql.g:409:4: logicAnd ( OR logicAnd )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(406, 4);
-			PushFollow(Follow._equality_in_logicAnd2270);
-			equality180=equality();
+			DebugLocation(409, 4);
+			PushFollow(Follow._logicAnd_in_logicOr2317);
+			logicAnd191=logicAnd();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, equality180.Tree);
-			DebugLocation(406, 13);
-			// Plsql.g:406:13: ( AND equality )*
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logicAnd191.Tree);
+			DebugLocation(409, 13);
+			// Plsql.g:409:13: ( OR logicAnd )*
 			try { DebugEnterSubRule(34);
 			while (true)
 			{
@@ -7321,7 +7424,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(34, decisionCanBacktrack[34]);
 				int LA34_0 = input.LA(1);
 
-				if ((LA34_0==AND))
+				if ((LA34_0==OR))
 				{
 					alt34=1;
 				}
@@ -7332,20 +7435,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:406:15: AND equality
+					// Plsql.g:409:15: OR logicAnd
 					{
-					DebugLocation(406, 27);
-					AND181=(IToken)Match(input,AND,Follow._AND_in_logicAnd2274); if (state.failed) return retval;
+					DebugLocation(409, 25);
+					OR192=(IToken)Match(input,OR,Follow._OR_in_logicOr2321); if (state.failed) return retval;
 					if ( state.backtracking == 0 ) {
-					AND181_tree = new AndNode(AND181) ;
-					root_0 = (object)adaptor.BecomeRoot(AND181_tree, root_0);
+					OR192_tree = new OrNode(OR192) ;
+					root_0 = (object)adaptor.BecomeRoot(OR192_tree, root_0);
 					}
-					DebugLocation(406, 29);
-					PushFollow(Follow._equality_in_logicAnd2280);
-					equality182=equality();
+					DebugLocation(409, 27);
+					PushFollow(Follow._logicAnd_in_logicOr2327);
+					logicAnd193=logicAnd();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, equality182.Tree);
+					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, logicAnd193.Tree);
 
 					}
 					break;
@@ -7380,62 +7483,63 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("logicAnd", 45);
-			LeaveRule("logicAnd", 45);
-			Leave_logicAnd();
+			TraceOut("logicOr", 45);
+			LeaveRule("logicOr", 45);
+			Leave_logicOr();
 		}
-		DebugLocation(407, 1);
-		} finally { DebugExitRule(GrammarFileName, "logicAnd"); }
+		DebugLocation(410, 1);
+		} finally { DebugExitRule(GrammarFileName, "logicOr"); }
 		return retval;
 
 	}
-	// $ANTLR end "logicAnd"
+	// $ANTLR end "logicOr"
 
-	public class equality_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
+	public class logicAnd_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
 	{
 		private object _tree;
 		public object Tree { get { return _tree; } set { _tree = value; } }
 	}
 
-	partial void Enter_equality();
-	partial void Leave_equality();
+	partial void Enter_logicAnd();
+	partial void Leave_logicAnd();
 
-	// $ANTLR start "equality"
-	// Plsql.g:409:1: equality : inequality ( equalityOperator inequality )* ;
-	[GrammarRule("equality")]
-	private PlsqlParser.equality_return equality()
+	// $ANTLR start "logicAnd"
+	// Plsql.g:412:1: logicAnd : equality ( AND equality )* ;
+	[GrammarRule("logicAnd")]
+	private PlsqlParser.logicAnd_return logicAnd()
 	{
-		Enter_equality();
-		EnterRule("equality", 46);
-		TraceIn("equality", 46);
-		PlsqlParser.equality_return retval = new PlsqlParser.equality_return();
+		Enter_logicAnd();
+		EnterRule("logicAnd", 46);
+		TraceIn("logicAnd", 46);
+		PlsqlParser.logicAnd_return retval = new PlsqlParser.logicAnd_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.inequality_return inequality183 = default(PlsqlParser.inequality_return);
-		PlsqlParser.equalityOperator_return equalityOperator184 = default(PlsqlParser.equalityOperator_return);
-		PlsqlParser.inequality_return inequality185 = default(PlsqlParser.inequality_return);
+		IToken AND195=null;
+		PlsqlParser.equality_return equality194 = default(PlsqlParser.equality_return);
+		PlsqlParser.equality_return equality196 = default(PlsqlParser.equality_return);
 
+		object AND195_tree=null;
 
-		try { DebugEnterRule(GrammarFileName, "equality");
-		DebugLocation(409, 1);
+		try { DebugEnterRule(GrammarFileName, "logicAnd");
+		DebugLocation(412, 1);
 		try
 		{
-			// Plsql.g:410:2: ( inequality ( equalityOperator inequality )* )
+			// Plsql.g:413:2: ( equality ( AND equality )* )
 			DebugEnterAlt(1);
-			// Plsql.g:410:4: inequality ( equalityOperator inequality )*
+			// Plsql.g:413:4: equality ( AND equality )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(410, 4);
-			PushFollow(Follow._inequality_in_equality2293);
-			inequality183=inequality();
+			DebugLocation(413, 4);
+			PushFollow(Follow._equality_in_logicAnd2340);
+			equality194=equality();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, inequality183.Tree);
-			DebugLocation(410, 15);
-			// Plsql.g:410:15: ( equalityOperator inequality )*
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, equality194.Tree);
+			DebugLocation(413, 13);
+			// Plsql.g:413:13: ( AND equality )*
 			try { DebugEnterSubRule(35);
 			while (true)
 			{
@@ -7443,7 +7547,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(35, decisionCanBacktrack[35]);
 				int LA35_0 = input.LA(1);
 
-				if (((LA35_0>=EQUAL && LA35_0<=NEQUAL)))
+				if ((LA35_0==AND))
 				{
 					alt35=1;
 				}
@@ -7454,20 +7558,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:410:17: equalityOperator inequality
+					// Plsql.g:413:15: AND equality
 					{
-					DebugLocation(410, 33);
-					PushFollow(Follow._equalityOperator_in_equality2297);
-					equalityOperator184=equalityOperator();
+					DebugLocation(413, 27);
+					AND195=(IToken)Match(input,AND,Follow._AND_in_logicAnd2344); if (state.failed) return retval;
+					if ( state.backtracking == 0 ) {
+					AND195_tree = new AndNode(AND195) ;
+					root_0 = (object)adaptor.BecomeRoot(AND195_tree, root_0);
+					}
+					DebugLocation(413, 29);
+					PushFollow(Follow._equality_in_logicAnd2350);
+					equality196=equality();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(equalityOperator184.Tree, root_0);
-					DebugLocation(410, 35);
-					PushFollow(Follow._inequality_in_equality2300);
-					inequality185=inequality();
-					PopFollow();
-					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, inequality185.Tree);
+					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, equality196.Tree);
 
 					}
 					break;
@@ -7502,62 +7606,62 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("equality", 46);
-			LeaveRule("equality", 46);
-			Leave_equality();
+			TraceOut("logicAnd", 46);
+			LeaveRule("logicAnd", 46);
+			Leave_logicAnd();
 		}
-		DebugLocation(411, 1);
-		} finally { DebugExitRule(GrammarFileName, "equality"); }
+		DebugLocation(414, 1);
+		} finally { DebugExitRule(GrammarFileName, "logicAnd"); }
 		return retval;
 
 	}
-	// $ANTLR end "equality"
+	// $ANTLR end "logicAnd"
 
-	public class inequality_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
+	public class equality_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
 	{
 		private object _tree;
 		public object Tree { get { return _tree; } set { _tree = value; } }
 	}
 
-	partial void Enter_inequality();
-	partial void Leave_inequality();
+	partial void Enter_equality();
+	partial void Leave_equality();
 
-	// $ANTLR start "inequality"
-	// Plsql.g:413:1: inequality : add ( ineqOperator add )* ;
-	[GrammarRule("inequality")]
-	private PlsqlParser.inequality_return inequality()
+	// $ANTLR start "equality"
+	// Plsql.g:416:1: equality : inequality ( equalityOperator inequality )* ;
+	[GrammarRule("equality")]
+	private PlsqlParser.equality_return equality()
 	{
-		Enter_inequality();
-		EnterRule("inequality", 47);
-		TraceIn("inequality", 47);
-		PlsqlParser.inequality_return retval = new PlsqlParser.inequality_return();
+		Enter_equality();
+		EnterRule("equality", 47);
+		TraceIn("equality", 47);
+		PlsqlParser.equality_return retval = new PlsqlParser.equality_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.add_return add186 = default(PlsqlParser.add_return);
-		PlsqlParser.ineqOperator_return ineqOperator187 = default(PlsqlParser.ineqOperator_return);
-		PlsqlParser.add_return add188 = default(PlsqlParser.add_return);
+		PlsqlParser.inequality_return inequality197 = default(PlsqlParser.inequality_return);
+		PlsqlParser.equalityOperator_return equalityOperator198 = default(PlsqlParser.equalityOperator_return);
+		PlsqlParser.inequality_return inequality199 = default(PlsqlParser.inequality_return);
 
 
-		try { DebugEnterRule(GrammarFileName, "inequality");
-		DebugLocation(413, 1);
+		try { DebugEnterRule(GrammarFileName, "equality");
+		DebugLocation(416, 1);
 		try
 		{
-			// Plsql.g:414:2: ( add ( ineqOperator add )* )
+			// Plsql.g:417:2: ( inequality ( equalityOperator inequality )* )
 			DebugEnterAlt(1);
-			// Plsql.g:414:4: add ( ineqOperator add )*
+			// Plsql.g:417:4: inequality ( equalityOperator inequality )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(414, 4);
-			PushFollow(Follow._add_in_inequality2313);
-			add186=add();
+			DebugLocation(417, 4);
+			PushFollow(Follow._inequality_in_equality2363);
+			inequality197=inequality();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, add186.Tree);
-			DebugLocation(414, 8);
-			// Plsql.g:414:8: ( ineqOperator add )*
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, inequality197.Tree);
+			DebugLocation(417, 15);
+			// Plsql.g:417:15: ( equalityOperator inequality )*
 			try { DebugEnterSubRule(36);
 			while (true)
 			{
@@ -7565,7 +7669,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				try { DebugEnterDecision(36, decisionCanBacktrack[36]);
 				int LA36_0 = input.LA(1);
 
-				if (((LA36_0>=MORE && LA36_0<=LESSEQ)))
+				if (((LA36_0>=EQUAL && LA36_0<=NEQUAL)))
 				{
 					alt36=1;
 				}
@@ -7576,20 +7680,20 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:414:10: ineqOperator add
+					// Plsql.g:417:17: equalityOperator inequality
 					{
-					DebugLocation(414, 22);
-					PushFollow(Follow._ineqOperator_in_inequality2317);
-					ineqOperator187=ineqOperator();
+					DebugLocation(417, 33);
+					PushFollow(Follow._equalityOperator_in_equality2367);
+					equalityOperator198=equalityOperator();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(ineqOperator187.Tree, root_0);
-					DebugLocation(414, 24);
-					PushFollow(Follow._add_in_inequality2320);
-					add188=add();
+					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(equalityOperator198.Tree, root_0);
+					DebugLocation(417, 35);
+					PushFollow(Follow._inequality_in_equality2370);
+					inequality199=inequality();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, add188.Tree);
+					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, inequality199.Tree);
 
 					}
 					break;
@@ -7624,95 +7728,94 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("inequality", 47);
-			LeaveRule("inequality", 47);
-			Leave_inequality();
+			TraceOut("equality", 47);
+			LeaveRule("equality", 47);
+			Leave_equality();
 		}
-		DebugLocation(415, 1);
-		} finally { DebugExitRule(GrammarFileName, "inequality"); }
+		DebugLocation(418, 1);
+		} finally { DebugExitRule(GrammarFileName, "equality"); }
 		return retval;
 
 	}
-	// $ANTLR end "inequality"
+	// $ANTLR end "equality"
 
-	public class add_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
+	public class inequality_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
 	{
 		private object _tree;
 		public object Tree { get { return _tree; } set { _tree = value; } }
 	}
 
-	partial void Enter_add();
-	partial void Leave_add();
+	partial void Enter_inequality();
+	partial void Leave_inequality();
 
-	// $ANTLR start "add"
-	// Plsql.g:417:1: add : mult ( addOperator mult )* ;
-	[GrammarRule("add")]
-	private PlsqlParser.add_return add()
+	// $ANTLR start "inequality"
+	// Plsql.g:420:1: inequality : add ( ineqOperator add )* ;
+	[GrammarRule("inequality")]
+	private PlsqlParser.inequality_return inequality()
 	{
-		Enter_add();
-		EnterRule("add", 48);
-		TraceIn("add", 48);
-		PlsqlParser.add_return retval = new PlsqlParser.add_return();
+		Enter_inequality();
+		EnterRule("inequality", 48);
+		TraceIn("inequality", 48);
+		PlsqlParser.inequality_return retval = new PlsqlParser.inequality_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.mult_return mult189 = default(PlsqlParser.mult_return);
-		PlsqlParser.addOperator_return addOperator190 = default(PlsqlParser.addOperator_return);
-		PlsqlParser.mult_return mult191 = default(PlsqlParser.mult_return);
+		PlsqlParser.add_return add200 = default(PlsqlParser.add_return);
+		PlsqlParser.ineqOperator_return ineqOperator201 = default(PlsqlParser.ineqOperator_return);
+		PlsqlParser.add_return add202 = default(PlsqlParser.add_return);
 
 
-		try { DebugEnterRule(GrammarFileName, "add");
-		DebugLocation(417, 4);
+		try { DebugEnterRule(GrammarFileName, "inequality");
+		DebugLocation(420, 1);
 		try
 		{
-			// Plsql.g:417:5: ( mult ( addOperator mult )* )
+			// Plsql.g:421:2: ( add ( ineqOperator add )* )
 			DebugEnterAlt(1);
-			// Plsql.g:417:9: mult ( addOperator mult )*
+			// Plsql.g:421:4: add ( ineqOperator add )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(417, 9);
-			PushFollow(Follow._mult_in_add2334);
-			mult189=mult();
+			DebugLocation(421, 4);
+			PushFollow(Follow._add_in_inequality2383);
+			add200=add();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, mult189.Tree);
-			DebugLocation(417, 14);
-			// Plsql.g:417:14: ( addOperator mult )*
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, add200.Tree);
+			DebugLocation(421, 8);
+			// Plsql.g:421:8: ( ineqOperator add )*
 			try { DebugEnterSubRule(37);
 			while (true)
 			{
 				int alt37=2;
 				try { DebugEnterDecision(37, decisionCanBacktrack[37]);
-				try
+				int LA37_0 = input.LA(1);
+
+				if (((LA37_0>=MORE && LA37_0<=LESSEQ)))
 				{
-					alt37 = dfa37.Predict(input);
+					alt37=1;
 				}
-				catch (NoViableAltException nvae)
-				{
-					DebugRecognitionException(nvae);
-					throw;
-				}
+
+
 				} finally { DebugExitDecision(37); }
 				switch ( alt37 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:417:16: addOperator mult
+					// Plsql.g:421:10: ineqOperator add
 					{
-					DebugLocation(417, 27);
-					PushFollow(Follow._addOperator_in_add2338);
-					addOperator190=addOperator();
+					DebugLocation(421, 22);
+					PushFollow(Follow._ineqOperator_in_inequality2387);
+					ineqOperator201=ineqOperator();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(addOperator190.Tree, root_0);
-					DebugLocation(417, 29);
-					PushFollow(Follow._mult_in_add2341);
-					mult191=mult();
+					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(ineqOperator201.Tree, root_0);
+					DebugLocation(421, 24);
+					PushFollow(Follow._add_in_inequality2390);
+					add202=add();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, mult191.Tree);
+					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, add202.Tree);
 
 					}
 					break;
@@ -7747,94 +7850,95 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("add", 48);
-			LeaveRule("add", 48);
-			Leave_add();
+			TraceOut("inequality", 48);
+			LeaveRule("inequality", 48);
+			Leave_inequality();
 		}
-		DebugLocation(418, 4);
-		} finally { DebugExitRule(GrammarFileName, "add"); }
+		DebugLocation(422, 1);
+		} finally { DebugExitRule(GrammarFileName, "inequality"); }
 		return retval;
 
 	}
-	// $ANTLR end "add"
+	// $ANTLR end "inequality"
 
-	public class mult_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
+	public class add_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
 	{
 		private object _tree;
 		public object Tree { get { return _tree; } set { _tree = value; } }
 	}
 
-	partial void Enter_mult();
-	partial void Leave_mult();
+	partial void Enter_add();
+	partial void Leave_add();
 
-	// $ANTLR start "mult"
-	// Plsql.g:420:1: mult : cast ( multOperator cast )* ;
-	[GrammarRule("mult")]
-	private PlsqlParser.mult_return mult()
+	// $ANTLR start "add"
+	// Plsql.g:424:1: add : mult ( addOperator mult )* ;
+	[GrammarRule("add")]
+	private PlsqlParser.add_return add()
 	{
-		Enter_mult();
-		EnterRule("mult", 49);
-		TraceIn("mult", 49);
-		PlsqlParser.mult_return retval = new PlsqlParser.mult_return();
+		Enter_add();
+		EnterRule("add", 49);
+		TraceIn("add", 49);
+		PlsqlParser.add_return retval = new PlsqlParser.add_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.cast_return cast192 = default(PlsqlParser.cast_return);
-		PlsqlParser.multOperator_return multOperator193 = default(PlsqlParser.multOperator_return);
-		PlsqlParser.cast_return cast194 = default(PlsqlParser.cast_return);
+		PlsqlParser.mult_return mult203 = default(PlsqlParser.mult_return);
+		PlsqlParser.addOperator_return addOperator204 = default(PlsqlParser.addOperator_return);
+		PlsqlParser.mult_return mult205 = default(PlsqlParser.mult_return);
 
 
-		try { DebugEnterRule(GrammarFileName, "mult");
-		DebugLocation(420, 1);
+		try { DebugEnterRule(GrammarFileName, "add");
+		DebugLocation(424, 4);
 		try
 		{
-			// Plsql.g:420:5: ( cast ( multOperator cast )* )
+			// Plsql.g:424:5: ( mult ( addOperator mult )* )
 			DebugEnterAlt(1);
-			// Plsql.g:420:9: cast ( multOperator cast )*
+			// Plsql.g:424:9: mult ( addOperator mult )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(420, 9);
-			PushFollow(Follow._cast_in_mult2357);
-			cast192=cast();
+			DebugLocation(424, 9);
+			PushFollow(Follow._mult_in_add2404);
+			mult203=mult();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, cast192.Tree);
-			DebugLocation(420, 14);
-			// Plsql.g:420:14: ( multOperator cast )*
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, mult203.Tree);
+			DebugLocation(424, 14);
+			// Plsql.g:424:14: ( addOperator mult )*
 			try { DebugEnterSubRule(38);
 			while (true)
 			{
 				int alt38=2;
 				try { DebugEnterDecision(38, decisionCanBacktrack[38]);
-				int LA38_0 = input.LA(1);
-
-				if (((LA38_0>=MULT && LA38_0<=MOD)))
+				try
 				{
-					alt38=1;
+					alt38 = dfa38.Predict(input);
 				}
-
-
+				catch (NoViableAltException nvae)
+				{
+					DebugRecognitionException(nvae);
+					throw;
+				}
 				} finally { DebugExitDecision(38); }
 				switch ( alt38 )
 				{
 				case 1:
 					DebugEnterAlt(1);
-					// Plsql.g:420:16: multOperator cast
+					// Plsql.g:424:16: addOperator mult
 					{
-					DebugLocation(420, 28);
-					PushFollow(Follow._multOperator_in_mult2361);
-					multOperator193=multOperator();
+					DebugLocation(424, 27);
+					PushFollow(Follow._addOperator_in_add2408);
+					addOperator204=addOperator();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(multOperator193.Tree, root_0);
-					DebugLocation(420, 30);
-					PushFollow(Follow._cast_in_mult2364);
-					cast194=cast();
+					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(addOperator204.Tree, root_0);
+					DebugLocation(424, 29);
+					PushFollow(Follow._mult_in_add2411);
+					mult205=mult();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, cast194.Tree);
+					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, mult205.Tree);
 
 					}
 					break;
@@ -7869,11 +7973,133 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("mult", 49);
-			LeaveRule("mult", 49);
+			TraceOut("add", 49);
+			LeaveRule("add", 49);
+			Leave_add();
+		}
+		DebugLocation(425, 4);
+		} finally { DebugExitRule(GrammarFileName, "add"); }
+		return retval;
+
+	}
+	// $ANTLR end "add"
+
+	public class mult_return : ParserRuleReturnScope<IToken>, IAstRuleReturnScope<object>
+	{
+		private object _tree;
+		public object Tree { get { return _tree; } set { _tree = value; } }
+	}
+
+	partial void Enter_mult();
+	partial void Leave_mult();
+
+	// $ANTLR start "mult"
+	// Plsql.g:427:1: mult : cast ( multOperator cast )* ;
+	[GrammarRule("mult")]
+	private PlsqlParser.mult_return mult()
+	{
+		Enter_mult();
+		EnterRule("mult", 50);
+		TraceIn("mult", 50);
+		PlsqlParser.mult_return retval = new PlsqlParser.mult_return();
+		retval.Start = (IToken)input.LT(1);
+
+		object root_0 = null;
+
+		PlsqlParser.cast_return cast206 = default(PlsqlParser.cast_return);
+		PlsqlParser.multOperator_return multOperator207 = default(PlsqlParser.multOperator_return);
+		PlsqlParser.cast_return cast208 = default(PlsqlParser.cast_return);
+
+
+		try { DebugEnterRule(GrammarFileName, "mult");
+		DebugLocation(427, 1);
+		try
+		{
+			// Plsql.g:427:5: ( cast ( multOperator cast )* )
+			DebugEnterAlt(1);
+			// Plsql.g:427:9: cast ( multOperator cast )*
+			{
+			root_0 = (object)adaptor.Nil();
+
+			DebugLocation(427, 9);
+			PushFollow(Follow._cast_in_mult2427);
+			cast206=cast();
+			PopFollow();
+			if (state.failed) return retval;
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, cast206.Tree);
+			DebugLocation(427, 14);
+			// Plsql.g:427:14: ( multOperator cast )*
+			try { DebugEnterSubRule(39);
+			while (true)
+			{
+				int alt39=2;
+				try { DebugEnterDecision(39, decisionCanBacktrack[39]);
+				int LA39_0 = input.LA(1);
+
+				if (((LA39_0>=MULT && LA39_0<=MOD)))
+				{
+					alt39=1;
+				}
+
+
+				} finally { DebugExitDecision(39); }
+				switch ( alt39 )
+				{
+				case 1:
+					DebugEnterAlt(1);
+					// Plsql.g:427:16: multOperator cast
+					{
+					DebugLocation(427, 28);
+					PushFollow(Follow._multOperator_in_mult2431);
+					multOperator207=multOperator();
+					PopFollow();
+					if (state.failed) return retval;
+					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(multOperator207.Tree, root_0);
+					DebugLocation(427, 30);
+					PushFollow(Follow._cast_in_mult2434);
+					cast208=cast();
+					PopFollow();
+					if (state.failed) return retval;
+					if ( state.backtracking == 0 ) adaptor.AddChild(root_0, cast208.Tree);
+
+					}
+					break;
+
+				default:
+					goto loop39;
+				}
+			}
+
+			loop39:
+				;
+
+			} finally { DebugExitSubRule(39); }
+
+
+			}
+
+			retval.Stop = (IToken)input.LT(-1);
+
+			if ( state.backtracking == 0 ) {
+
+			retval.Tree = (object)adaptor.RulePostProcessing(root_0);
+			adaptor.SetTokenBoundaries(retval.Tree, retval.Start, retval.Stop);
+			}
+		}
+		catch (RecognitionException re)
+		{
+			ReportError(re);
+			Recover(input,re);
+		retval.Tree = (object)adaptor.ErrorNode(input, retval.Start, input.LT(-1), re);
+
+		}
+		finally
+		{
+			TraceOut("mult", 50);
+			LeaveRule("mult", 50);
 			Leave_mult();
 		}
-		DebugLocation(421, 1);
+		DebugLocation(428, 1);
 		} finally { DebugExitRule(GrammarFileName, "mult"); }
 		return retval;
 
@@ -7890,78 +8116,78 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_cast();
 
 	// $ANTLR start "cast"
-	// Plsql.g:423:1: cast : ( '(' type ')' unary -> ^( Cast unary type ) | unary );
+	// Plsql.g:430:1: cast : ( '(' type ')' unary -> ^( Cast unary type ) | unary );
 	[GrammarRule("cast")]
 	private PlsqlParser.cast_return cast()
 	{
 		Enter_cast();
-		EnterRule("cast", 50);
-		TraceIn("cast", 50);
+		EnterRule("cast", 51);
+		TraceIn("cast", 51);
 		PlsqlParser.cast_return retval = new PlsqlParser.cast_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken char_literal195=null;
-		IToken char_literal197=null;
-		PlsqlParser.type_return type196 = default(PlsqlParser.type_return);
-		PlsqlParser.unary_return unary198 = default(PlsqlParser.unary_return);
-		PlsqlParser.unary_return unary199 = default(PlsqlParser.unary_return);
+		IToken char_literal209=null;
+		IToken char_literal211=null;
+		PlsqlParser.type_return type210 = default(PlsqlParser.type_return);
+		PlsqlParser.unary_return unary212 = default(PlsqlParser.unary_return);
+		PlsqlParser.unary_return unary213 = default(PlsqlParser.unary_return);
 
-		object char_literal195_tree=null;
-		object char_literal197_tree=null;
+		object char_literal209_tree=null;
+		object char_literal211_tree=null;
 		RewriteRuleITokenStream stream_103=new RewriteRuleITokenStream(adaptor,"token 103");
 		RewriteRuleITokenStream stream_102=new RewriteRuleITokenStream(adaptor,"token 102");
 		RewriteRuleSubtreeStream stream_unary=new RewriteRuleSubtreeStream(adaptor,"rule unary");
 		RewriteRuleSubtreeStream stream_type=new RewriteRuleSubtreeStream(adaptor,"rule type");
 		try { DebugEnterRule(GrammarFileName, "cast");
-		DebugLocation(423, 1);
+		DebugLocation(430, 1);
 		try
 		{
-			// Plsql.g:423:5: ( '(' type ')' unary -> ^( Cast unary type ) | unary )
-			int alt39=2;
-			try { DebugEnterDecision(39, decisionCanBacktrack[39]);
+			// Plsql.g:430:5: ( '(' type ')' unary -> ^( Cast unary type ) | unary )
+			int alt40=2;
+			try { DebugEnterDecision(40, decisionCanBacktrack[40]);
 			try
 			{
-				alt39 = dfa39.Predict(input);
+				alt40 = dfa40.Predict(input);
 			}
 			catch (NoViableAltException nvae)
 			{
 				DebugRecognitionException(nvae);
 				throw;
 			}
-			} finally { DebugExitDecision(39); }
-			switch (alt39)
+			} finally { DebugExitDecision(40); }
+			switch (alt40)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:423:7: '(' type ')' unary
+				// Plsql.g:430:7: '(' type ')' unary
 				{
-				DebugLocation(423, 7);
-				char_literal195=(IToken)Match(input,102,Follow._102_in_cast2376); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_102.Add(char_literal195);
+				DebugLocation(430, 7);
+				char_literal209=(IToken)Match(input,102,Follow._102_in_cast2446); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_102.Add(char_literal209);
 
-				DebugLocation(423, 11);
-				PushFollow(Follow._type_in_cast2378);
-				type196=type();
+				DebugLocation(430, 11);
+				PushFollow(Follow._type_in_cast2448);
+				type210=type();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_type.Add(type196.Tree);
-				DebugLocation(423, 16);
-				char_literal197=(IToken)Match(input,103,Follow._103_in_cast2380); if (state.failed) return retval; 
-				if ( state.backtracking == 0 ) stream_103.Add(char_literal197);
+				if ( state.backtracking == 0 ) stream_type.Add(type210.Tree);
+				DebugLocation(430, 16);
+				char_literal211=(IToken)Match(input,103,Follow._103_in_cast2450); if (state.failed) return retval; 
+				if ( state.backtracking == 0 ) stream_103.Add(char_literal211);
 
-				DebugLocation(423, 20);
-				PushFollow(Follow._unary_in_cast2382);
-				unary198=unary();
+				DebugLocation(430, 20);
+				PushFollow(Follow._unary_in_cast2452);
+				unary212=unary();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) stream_unary.Add(unary198.Tree);
+				if ( state.backtracking == 0 ) stream_unary.Add(unary212.Tree);
 
 
 				{
 				// AST REWRITE
-				// elements: unary, type
+				// elements: type, unary
 				// token labels: 
 				// rule labels: retval
 				// token list labels: 
@@ -7972,18 +8198,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 424:2: -> ^( Cast unary type )
+				// 431:2: -> ^( Cast unary type )
 				{
-					DebugLocation(424, 5);
-					// Plsql.g:424:5: ^( Cast unary type )
+					DebugLocation(431, 5);
+					// Plsql.g:431:5: ^( Cast unary type )
 					{
 					object root_1 = (object)adaptor.Nil();
-					DebugLocation(424, 7);
+					DebugLocation(431, 7);
 					root_1 = (object)adaptor.BecomeRoot(new CastNode(Cast), root_1);
 
-					DebugLocation(424, 22);
+					DebugLocation(431, 22);
 					adaptor.AddChild(root_1, stream_unary.NextTree());
-					DebugLocation(424, 28);
+					DebugLocation(431, 28);
 					adaptor.AddChild(root_1, stream_type.NextTree());
 
 					adaptor.AddChild(root_0, root_1);
@@ -7999,16 +8225,16 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:425:4: unary
+				// Plsql.g:432:4: unary
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(425, 4);
-				PushFollow(Follow._unary_in_cast2401);
-				unary199=unary();
+				DebugLocation(432, 4);
+				PushFollow(Follow._unary_in_cast2471);
+				unary213=unary();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, unary199.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, unary213.Tree);
 
 				}
 				break;
@@ -8031,11 +8257,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("cast", 50);
-			LeaveRule("cast", 50);
+			TraceOut("cast", 51);
+			LeaveRule("cast", 51);
 			Leave_cast();
 		}
-		DebugLocation(426, 1);
+		DebugLocation(433, 1);
 		} finally { DebugExitRule(GrammarFileName, "cast"); }
 		return retval;
 
@@ -8052,74 +8278,74 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_unary();
 
 	// $ANTLR start "unary"
-	// Plsql.g:428:1: unary : ( ( unaryOperator unary ) | postfix );
+	// Plsql.g:435:1: unary : ( ( unaryOperator unary ) | postfix );
 	[GrammarRule("unary")]
 	private PlsqlParser.unary_return unary()
 	{
 		Enter_unary();
-		EnterRule("unary", 51);
-		TraceIn("unary", 51);
+		EnterRule("unary", 52);
+		TraceIn("unary", 52);
 		PlsqlParser.unary_return retval = new PlsqlParser.unary_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.unaryOperator_return unaryOperator200 = default(PlsqlParser.unaryOperator_return);
-		PlsqlParser.unary_return unary201 = default(PlsqlParser.unary_return);
-		PlsqlParser.postfix_return postfix202 = default(PlsqlParser.postfix_return);
+		PlsqlParser.unaryOperator_return unaryOperator214 = default(PlsqlParser.unaryOperator_return);
+		PlsqlParser.unary_return unary215 = default(PlsqlParser.unary_return);
+		PlsqlParser.postfix_return postfix216 = default(PlsqlParser.postfix_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "unary");
-		DebugLocation(428, 1);
+		DebugLocation(435, 1);
 		try
 		{
-			// Plsql.g:429:2: ( ( unaryOperator unary ) | postfix )
-			int alt40=2;
-			try { DebugEnterDecision(40, decisionCanBacktrack[40]);
-			int LA40_0 = input.LA(1);
+			// Plsql.g:436:2: ( ( unaryOperator unary ) | postfix )
+			int alt41=2;
+			try { DebugEnterDecision(41, decisionCanBacktrack[41]);
+			int LA41_0 = input.LA(1);
 
-			if ((LA40_0==MINUS||LA40_0==NOT))
+			if ((LA41_0==MINUS||LA41_0==NOT))
 			{
-				alt40=1;
+				alt41=1;
 			}
-			else if ((LA40_0==SELF||(LA40_0>=TRUE && LA40_0<=FALSE)||(LA40_0>=ID && LA40_0<=QUOTED_CHAR)||LA40_0==102))
+			else if ((LA41_0==SELF||(LA41_0>=TRUE && LA41_0<=FALSE)||(LA41_0>=ID && LA41_0<=QUOTED_CHAR)||LA41_0==102))
 			{
-				alt40=2;
+				alt41=2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 40, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 41, 0, input);
 
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(40); }
-			switch (alt40)
+			} finally { DebugExitDecision(41); }
+			switch (alt41)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:429:4: ( unaryOperator unary )
+				// Plsql.g:436:4: ( unaryOperator unary )
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(429, 4);
-				// Plsql.g:429:4: ( unaryOperator unary )
+				DebugLocation(436, 4);
+				// Plsql.g:436:4: ( unaryOperator unary )
 				DebugEnterAlt(1);
-				// Plsql.g:429:5: unaryOperator unary
+				// Plsql.g:436:5: unaryOperator unary
 				{
-				DebugLocation(429, 18);
-				PushFollow(Follow._unaryOperator_in_unary2413);
-				unaryOperator200=unaryOperator();
+				DebugLocation(436, 18);
+				PushFollow(Follow._unaryOperator_in_unary2483);
+				unaryOperator214=unaryOperator();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(unaryOperator200.Tree, root_0);
-				DebugLocation(429, 20);
-				PushFollow(Follow._unary_in_unary2416);
-				unary201=unary();
+				if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(unaryOperator214.Tree, root_0);
+				DebugLocation(436, 20);
+				PushFollow(Follow._unary_in_unary2486);
+				unary215=unary();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, unary201.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, unary215.Tree);
 
 				}
 
@@ -8128,16 +8354,16 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:430:4: postfix
+				// Plsql.g:437:4: postfix
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(430, 4);
-				PushFollow(Follow._postfix_in_unary2423);
-				postfix202=postfix();
+				DebugLocation(437, 4);
+				PushFollow(Follow._postfix_in_unary2493);
+				postfix216=postfix();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, postfix202.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, postfix216.Tree);
 
 				}
 				break;
@@ -8160,11 +8386,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("unary", 51);
-			LeaveRule("unary", 51);
+			TraceOut("unary", 52);
+			LeaveRule("unary", 52);
 			Leave_unary();
 		}
-		DebugLocation(431, 1);
+		DebugLocation(438, 1);
 		} finally { DebugExitRule(GrammarFileName, "unary"); }
 		return retval;
 
@@ -8181,79 +8407,79 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_postfix();
 
 	// $ANTLR start "postfix"
-	// Plsql.g:435:1: postfix : quant ( tmp )* ;
+	// Plsql.g:442:1: postfix : quant ( tmp )* ;
 	[GrammarRule("postfix")]
 	private PlsqlParser.postfix_return postfix()
 	{
 		Enter_postfix();
-		EnterRule("postfix", 52);
-		TraceIn("postfix", 52);
+		EnterRule("postfix", 53);
+		TraceIn("postfix", 53);
 		PlsqlParser.postfix_return retval = new PlsqlParser.postfix_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.quant_return quant203 = default(PlsqlParser.quant_return);
-		PlsqlParser.tmp_return tmp204 = default(PlsqlParser.tmp_return);
+		PlsqlParser.quant_return quant217 = default(PlsqlParser.quant_return);
+		PlsqlParser.tmp_return tmp218 = default(PlsqlParser.tmp_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "postfix");
-		DebugLocation(435, 1);
+		DebugLocation(442, 1);
 		try
 		{
-			// Plsql.g:436:2: ( quant ( tmp )* )
+			// Plsql.g:443:2: ( quant ( tmp )* )
 			DebugEnterAlt(1);
-			// Plsql.g:436:4: quant ( tmp )*
+			// Plsql.g:443:4: quant ( tmp )*
 			{
 			root_0 = (object)adaptor.Nil();
 
-			DebugLocation(436, 4);
-			PushFollow(Follow._quant_in_postfix2438);
-			quant203=quant();
+			DebugLocation(443, 4);
+			PushFollow(Follow._quant_in_postfix2508);
+			quant217=quant();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, quant203.Tree);
-			DebugLocation(436, 13);
-			// Plsql.g:436:13: ( tmp )*
-			try { DebugEnterSubRule(41);
+			if ( state.backtracking == 0 ) adaptor.AddChild(root_0, quant217.Tree);
+			DebugLocation(443, 13);
+			// Plsql.g:443:13: ( tmp )*
+			try { DebugEnterSubRule(42);
 			while (true)
 			{
-				int alt41=2;
-				try { DebugEnterDecision(41, decisionCanBacktrack[41]);
-				int LA41_0 = input.LA(1);
+				int alt42=2;
+				try { DebugEnterDecision(42, decisionCanBacktrack[42]);
+				int LA42_0 = input.LA(1);
 
-				if ((LA41_0==100||LA41_0==105))
+				if ((LA42_0==100||LA42_0==105))
 				{
-					alt41=1;
+					alt42=1;
 				}
 
 
-				} finally { DebugExitDecision(41); }
-				switch ( alt41 )
+				} finally { DebugExitDecision(42); }
+				switch ( alt42 )
 				{
 				case 1:
 					DebugEnterAlt(1);
 					// Plsql.g:0:0: tmp
 					{
-					DebugLocation(436, 13);
-					PushFollow(Follow._tmp_in_postfix2440);
-					tmp204=tmp();
+					DebugLocation(443, 13);
+					PushFollow(Follow._tmp_in_postfix2510);
+					tmp218=tmp();
 					PopFollow();
 					if (state.failed) return retval;
-					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(tmp204.Tree, root_0);
+					if ( state.backtracking == 0 ) root_0 = (object)adaptor.BecomeRoot(tmp218.Tree, root_0);
 
 					}
 					break;
 
 				default:
-					goto loop41;
+					goto loop42;
 				}
 			}
 
-			loop41:
+			loop42:
 				;
 
-			} finally { DebugExitSubRule(41); }
+			} finally { DebugExitSubRule(42); }
 
 
 			}
@@ -8275,11 +8501,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("postfix", 52);
-			LeaveRule("postfix", 52);
+			TraceOut("postfix", 53);
+			LeaveRule("postfix", 53);
 			Leave_postfix();
 		}
-		DebugLocation(437, 1);
+		DebugLocation(444, 1);
 		} finally { DebugExitRule(GrammarFileName, "postfix"); }
 		return retval;
 
@@ -8296,52 +8522,52 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_tmp();
 
 	// $ANTLR start "tmp"
-	// Plsql.g:439:1: tmp : ( index | methodCall | memberCall );
+	// Plsql.g:446:1: tmp : ( index | methodCall | memberCall );
 	[GrammarRule("tmp")]
 	private PlsqlParser.tmp_return tmp()
 	{
 		Enter_tmp();
-		EnterRule("tmp", 53);
-		TraceIn("tmp", 53);
+		EnterRule("tmp", 54);
+		TraceIn("tmp", 54);
 		PlsqlParser.tmp_return retval = new PlsqlParser.tmp_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.index_return index205 = default(PlsqlParser.index_return);
-		PlsqlParser.methodCall_return methodCall206 = default(PlsqlParser.methodCall_return);
-		PlsqlParser.memberCall_return memberCall207 = default(PlsqlParser.memberCall_return);
+		PlsqlParser.index_return index219 = default(PlsqlParser.index_return);
+		PlsqlParser.methodCall_return methodCall220 = default(PlsqlParser.methodCall_return);
+		PlsqlParser.memberCall_return memberCall221 = default(PlsqlParser.memberCall_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "tmp");
-		DebugLocation(439, 1);
+		DebugLocation(446, 1);
 		try
 		{
-			// Plsql.g:439:5: ( index | methodCall | memberCall )
-			int alt42=3;
-			try { DebugEnterDecision(42, decisionCanBacktrack[42]);
-			int LA42_0 = input.LA(1);
+			// Plsql.g:446:5: ( index | methodCall | memberCall )
+			int alt43=3;
+			try { DebugEnterDecision(43, decisionCanBacktrack[43]);
+			int LA43_0 = input.LA(1);
 
-			if ((LA42_0==105))
+			if ((LA43_0==105))
 			{
-				alt42=1;
+				alt43=1;
 			}
-			else if ((LA42_0==100))
+			else if ((LA43_0==100))
 			{
-				int LA42_2 = input.LA(2);
+				int LA43_2 = input.LA(2);
 
-				if ((EvaluatePredicate(synpred62_Plsql_fragment)))
+				if ((EvaluatePredicate(synpred65_Plsql_fragment)))
 				{
-					alt42=2;
+					alt43=2;
 				}
 				else if ((true))
 				{
-					alt42=3;
+					alt43=3;
 				}
 				else
 				{
 					if (state.backtracking>0) {state.failed=true; return retval;}
-					NoViableAltException nvae = new NoViableAltException("", 42, 2, input);
+					NoViableAltException nvae = new NoViableAltException("", 43, 2, input);
 
 					DebugRecognitionException(nvae);
 					throw nvae;
@@ -8350,56 +8576,56 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 42, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 43, 0, input);
 
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(42); }
-			switch (alt42)
+			} finally { DebugExitDecision(43); }
+			switch (alt43)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:439:7: index
+				// Plsql.g:446:7: index
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(439, 7);
-				PushFollow(Follow._index_in_tmp2452);
-				index205=index();
+				DebugLocation(446, 7);
+				PushFollow(Follow._index_in_tmp2522);
+				index219=index();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, index205.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, index219.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:440:4: methodCall
+				// Plsql.g:447:4: methodCall
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(440, 4);
-				PushFollow(Follow._methodCall_in_tmp2457);
-				methodCall206=methodCall();
+				DebugLocation(447, 4);
+				PushFollow(Follow._methodCall_in_tmp2527);
+				methodCall220=methodCall();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodCall206.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, methodCall220.Tree);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// Plsql.g:441:4: memberCall
+				// Plsql.g:448:4: memberCall
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(441, 4);
-				PushFollow(Follow._memberCall_in_tmp2462);
-				memberCall207=memberCall();
+				DebugLocation(448, 4);
+				PushFollow(Follow._memberCall_in_tmp2532);
+				memberCall221=memberCall();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, memberCall207.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, memberCall221.Tree);
 
 				}
 				break;
@@ -8422,11 +8648,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("tmp", 53);
-			LeaveRule("tmp", 53);
+			TraceOut("tmp", 54);
+			LeaveRule("tmp", 54);
 			Leave_tmp();
 		}
-		DebugLocation(442, 1);
+		DebugLocation(449, 1);
 		} finally { DebugExitRule(GrammarFileName, "tmp"); }
 		return retval;
 
@@ -8443,48 +8669,48 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_index();
 
 	// $ANTLR start "index"
-	// Plsql.g:444:1: index : '[' expression ']' -> ^( Index expression ) ;
+	// Plsql.g:451:1: index : '[' expression ']' -> ^( Index expression ) ;
 	[GrammarRule("index")]
 	private PlsqlParser.index_return index()
 	{
 		Enter_index();
-		EnterRule("index", 54);
-		TraceIn("index", 54);
+		EnterRule("index", 55);
+		TraceIn("index", 55);
 		PlsqlParser.index_return retval = new PlsqlParser.index_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken char_literal208=null;
-		IToken char_literal210=null;
-		PlsqlParser.expression_return expression209 = default(PlsqlParser.expression_return);
+		IToken char_literal222=null;
+		IToken char_literal224=null;
+		PlsqlParser.expression_return expression223 = default(PlsqlParser.expression_return);
 
-		object char_literal208_tree=null;
-		object char_literal210_tree=null;
+		object char_literal222_tree=null;
+		object char_literal224_tree=null;
 		RewriteRuleITokenStream stream_106=new RewriteRuleITokenStream(adaptor,"token 106");
 		RewriteRuleITokenStream stream_105=new RewriteRuleITokenStream(adaptor,"token 105");
 		RewriteRuleSubtreeStream stream_expression=new RewriteRuleSubtreeStream(adaptor,"rule expression");
 		try { DebugEnterRule(GrammarFileName, "index");
-		DebugLocation(444, 1);
+		DebugLocation(451, 1);
 		try
 		{
-			// Plsql.g:445:2: ( '[' expression ']' -> ^( Index expression ) )
+			// Plsql.g:452:2: ( '[' expression ']' -> ^( Index expression ) )
 			DebugEnterAlt(1);
-			// Plsql.g:445:4: '[' expression ']'
+			// Plsql.g:452:4: '[' expression ']'
 			{
-			DebugLocation(445, 4);
-			char_literal208=(IToken)Match(input,105,Follow._105_in_index2473); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_105.Add(char_literal208);
+			DebugLocation(452, 4);
+			char_literal222=(IToken)Match(input,105,Follow._105_in_index2543); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_105.Add(char_literal222);
 
-			DebugLocation(445, 8);
-			PushFollow(Follow._expression_in_index2475);
-			expression209=expression();
+			DebugLocation(452, 8);
+			PushFollow(Follow._expression_in_index2545);
+			expression223=expression();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_expression.Add(expression209.Tree);
-			DebugLocation(445, 19);
-			char_literal210=(IToken)Match(input,106,Follow._106_in_index2477); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_106.Add(char_literal210);
+			if ( state.backtracking == 0 ) stream_expression.Add(expression223.Tree);
+			DebugLocation(452, 19);
+			char_literal224=(IToken)Match(input,106,Follow._106_in_index2547); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_106.Add(char_literal224);
 
 
 
@@ -8501,16 +8727,16 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 446:2: -> ^( Index expression )
+			// 453:2: -> ^( Index expression )
 			{
-				DebugLocation(446, 5);
-				// Plsql.g:446:5: ^( Index expression )
+				DebugLocation(453, 5);
+				// Plsql.g:453:5: ^( Index expression )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(446, 7);
+				DebugLocation(453, 7);
 				root_1 = (object)adaptor.BecomeRoot(new IndexNode(Index), root_1);
 
-				DebugLocation(446, 24);
+				DebugLocation(453, 24);
 				adaptor.AddChild(root_1, stream_expression.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -8541,11 +8767,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("index", 54);
-			LeaveRule("index", 54);
+			TraceOut("index", 55);
+			LeaveRule("index", 55);
 			Leave_index();
 		}
-		DebugLocation(447, 1);
+		DebugLocation(454, 1);
 		} finally { DebugExitRule(GrammarFileName, "index"); }
 		return retval;
 
@@ -8562,41 +8788,41 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_memberCall();
 
 	// $ANTLR start "memberCall"
-	// Plsql.g:449:1: memberCall : '.' ID -> ^( MemberCall ID ) ;
+	// Plsql.g:456:1: memberCall : '.' ID -> ^( MemberCall ID ) ;
 	[GrammarRule("memberCall")]
 	private PlsqlParser.memberCall_return memberCall()
 	{
 		Enter_memberCall();
-		EnterRule("memberCall", 55);
-		TraceIn("memberCall", 55);
+		EnterRule("memberCall", 56);
+		TraceIn("memberCall", 56);
 		PlsqlParser.memberCall_return retval = new PlsqlParser.memberCall_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken char_literal211=null;
-		IToken ID212=null;
+		IToken char_literal225=null;
+		IToken ID226=null;
 
-		object char_literal211_tree=null;
-		object ID212_tree=null;
+		object char_literal225_tree=null;
+		object ID226_tree=null;
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleITokenStream stream_100=new RewriteRuleITokenStream(adaptor,"token 100");
 
 		try { DebugEnterRule(GrammarFileName, "memberCall");
-		DebugLocation(449, 1);
+		DebugLocation(456, 1);
 		try
 		{
-			// Plsql.g:450:2: ( '.' ID -> ^( MemberCall ID ) )
+			// Plsql.g:457:2: ( '.' ID -> ^( MemberCall ID ) )
 			DebugEnterAlt(1);
-			// Plsql.g:450:4: '.' ID
+			// Plsql.g:457:4: '.' ID
 			{
-			DebugLocation(450, 4);
-			char_literal211=(IToken)Match(input,100,Follow._100_in_memberCall2500); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_100.Add(char_literal211);
+			DebugLocation(457, 4);
+			char_literal225=(IToken)Match(input,100,Follow._100_in_memberCall2570); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_100.Add(char_literal225);
 
-			DebugLocation(450, 8);
-			ID212=(IToken)Match(input,ID,Follow._ID_in_memberCall2502); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID212);
+			DebugLocation(457, 8);
+			ID226=(IToken)Match(input,ID,Follow._ID_in_memberCall2572); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID226);
 
 
 
@@ -8613,16 +8839,16 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 451:2: -> ^( MemberCall ID )
+			// 458:2: -> ^( MemberCall ID )
 			{
-				DebugLocation(451, 5);
-				// Plsql.g:451:5: ^( MemberCall ID )
+				DebugLocation(458, 5);
+				// Plsql.g:458:5: ^( MemberCall ID )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(451, 7);
+				DebugLocation(458, 7);
 				root_1 = (object)adaptor.BecomeRoot(new MemberCallNode(MemberCall), root_1);
 
-				DebugLocation(451, 34);
+				DebugLocation(458, 34);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
 
 				adaptor.AddChild(root_0, root_1);
@@ -8653,11 +8879,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("memberCall", 55);
-			LeaveRule("memberCall", 55);
+			TraceOut("memberCall", 56);
+			LeaveRule("memberCall", 56);
 			Leave_memberCall();
 		}
-		DebugLocation(452, 1);
+		DebugLocation(459, 1);
 		} finally { DebugExitRule(GrammarFileName, "memberCall"); }
 		return retval;
 
@@ -8674,67 +8900,67 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_expressionOrEmpty();
 
 	// $ANTLR start "expressionOrEmpty"
-	// Plsql.g:454:1: expressionOrEmpty : ( expression | -> Expression );
+	// Plsql.g:461:1: expressionOrEmpty : ( expression | -> Expression );
 	[GrammarRule("expressionOrEmpty")]
 	private PlsqlParser.expressionOrEmpty_return expressionOrEmpty()
 	{
 		Enter_expressionOrEmpty();
-		EnterRule("expressionOrEmpty", 56);
-		TraceIn("expressionOrEmpty", 56);
+		EnterRule("expressionOrEmpty", 57);
+		TraceIn("expressionOrEmpty", 57);
 		PlsqlParser.expressionOrEmpty_return retval = new PlsqlParser.expressionOrEmpty_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		PlsqlParser.expression_return expression213 = default(PlsqlParser.expression_return);
+		PlsqlParser.expression_return expression227 = default(PlsqlParser.expression_return);
 
 
 		try { DebugEnterRule(GrammarFileName, "expressionOrEmpty");
-		DebugLocation(454, 1);
+		DebugLocation(461, 1);
 		try
 		{
-			// Plsql.g:455:2: ( expression | -> Expression )
-			int alt43=2;
-			try { DebugEnterDecision(43, decisionCanBacktrack[43]);
-			int LA43_0 = input.LA(1);
+			// Plsql.g:462:2: ( expression | -> Expression )
+			int alt44=2;
+			try { DebugEnterDecision(44, decisionCanBacktrack[44]);
+			int LA44_0 = input.LA(1);
 
-			if ((LA43_0==SELF||(LA43_0>=TRUE && LA43_0<=FALSE)||LA43_0==MINUS||LA43_0==NOT||(LA43_0>=ID && LA43_0<=QUOTED_CHAR)||LA43_0==102))
+			if ((LA44_0==SELF||(LA44_0>=TRUE && LA44_0<=FALSE)||LA44_0==MINUS||LA44_0==NOT||(LA44_0>=ID && LA44_0<=QUOTED_CHAR)||LA44_0==102))
 			{
-				alt43=1;
+				alt44=1;
 			}
-			else if ((LA43_0==EOF))
+			else if ((LA44_0==EOF))
 			{
-				alt43=2;
+				alt44=2;
 			}
 			else
 			{
 				if (state.backtracking>0) {state.failed=true; return retval;}
-				NoViableAltException nvae = new NoViableAltException("", 43, 0, input);
+				NoViableAltException nvae = new NoViableAltException("", 44, 0, input);
 
 				DebugRecognitionException(nvae);
 				throw nvae;
 			}
-			} finally { DebugExitDecision(43); }
-			switch (alt43)
+			} finally { DebugExitDecision(44); }
+			switch (alt44)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:455:4: expression
+				// Plsql.g:462:4: expression
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(455, 4);
-				PushFollow(Follow._expression_in_expressionOrEmpty2525);
-				expression213=expression();
+				DebugLocation(462, 4);
+				PushFollow(Follow._expression_in_expressionOrEmpty2595);
+				expression227=expression();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression213.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expression227.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:456:4: 
+				// Plsql.g:463:4: 
 				{
 
 				{
@@ -8750,9 +8976,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 				root_0 = (object)adaptor.Nil();
-				// 456:4: -> Expression
+				// 463:4: -> Expression
 				{
-					DebugLocation(456, 7);
+					DebugLocation(463, 7);
 					adaptor.AddChild(root_0, (object)adaptor.Create(Expression, "Expression"));
 
 				}
@@ -8782,11 +9008,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("expressionOrEmpty", 56);
-			LeaveRule("expressionOrEmpty", 56);
+			TraceOut("expressionOrEmpty", 57);
+			LeaveRule("expressionOrEmpty", 57);
 			Leave_expressionOrEmpty();
 		}
-		DebugLocation(457, 1);
+		DebugLocation(464, 1);
 		} finally { DebugExitRule(GrammarFileName, "expressionOrEmpty"); }
 		return retval;
 
@@ -8803,62 +9029,62 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_methodCall();
 
 	// $ANTLR start "methodCall"
-	// Plsql.g:459:1: methodCall : '.' ID '(' expressionList ')' -> ^( MethodCall ID expressionList ) ;
+	// Plsql.g:466:1: methodCall : '.' ID '(' expressionList ')' -> ^( MethodCall ID expressionList ) ;
 	[GrammarRule("methodCall")]
 	private PlsqlParser.methodCall_return methodCall()
 	{
 		Enter_methodCall();
-		EnterRule("methodCall", 57);
-		TraceIn("methodCall", 57);
+		EnterRule("methodCall", 58);
+		TraceIn("methodCall", 58);
 		PlsqlParser.methodCall_return retval = new PlsqlParser.methodCall_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken char_literal214=null;
-		IToken ID215=null;
-		IToken char_literal216=null;
-		IToken char_literal218=null;
-		PlsqlParser.expressionList_return expressionList217 = default(PlsqlParser.expressionList_return);
+		IToken char_literal228=null;
+		IToken ID229=null;
+		IToken char_literal230=null;
+		IToken char_literal232=null;
+		PlsqlParser.expressionList_return expressionList231 = default(PlsqlParser.expressionList_return);
 
-		object char_literal214_tree=null;
-		object ID215_tree=null;
-		object char_literal216_tree=null;
-		object char_literal218_tree=null;
+		object char_literal228_tree=null;
+		object ID229_tree=null;
+		object char_literal230_tree=null;
+		object char_literal232_tree=null;
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleITokenStream stream_103=new RewriteRuleITokenStream(adaptor,"token 103");
 		RewriteRuleITokenStream stream_102=new RewriteRuleITokenStream(adaptor,"token 102");
 		RewriteRuleITokenStream stream_100=new RewriteRuleITokenStream(adaptor,"token 100");
 		RewriteRuleSubtreeStream stream_expressionList=new RewriteRuleSubtreeStream(adaptor,"rule expressionList");
 		try { DebugEnterRule(GrammarFileName, "methodCall");
-		DebugLocation(459, 1);
+		DebugLocation(466, 1);
 		try
 		{
-			// Plsql.g:460:2: ( '.' ID '(' expressionList ')' -> ^( MethodCall ID expressionList ) )
+			// Plsql.g:467:2: ( '.' ID '(' expressionList ')' -> ^( MethodCall ID expressionList ) )
 			DebugEnterAlt(1);
-			// Plsql.g:460:4: '.' ID '(' expressionList ')'
+			// Plsql.g:467:4: '.' ID '(' expressionList ')'
 			{
-			DebugLocation(460, 4);
-			char_literal214=(IToken)Match(input,100,Follow._100_in_methodCall2543); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_100.Add(char_literal214);
+			DebugLocation(467, 4);
+			char_literal228=(IToken)Match(input,100,Follow._100_in_methodCall2613); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_100.Add(char_literal228);
 
-			DebugLocation(460, 8);
-			ID215=(IToken)Match(input,ID,Follow._ID_in_methodCall2545); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID215);
+			DebugLocation(467, 8);
+			ID229=(IToken)Match(input,ID,Follow._ID_in_methodCall2615); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID229);
 
-			DebugLocation(460, 11);
-			char_literal216=(IToken)Match(input,102,Follow._102_in_methodCall2547); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_102.Add(char_literal216);
+			DebugLocation(467, 11);
+			char_literal230=(IToken)Match(input,102,Follow._102_in_methodCall2617); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_102.Add(char_literal230);
 
-			DebugLocation(460, 15);
-			PushFollow(Follow._expressionList_in_methodCall2549);
-			expressionList217=expressionList();
+			DebugLocation(467, 15);
+			PushFollow(Follow._expressionList_in_methodCall2619);
+			expressionList231=expressionList();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_expressionList.Add(expressionList217.Tree);
-			DebugLocation(460, 30);
-			char_literal218=(IToken)Match(input,103,Follow._103_in_methodCall2551); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_103.Add(char_literal218);
+			if ( state.backtracking == 0 ) stream_expressionList.Add(expressionList231.Tree);
+			DebugLocation(467, 30);
+			char_literal232=(IToken)Match(input,103,Follow._103_in_methodCall2621); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_103.Add(char_literal232);
 
 
 
@@ -8875,18 +9101,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 461:2: -> ^( MethodCall ID expressionList )
+			// 468:2: -> ^( MethodCall ID expressionList )
 			{
-				DebugLocation(461, 5);
-				// Plsql.g:461:5: ^( MethodCall ID expressionList )
+				DebugLocation(468, 5);
+				// Plsql.g:468:5: ^( MethodCall ID expressionList )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(461, 7);
+				DebugLocation(468, 7);
 				root_1 = (object)adaptor.BecomeRoot(new MethodCallNode(MethodCall), root_1);
 
-				DebugLocation(461, 34);
+				DebugLocation(468, 34);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(461, 37);
+				DebugLocation(468, 37);
 				adaptor.AddChild(root_1, stream_expressionList.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -8917,11 +9143,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("methodCall", 57);
-			LeaveRule("methodCall", 57);
+			TraceOut("methodCall", 58);
+			LeaveRule("methodCall", 58);
 			Leave_methodCall();
 		}
-		DebugLocation(462, 1);
+		DebugLocation(469, 1);
 		} finally { DebugExitRule(GrammarFileName, "methodCall"); }
 		return retval;
 
@@ -8938,61 +9164,61 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_createInstance();
 
 	// $ANTLR start "createInstance"
-	// Plsql.g:464:1: createInstance : ID '(' expressionList ')' -> ^( CreateInstance ID expressionList ) ;
+	// Plsql.g:471:1: createInstance : ID '(' expressionList ')' -> ^( CreateInstance ID expressionList ) ;
 	[GrammarRule("createInstance")]
 	private PlsqlParser.createInstance_return createInstance()
 	{
 		Enter_createInstance();
-		EnterRule("createInstance", 58);
-		TraceIn("createInstance", 58);
+		EnterRule("createInstance", 59);
+		TraceIn("createInstance", 59);
 		PlsqlParser.createInstance_return retval = new PlsqlParser.createInstance_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken ID219=null;
-		IToken char_literal220=null;
-		IToken char_literal222=null;
-		PlsqlParser.expressionList_return expressionList221 = default(PlsqlParser.expressionList_return);
+		IToken ID233=null;
+		IToken char_literal234=null;
+		IToken char_literal236=null;
+		PlsqlParser.expressionList_return expressionList235 = default(PlsqlParser.expressionList_return);
 
-		object ID219_tree=null;
-		object char_literal220_tree=null;
-		object char_literal222_tree=null;
+		object ID233_tree=null;
+		object char_literal234_tree=null;
+		object char_literal236_tree=null;
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 		RewriteRuleITokenStream stream_103=new RewriteRuleITokenStream(adaptor,"token 103");
 		RewriteRuleITokenStream stream_102=new RewriteRuleITokenStream(adaptor,"token 102");
 		RewriteRuleSubtreeStream stream_expressionList=new RewriteRuleSubtreeStream(adaptor,"rule expressionList");
 		try { DebugEnterRule(GrammarFileName, "createInstance");
-		DebugLocation(464, 1);
+		DebugLocation(471, 1);
 		try
 		{
-			// Plsql.g:465:2: ( ID '(' expressionList ')' -> ^( CreateInstance ID expressionList ) )
+			// Plsql.g:472:2: ( ID '(' expressionList ')' -> ^( CreateInstance ID expressionList ) )
 			DebugEnterAlt(1);
-			// Plsql.g:465:4: ID '(' expressionList ')'
+			// Plsql.g:472:4: ID '(' expressionList ')'
 			{
-			DebugLocation(465, 4);
-			ID219=(IToken)Match(input,ID,Follow._ID_in_createInstance2576); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID219);
+			DebugLocation(472, 4);
+			ID233=(IToken)Match(input,ID,Follow._ID_in_createInstance2646); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID233);
 
-			DebugLocation(465, 7);
-			char_literal220=(IToken)Match(input,102,Follow._102_in_createInstance2578); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_102.Add(char_literal220);
+			DebugLocation(472, 7);
+			char_literal234=(IToken)Match(input,102,Follow._102_in_createInstance2648); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_102.Add(char_literal234);
 
-			DebugLocation(465, 11);
-			PushFollow(Follow._expressionList_in_createInstance2580);
-			expressionList221=expressionList();
+			DebugLocation(472, 11);
+			PushFollow(Follow._expressionList_in_createInstance2650);
+			expressionList235=expressionList();
 			PopFollow();
 			if (state.failed) return retval;
-			if ( state.backtracking == 0 ) stream_expressionList.Add(expressionList221.Tree);
-			DebugLocation(465, 26);
-			char_literal222=(IToken)Match(input,103,Follow._103_in_createInstance2582); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_103.Add(char_literal222);
+			if ( state.backtracking == 0 ) stream_expressionList.Add(expressionList235.Tree);
+			DebugLocation(472, 26);
+			char_literal236=(IToken)Match(input,103,Follow._103_in_createInstance2652); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_103.Add(char_literal236);
 
 
 
 			{
 			// AST REWRITE
-			// elements: ID, expressionList
+			// elements: expressionList, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -9003,18 +9229,18 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 466:2: -> ^( CreateInstance ID expressionList )
+			// 473:2: -> ^( CreateInstance ID expressionList )
 			{
-				DebugLocation(466, 5);
-				// Plsql.g:466:5: ^( CreateInstance ID expressionList )
+				DebugLocation(473, 5);
+				// Plsql.g:473:5: ^( CreateInstance ID expressionList )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(466, 7);
+				DebugLocation(473, 7);
 				root_1 = (object)adaptor.BecomeRoot(new CreateInstanceNode(CreateInstance), root_1);
 
-				DebugLocation(466, 42);
+				DebugLocation(473, 42);
 				adaptor.AddChild(root_1, stream_ID.NextNode());
-				DebugLocation(466, 45);
+				DebugLocation(473, 45);
 				adaptor.AddChild(root_1, stream_expressionList.NextTree());
 
 				adaptor.AddChild(root_0, root_1);
@@ -9045,11 +9271,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("createInstance", 58);
-			LeaveRule("createInstance", 58);
+			TraceOut("createInstance", 59);
+			LeaveRule("createInstance", 59);
 			Leave_createInstance();
 		}
-		DebugLocation(467, 1);
+		DebugLocation(474, 1);
 		} finally { DebugExitRule(GrammarFileName, "createInstance"); }
 		return retval;
 
@@ -9066,172 +9292,172 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_quant();
 
 	// $ANTLR start "quant"
-	// Plsql.g:469:1: quant : ( number | bool_ | string_ | char_ | createInstance | '(' expr_ ')' | var | SELF );
+	// Plsql.g:476:1: quant : ( number | bool_ | string_ | char_ | createInstance | '(' expr_ ')' | var | SELF );
 	[GrammarRule("quant")]
 	private PlsqlParser.quant_return quant()
 	{
 		Enter_quant();
-		EnterRule("quant", 59);
-		TraceIn("quant", 59);
+		EnterRule("quant", 60);
+		TraceIn("quant", 60);
 		PlsqlParser.quant_return retval = new PlsqlParser.quant_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken char_literal228=null;
-		IToken char_literal230=null;
-		IToken SELF232=null;
-		PlsqlParser.number_return number223 = default(PlsqlParser.number_return);
-		PlsqlParser.bool__return bool_224 = default(PlsqlParser.bool__return);
-		PlsqlParser.string__return string_225 = default(PlsqlParser.string__return);
-		PlsqlParser.char__return char_226 = default(PlsqlParser.char__return);
-		PlsqlParser.createInstance_return createInstance227 = default(PlsqlParser.createInstance_return);
-		PlsqlParser.expr__return expr_229 = default(PlsqlParser.expr__return);
-		PlsqlParser.var_return var231 = default(PlsqlParser.var_return);
+		IToken char_literal242=null;
+		IToken char_literal244=null;
+		IToken SELF246=null;
+		PlsqlParser.number_return number237 = default(PlsqlParser.number_return);
+		PlsqlParser.bool__return bool_238 = default(PlsqlParser.bool__return);
+		PlsqlParser.string__return string_239 = default(PlsqlParser.string__return);
+		PlsqlParser.char__return char_240 = default(PlsqlParser.char__return);
+		PlsqlParser.createInstance_return createInstance241 = default(PlsqlParser.createInstance_return);
+		PlsqlParser.expr__return expr_243 = default(PlsqlParser.expr__return);
+		PlsqlParser.var_return var245 = default(PlsqlParser.var_return);
 
-		object char_literal228_tree=null;
-		object char_literal230_tree=null;
-		object SELF232_tree=null;
+		object char_literal242_tree=null;
+		object char_literal244_tree=null;
+		object SELF246_tree=null;
 
 		try { DebugEnterRule(GrammarFileName, "quant");
-		DebugLocation(469, 1);
+		DebugLocation(476, 1);
 		try
 		{
-			// Plsql.g:470:2: ( number | bool_ | string_ | char_ | createInstance | '(' expr_ ')' | var | SELF )
-			int alt44=8;
-			try { DebugEnterDecision(44, decisionCanBacktrack[44]);
+			// Plsql.g:477:2: ( number | bool_ | string_ | char_ | createInstance | '(' expr_ ')' | var | SELF )
+			int alt45=8;
+			try { DebugEnterDecision(45, decisionCanBacktrack[45]);
 			try
 			{
-				alt44 = dfa44.Predict(input);
+				alt45 = dfa45.Predict(input);
 			}
 			catch (NoViableAltException nvae)
 			{
 				DebugRecognitionException(nvae);
 				throw;
 			}
-			} finally { DebugExitDecision(44); }
-			switch (alt44)
+			} finally { DebugExitDecision(45); }
+			switch (alt45)
 			{
 			case 1:
 				DebugEnterAlt(1);
-				// Plsql.g:470:4: number
+				// Plsql.g:477:4: number
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(470, 4);
-				PushFollow(Follow._number_in_quant2607);
-				number223=number();
+				DebugLocation(477, 4);
+				PushFollow(Follow._number_in_quant2677);
+				number237=number();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, number223.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, number237.Tree);
 
 				}
 				break;
 			case 2:
 				DebugEnterAlt(2);
-				// Plsql.g:471:6: bool_
+				// Plsql.g:478:6: bool_
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(471, 6);
-				PushFollow(Follow._bool__in_quant2614);
-				bool_224=bool_();
+				DebugLocation(478, 6);
+				PushFollow(Follow._bool__in_quant2684);
+				bool_238=bool_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, bool_224.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, bool_238.Tree);
 
 				}
 				break;
 			case 3:
 				DebugEnterAlt(3);
-				// Plsql.g:472:6: string_
+				// Plsql.g:479:6: string_
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(472, 6);
-				PushFollow(Follow._string__in_quant2621);
-				string_225=string_();
+				DebugLocation(479, 6);
+				PushFollow(Follow._string__in_quant2691);
+				string_239=string_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, string_225.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, string_239.Tree);
 
 				}
 				break;
 			case 4:
 				DebugEnterAlt(4);
-				// Plsql.g:473:4: char_
+				// Plsql.g:480:4: char_
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(473, 4);
-				PushFollow(Follow._char__in_quant2626);
-				char_226=char_();
+				DebugLocation(480, 4);
+				PushFollow(Follow._char__in_quant2696);
+				char_240=char_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, char_226.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, char_240.Tree);
 
 				}
 				break;
 			case 5:
 				DebugEnterAlt(5);
-				// Plsql.g:474:6: createInstance
+				// Plsql.g:481:6: createInstance
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(474, 6);
-				PushFollow(Follow._createInstance_in_quant2633);
-				createInstance227=createInstance();
+				DebugLocation(481, 6);
+				PushFollow(Follow._createInstance_in_quant2703);
+				createInstance241=createInstance();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, createInstance227.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, createInstance241.Tree);
 
 				}
 				break;
 			case 6:
 				DebugEnterAlt(6);
-				// Plsql.g:475:6: '(' expr_ ')'
+				// Plsql.g:482:6: '(' expr_ ')'
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(475, 9);
-				char_literal228=(IToken)Match(input,102,Follow._102_in_quant2640); if (state.failed) return retval;
-				DebugLocation(475, 11);
-				PushFollow(Follow._expr__in_quant2643);
-				expr_229=expr_();
+				DebugLocation(482, 9);
+				char_literal242=(IToken)Match(input,102,Follow._102_in_quant2710); if (state.failed) return retval;
+				DebugLocation(482, 11);
+				PushFollow(Follow._expr__in_quant2713);
+				expr_243=expr_();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expr_229.Tree);
-				DebugLocation(475, 20);
-				char_literal230=(IToken)Match(input,103,Follow._103_in_quant2645); if (state.failed) return retval;
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, expr_243.Tree);
+				DebugLocation(482, 20);
+				char_literal244=(IToken)Match(input,103,Follow._103_in_quant2715); if (state.failed) return retval;
 
 				}
 				break;
 			case 7:
 				DebugEnterAlt(7);
-				// Plsql.g:476:6: var
+				// Plsql.g:483:6: var
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(476, 6);
-				PushFollow(Follow._var_in_quant2653);
-				var231=var();
+				DebugLocation(483, 6);
+				PushFollow(Follow._var_in_quant2723);
+				var245=var();
 				PopFollow();
 				if (state.failed) return retval;
-				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, var231.Tree);
+				if ( state.backtracking == 0 ) adaptor.AddChild(root_0, var245.Tree);
 
 				}
 				break;
 			case 8:
 				DebugEnterAlt(8);
-				// Plsql.g:477:6: SELF
+				// Plsql.g:484:6: SELF
 				{
 				root_0 = (object)adaptor.Nil();
 
-				DebugLocation(477, 6);
-				SELF232=(IToken)Match(input,SELF,Follow._SELF_in_quant2660); if (state.failed) return retval;
+				DebugLocation(484, 6);
+				SELF246=(IToken)Match(input,SELF,Follow._SELF_in_quant2730); if (state.failed) return retval;
 				if ( state.backtracking==0 ) {
-				SELF232_tree = new SelfNode(SELF232) ;
-				adaptor.AddChild(root_0, SELF232_tree);
+				SELF246_tree = new SelfNode(SELF246) ;
+				adaptor.AddChild(root_0, SELF246_tree);
 				}
 
 				}
@@ -9255,11 +9481,11 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("quant", 59);
-			LeaveRule("quant", 59);
+			TraceOut("quant", 60);
+			LeaveRule("quant", 60);
 			Leave_quant();
 		}
-		DebugLocation(478, 1);
+		DebugLocation(485, 1);
 		} finally { DebugExitRule(GrammarFileName, "quant"); }
 		return retval;
 
@@ -9276,34 +9502,34 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 	partial void Leave_var();
 
 	// $ANTLR start "var"
-	// Plsql.g:480:1: var : ID -> ^( ID ) ;
+	// Plsql.g:487:1: var : ID -> ^( ID ) ;
 	[GrammarRule("var")]
 	private PlsqlParser.var_return var()
 	{
 		Enter_var();
-		EnterRule("var", 60);
-		TraceIn("var", 60);
+		EnterRule("var", 61);
+		TraceIn("var", 61);
 		PlsqlParser.var_return retval = new PlsqlParser.var_return();
 		retval.Start = (IToken)input.LT(1);
 
 		object root_0 = null;
 
-		IToken ID233=null;
+		IToken ID247=null;
 
-		object ID233_tree=null;
+		object ID247_tree=null;
 		RewriteRuleITokenStream stream_ID=new RewriteRuleITokenStream(adaptor,"token ID");
 
 		try { DebugEnterRule(GrammarFileName, "var");
-		DebugLocation(480, 1);
+		DebugLocation(487, 1);
 		try
 		{
-			// Plsql.g:480:5: ( ID -> ^( ID ) )
+			// Plsql.g:487:5: ( ID -> ^( ID ) )
 			DebugEnterAlt(1);
-			// Plsql.g:480:7: ID
+			// Plsql.g:487:7: ID
 			{
-			DebugLocation(480, 7);
-			ID233=(IToken)Match(input,ID,Follow._ID_in_var2673); if (state.failed) return retval; 
-			if ( state.backtracking == 0 ) stream_ID.Add(ID233);
+			DebugLocation(487, 7);
+			ID247=(IToken)Match(input,ID,Follow._ID_in_var2743); if (state.failed) return retval; 
+			if ( state.backtracking == 0 ) stream_ID.Add(ID247);
 
 
 
@@ -9320,13 +9546,13 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.Tree:null);
 
 			root_0 = (object)adaptor.Nil();
-			// 481:2: -> ^( ID )
+			// 488:2: -> ^( ID )
 			{
-				DebugLocation(481, 5);
-				// Plsql.g:481:5: ^( ID )
+				DebugLocation(488, 5);
+				// Plsql.g:488:5: ^( ID )
 				{
 				object root_1 = (object)adaptor.Nil();
-				DebugLocation(481, 7);
+				DebugLocation(488, 7);
 				root_1 = (object)adaptor.BecomeRoot(new VarNode(stream_ID.NextToken()), root_1);
 
 				adaptor.AddChild(root_0, root_1);
@@ -9357,34 +9583,34 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("var", 60);
-			LeaveRule("var", 60);
+			TraceOut("var", 61);
+			LeaveRule("var", 61);
 			Leave_var();
 		}
-		DebugLocation(482, 1);
+		DebugLocation(489, 1);
 		} finally { DebugExitRule(GrammarFileName, "var"); }
 		return retval;
 
 	}
 	// $ANTLR end "var"
 
-	partial void Enter_synpred42_Plsql_fragment();
-	partial void Leave_synpred42_Plsql_fragment();
+	partial void Enter_synpred43_Plsql_fragment();
+	partial void Leave_synpred43_Plsql_fragment();
 
-	// $ANTLR start synpred42_Plsql
-	public void synpred42_Plsql_fragment()
+	// $ANTLR start synpred43_Plsql
+	public void synpred43_Plsql_fragment()
 	{
-		Enter_synpred42_Plsql_fragment();
-		EnterRule("synpred42_Plsql_fragment", 102);
-		TraceIn("synpred42_Plsql_fragment", 102);
+		Enter_synpred43_Plsql_fragment();
+		EnterRule("synpred43_Plsql_fragment", 104);
+		TraceIn("synpred43_Plsql_fragment", 104);
 		try
 		{
-			// Plsql.g:361:4: ( assign )
+			// Plsql.g:362:4: ( assign )
 			DebugEnterAlt(1);
-			// Plsql.g:361:4: assign
+			// Plsql.g:362:4: assign
 			{
-			DebugLocation(361, 4);
-			PushFollow(Follow._assign_in_synpred42_Plsql1995);
+			DebugLocation(362, 4);
+			PushFollow(Follow._assign_in_synpred43_Plsql2007);
 			assign();
 			PopFollow();
 			if (state.failed) return;
@@ -9394,30 +9620,30 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("synpred42_Plsql_fragment", 102);
-			LeaveRule("synpred42_Plsql_fragment", 102);
-			Leave_synpred42_Plsql_fragment();
+			TraceOut("synpred43_Plsql_fragment", 104);
+			LeaveRule("synpred43_Plsql_fragment", 104);
+			Leave_synpred43_Plsql_fragment();
 		}
 	}
-	// $ANTLR end synpred42_Plsql
+	// $ANTLR end synpred43_Plsql
 
-	partial void Enter_synpred45_Plsql_fragment();
-	partial void Leave_synpred45_Plsql_fragment();
+	partial void Enter_synpred46_Plsql_fragment();
+	partial void Leave_synpred46_Plsql_fragment();
 
-	// $ANTLR start synpred45_Plsql
-	public void synpred45_Plsql_fragment()
+	// $ANTLR start synpred46_Plsql
+	public void synpred46_Plsql_fragment()
 	{
-		Enter_synpred45_Plsql_fragment();
-		EnterRule("synpred45_Plsql_fragment", 105);
-		TraceIn("synpred45_Plsql_fragment", 105);
+		Enter_synpred46_Plsql_fragment();
+		EnterRule("synpred46_Plsql_fragment", 107);
+		TraceIn("synpred46_Plsql_fragment", 107);
 		try
 		{
-			// Plsql.g:364:4: ( expression )
+			// Plsql.g:365:4: ( expression )
 			DebugEnterAlt(1);
-			// Plsql.g:364:4: expression
+			// Plsql.g:365:4: expression
 			{
-			DebugLocation(364, 4);
-			PushFollow(Follow._expression_in_synpred45_Plsql2010);
+			DebugLocation(365, 4);
+			PushFollow(Follow._expression_in_synpred46_Plsql2022);
 			expression();
 			PopFollow();
 			if (state.failed) return;
@@ -9427,35 +9653,68 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("synpred45_Plsql_fragment", 105);
-			LeaveRule("synpred45_Plsql_fragment", 105);
-			Leave_synpred45_Plsql_fragment();
+			TraceOut("synpred46_Plsql_fragment", 107);
+			LeaveRule("synpred46_Plsql_fragment", 107);
+			Leave_synpred46_Plsql_fragment();
 		}
 	}
-	// $ANTLR end synpred45_Plsql
+	// $ANTLR end synpred46_Plsql
 
-	partial void Enter_synpred56_Plsql_fragment();
-	partial void Leave_synpred56_Plsql_fragment();
+	partial void Enter_synpred51_Plsql_fragment();
+	partial void Leave_synpred51_Plsql_fragment();
 
-	// $ANTLR start synpred56_Plsql
-	public void synpred56_Plsql_fragment()
+	// $ANTLR start synpred51_Plsql
+	public void synpred51_Plsql_fragment()
 	{
-		Enter_synpred56_Plsql_fragment();
-		EnterRule("synpred56_Plsql_fragment", 116);
-		TraceIn("synpred56_Plsql_fragment", 116);
+		Enter_synpred51_Plsql_fragment();
+		EnterRule("synpred51_Plsql_fragment", 112);
+		TraceIn("synpred51_Plsql_fragment", 112);
 		try
 		{
-			// Plsql.g:417:16: ( addOperator mult )
+			// Plsql.g:387:4: ( assign )
 			DebugEnterAlt(1);
-			// Plsql.g:417:16: addOperator mult
+			// Plsql.g:387:4: assign
 			{
-			DebugLocation(417, 16);
-			PushFollow(Follow._addOperator_in_synpred56_Plsql2338);
+			DebugLocation(387, 4);
+			PushFollow(Follow._assign_in_synpred51_Plsql2229);
+			assign();
+			PopFollow();
+			if (state.failed) return;
+
+			}
+
+		}
+		finally
+		{
+			TraceOut("synpred51_Plsql_fragment", 112);
+			LeaveRule("synpred51_Plsql_fragment", 112);
+			Leave_synpred51_Plsql_fragment();
+		}
+	}
+	// $ANTLR end synpred51_Plsql
+
+	partial void Enter_synpred59_Plsql_fragment();
+	partial void Leave_synpred59_Plsql_fragment();
+
+	// $ANTLR start synpred59_Plsql
+	public void synpred59_Plsql_fragment()
+	{
+		Enter_synpred59_Plsql_fragment();
+		EnterRule("synpred59_Plsql_fragment", 120);
+		TraceIn("synpred59_Plsql_fragment", 120);
+		try
+		{
+			// Plsql.g:424:16: ( addOperator mult )
+			DebugEnterAlt(1);
+			// Plsql.g:424:16: addOperator mult
+			{
+			DebugLocation(424, 16);
+			PushFollow(Follow._addOperator_in_synpred59_Plsql2408);
 			addOperator();
 			PopFollow();
 			if (state.failed) return;
-			DebugLocation(417, 29);
-			PushFollow(Follow._mult_in_synpred56_Plsql2341);
+			DebugLocation(424, 29);
+			PushFollow(Follow._mult_in_synpred59_Plsql2411);
 			mult();
 			PopFollow();
 			if (state.failed) return;
@@ -9465,39 +9724,39 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("synpred56_Plsql_fragment", 116);
-			LeaveRule("synpred56_Plsql_fragment", 116);
-			Leave_synpred56_Plsql_fragment();
+			TraceOut("synpred59_Plsql_fragment", 120);
+			LeaveRule("synpred59_Plsql_fragment", 120);
+			Leave_synpred59_Plsql_fragment();
 		}
 	}
-	// $ANTLR end synpred56_Plsql
+	// $ANTLR end synpred59_Plsql
 
-	partial void Enter_synpred58_Plsql_fragment();
-	partial void Leave_synpred58_Plsql_fragment();
+	partial void Enter_synpred61_Plsql_fragment();
+	partial void Leave_synpred61_Plsql_fragment();
 
-	// $ANTLR start synpred58_Plsql
-	public void synpred58_Plsql_fragment()
+	// $ANTLR start synpred61_Plsql
+	public void synpred61_Plsql_fragment()
 	{
-		Enter_synpred58_Plsql_fragment();
-		EnterRule("synpred58_Plsql_fragment", 118);
-		TraceIn("synpred58_Plsql_fragment", 118);
+		Enter_synpred61_Plsql_fragment();
+		EnterRule("synpred61_Plsql_fragment", 122);
+		TraceIn("synpred61_Plsql_fragment", 122);
 		try
 		{
-			// Plsql.g:423:7: ( '(' type ')' unary )
+			// Plsql.g:430:7: ( '(' type ')' unary )
 			DebugEnterAlt(1);
-			// Plsql.g:423:7: '(' type ')' unary
+			// Plsql.g:430:7: '(' type ')' unary
 			{
-			DebugLocation(423, 7);
-			Match(input,102,Follow._102_in_synpred58_Plsql2376); if (state.failed) return;
-			DebugLocation(423, 11);
-			PushFollow(Follow._type_in_synpred58_Plsql2378);
+			DebugLocation(430, 7);
+			Match(input,102,Follow._102_in_synpred61_Plsql2446); if (state.failed) return;
+			DebugLocation(430, 11);
+			PushFollow(Follow._type_in_synpred61_Plsql2448);
 			type();
 			PopFollow();
 			if (state.failed) return;
-			DebugLocation(423, 16);
-			Match(input,103,Follow._103_in_synpred58_Plsql2380); if (state.failed) return;
-			DebugLocation(423, 20);
-			PushFollow(Follow._unary_in_synpred58_Plsql2382);
+			DebugLocation(430, 16);
+			Match(input,103,Follow._103_in_synpred61_Plsql2450); if (state.failed) return;
+			DebugLocation(430, 20);
+			PushFollow(Follow._unary_in_synpred61_Plsql2452);
 			unary();
 			PopFollow();
 			if (state.failed) return;
@@ -9507,30 +9766,30 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("synpred58_Plsql_fragment", 118);
-			LeaveRule("synpred58_Plsql_fragment", 118);
-			Leave_synpred58_Plsql_fragment();
+			TraceOut("synpred61_Plsql_fragment", 122);
+			LeaveRule("synpred61_Plsql_fragment", 122);
+			Leave_synpred61_Plsql_fragment();
 		}
 	}
-	// $ANTLR end synpred58_Plsql
+	// $ANTLR end synpred61_Plsql
 
-	partial void Enter_synpred62_Plsql_fragment();
-	partial void Leave_synpred62_Plsql_fragment();
+	partial void Enter_synpred65_Plsql_fragment();
+	partial void Leave_synpred65_Plsql_fragment();
 
-	// $ANTLR start synpred62_Plsql
-	public void synpred62_Plsql_fragment()
+	// $ANTLR start synpred65_Plsql
+	public void synpred65_Plsql_fragment()
 	{
-		Enter_synpred62_Plsql_fragment();
-		EnterRule("synpred62_Plsql_fragment", 122);
-		TraceIn("synpred62_Plsql_fragment", 122);
+		Enter_synpred65_Plsql_fragment();
+		EnterRule("synpred65_Plsql_fragment", 126);
+		TraceIn("synpred65_Plsql_fragment", 126);
 		try
 		{
-			// Plsql.g:440:4: ( methodCall )
+			// Plsql.g:447:4: ( methodCall )
 			DebugEnterAlt(1);
-			// Plsql.g:440:4: methodCall
+			// Plsql.g:447:4: methodCall
 			{
-			DebugLocation(440, 4);
-			PushFollow(Follow._methodCall_in_synpred62_Plsql2457);
+			DebugLocation(447, 4);
+			PushFollow(Follow._methodCall_in_synpred65_Plsql2527);
 			methodCall();
 			PopFollow();
 			if (state.failed) return;
@@ -9540,30 +9799,30 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("synpred62_Plsql_fragment", 122);
-			LeaveRule("synpred62_Plsql_fragment", 122);
-			Leave_synpred62_Plsql_fragment();
+			TraceOut("synpred65_Plsql_fragment", 126);
+			LeaveRule("synpred65_Plsql_fragment", 126);
+			Leave_synpred65_Plsql_fragment();
 		}
 	}
-	// $ANTLR end synpred62_Plsql
+	// $ANTLR end synpred65_Plsql
 
-	partial void Enter_synpred68_Plsql_fragment();
-	partial void Leave_synpred68_Plsql_fragment();
+	partial void Enter_synpred71_Plsql_fragment();
+	partial void Leave_synpred71_Plsql_fragment();
 
-	// $ANTLR start synpred68_Plsql
-	public void synpred68_Plsql_fragment()
+	// $ANTLR start synpred71_Plsql
+	public void synpred71_Plsql_fragment()
 	{
-		Enter_synpred68_Plsql_fragment();
-		EnterRule("synpred68_Plsql_fragment", 128);
-		TraceIn("synpred68_Plsql_fragment", 128);
+		Enter_synpred71_Plsql_fragment();
+		EnterRule("synpred71_Plsql_fragment", 132);
+		TraceIn("synpred71_Plsql_fragment", 132);
 		try
 		{
-			// Plsql.g:474:6: ( createInstance )
+			// Plsql.g:481:6: ( createInstance )
 			DebugEnterAlt(1);
-			// Plsql.g:474:6: createInstance
+			// Plsql.g:481:6: createInstance
 			{
-			DebugLocation(474, 6);
-			PushFollow(Follow._createInstance_in_synpred68_Plsql2633);
+			DebugLocation(481, 6);
+			PushFollow(Follow._createInstance_in_synpred71_Plsql2703);
 			createInstance();
 			PopFollow();
 			if (state.failed) return;
@@ -9573,30 +9832,30 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("synpred68_Plsql_fragment", 128);
-			LeaveRule("synpred68_Plsql_fragment", 128);
-			Leave_synpred68_Plsql_fragment();
+			TraceOut("synpred71_Plsql_fragment", 132);
+			LeaveRule("synpred71_Plsql_fragment", 132);
+			Leave_synpred71_Plsql_fragment();
 		}
 	}
-	// $ANTLR end synpred68_Plsql
+	// $ANTLR end synpred71_Plsql
 
-	partial void Enter_synpred70_Plsql_fragment();
-	partial void Leave_synpred70_Plsql_fragment();
+	partial void Enter_synpred73_Plsql_fragment();
+	partial void Leave_synpred73_Plsql_fragment();
 
-	// $ANTLR start synpred70_Plsql
-	public void synpred70_Plsql_fragment()
+	// $ANTLR start synpred73_Plsql
+	public void synpred73_Plsql_fragment()
 	{
-		Enter_synpred70_Plsql_fragment();
-		EnterRule("synpred70_Plsql_fragment", 130);
-		TraceIn("synpred70_Plsql_fragment", 130);
+		Enter_synpred73_Plsql_fragment();
+		EnterRule("synpred73_Plsql_fragment", 134);
+		TraceIn("synpred73_Plsql_fragment", 134);
 		try
 		{
-			// Plsql.g:476:6: ( var )
+			// Plsql.g:483:6: ( var )
 			DebugEnterAlt(1);
-			// Plsql.g:476:6: var
+			// Plsql.g:483:6: var
 			{
-			DebugLocation(476, 6);
-			PushFollow(Follow._var_in_synpred70_Plsql2653);
+			DebugLocation(483, 6);
+			PushFollow(Follow._var_in_synpred73_Plsql2723);
 			var();
 			PopFollow();
 			if (state.failed) return;
@@ -9606,12 +9865,12 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 		finally
 		{
-			TraceOut("synpred70_Plsql_fragment", 130);
-			LeaveRule("synpred70_Plsql_fragment", 130);
-			Leave_synpred70_Plsql_fragment();
+			TraceOut("synpred73_Plsql_fragment", 134);
+			LeaveRule("synpred73_Plsql_fragment", 134);
+			Leave_synpred73_Plsql_fragment();
 		}
 	}
-	// $ANTLR end synpred70_Plsql
+	// $ANTLR end synpred73_Plsql
 	#endregion Rules
 
 	#region Synpreds
@@ -9640,40 +9899,111 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 
 
 	#region DFA
+	DFA3 dfa3;
 	DFA26 dfa26;
-	DFA37 dfa37;
-	DFA39 dfa39;
-	DFA44 dfa44;
+	DFA30 dfa30;
+	DFA38 dfa38;
+	DFA40 dfa40;
+	DFA45 dfa45;
 
 	protected override void InitDFAs()
 	{
 		base.InitDFAs();
+		dfa3 = new DFA3( this );
 		dfa26 = new DFA26( this, SpecialStateTransition26 );
-		dfa37 = new DFA37( this, SpecialStateTransition37 );
-		dfa39 = new DFA39( this, SpecialStateTransition39 );
-		dfa44 = new DFA44( this, SpecialStateTransition44 );
+		dfa30 = new DFA30( this, SpecialStateTransition30 );
+		dfa38 = new DFA38( this, SpecialStateTransition38 );
+		dfa40 = new DFA40( this, SpecialStateTransition40 );
+		dfa45 = new DFA45( this, SpecialStateTransition45 );
+	}
+
+	private class DFA3 : DFA
+	{
+		private const string DFA3_eotS =
+			"\xA\xFFFF";
+		private const string DFA3_eofS =
+			"\x7\xFFFF\x1\x9\x2\xFFFF";
+		private const string DFA3_minS =
+			"\x1\x22\x6\xFFFF\x1\x37\x2\xFFFF";
+		private const string DFA3_maxS =
+			"\x1\x5E\x6\xFFFF\x1\x68\x2\xFFFF";
+		private const string DFA3_acceptS =
+			"\x1\xFFFF\x1\x1\x1\x2\x1\x3\x1\x4\x1\x5\x1\x6\x1\xFFFF\x1\x7\x1\x8";
+		private const string DFA3_specialS =
+			"\xA\xFFFF}>";
+		private static readonly string[] DFA3_transitionS =
+			{
+				"\x1\x2\x1\x1\x1\x3\x1\x6\x1\x4\x1\x5\x36\xFFFF\x1\x7",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"\x1\x9\x2C\xFFFF\x1\x8\x1\x9\x1\xFFFF\x2\x9",
+				"",
+				""
+			};
+
+		private static readonly short[] DFA3_eot = DFA.UnpackEncodedString(DFA3_eotS);
+		private static readonly short[] DFA3_eof = DFA.UnpackEncodedString(DFA3_eofS);
+		private static readonly char[] DFA3_min = DFA.UnpackEncodedStringToUnsignedChars(DFA3_minS);
+		private static readonly char[] DFA3_max = DFA.UnpackEncodedStringToUnsignedChars(DFA3_maxS);
+		private static readonly short[] DFA3_accept = DFA.UnpackEncodedString(DFA3_acceptS);
+		private static readonly short[] DFA3_special = DFA.UnpackEncodedString(DFA3_specialS);
+		private static readonly short[][] DFA3_transition;
+
+		static DFA3()
+		{
+			int numStates = DFA3_transitionS.Length;
+			DFA3_transition = new short[numStates][];
+			for ( int i=0; i < numStates; i++ )
+			{
+				DFA3_transition[i] = DFA.UnpackEncodedString(DFA3_transitionS[i]);
+			}
+		}
+
+		public DFA3( BaseRecognizer recognizer )
+		{
+			this.recognizer = recognizer;
+			this.decisionNumber = 3;
+			this.eot = DFA3_eot;
+			this.eof = DFA3_eof;
+			this.min = DFA3_min;
+			this.max = DFA3_max;
+			this.accept = DFA3_accept;
+			this.special = DFA3_special;
+			this.transition = DFA3_transition;
+		}
+
+		public override string Description { get { return "177:1: type : ( INT -> INT | BYTE -> BYTE | CHAR -> CHAR | DOUBLE -> DOUBLE | STRING -> STRING | BOOL -> BOOL | ID '.' ID -> ^( TypeName ID ID ) | ID -> ID );"; } }
+
+		public override void Error(NoViableAltException nvae)
+		{
+			DebugRecognitionException(nvae);
+		}
 	}
 
 	private class DFA26 : DFA
 	{
 		private const string DFA26_eotS =
-			"\x12\xFFFF";
+			"\x13\xFFFF";
 		private const string DFA26_eofS =
-			"\x12\xFFFF";
+			"\x13\xFFFF";
 		private const string DFA26_minS =
-			"\x1\x2A\xB\x0\x6\xFFFF";
+			"\x1\x2A\xB\x0\x7\xFFFF";
 		private const string DFA26_maxS =
-			"\x1\x66\xB\x0\x6\xFFFF";
+			"\x1\x66\xB\x0\x7\xFFFF";
 		private const string DFA26_acceptS =
-			"\xC\xFFFF\x1\x2\x1\x3\x1\xFFFF\x1\x5\x1\x1\x1\x4";
+			"\xC\xFFFF\x1\x2\x1\x3\x2\xFFFF\x1\x5\x1\x1\x1\x4";
 		private const string DFA26_specialS =
 			"\x1\xFFFF\x1\x0\x1\x1\x1\x2\x1\x3\x1\x4\x1\x5\x1\x6\x1\x7\x1\x8\x1\x9"+
-			"\x1\xA\x6\xFFFF}>";
+			"\x1\xA\x7\xFFFF}>";
 		private static readonly string[] DFA26_transitionS =
 			{
-				"\x1\xC\x3\xFFFF\x2\xD\x15\xFFFF\x1\xB\x2\xFFFF\x1\x6\x1\x7\x1\xF\x1"+
-				"\xFFFF\x1\x2\xB\xFFFF\x1\x3\x5\xFFFF\x1\xA\x1\x4\x1\x5\x1\x8\x1\x9\x3"+
-				"\xFFFF\x1\x1",
+				"\x1\xC\x3\xFFFF\x2\xD\x2\xFFFF\x1\xD\x12\xFFFF\x1\xB\x2\xFFFF\x1\x6"+
+				"\x1\x7\x1\x10\x1\xFFFF\x1\x2\xB\xFFFF\x1\x3\x5\xFFFF\x1\xA\x1\x4\x1"+
+				"\x5\x1\x8\x1\x9\x3\xFFFF\x1\x1",
 				"\x1\xFFFF",
 				"\x1\xFFFF",
 				"\x1\xFFFF",
@@ -9685,6 +10015,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				"\x1\xFFFF",
 				"\x1\xFFFF",
 				"\x1\xFFFF",
+				"",
 				"",
 				"",
 				"",
@@ -9725,7 +10056,7 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 			this.transition = DFA26_transition;
 		}
 
-		public override string Description { get { return "360:1: command : ( assign | if_ | cycle | expression | RETURN expression );"; } }
+		public override string Description { get { return "361:1: command : ( assign | if_ | cycle | expression | RETURN expression );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -9746,9 +10077,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_1 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_1);
@@ -9761,9 +10092,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_2 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_2);
@@ -9776,9 +10107,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_3 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_3);
@@ -9791,9 +10122,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_4 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_4);
@@ -9806,9 +10137,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_5 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_5);
@@ -9821,9 +10152,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_6 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_6);
@@ -9836,9 +10167,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_7 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_7);
@@ -9851,9 +10182,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_8 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_8);
@@ -9866,9 +10197,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_9 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_9);
@@ -9881,9 +10212,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_10 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_10);
@@ -9896,9 +10227,9 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				int index26_11 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred42_Plsql_fragment)) ) {s = 16;}
+				if ( (EvaluatePredicate(synpred43_Plsql_fragment)) ) {s = 17;}
 
-				else if ( (EvaluatePredicate(synpred45_Plsql_fragment)) ) {s = 17;}
+				else if ( (EvaluatePredicate(synpred46_Plsql_fragment)) ) {s = 18;}
 
 
 				input.Seek(index26_11);
@@ -9910,21 +10241,272 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		dfa.Error(nvae);
 		throw nvae;
 	}
-	private class DFA37 : DFA
+	private class DFA30 : DFA
 	{
-		private const string DFA37_eotS =
+		private const string DFA30_eotS =
+			"\xE\xFFFF";
+		private const string DFA30_eofS =
+			"\xE\xFFFF";
+		private const string DFA30_minS =
+			"\x1\x45\xB\x0\x2\xFFFF";
+		private const string DFA30_maxS =
+			"\x1\x66\xB\x0\x2\xFFFF";
+		private const string DFA30_acceptS =
+			"\xC\xFFFF\x1\x1\x1\x2";
+		private const string DFA30_specialS =
+			"\x1\xFFFF\x1\x0\x1\x1\x1\x2\x1\x3\x1\x4\x1\x5\x1\x6\x1\x7\x1\x8\x1\x9"+
+			"\x1\xA\x2\xFFFF}>";
+		private static readonly string[] DFA30_transitionS =
+			{
+				"\x1\xB\x2\xFFFF\x1\x6\x1\x7\x2\xFFFF\x1\x2\xB\xFFFF\x1\x3\x5\xFFFF"+
+				"\x1\xA\x1\x4\x1\x5\x1\x8\x1\x9\x3\xFFFF\x1\x1",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"\x1\xFFFF",
+				"",
+				""
+			};
+
+		private static readonly short[] DFA30_eot = DFA.UnpackEncodedString(DFA30_eotS);
+		private static readonly short[] DFA30_eof = DFA.UnpackEncodedString(DFA30_eofS);
+		private static readonly char[] DFA30_min = DFA.UnpackEncodedStringToUnsignedChars(DFA30_minS);
+		private static readonly char[] DFA30_max = DFA.UnpackEncodedStringToUnsignedChars(DFA30_maxS);
+		private static readonly short[] DFA30_accept = DFA.UnpackEncodedString(DFA30_acceptS);
+		private static readonly short[] DFA30_special = DFA.UnpackEncodedString(DFA30_specialS);
+		private static readonly short[][] DFA30_transition;
+
+		static DFA30()
+		{
+			int numStates = DFA30_transitionS.Length;
+			DFA30_transition = new short[numStates][];
+			for ( int i=0; i < numStates; i++ )
+			{
+				DFA30_transition[i] = DFA.UnpackEncodedString(DFA30_transitionS[i]);
+			}
+		}
+
+		public DFA30( BaseRecognizer recognizer, SpecialStateTransitionHandler specialStateTransition )
+			: base(specialStateTransition)
+		{
+			this.recognizer = recognizer;
+			this.decisionNumber = 30;
+			this.eot = DFA30_eot;
+			this.eof = DFA30_eof;
+			this.min = DFA30_min;
+			this.max = DFA30_max;
+			this.accept = DFA30_accept;
+			this.special = DFA30_special;
+			this.transition = DFA30_transition;
+		}
+
+		public override string Description { get { return "386:1: assignOrExpression : ( assign | expression );"; } }
+
+		public override void Error(NoViableAltException nvae)
+		{
+			DebugRecognitionException(nvae);
+		}
+	}
+
+	private int SpecialStateTransition30(DFA dfa, int s, IIntStream _input)
+	{
+		ITokenStream input = (ITokenStream)_input;
+		int _s = s;
+		switch (s)
+		{
+			case 0:
+				int LA30_1 = input.LA(1);
+
+
+				int index30_1 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_1);
+				if ( s>=0 ) return s;
+				break;
+			case 1:
+				int LA30_2 = input.LA(1);
+
+
+				int index30_2 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_2);
+				if ( s>=0 ) return s;
+				break;
+			case 2:
+				int LA30_3 = input.LA(1);
+
+
+				int index30_3 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_3);
+				if ( s>=0 ) return s;
+				break;
+			case 3:
+				int LA30_4 = input.LA(1);
+
+
+				int index30_4 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_4);
+				if ( s>=0 ) return s;
+				break;
+			case 4:
+				int LA30_5 = input.LA(1);
+
+
+				int index30_5 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_5);
+				if ( s>=0 ) return s;
+				break;
+			case 5:
+				int LA30_6 = input.LA(1);
+
+
+				int index30_6 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_6);
+				if ( s>=0 ) return s;
+				break;
+			case 6:
+				int LA30_7 = input.LA(1);
+
+
+				int index30_7 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_7);
+				if ( s>=0 ) return s;
+				break;
+			case 7:
+				int LA30_8 = input.LA(1);
+
+
+				int index30_8 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_8);
+				if ( s>=0 ) return s;
+				break;
+			case 8:
+				int LA30_9 = input.LA(1);
+
+
+				int index30_9 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_9);
+				if ( s>=0 ) return s;
+				break;
+			case 9:
+				int LA30_10 = input.LA(1);
+
+
+				int index30_10 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_10);
+				if ( s>=0 ) return s;
+				break;
+			case 10:
+				int LA30_11 = input.LA(1);
+
+
+				int index30_11 = input.Index;
+				input.Rewind();
+				s = -1;
+				if ( (EvaluatePredicate(synpred51_Plsql_fragment)) ) {s = 12;}
+
+				else if ( (true) ) {s = 13;}
+
+
+				input.Seek(index30_11);
+				if ( s>=0 ) return s;
+				break;
+		}
+		if (state.backtracking > 0) {state.failed=true; return -1;}
+		NoViableAltException nvae = new NoViableAltException(dfa.Description, 30, _s, input);
+		dfa.Error(nvae);
+		throw nvae;
+	}
+	private class DFA38 : DFA
+	{
+		private const string DFA38_eotS =
 			"\x1E\xFFFF";
-		private const string DFA37_eofS =
+		private const string DFA38_eofS =
 			"\x1\x1\x1D\xFFFF";
-		private const string DFA37_minS =
+		private const string DFA38_minS =
 			"\x1\x2B\x12\xFFFF\x1\x0\xA\xFFFF";
-		private const string DFA37_maxS =
+		private const string DFA38_maxS =
 			"\x1\x6A\x12\xFFFF\x1\x0\xA\xFFFF";
-		private const string DFA37_acceptS =
+		private const string DFA38_acceptS =
 			"\x1\xFFFF\x1\x2\x1B\xFFFF\x1\x1";
-		private const string DFA37_specialS =
+		private const string DFA38_specialS =
 			"\x13\xFFFF\x1\x0\xA\xFFFF}>";
-		private static readonly string[] DFA37_transitionS =
+		private static readonly string[] DFA38_transitionS =
 			{
 				"\x1\x1\x3\xFFFF\x1\x1\x12\xFFFF\x1\x1\x2\xFFFF\x1\x1\x2\xFFFF\x2\x1"+
 				"\x1\xFFFF\x1\x1D\x1\x13\x3\xFFFF\xA\x1\x4\xFFFF\x5\x1\x2\xFFFF\x4\x1"+
@@ -9960,39 +10542,39 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				""
 			};
 
-		private static readonly short[] DFA37_eot = DFA.UnpackEncodedString(DFA37_eotS);
-		private static readonly short[] DFA37_eof = DFA.UnpackEncodedString(DFA37_eofS);
-		private static readonly char[] DFA37_min = DFA.UnpackEncodedStringToUnsignedChars(DFA37_minS);
-		private static readonly char[] DFA37_max = DFA.UnpackEncodedStringToUnsignedChars(DFA37_maxS);
-		private static readonly short[] DFA37_accept = DFA.UnpackEncodedString(DFA37_acceptS);
-		private static readonly short[] DFA37_special = DFA.UnpackEncodedString(DFA37_specialS);
-		private static readonly short[][] DFA37_transition;
+		private static readonly short[] DFA38_eot = DFA.UnpackEncodedString(DFA38_eotS);
+		private static readonly short[] DFA38_eof = DFA.UnpackEncodedString(DFA38_eofS);
+		private static readonly char[] DFA38_min = DFA.UnpackEncodedStringToUnsignedChars(DFA38_minS);
+		private static readonly char[] DFA38_max = DFA.UnpackEncodedStringToUnsignedChars(DFA38_maxS);
+		private static readonly short[] DFA38_accept = DFA.UnpackEncodedString(DFA38_acceptS);
+		private static readonly short[] DFA38_special = DFA.UnpackEncodedString(DFA38_specialS);
+		private static readonly short[][] DFA38_transition;
 
-		static DFA37()
+		static DFA38()
 		{
-			int numStates = DFA37_transitionS.Length;
-			DFA37_transition = new short[numStates][];
+			int numStates = DFA38_transitionS.Length;
+			DFA38_transition = new short[numStates][];
 			for ( int i=0; i < numStates; i++ )
 			{
-				DFA37_transition[i] = DFA.UnpackEncodedString(DFA37_transitionS[i]);
+				DFA38_transition[i] = DFA.UnpackEncodedString(DFA38_transitionS[i]);
 			}
 		}
 
-		public DFA37( BaseRecognizer recognizer, SpecialStateTransitionHandler specialStateTransition )
+		public DFA38( BaseRecognizer recognizer, SpecialStateTransitionHandler specialStateTransition )
 			: base(specialStateTransition)
 		{
 			this.recognizer = recognizer;
-			this.decisionNumber = 37;
-			this.eot = DFA37_eot;
-			this.eof = DFA37_eof;
-			this.min = DFA37_min;
-			this.max = DFA37_max;
-			this.accept = DFA37_accept;
-			this.special = DFA37_special;
-			this.transition = DFA37_transition;
+			this.decisionNumber = 38;
+			this.eot = DFA38_eot;
+			this.eof = DFA38_eof;
+			this.min = DFA38_min;
+			this.max = DFA38_max;
+			this.accept = DFA38_accept;
+			this.special = DFA38_special;
+			this.transition = DFA38_transition;
 		}
 
-		public override string Description { get { return "()* loopback of 417:14: ( addOperator mult )*"; } }
+		public override string Description { get { return "()* loopback of 424:14: ( addOperator mult )*"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -10000,48 +10582,48 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 	}
 
-	private int SpecialStateTransition37(DFA dfa, int s, IIntStream _input)
+	private int SpecialStateTransition38(DFA dfa, int s, IIntStream _input)
 	{
 		ITokenStream input = (ITokenStream)_input;
 		int _s = s;
 		switch (s)
 		{
 			case 0:
-				int LA37_19 = input.LA(1);
+				int LA38_19 = input.LA(1);
 
 
-				int index37_19 = input.Index;
+				int index38_19 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred56_Plsql_fragment)) ) {s = 29;}
+				if ( (EvaluatePredicate(synpred59_Plsql_fragment)) ) {s = 29;}
 
 				else if ( (true) ) {s = 1;}
 
 
-				input.Seek(index37_19);
+				input.Seek(index38_19);
 				if ( s>=0 ) return s;
 				break;
 		}
 		if (state.backtracking > 0) {state.failed=true; return -1;}
-		NoViableAltException nvae = new NoViableAltException(dfa.Description, 37, _s, input);
+		NoViableAltException nvae = new NoViableAltException(dfa.Description, 38, _s, input);
 		dfa.Error(nvae);
 		throw nvae;
 	}
-	private class DFA39 : DFA
+	private class DFA40 : DFA
 	{
-		private const string DFA39_eotS =
+		private const string DFA40_eotS =
 			"\xD\xFFFF";
-		private const string DFA39_eofS =
+		private const string DFA40_eofS =
 			"\xD\xFFFF";
-		private const string DFA39_minS =
+		private const string DFA40_minS =
 			"\x1\x45\x1\x0\xB\xFFFF";
-		private const string DFA39_maxS =
+		private const string DFA40_maxS =
 			"\x1\x66\x1\x0\xB\xFFFF";
-		private const string DFA39_acceptS =
+		private const string DFA40_acceptS =
 			"\x2\xFFFF\x1\x2\x9\xFFFF\x1\x1";
-		private const string DFA39_specialS =
+		private const string DFA40_specialS =
 			"\x1\xFFFF\x1\x0\xB\xFFFF}>";
-		private static readonly string[] DFA39_transitionS =
+		private static readonly string[] DFA40_transitionS =
 			{
 				"\x1\x2\x2\xFFFF\x2\x2\x2\xFFFF\x1\x2\xB\xFFFF\x1\x2\x5\xFFFF\x5\x2"+
 				"\x3\xFFFF\x1\x1",
@@ -10059,39 +10641,39 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				""
 			};
 
-		private static readonly short[] DFA39_eot = DFA.UnpackEncodedString(DFA39_eotS);
-		private static readonly short[] DFA39_eof = DFA.UnpackEncodedString(DFA39_eofS);
-		private static readonly char[] DFA39_min = DFA.UnpackEncodedStringToUnsignedChars(DFA39_minS);
-		private static readonly char[] DFA39_max = DFA.UnpackEncodedStringToUnsignedChars(DFA39_maxS);
-		private static readonly short[] DFA39_accept = DFA.UnpackEncodedString(DFA39_acceptS);
-		private static readonly short[] DFA39_special = DFA.UnpackEncodedString(DFA39_specialS);
-		private static readonly short[][] DFA39_transition;
+		private static readonly short[] DFA40_eot = DFA.UnpackEncodedString(DFA40_eotS);
+		private static readonly short[] DFA40_eof = DFA.UnpackEncodedString(DFA40_eofS);
+		private static readonly char[] DFA40_min = DFA.UnpackEncodedStringToUnsignedChars(DFA40_minS);
+		private static readonly char[] DFA40_max = DFA.UnpackEncodedStringToUnsignedChars(DFA40_maxS);
+		private static readonly short[] DFA40_accept = DFA.UnpackEncodedString(DFA40_acceptS);
+		private static readonly short[] DFA40_special = DFA.UnpackEncodedString(DFA40_specialS);
+		private static readonly short[][] DFA40_transition;
 
-		static DFA39()
+		static DFA40()
 		{
-			int numStates = DFA39_transitionS.Length;
-			DFA39_transition = new short[numStates][];
+			int numStates = DFA40_transitionS.Length;
+			DFA40_transition = new short[numStates][];
 			for ( int i=0; i < numStates; i++ )
 			{
-				DFA39_transition[i] = DFA.UnpackEncodedString(DFA39_transitionS[i]);
+				DFA40_transition[i] = DFA.UnpackEncodedString(DFA40_transitionS[i]);
 			}
 		}
 
-		public DFA39( BaseRecognizer recognizer, SpecialStateTransitionHandler specialStateTransition )
+		public DFA40( BaseRecognizer recognizer, SpecialStateTransitionHandler specialStateTransition )
 			: base(specialStateTransition)
 		{
 			this.recognizer = recognizer;
-			this.decisionNumber = 39;
-			this.eot = DFA39_eot;
-			this.eof = DFA39_eof;
-			this.min = DFA39_min;
-			this.max = DFA39_max;
-			this.accept = DFA39_accept;
-			this.special = DFA39_special;
-			this.transition = DFA39_transition;
+			this.decisionNumber = 40;
+			this.eot = DFA40_eot;
+			this.eof = DFA40_eof;
+			this.min = DFA40_min;
+			this.max = DFA40_max;
+			this.accept = DFA40_accept;
+			this.special = DFA40_special;
+			this.transition = DFA40_transition;
 		}
 
-		public override string Description { get { return "423:1: cast : ( '(' type ')' unary -> ^( Cast unary type ) | unary );"; } }
+		public override string Description { get { return "430:1: cast : ( '(' type ')' unary -> ^( Cast unary type ) | unary );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -10099,49 +10681,49 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 	}
 
-	private int SpecialStateTransition39(DFA dfa, int s, IIntStream _input)
+	private int SpecialStateTransition40(DFA dfa, int s, IIntStream _input)
 	{
 		ITokenStream input = (ITokenStream)_input;
 		int _s = s;
 		switch (s)
 		{
 			case 0:
-				int LA39_1 = input.LA(1);
+				int LA40_1 = input.LA(1);
 
 
-				int index39_1 = input.Index;
+				int index40_1 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred58_Plsql_fragment)) ) {s = 12;}
+				if ( (EvaluatePredicate(synpred61_Plsql_fragment)) ) {s = 12;}
 
 				else if ( (true) ) {s = 2;}
 
 
-				input.Seek(index39_1);
+				input.Seek(index40_1);
 				if ( s>=0 ) return s;
 				break;
 		}
 		if (state.backtracking > 0) {state.failed=true; return -1;}
-		NoViableAltException nvae = new NoViableAltException(dfa.Description, 39, _s, input);
+		NoViableAltException nvae = new NoViableAltException(dfa.Description, 40, _s, input);
 		dfa.Error(nvae);
 		throw nvae;
 	}
-	private class DFA44 : DFA
+	private class DFA45 : DFA
 	{
-		private const string DFA44_eotS =
+		private const string DFA45_eotS =
 			"\xC\xFFFF";
-		private const string DFA44_eofS =
+		private const string DFA45_eofS =
 			"\xC\xFFFF";
-		private const string DFA44_minS =
+		private const string DFA45_minS =
 			"\x1\x45\x6\xFFFF\x1\x0\x4\xFFFF";
-		private const string DFA44_maxS =
+		private const string DFA45_maxS =
 			"\x1\x66\x6\xFFFF\x1\x0\x4\xFFFF";
-		private const string DFA44_acceptS =
+		private const string DFA45_acceptS =
 			"\x1\xFFFF\x1\x1\x1\xFFFF\x1\x2\x1\xFFFF\x1\x3\x1\x4\x1\xFFFF\x1\x6\x1"+
 			"\x8\x1\x5\x1\x7";
-		private const string DFA44_specialS =
+		private const string DFA45_specialS =
 			"\x7\xFFFF\x1\x0\x4\xFFFF}>";
-		private static readonly string[] DFA44_transitionS =
+		private static readonly string[] DFA45_transitionS =
 			{
 				"\x1\x9\x2\xFFFF\x2\x3\x14\xFFFF\x1\x7\x2\x1\x1\x5\x1\x6\x3\xFFFF\x1"+
 				"\x8",
@@ -10158,39 +10740,39 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 				""
 			};
 
-		private static readonly short[] DFA44_eot = DFA.UnpackEncodedString(DFA44_eotS);
-		private static readonly short[] DFA44_eof = DFA.UnpackEncodedString(DFA44_eofS);
-		private static readonly char[] DFA44_min = DFA.UnpackEncodedStringToUnsignedChars(DFA44_minS);
-		private static readonly char[] DFA44_max = DFA.UnpackEncodedStringToUnsignedChars(DFA44_maxS);
-		private static readonly short[] DFA44_accept = DFA.UnpackEncodedString(DFA44_acceptS);
-		private static readonly short[] DFA44_special = DFA.UnpackEncodedString(DFA44_specialS);
-		private static readonly short[][] DFA44_transition;
+		private static readonly short[] DFA45_eot = DFA.UnpackEncodedString(DFA45_eotS);
+		private static readonly short[] DFA45_eof = DFA.UnpackEncodedString(DFA45_eofS);
+		private static readonly char[] DFA45_min = DFA.UnpackEncodedStringToUnsignedChars(DFA45_minS);
+		private static readonly char[] DFA45_max = DFA.UnpackEncodedStringToUnsignedChars(DFA45_maxS);
+		private static readonly short[] DFA45_accept = DFA.UnpackEncodedString(DFA45_acceptS);
+		private static readonly short[] DFA45_special = DFA.UnpackEncodedString(DFA45_specialS);
+		private static readonly short[][] DFA45_transition;
 
-		static DFA44()
+		static DFA45()
 		{
-			int numStates = DFA44_transitionS.Length;
-			DFA44_transition = new short[numStates][];
+			int numStates = DFA45_transitionS.Length;
+			DFA45_transition = new short[numStates][];
 			for ( int i=0; i < numStates; i++ )
 			{
-				DFA44_transition[i] = DFA.UnpackEncodedString(DFA44_transitionS[i]);
+				DFA45_transition[i] = DFA.UnpackEncodedString(DFA45_transitionS[i]);
 			}
 		}
 
-		public DFA44( BaseRecognizer recognizer, SpecialStateTransitionHandler specialStateTransition )
+		public DFA45( BaseRecognizer recognizer, SpecialStateTransitionHandler specialStateTransition )
 			: base(specialStateTransition)
 		{
 			this.recognizer = recognizer;
-			this.decisionNumber = 44;
-			this.eot = DFA44_eot;
-			this.eof = DFA44_eof;
-			this.min = DFA44_min;
-			this.max = DFA44_max;
-			this.accept = DFA44_accept;
-			this.special = DFA44_special;
-			this.transition = DFA44_transition;
+			this.decisionNumber = 45;
+			this.eot = DFA45_eot;
+			this.eof = DFA45_eof;
+			this.min = DFA45_min;
+			this.max = DFA45_max;
+			this.accept = DFA45_accept;
+			this.special = DFA45_special;
+			this.transition = DFA45_transition;
 		}
 
-		public override string Description { get { return "469:1: quant : ( number | bool_ | string_ | char_ | createInstance | '(' expr_ ')' | var | SELF );"; } }
+		public override string Description { get { return "476:1: quant : ( number | bool_ | string_ | char_ | createInstance | '(' expr_ ')' | var | SELF );"; } }
 
 		public override void Error(NoViableAltException nvae)
 		{
@@ -10198,30 +10780,30 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		}
 	}
 
-	private int SpecialStateTransition44(DFA dfa, int s, IIntStream _input)
+	private int SpecialStateTransition45(DFA dfa, int s, IIntStream _input)
 	{
 		ITokenStream input = (ITokenStream)_input;
 		int _s = s;
 		switch (s)
 		{
 			case 0:
-				int LA44_7 = input.LA(1);
+				int LA45_7 = input.LA(1);
 
 
-				int index44_7 = input.Index;
+				int index45_7 = input.Index;
 				input.Rewind();
 				s = -1;
-				if ( (EvaluatePredicate(synpred68_Plsql_fragment)) ) {s = 10;}
+				if ( (EvaluatePredicate(synpred71_Plsql_fragment)) ) {s = 10;}
 
-				else if ( (EvaluatePredicate(synpred70_Plsql_fragment)) ) {s = 11;}
+				else if ( (EvaluatePredicate(synpred73_Plsql_fragment)) ) {s = 11;}
 
 
-				input.Seek(index44_7);
+				input.Seek(index45_7);
 				if ( s>=0 ) return s;
 				break;
 		}
 		if (state.backtracking > 0) {state.failed=true; return -1;}
-		NoViableAltException nvae = new NoViableAltException(dfa.Description, 44, _s, input);
+		NoViableAltException nvae = new NoViableAltException(dfa.Description, 45, _s, input);
 		dfa.Error(nvae);
 		throw nvae;
 	}
@@ -10244,237 +10826,252 @@ public partial class PlsqlParser : Antlr.Runtime.Parser
 		public static readonly BitSet _BYTE_in_type942 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _CHAR_in_type954 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _DOUBLE_in_type966 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _BOOL_in_type980 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ID_in_type994 = new BitSet(new ulong[]{0x0UL,0x1000000000UL});
-		public static readonly BitSet _100_in_type996 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_type998 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ID_in_type1020 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _objOrPack_in_program1040 = new BitSet(new ulong[]{0x8000000000000UL,0x10UL});
-		public static readonly BitSet _entryPoint_in_program1043 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _object__in_objOrPack1066 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _package__in_objOrPack1072 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _STRING_in_type978 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _BOOL_in_type992 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ID_in_type1006 = new BitSet(new ulong[]{0x0UL,0x1000000000UL});
+		public static readonly BitSet _100_in_type1008 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_type1010 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ID_in_type1032 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _objOrPack_in_program1052 = new BitSet(new ulong[]{0x8000000000000UL,0x10UL});
+		public static readonly BitSet _entryPoint_in_program1055 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _object__in_objOrPack1078 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _package__in_objOrPack1084 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _set_in_isOrAs0 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _EQUAL_in_equalityOperator1102 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _NEQUAL_in_equalityOperator1114 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _MORE_in_ineqOperator1132 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LESS_in_ineqOperator1144 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _MOREEQ_in_ineqOperator1156 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LESSEQ_in_ineqOperator1168 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _PLUS_in_addOperator1186 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _MINUS_in_addOperator1198 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _MULT_in_multOperator1216 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _DIVIDE_in_multOperator1228 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _MOD_in_multOperator1240 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _EQUAL_in_equalityOperator1114 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _NEQUAL_in_equalityOperator1126 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _MORE_in_ineqOperator1144 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _LESS_in_ineqOperator1156 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _MOREEQ_in_ineqOperator1168 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _LESSEQ_in_ineqOperator1180 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _PLUS_in_addOperator1198 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _MINUS_in_addOperator1210 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _MULT_in_multOperator1228 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _DIVIDE_in_multOperator1240 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _MOD_in_multOperator1252 = new BitSet(new ulong[]{0x2UL});
 		public static readonly BitSet _set_in_assignOperator0 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _MINUS_in_unaryOperator1289 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _NOT_in_unaryOperator1301 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ID_in_varDef1322 = new BitSet(new ulong[]{0x7C00000000UL,0x40000000UL});
-		public static readonly BitSet _type_in_varDef1324 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _varDef_in_varList1352 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
-		public static readonly BitSet _101_in_varList1356 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _varDef_in_varList1358 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
-		public static readonly BitSet _procDecl_in_methodDecl1384 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _funcDecl_in_methodDecl1389 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _MEMBER_in_methodModifier1400 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _STATIC_in_methodModifier1405 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodModifier_in_procDecl1423 = new BitSet(new ulong[]{0x20000000000000UL});
-		public static readonly BitSet _PROCEDURE_in_procDecl1425 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_procDecl1427 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
-		public static readonly BitSet _102_in_procDecl1429 = new BitSet(new ulong[]{0x0UL,0x8040000000UL});
-		public static readonly BitSet _varList_in_procDecl1431 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_procDecl1433 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodModifier_in_funcDecl1465 = new BitSet(new ulong[]{0x40000000000000UL});
-		public static readonly BitSet _FUNCTION_in_funcDecl1467 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_funcDecl1469 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
-		public static readonly BitSet _102_in_funcDecl1471 = new BitSet(new ulong[]{0x0UL,0x8040000000UL});
-		public static readonly BitSet _varList_in_funcDecl1473 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_funcDecl1475 = new BitSet(new ulong[]{0x0UL,0x400UL});
-		public static readonly BitSet _RETURN_in_funcDecl1477 = new BitSet(new ulong[]{0x7C00000000UL,0x40000000UL});
-		public static readonly BitSet _type_in_funcDecl1479 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodDecl_in_methodDef1508 = new BitSet(new ulong[]{0x80000000000000UL});
-		public static readonly BitSet _IS_in_methodDef1510 = new BitSet(new ulong[]{0x0UL,0x40000002UL});
-		public static readonly BitSet _declareBlock_in_methodDef1512 = new BitSet(new ulong[]{0x0UL,0x2UL});
-		public static readonly BitSet _BEGIN_in_methodDef1514 = new BitSet(new ulong[]{0xC40000000000UL,0x47C1001724UL});
-		public static readonly BitSet _codeBlock_in_methodDef1516 = new BitSet(new ulong[]{0x0UL,0x4UL});
-		public static readonly BitSet _END_in_methodDef1518 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _TYPE_in_typeDecl1545 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_typeDecl1547 = new BitSet(new ulong[]{0x80000000000000UL});
-		public static readonly BitSet _IS_in_typeDecl1549 = new BitSet(new ulong[]{0x200000000000000UL});
-		public static readonly BitSet _TABLE_in_typeDecl1551 = new BitSet(new ulong[]{0x400000000000000UL});
-		public static readonly BitSet _OF_in_typeDecl1553 = new BitSet(new ulong[]{0x7C00000000UL,0x40000000UL});
-		public static readonly BitSet _type_in_typeDecl1555 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _TYPE_in_typeDecl1574 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_typeDecl1576 = new BitSet(new ulong[]{0x80000000000000UL});
-		public static readonly BitSet _IS_in_typeDecl1578 = new BitSet(new ulong[]{0x2000000000000000UL});
-		public static readonly BitSet _RECORD_in_typeDecl1580 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
-		public static readonly BitSet _102_in_typeDecl1582 = new BitSet(new ulong[]{0x0UL,0x8040000000UL});
-		public static readonly BitSet _varList_in_typeDecl1584 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_typeDecl1586 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _objectDecl_in_object_1613 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _objectBody_in_object_1618 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _CREATE_in_objectDecl1629 = new BitSet(new ulong[]{0x20000000000UL});
-		public static readonly BitSet _TYPE_in_objectDecl1631 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_objectDecl1633 = new BitSet(new ulong[]{0x180000000000000UL});
-		public static readonly BitSet _isOrAs_in_objectDecl1635 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _OBJECT_in_objectDecl1637 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
-		public static readonly BitSet _102_in_objectDecl1639 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000001UL});
-		public static readonly BitSet _objectDeclItem_in_objectDecl1641 = new BitSet(new ulong[]{0x8060000000000000UL,0x8040000001UL});
-		public static readonly BitSet _103_in_objectDecl1644 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_objectDecl1646 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _CREATE_in_objectBody1672 = new BitSet(new ulong[]{0x20000000000UL});
-		public static readonly BitSet _TYPE_in_objectBody1674 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _BODY_in_objectBody1676 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_objectBody1678 = new BitSet(new ulong[]{0x180000000000000UL});
-		public static readonly BitSet _isOrAs_in_objectBody1680 = new BitSet(new ulong[]{0x4000000000000000UL});
-		public static readonly BitSet _OBJECT_in_objectBody1682 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000001UL});
-		public static readonly BitSet _methodDef_in_objectBody1686 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_objectBody1688 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000005UL});
-		public static readonly BitSet _END_in_objectBody1693 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_objectBody1695 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _varDef_in_objectDeclItem1721 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_objectDeclItem1723 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodDecl_in_objectDeclItem1729 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_objectDeclItem1731 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _packageDecl_in_package_1746 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _packageDef_in_package_1751 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _CREATE_in_packageDecl1762 = new BitSet(new ulong[]{0x0UL,0x8UL});
-		public static readonly BitSet _PACKAGE_in_packageDecl1764 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_packageDecl1766 = new BitSet(new ulong[]{0x180000000000000UL});
-		public static readonly BitSet _isOrAs_in_packageDecl1768 = new BitSet(new ulong[]{0x8060020000000000UL,0x40000001UL});
-		public static readonly BitSet _packageDeclItem_in_packageDecl1770 = new BitSet(new ulong[]{0x8060020000000000UL,0x40000005UL});
-		public static readonly BitSet _END_in_packageDecl1773 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_packageDecl1775 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _CREATE_in_packageDef1802 = new BitSet(new ulong[]{0x0UL,0x8UL});
-		public static readonly BitSet _PACKAGE_in_packageDef1804 = new BitSet(new ulong[]{0x10000000000000UL});
-		public static readonly BitSet _BODY_in_packageDef1806 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_packageDef1808 = new BitSet(new ulong[]{0x180000000000000UL});
-		public static readonly BitSet _isOrAs_in_packageDef1810 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000001UL});
-		public static readonly BitSet _packageBodyItem_in_packageDef1812 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000005UL});
-		public static readonly BitSet _END_in_packageDef1815 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_packageDef1817 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _varDef_in_packageDeclItem1843 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_packageDeclItem1845 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _typeDecl_in_packageDeclItem1851 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_packageDeclItem1853 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodDecl_in_packageDeclItem1859 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_packageDeclItem1861 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodDef_in_packageBodyItem1873 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_packageBodyItem1875 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _DECLARE_in_entryPoint1890 = new BitSet(new ulong[]{0x0UL,0x40000002UL});
-		public static readonly BitSet _declareBlock_in_entryPoint1892 = new BitSet(new ulong[]{0x0UL,0x2UL});
-		public static readonly BitSet _BEGIN_in_entryPoint1894 = new BitSet(new ulong[]{0xC40000000000UL,0x47C1001724UL});
-		public static readonly BitSet _codeBlock_in_entryPoint1896 = new BitSet(new ulong[]{0x0UL,0x4UL});
-		public static readonly BitSet _END_in_entryPoint1898 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_entryPoint1900 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _declareItem_in_declareBlock1926 = new BitSet(new ulong[]{0x2UL,0x40000000UL});
-		public static readonly BitSet _varDef_in_declareItem1951 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_declareItem1953 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _command_in_codeBlock1967 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
-		public static readonly BitSet _104_in_codeBlock1969 = new BitSet(new ulong[]{0xC40000000002UL,0x47C1001720UL});
-		public static readonly BitSet _assign_in_command1995 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _if__in_command2000 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _cycle_in_command2005 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expression_in_command2010 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _RETURN_in_command2015 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _expression_in_command2021 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expression_in_assign2032 = new BitSet(new ulong[]{0x0UL,0x2000000UL});
-		public static readonly BitSet _ASSIGN_in_assign2034 = new BitSet(new ulong[]{0x0UL,0x47C1001360UL});
-		public static readonly BitSet _NULL_in_assign2042 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expression_in_assign2049 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _IF_in_if_2060 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _expression_in_if_2062 = new BitSet(new ulong[]{0x80000000000UL});
-		public static readonly BitSet _THEN_in_if_2064 = new BitSet(new ulong[]{0xD40000000000UL,0x47C1001724UL});
-		public static readonly BitSet _codeBlock_in_if_2066 = new BitSet(new ulong[]{0x100000000000UL,0x4UL});
-		public static readonly BitSet _ELSE_in_if_2069 = new BitSet(new ulong[]{0xC40000000000UL,0x47C1001724UL});
-		public static readonly BitSet _codeBlock_in_if_2071 = new BitSet(new ulong[]{0x0UL,0x4UL});
-		public static readonly BitSet _END_in_if_2075 = new BitSet(new ulong[]{0x40000000000UL});
-		public static readonly BitSet _IF_in_if_2077 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _WHILE_in_cycle2108 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _expression_in_cycle2110 = new BitSet(new ulong[]{0x800000000000UL});
-		public static readonly BitSet _LOOP_in_cycle2112 = new BitSet(new ulong[]{0xC40000000000UL,0x47C1001724UL});
-		public static readonly BitSet _codeBlock_in_cycle2114 = new BitSet(new ulong[]{0x0UL,0x4UL});
-		public static readonly BitSet _END_in_cycle2116 = new BitSet(new ulong[]{0x800000000000UL});
-		public static readonly BitSet _LOOP_in_cycle2118 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _LOOP_in_cycle2137 = new BitSet(new ulong[]{0x1C40000000000UL,0x47C1001720UL});
-		public static readonly BitSet _codeBlock_in_cycle2139 = new BitSet(new ulong[]{0x1000000000000UL});
-		public static readonly BitSet _EXIT_in_cycle2141 = new BitSet(new ulong[]{0x2000000000000UL});
-		public static readonly BitSet _WHEN_in_cycle2143 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _expression_in_cycle2145 = new BitSet(new ulong[]{0x0UL,0x4UL});
-		public static readonly BitSet _END_in_cycle2147 = new BitSet(new ulong[]{0x800000000000UL});
-		public static readonly BitSet _LOOP_in_cycle2149 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expr__in_expressionList2177 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
-		public static readonly BitSet _101_in_expressionList2181 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _expr__in_expressionList2183 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
-		public static readonly BitSet _expr__in_expression2212 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _logicOr_in_expr_2235 = new BitSet(new ulong[]{0x2UL,0x47C1001320UL});
-		public static readonly BitSet _logicAnd_in_logicOr2247 = new BitSet(new ulong[]{0x2UL,0x20000UL});
-		public static readonly BitSet _OR_in_logicOr2251 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _logicAnd_in_logicOr2257 = new BitSet(new ulong[]{0x2UL,0x20000UL});
-		public static readonly BitSet _equality_in_logicAnd2270 = new BitSet(new ulong[]{0x2UL,0x10000UL});
-		public static readonly BitSet _AND_in_logicAnd2274 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _equality_in_logicAnd2280 = new BitSet(new ulong[]{0x2UL,0x10000UL});
-		public static readonly BitSet _inequality_in_equality2293 = new BitSet(new ulong[]{0x2UL,0xC0000UL});
-		public static readonly BitSet _equalityOperator_in_equality2297 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _inequality_in_equality2300 = new BitSet(new ulong[]{0x2UL,0xC0000UL});
-		public static readonly BitSet _add_in_inequality2313 = new BitSet(new ulong[]{0x2UL,0xF00000UL});
-		public static readonly BitSet _ineqOperator_in_inequality2317 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _add_in_inequality2320 = new BitSet(new ulong[]{0x2UL,0xF00000UL});
-		public static readonly BitSet _mult_in_add2334 = new BitSet(new ulong[]{0x2UL,0x1800UL});
-		public static readonly BitSet _addOperator_in_add2338 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _mult_in_add2341 = new BitSet(new ulong[]{0x2UL,0x1800UL});
-		public static readonly BitSet _cast_in_mult2357 = new BitSet(new ulong[]{0x2UL,0xE000UL});
-		public static readonly BitSet _multOperator_in_mult2361 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _cast_in_mult2364 = new BitSet(new ulong[]{0x2UL,0xE000UL});
-		public static readonly BitSet _102_in_cast2376 = new BitSet(new ulong[]{0x7C00000000UL,0x40000000UL});
-		public static readonly BitSet _type_in_cast2378 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_cast2380 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _unary_in_cast2382 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _unary_in_cast2401 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _unaryOperator_in_unary2413 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _unary_in_unary2416 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _postfix_in_unary2423 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _quant_in_postfix2438 = new BitSet(new ulong[]{0x2UL,0x21000000000UL});
-		public static readonly BitSet _tmp_in_postfix2440 = new BitSet(new ulong[]{0x2UL,0x21000000000UL});
-		public static readonly BitSet _index_in_tmp2452 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodCall_in_tmp2457 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _memberCall_in_tmp2462 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _105_in_index2473 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _expression_in_index2475 = new BitSet(new ulong[]{0x0UL,0x40000000000UL});
-		public static readonly BitSet _106_in_index2477 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _100_in_memberCall2500 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_memberCall2502 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expression_in_expressionOrEmpty2525 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _100_in_methodCall2543 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
-		public static readonly BitSet _ID_in_methodCall2545 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
-		public static readonly BitSet _102_in_methodCall2547 = new BitSet(new ulong[]{0x0UL,0xC7C1001320UL});
-		public static readonly BitSet _expressionList_in_methodCall2549 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_methodCall2551 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ID_in_createInstance2576 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
-		public static readonly BitSet _102_in_createInstance2578 = new BitSet(new ulong[]{0x0UL,0xC7C1001320UL});
-		public static readonly BitSet _expressionList_in_createInstance2580 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_createInstance2582 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _number_in_quant2607 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _bool__in_quant2614 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _string__in_quant2621 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _char__in_quant2626 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _createInstance_in_quant2633 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _102_in_quant2640 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _expr__in_quant2643 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_quant2645 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _var_in_quant2653 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _SELF_in_quant2660 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _ID_in_var2673 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _assign_in_synpred42_Plsql1995 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _expression_in_synpred45_Plsql2010 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _addOperator_in_synpred56_Plsql2338 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _mult_in_synpred56_Plsql2341 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _102_in_synpred58_Plsql2376 = new BitSet(new ulong[]{0x7C00000000UL,0x40000000UL});
-		public static readonly BitSet _type_in_synpred58_Plsql2378 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
-		public static readonly BitSet _103_in_synpred58_Plsql2380 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
-		public static readonly BitSet _unary_in_synpred58_Plsql2382 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _methodCall_in_synpred62_Plsql2457 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _createInstance_in_synpred68_Plsql2633 = new BitSet(new ulong[]{0x2UL});
-		public static readonly BitSet _var_in_synpred70_Plsql2653 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _MINUS_in_unaryOperator1301 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _NOT_in_unaryOperator1313 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ID_in_varDef1334 = new BitSet(new ulong[]{0xFC00000000UL,0x40000000UL});
+		public static readonly BitSet _type_in_varDef1336 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _varDef_in_varList1364 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
+		public static readonly BitSet _101_in_varList1368 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _varDef_in_varList1370 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
+		public static readonly BitSet _procDecl_in_methodDecl1396 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _funcDecl_in_methodDecl1401 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _MEMBER_in_methodModifier1412 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _STATIC_in_methodModifier1417 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodModifier_in_procDecl1435 = new BitSet(new ulong[]{0x20000000000000UL});
+		public static readonly BitSet _PROCEDURE_in_procDecl1437 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_procDecl1439 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_procDecl1441 = new BitSet(new ulong[]{0x0UL,0x8040000000UL});
+		public static readonly BitSet _varList_in_procDecl1443 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_procDecl1445 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodModifier_in_funcDecl1477 = new BitSet(new ulong[]{0x40000000000000UL});
+		public static readonly BitSet _FUNCTION_in_funcDecl1479 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_funcDecl1481 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_funcDecl1483 = new BitSet(new ulong[]{0x0UL,0x8040000000UL});
+		public static readonly BitSet _varList_in_funcDecl1485 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_funcDecl1487 = new BitSet(new ulong[]{0x0UL,0x400UL});
+		public static readonly BitSet _RETURN_in_funcDecl1489 = new BitSet(new ulong[]{0xFC00000000UL,0x40000000UL});
+		public static readonly BitSet _type_in_funcDecl1491 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodDecl_in_methodDef1520 = new BitSet(new ulong[]{0x80000000000000UL});
+		public static readonly BitSet _IS_in_methodDef1522 = new BitSet(new ulong[]{0x0UL,0x40000002UL});
+		public static readonly BitSet _declareBlock_in_methodDef1524 = new BitSet(new ulong[]{0x0UL,0x2UL});
+		public static readonly BitSet _BEGIN_in_methodDef1526 = new BitSet(new ulong[]{0x4C40000000000UL,0x47C1001724UL});
+		public static readonly BitSet _codeBlock_in_methodDef1528 = new BitSet(new ulong[]{0x0UL,0x4UL});
+		public static readonly BitSet _END_in_methodDef1530 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _TYPE_in_typeDecl1557 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_typeDecl1559 = new BitSet(new ulong[]{0x80000000000000UL});
+		public static readonly BitSet _IS_in_typeDecl1561 = new BitSet(new ulong[]{0x200000000000000UL});
+		public static readonly BitSet _TABLE_in_typeDecl1563 = new BitSet(new ulong[]{0x400000000000000UL});
+		public static readonly BitSet _OF_in_typeDecl1565 = new BitSet(new ulong[]{0xFC00000000UL,0x40000000UL});
+		public static readonly BitSet _type_in_typeDecl1567 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _TYPE_in_typeDecl1586 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_typeDecl1588 = new BitSet(new ulong[]{0x80000000000000UL});
+		public static readonly BitSet _IS_in_typeDecl1590 = new BitSet(new ulong[]{0x2000000000000000UL});
+		public static readonly BitSet _RECORD_in_typeDecl1592 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_typeDecl1594 = new BitSet(new ulong[]{0x0UL,0x8040000000UL});
+		public static readonly BitSet _varList_in_typeDecl1596 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_typeDecl1598 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _objectDecl_in_object_1625 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _objectBody_in_object_1630 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _CREATE_in_objectDecl1641 = new BitSet(new ulong[]{0x20000000000UL});
+		public static readonly BitSet _TYPE_in_objectDecl1643 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_objectDecl1645 = new BitSet(new ulong[]{0x180000000000000UL});
+		public static readonly BitSet _isOrAs_in_objectDecl1647 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _OBJECT_in_objectDecl1649 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_objectDecl1651 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000001UL});
+		public static readonly BitSet _objectDeclItem_in_objectDecl1653 = new BitSet(new ulong[]{0x8060000000000000UL,0x8040000001UL});
+		public static readonly BitSet _103_in_objectDecl1656 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_objectDecl1658 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _CREATE_in_objectBody1684 = new BitSet(new ulong[]{0x20000000000UL});
+		public static readonly BitSet _TYPE_in_objectBody1686 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _BODY_in_objectBody1688 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_objectBody1690 = new BitSet(new ulong[]{0x180000000000000UL});
+		public static readonly BitSet _isOrAs_in_objectBody1692 = new BitSet(new ulong[]{0x4000000000000000UL});
+		public static readonly BitSet _OBJECT_in_objectBody1694 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000001UL});
+		public static readonly BitSet _methodDef_in_objectBody1698 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_objectBody1700 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000005UL});
+		public static readonly BitSet _END_in_objectBody1705 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_objectBody1707 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _varDef_in_objectDeclItem1733 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_objectDeclItem1735 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodDecl_in_objectDeclItem1741 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_objectDeclItem1743 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _packageDecl_in_package_1758 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _packageDef_in_package_1763 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _CREATE_in_packageDecl1774 = new BitSet(new ulong[]{0x0UL,0x8UL});
+		public static readonly BitSet _PACKAGE_in_packageDecl1776 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_packageDecl1778 = new BitSet(new ulong[]{0x180000000000000UL});
+		public static readonly BitSet _isOrAs_in_packageDecl1780 = new BitSet(new ulong[]{0x8060020000000000UL,0x40000001UL});
+		public static readonly BitSet _packageDeclItem_in_packageDecl1782 = new BitSet(new ulong[]{0x8060020000000000UL,0x40000005UL});
+		public static readonly BitSet _END_in_packageDecl1785 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_packageDecl1787 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _CREATE_in_packageDef1814 = new BitSet(new ulong[]{0x0UL,0x8UL});
+		public static readonly BitSet _PACKAGE_in_packageDef1816 = new BitSet(new ulong[]{0x10000000000000UL});
+		public static readonly BitSet _BODY_in_packageDef1818 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_packageDef1820 = new BitSet(new ulong[]{0x180000000000000UL});
+		public static readonly BitSet _isOrAs_in_packageDef1822 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000001UL});
+		public static readonly BitSet _packageBodyItem_in_packageDef1824 = new BitSet(new ulong[]{0x8060000000000000UL,0x40000005UL});
+		public static readonly BitSet _END_in_packageDef1827 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_packageDef1829 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _varDef_in_packageDeclItem1855 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_packageDeclItem1857 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _typeDecl_in_packageDeclItem1863 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_packageDeclItem1865 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodDecl_in_packageDeclItem1871 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_packageDeclItem1873 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodDef_in_packageBodyItem1885 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_packageBodyItem1887 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _DECLARE_in_entryPoint1902 = new BitSet(new ulong[]{0x0UL,0x40000002UL});
+		public static readonly BitSet _declareBlock_in_entryPoint1904 = new BitSet(new ulong[]{0x0UL,0x2UL});
+		public static readonly BitSet _BEGIN_in_entryPoint1906 = new BitSet(new ulong[]{0x4C40000000000UL,0x47C1001724UL});
+		public static readonly BitSet _codeBlock_in_entryPoint1908 = new BitSet(new ulong[]{0x0UL,0x4UL});
+		public static readonly BitSet _END_in_entryPoint1910 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_entryPoint1912 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _declareItem_in_declareBlock1938 = new BitSet(new ulong[]{0x2UL,0x40000000UL});
+		public static readonly BitSet _varDef_in_declareItem1963 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_declareItem1965 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _command_in_codeBlock1979 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_codeBlock1981 = new BitSet(new ulong[]{0x4C40000000002UL,0x47C1001720UL});
+		public static readonly BitSet _assign_in_command2007 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _if__in_command2012 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _cycle_in_command2017 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expression_in_command2022 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _RETURN_in_command2027 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expression_in_command2033 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expression_in_assign2044 = new BitSet(new ulong[]{0x0UL,0x2000000UL});
+		public static readonly BitSet _ASSIGN_in_assign2046 = new BitSet(new ulong[]{0x0UL,0x47C1001360UL});
+		public static readonly BitSet _NULL_in_assign2054 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expression_in_assign2061 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _IF_in_if_2072 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expression_in_if_2074 = new BitSet(new ulong[]{0x80000000000UL});
+		public static readonly BitSet _THEN_in_if_2076 = new BitSet(new ulong[]{0x4D40000000000UL,0x47C1001724UL});
+		public static readonly BitSet _codeBlock_in_if_2078 = new BitSet(new ulong[]{0x100000000000UL,0x4UL});
+		public static readonly BitSet _ELSE_in_if_2081 = new BitSet(new ulong[]{0x4C40000000000UL,0x47C1001724UL});
+		public static readonly BitSet _codeBlock_in_if_2083 = new BitSet(new ulong[]{0x0UL,0x4UL});
+		public static readonly BitSet _END_in_if_2087 = new BitSet(new ulong[]{0x40000000000UL});
+		public static readonly BitSet _IF_in_if_2089 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _WHILE_in_cycle2120 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expression_in_cycle2122 = new BitSet(new ulong[]{0x800000000000UL});
+		public static readonly BitSet _LOOP_in_cycle2124 = new BitSet(new ulong[]{0x4C40000000000UL,0x47C1001724UL});
+		public static readonly BitSet _codeBlock_in_cycle2126 = new BitSet(new ulong[]{0x0UL,0x4UL});
+		public static readonly BitSet _END_in_cycle2128 = new BitSet(new ulong[]{0x800000000000UL});
+		public static readonly BitSet _LOOP_in_cycle2130 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _LOOP_in_cycle2149 = new BitSet(new ulong[]{0x5C40000000000UL,0x47C1001720UL});
+		public static readonly BitSet _codeBlock_in_cycle2151 = new BitSet(new ulong[]{0x1000000000000UL});
+		public static readonly BitSet _EXIT_in_cycle2153 = new BitSet(new ulong[]{0x2000000000000UL});
+		public static readonly BitSet _WHEN_in_cycle2155 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expression_in_cycle2157 = new BitSet(new ulong[]{0x0UL,0x4UL});
+		public static readonly BitSet _END_in_cycle2159 = new BitSet(new ulong[]{0x800000000000UL});
+		public static readonly BitSet _LOOP_in_cycle2161 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _FOR_in_cycle2180 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_cycle2182 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _assignOrExpression_in_cycle2184 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_cycle2186 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expression_in_cycle2188 = new BitSet(new ulong[]{0x0UL,0x10000000000UL});
+		public static readonly BitSet _104_in_cycle2190 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _assignOrExpression_in_cycle2192 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_cycle2194 = new BitSet(new ulong[]{0x4C40000000000UL,0x47C1001724UL});
+		public static readonly BitSet _codeBlock_in_cycle2196 = new BitSet(new ulong[]{0x0UL,0x4UL});
+		public static readonly BitSet _END_in_cycle2198 = new BitSet(new ulong[]{0x4000000000000UL});
+		public static readonly BitSet _FOR_in_cycle2200 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _assign_in_assignOrExpression2229 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expression_in_assignOrExpression2234 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expr__in_expressionList2247 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
+		public static readonly BitSet _101_in_expressionList2251 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expr__in_expressionList2253 = new BitSet(new ulong[]{0x2UL,0x2000000000UL});
+		public static readonly BitSet _expr__in_expression2282 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _logicOr_in_expr_2305 = new BitSet(new ulong[]{0x2UL,0x47C1001320UL});
+		public static readonly BitSet _logicAnd_in_logicOr2317 = new BitSet(new ulong[]{0x2UL,0x20000UL});
+		public static readonly BitSet _OR_in_logicOr2321 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _logicAnd_in_logicOr2327 = new BitSet(new ulong[]{0x2UL,0x20000UL});
+		public static readonly BitSet _equality_in_logicAnd2340 = new BitSet(new ulong[]{0x2UL,0x10000UL});
+		public static readonly BitSet _AND_in_logicAnd2344 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _equality_in_logicAnd2350 = new BitSet(new ulong[]{0x2UL,0x10000UL});
+		public static readonly BitSet _inequality_in_equality2363 = new BitSet(new ulong[]{0x2UL,0xC0000UL});
+		public static readonly BitSet _equalityOperator_in_equality2367 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _inequality_in_equality2370 = new BitSet(new ulong[]{0x2UL,0xC0000UL});
+		public static readonly BitSet _add_in_inequality2383 = new BitSet(new ulong[]{0x2UL,0xF00000UL});
+		public static readonly BitSet _ineqOperator_in_inequality2387 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _add_in_inequality2390 = new BitSet(new ulong[]{0x2UL,0xF00000UL});
+		public static readonly BitSet _mult_in_add2404 = new BitSet(new ulong[]{0x2UL,0x1800UL});
+		public static readonly BitSet _addOperator_in_add2408 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _mult_in_add2411 = new BitSet(new ulong[]{0x2UL,0x1800UL});
+		public static readonly BitSet _cast_in_mult2427 = new BitSet(new ulong[]{0x2UL,0xE000UL});
+		public static readonly BitSet _multOperator_in_mult2431 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _cast_in_mult2434 = new BitSet(new ulong[]{0x2UL,0xE000UL});
+		public static readonly BitSet _102_in_cast2446 = new BitSet(new ulong[]{0xFC00000000UL,0x40000000UL});
+		public static readonly BitSet _type_in_cast2448 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_cast2450 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _unary_in_cast2452 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _unary_in_cast2471 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _unaryOperator_in_unary2483 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _unary_in_unary2486 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _postfix_in_unary2493 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _quant_in_postfix2508 = new BitSet(new ulong[]{0x2UL,0x21000000000UL});
+		public static readonly BitSet _tmp_in_postfix2510 = new BitSet(new ulong[]{0x2UL,0x21000000000UL});
+		public static readonly BitSet _index_in_tmp2522 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodCall_in_tmp2527 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _memberCall_in_tmp2532 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _105_in_index2543 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expression_in_index2545 = new BitSet(new ulong[]{0x0UL,0x40000000000UL});
+		public static readonly BitSet _106_in_index2547 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _100_in_memberCall2570 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_memberCall2572 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expression_in_expressionOrEmpty2595 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _100_in_methodCall2613 = new BitSet(new ulong[]{0x0UL,0x40000000UL});
+		public static readonly BitSet _ID_in_methodCall2615 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_methodCall2617 = new BitSet(new ulong[]{0x0UL,0xC7C1001320UL});
+		public static readonly BitSet _expressionList_in_methodCall2619 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_methodCall2621 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ID_in_createInstance2646 = new BitSet(new ulong[]{0x0UL,0x4000000000UL});
+		public static readonly BitSet _102_in_createInstance2648 = new BitSet(new ulong[]{0x0UL,0xC7C1001320UL});
+		public static readonly BitSet _expressionList_in_createInstance2650 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_createInstance2652 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _number_in_quant2677 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _bool__in_quant2684 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _string__in_quant2691 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _char__in_quant2696 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _createInstance_in_quant2703 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _102_in_quant2710 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _expr__in_quant2713 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_quant2715 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _var_in_quant2723 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _SELF_in_quant2730 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _ID_in_var2743 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _assign_in_synpred43_Plsql2007 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _expression_in_synpred46_Plsql2022 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _assign_in_synpred51_Plsql2229 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _addOperator_in_synpred59_Plsql2408 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _mult_in_synpred59_Plsql2411 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _102_in_synpred61_Plsql2446 = new BitSet(new ulong[]{0xFC00000000UL,0x40000000UL});
+		public static readonly BitSet _type_in_synpred61_Plsql2448 = new BitSet(new ulong[]{0x0UL,0x8000000000UL});
+		public static readonly BitSet _103_in_synpred61_Plsql2450 = new BitSet(new ulong[]{0x0UL,0x47C1001320UL});
+		public static readonly BitSet _unary_in_synpred61_Plsql2452 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _methodCall_in_synpred65_Plsql2527 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _createInstance_in_synpred71_Plsql2703 = new BitSet(new ulong[]{0x2UL});
+		public static readonly BitSet _var_in_synpred73_Plsql2723 = new BitSet(new ulong[]{0x2UL});
 
 	}
 	#endregion Follow sets

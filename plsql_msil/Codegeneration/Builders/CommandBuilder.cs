@@ -329,10 +329,13 @@ namespace plsql_msil.Codegeneration.Builders
             return tmp;
         }
 
-        public int PrepareJump()
+        public int PrepareJump(bool pop)
         {
-            Pop();
-
+            if (pop)
+            {
+                Pop();
+            }
+         
             return Nop();
         }
 
@@ -458,15 +461,22 @@ namespace plsql_msil.Codegeneration.Builders
         protected string GetMSILTypeNameWithClass(TypeInfo type)
         {
 
-            if (type.Type == Types.Type.Class || type.Type == Types.Type.Record)
-            {
-                return "class " + GetMSILTypeName(type);
-            }
+            //if (type.Type == Types.Type.Class || type.Type == Types.Type.Record)
+            //{
+            //    return "class " + GetMSILTypeName(type);
+            //}
 
             return GetMSILTypeName(type);
         }
         protected string GetMSILTypeName(TypeInfo type)
         {
+           // return NameConvertor.Convert(type);
+
+            //if (type.Type == Types.Type.Class || type.Type == Types.Type.Record)
+            //{
+            //    return NameConvertor.Convert(type);
+            //}
+
             return NameConvertor.Convert(type);
         }
 

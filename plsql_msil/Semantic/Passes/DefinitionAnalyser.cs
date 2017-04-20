@@ -530,15 +530,15 @@ namespace plsql_msil.Semantic.Passes
                 return TypeDescriptor.Undefined;
             }
 
-            if (!lOperand.Type.IsCompatible(rOperand.Type))
-            {
-                Log(
-                    String.Format("Типы {0} и {1} не совместимы",
-                        lOperand.Type.ToString(),
-                        rOperand.Type.ToString()),
-                    node);
+            var type = Convert(lOperand.Type as SimpleType, rOperand.Type as SimpleType);
 
-                return TypeDescriptor.Undefined;
+            if (!lOperand.Type.Equals(type))
+            {
+                InsertCastNode(node, node.LeftOperand.ChildIndex, type);
+            }
+            if (!rOperand.Type.Equals(type))
+            {
+                InsertCastNode(node, node.RightOperand.ChildIndex, type);
             }
 
             return TypeDescriptor.Bool;
@@ -584,7 +584,7 @@ namespace plsql_msil.Semantic.Passes
             if (!lValue.Type.CanBeAssignedWith(rValue.Type))
             {
                 Log(
-                    String.Format("Типы {0} и {1} не совместимы",
+                    string.Format("Типы {0} и {1} не совместимы",
                         lValue.Type.ToString(),
                         rValue.Type.ToString()),
                     node);
@@ -593,6 +593,25 @@ namespace plsql_msil.Semantic.Passes
             }
 
             return lValue;
+        }
+        private TypeDescriptor Visit(ForNode node)
+        {
+            Visit(node.Init as dynamic);
+
+            var type = Visit(node.Condition as dynamic);
+
+            Visit(node.Iteration as dynamic);
+
+            Visit(node.CodeBlock);
+
+            if (!IsBoolType(type.Type))
+            {
+                Log(
+                    "В цикле for условие должно быть типа bool",
+                    node);
+            }
+
+            return null;
         }
         private TypeDescriptor Visit(WhileNode node)
         {
