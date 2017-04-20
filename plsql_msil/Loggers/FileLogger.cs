@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using plsql_msil.Semantic.Passes;
 
-namespace plsql_msil.Semantic
+namespace plsql_msil.Loggers
 {
     class FileLogger :ILogger
     {

@@ -31,10 +31,11 @@ namespace plsql_msil.Types
         public virtual string Namespace { get; protected set; }
         public virtual bool IsLibClass { get; protected set; }
 
-        public virtual bool IsCompatible(TypeInfo info)
+        public virtual bool CanBeAssignedWith(TypeInfo info)
         {
             return Equals(info);
         }
+
 
         public virtual TypeInfo GetType(string typeName)
         {
@@ -68,6 +69,7 @@ namespace plsql_msil.Types
         private static TypeInfo bool_ = new SimpleType(SimpleTypeEnum.Bool);
         private static TypeInfo int_ = new SimpleType(SimpleTypeEnum.Int);
         private static TypeInfo char_ = new SimpleType(SimpleTypeEnum.Char);
+        private static TypeInfo byte_ = new SimpleType(SimpleTypeEnum.Byte);
         private static TypeInfo double_ = new SimpleType(SimpleTypeEnum.Double);
         private static TypeInfo string_ = new SimpleType(SimpleTypeEnum.String);
         private static TypeInfo float_ = new SimpleType(SimpleTypeEnum.Float);
@@ -86,6 +88,10 @@ namespace plsql_msil.Types
         public static TypeInfo Char
         {
             get { return char_; }
+        }
+        public static TypeInfo Byte
+        {
+            get { return byte_; }
         }
         public static TypeInfo Double
         {

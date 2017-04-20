@@ -8,16 +8,26 @@ namespace plsql_msil.Types
 {
     public enum SimpleTypeEnum
     {
-        Int, Char, Bool, String, Double, Float, Void, Null, Undefined
+        Bool, Byte, Char, Int, Float, Double, String, Void, Null, Undefined
     }
 
     class SimpleType :TypeInfo
     {
 
+
         public SimpleType(SimpleTypeEnum type) :base(type.ToString().ToLower(), true)
         {
             this.SType = type;
         }
+
+        private static SimpleTypeEnum[] order = new SimpleTypeEnum[]
+        {
+            SimpleTypeEnum.Byte,
+            SimpleTypeEnum.Char,
+            SimpleTypeEnum.Int, 
+            SimpleTypeEnum.Float,
+            SimpleTypeEnum.Double
+        };
 
         public override Type Type
         {
@@ -28,6 +38,11 @@ namespace plsql_msil.Types
         {
             get;
             private set;
+        }
+
+        public bool IsNumeric()
+        {
+            return order.Contains(SType);
         }
 
     }

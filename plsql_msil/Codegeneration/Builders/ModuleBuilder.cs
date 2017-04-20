@@ -1,12 +1,9 @@
-﻿using plsql_msil.Codegeneration.Builders;
-using plsql_msil.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using plsql_msil.Types;
 
-namespace plsql_msil.Codegeneration
+namespace plsql_msil.Codegeneration.Builders
 {
     class ModuleBuilder : Builder
     {

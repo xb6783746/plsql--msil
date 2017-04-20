@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Loggers;
 using plsql_msil.TypeLoader;
 
 /*

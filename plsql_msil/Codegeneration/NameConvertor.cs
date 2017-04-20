@@ -14,8 +14,8 @@ namespace plsql_msil.Codegeneration
         {
             {SimpleTypeEnum.Int, "int32"},
             {SimpleTypeEnum.Char, "char"},
-            {SimpleTypeEnum.Double, "double"},
-            {SimpleTypeEnum.Float, "float"},
+            {SimpleTypeEnum.Double, "float64"},
+            {SimpleTypeEnum.Float, "float32"},
             {SimpleTypeEnum.String, "string"},
             {SimpleTypeEnum.Bool, "bool"},
             {SimpleTypeEnum.Void, "void"}

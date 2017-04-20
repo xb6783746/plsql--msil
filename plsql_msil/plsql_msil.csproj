@@ -77,7 +77,9 @@
     <Compile Include="AstNodes\MethodNodes\MethodCallNode.cs" />
     <Compile Include="AstNodes\MethodNodes\MethodDefNode.cs" />
     <Compile Include="AstNodes\MethodNodes\MethodDeclNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\CastNode.cs" />
     <Compile Include="AstNodes\OtherNodes\BoolNode.cs" />
+    <Compile Include="AstNodes\OtherNodes\ByteNode.cs" />
     <Compile Include="AstNodes\OtherNodes\FloatNode.cs" />
     <Compile Include="AstNodes\OtherNodes\RealNode.cs" />
     <Compile Include="AstNodes\OtherNodes\IntegerNode.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Types\LibraryInfo.cs" />
     <Compile Include="Types\ConstructorInfo.cs" />
     <Compile Include="Types\MethodInfo.cs" />
+    <Compile Include="Types\OperatorTable.cs" />
     <Compile Include="Types\PackageType.cs" />
     <Compile Include="Types\SimpeType.cs" />
     <Compile Include="Types\RecordType.cs" />
@@ -155,6 +158,9 @@
   <ItemGroup>
     <Content Include="example.c" />
     <Content Include="lib.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Examples\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

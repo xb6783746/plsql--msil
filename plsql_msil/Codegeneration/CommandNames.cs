@@ -67,8 +67,10 @@ namespace plsql_msil.Codegeneration
         Ret,
         Pop,
 
+        CastByte,
         CastInt,
         CastChar,
+        CastFloat,
         CastDouble,
 
         IndexVal,
@@ -150,8 +152,10 @@ namespace plsql_msil.Codegeneration
                 {Code.Ret, "ret"},
                 {Code.Pop, "pop"},
 
+                {Code.CastByte, "conv.u1"},
                 {Code.CastInt, "conv.i4"},
-                {Code.CastChar, "conv.i2"},
+                {Code.CastChar, "conv.u2"},
+                {Code.CastFloat, "conv.r4"},
                 {Code.CastDouble, "conv.r8"},
 
                 {Code.IndexVal, "ldelem"},

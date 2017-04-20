@@ -1,20 +1,20 @@
-﻿using Antlr.Runtime.Tree;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using plsql_msil.AstNodes.TypeNodes;
+using Antlr.Runtime;
+using Antlr.Runtime.Tree;
+using plsql_msil.AstNodes;
+using plsql_msil.AstNodes.ClassNodes;
 using plsql_msil.AstNodes.CommandNodes;
 using plsql_msil.AstNodes.MathNodes;
 using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
-using plsql_msil.AstNodes;
 using plsql_msil.AstNodes.PackageNodes;
-using plsql_msil.AstNodes.ClassNodes;
+using plsql_msil.Loggers;
 using plsql_msil.Types;
+using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
 
-namespace plsql_msil.Semantic
+namespace plsql_msil.Semantic.Passes
 {
     class DefinitionAnalyser : Analyser, IPass
     {
@@ -24,9 +24,11 @@ namespace plsql_msil.Semantic
             this.types = types;
 
             context = new Context(types);
+            operatorTable = new OperatorTable();
         }
 
         private Context context;
+        private OperatorTable operatorTable;
 
         public bool Check(CommonTree tree, ILogger logger)
         {
@@ -436,7 +438,7 @@ namespace plsql_msil.Semantic
             if (!IsNumericType(lOperand.Type) || !IsNumericType(rOperand.Type))
             {
                 Log(
-                    String.Format("Оператор {0} не может применяться для типов {1} и {2}",
+                    string.Format("Оператор {0} не может применяться для типов {1} и {2}",
                         node.Text,
                         lOperand.Type.ToString(),
                         rOperand.Type.ToString()),
@@ -445,18 +447,18 @@ namespace plsql_msil.Semantic
                 return TypeDescriptor.Undefined;
             }
 
-            if (!lOperand.Type.IsCompatible(rOperand.Type))
-            {
-                Log(
-                    String.Format("Типы {0} и {1} не совместимы",
-                        lOperand.Type.ToString(),
-                        rOperand.Type.ToString()),
-                    node);
+            var type = Convert(lOperand.Type as SimpleType, rOperand.Type as SimpleType);
 
-                return TypeDescriptor.Undefined;
+            if (!lOperand.Type.Equals(type))
+            {
+                InsertCastNode(node, node.LeftOperand.ChildIndex, type);
+            }
+            if (!rOperand.Type.Equals(type))
+            {
+                InsertCastNode(node, node.RightOperand.ChildIndex, type);
             }
 
-            return lOperand;
+            return new TypeDescriptor(false, type);
 
         }
 
@@ -542,9 +544,29 @@ namespace plsql_msil.Semantic
             return TypeDescriptor.Bool;
         }
 
+        private TypeDescriptor Visit(CastNode node)
+        {
+            var expType = Visit(node.Expression as dynamic);
+            var convertType = context.GetType(node.TypeNode.TypeName);
+
+            if (!IsNumericType(expType.Type) || !IsNumericType(convertType))
+            {
+                Log(
+                    "Явное преобразование может применяться только для числовых типов",
+                    node);
+
+                return TypeDescriptor.Undefined;
+            }
+
+            node.Type = convertType;
+
+            return new TypeDescriptor(false, convertType);
+
+        }
+
         private TypeDescriptor Visit(AssignNode node)
         {
-            var lValue = Visit(node.LValue as dynamic);
+            TypeDescriptor lValue = Visit(node.LValue as dynamic);
             var rValue = Visit(node.Expression as dynamic);
 
             if (lValue.Type.Equals(TypeInfo.Undefined) || rValue.Type.Equals(TypeInfo.Undefined))
@@ -559,7 +581,7 @@ namespace plsql_msil.Semantic
                 return TypeDescriptor.Undefined;
             }
 
-            if (!lValue.Type.IsCompatible(rValue.Type))
+            if (!lValue.Type.CanBeAssignedWith(rValue.Type))
             {
                 Log(
                     String.Format("Типы {0} и {1} не совместимы",
@@ -654,7 +676,7 @@ namespace plsql_msil.Semantic
         {
             TypeDescriptor type = Visit(node.Expression);
 
-            if(!type.Type.IsCompatible(context.CurrentMethod.Ret))
+            if (!context.CurrentMethod.Ret.CanBeAssignedWith(type.Type))
             {
                 Log(String.Format("Попытка вернуть тип {0}, возвращаемый тип метода - {1}", 
                         type.ToString(),
@@ -690,6 +712,27 @@ namespace plsql_msil.Semantic
             }
 
             return vars;
+        }
+
+        private SimpleType Convert(SimpleType l, SimpleType r)
+        {
+            return l.SType < r.SType ? r : l;
+        }
+        private void InsertCastNode(CommonTree parent, int index, TypeInfo type)
+        {
+            CastNode newNode = new CastNode(new CommonToken(-1, "Cast"));
+            newNode.Type = type;
+            newNode.Parent = parent;
+
+            var oldNode = parent.GetChild(index);
+
+            oldNode.Parent = newNode;
+            newNode.AddChild(oldNode);
+
+            parent.DeleteChild(index);
+            parent.InsertChild(index, newNode);
+
+
         }
 
         private bool IsNumericType(TypeInfo type)

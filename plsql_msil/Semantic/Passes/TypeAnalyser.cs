@@ -1,18 +1,15 @@
-﻿using Antlr.Runtime.Tree;
-using plsql_msil.AstNodes;
+﻿using System;
+using System.Collections.Generic;
+using Antlr.Runtime.Tree;
 using plsql_msil.AstNodes.ClassNodes;
 using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
 using plsql_msil.AstNodes.PackageNodes;
 using plsql_msil.AstNodes.TypeNodes;
+using plsql_msil.Loggers;
 using plsql_msil.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace plsql_msil.Semantic
+namespace plsql_msil.Semantic.Passes
 {
     enum LogLevel
     {

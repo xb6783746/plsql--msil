@@ -1,6 +1,7 @@
 ﻿using plsql_msil.Types;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,19 +71,19 @@ namespace plsql_msil.Codegeneration.Builders
         {
             Push();
 
-            AddCommand(Code.LDouble, val.ToString());
+            AddCommand(Code.LDouble, val.ToString(CultureInfo.InvariantCulture));
         }
         public void LoadFloat(float val)
         {
             Push();
 
-            AddCommand(Code.LFloat, val.ToString());
+            AddCommand(Code.LFloat, val.ToString(CultureInfo.InvariantCulture));
         }
         public void LoadString(string val)
         {
             Push();
 
-            AddCommand(Code.LString, String.Format("\"{0}\"", val));
+            AddCommand(Code.LString, string.Format("\"{0}\"", val));
         }
         public void LoadBool(bool val)
         {
@@ -287,6 +288,36 @@ namespace plsql_msil.Codegeneration.Builders
         {
             LoadInt(0);
             Equal();
+        }
+
+        public void Convert(SimpleTypeEnum stype)
+        {
+            Code c = Code.CastInt;
+            switch (stype)
+            {
+                case SimpleTypeEnum.Bool:
+                    c = Code.CastByte;
+                    break;
+                case SimpleTypeEnum.Byte:
+                    c = Code.CastByte;
+                    break;
+                case SimpleTypeEnum.Char:
+                    c = Code.CastChar;
+                    break;
+                case SimpleTypeEnum.Int:
+                    c = Code.CastInt;
+                    break;
+                case SimpleTypeEnum.Float:
+                    c = Code.CastFloat;
+                    break;
+                case SimpleTypeEnum.Double:
+                    c = Code.CastDouble;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("stype", stype, null);
+            }
+
+            AddCommand(c, "");
         }
 
         public int Nop()

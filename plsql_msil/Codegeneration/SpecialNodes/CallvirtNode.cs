@@ -1,15 +1,10 @@
-﻿using Antlr.Runtime;
-using Antlr.Runtime.Tree;
+﻿using System.Collections.Generic;
+using Antlr.Runtime;
+using plsql_msil.AstNodes;
 using plsql_msil.AstNodes.MathNodes;
-using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace plsql_msil.AstNodes.SpecialNodes
+namespace plsql_msil.Codegeneration.SpecialNodes
 {
     class CallvirtNode :BasicNode
     {

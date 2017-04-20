@@ -3,40 +3,39 @@ using Antlr.Runtime.Tree;
 using plsql_msil.AstNodes.TypeNodes;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace plsql_msil.AstNodes.OtherNodes
 {
-    class RealNode : BasicNode
+    class ByteNode : BasicNode
     {
-        public RealNode(CommonTree node)
+        public ByteNode(CommonTree node)
             : base(node)
         {
 
         }
-        public RealNode(IToken t)
+        public ByteNode(IToken t)
             : base(t)
         {
 
         }
 
-        public RealNode(int t)
-            : base(new CommonToken(t, "Real"))
+        public ByteNode(int t)
+            : base(new CommonToken(t, "Byte"))
         {
 
         }
 
         public override ITree DupNode()
         {
-            return new RealNode(Token);
+            return new ByteNode(Token);
         }
 
-        public double Value
+        public byte Value
         {
-            get { return double.Parse(Text, CultureInfo.InvariantCulture); }
+            get { return byte.Parse(Text); }
         }
     }
 }

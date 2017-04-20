@@ -6,7 +6,6 @@ using plsql_msil.AstNodes.MathNodes;
 using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
 using plsql_msil.AstNodes.PackageNodes;
-using plsql_msil.AstNodes.SpecialNodes;
 using plsql_msil.Semantic;
 using plsql_msil.Types;
 using System;
@@ -14,6 +13,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Codegeneration.Builders;
+using plsql_msil.Codegeneration.SpecialNodes;
+using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
 
 namespace plsql_msil.Codegeneration
 {
@@ -306,6 +308,16 @@ namespace plsql_msil.Codegeneration
             var res = Visit(node.Operand as dynamic, builder);
 
             builder.Not();
+
+            return res;
+        }
+        private TypeInfo Visit(CastNode node, MethodBuilder builder)
+        {
+            var res = Visit(node.Expression as dynamic, builder);
+
+            var convType = node.Type as SimpleType;
+
+            builder.Convert(convType.SType);
 
             return res;
         }

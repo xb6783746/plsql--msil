@@ -6,7 +6,6 @@ using plsql_msil.AstNodes.MathNodes;
 using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
 using plsql_msil.AstNodes.PackageNodes;
-using plsql_msil.AstNodes.SpecialNodes;
 using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Types;
 using System;
@@ -14,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Codegeneration.SpecialNodes;
 
 namespace plsql_msil.Codegeneration
 {

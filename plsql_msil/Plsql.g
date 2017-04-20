@@ -32,6 +32,7 @@ tokens
 	CodeBlock;
 	MemberCall;
 	MethodCall;
+	Cast;
 	Expression;
 	ExpressionList;
 	StringLiteral;
@@ -40,6 +41,7 @@ tokens
 	CreateInstance;
 	Void;
 
+	BYTE = 'byte';
 	INT = 'int';
 	CHAR = 'char';
 	BOOL = 'bool';
@@ -174,6 +176,7 @@ number
 
 type
 	:	INT -> INT<TypeNode>
+	|	BYTE -> BYTE<TypeNode>
 	|	CHAR -> CHAR<TypeNode>
 	|	DOUBLE -> DOUBLE<TypeNode>
 	|   BOOL -> BOOL<TypeNode>
@@ -414,13 +417,20 @@ inequality
 add	:   mult ( addOperator^ mult)*
     ;
 
-mult:   unary ( multOperator^ unary)*
+mult:   cast ( multOperator^ cast)*
+	;
+	
+cast: '(' type ')' unary
+	-> ^(Cast<CastNode> unary type)
+	| unary
 	;
 
 unary
 	: (unaryOperator^ unary) 
 	| postfix
 	;
+	
+	
 
 postfix
 	: quant tmp^*

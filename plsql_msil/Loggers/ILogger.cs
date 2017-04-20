@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using plsql_msil.Semantic.Passes;
 
-namespace plsql_msil.Semantic
+namespace plsql_msil.Loggers
 {
     interface ILogger
     {
