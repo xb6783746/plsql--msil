@@ -157,15 +157,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Examples\nn\compile.bat" />
+    <None Include="Examples\nn\testImages.idx3-ubyte" />
+    <None Include="Examples\nn\testLabels.idx1-ubyte" />
+    <None Include="Examples\nn\trainImages.idx3-ubyte" />
+    <None Include="Examples\nn\trainLabels.idx1-ubyte" />
     <None Include="Plsql.g" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="example.c" />
+    <Content Include="Examples\nn\example.c" />
+    <Content Include="Examples\nn\layer.c" />
+    <Content Include="Examples\nn\lib.dll" />
+    <Content Include="Examples\nn\matrix.c" />
+    <Content Include="Examples\nn\MNISTImages.c" />
+    <Content Include="Examples\nn\net.c" />
     <Content Include="lib.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Examples\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>ilasm.bat</PostBuildEvent>
