@@ -29,5 +29,11 @@ namespace plsql_msil.Types
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            var type = obj as TableType;
+
+            return type != null && type.ItemsType.Equals(this.ItemsType);
+        }
     }
 }

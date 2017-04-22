@@ -349,7 +349,7 @@ namespace plsql_msil.Semantic.Passes
 
             if(!type.ContainsConstructor(typeList))
             {
-                Log(String.Format("У класса {0} нет конструктора, принимающего данные аргументы", node.TypeName), node);
+                Log(string.Format("У класса {0} нет конструктора, принимающего данные аргументы", node.TypeName), node);
 
                 return TypeDescriptor.Undefined;
             }

@@ -445,8 +445,9 @@ namespace plsql_msil.Codegeneration
 
             VarInfo varInfo = types.GetType(whereType.Name).GetField(node.MemberName);
 
-            lastType = whereType;
-            lastVar = varInfo;
+            //lastType = whereType;
+            //lastVar = varInfo;
+            // TODO Я НЕ ПОМНЮ, ЗАЧЕМ ЭТО
 
             builder.LoadToStack(whereType, varInfo);
 

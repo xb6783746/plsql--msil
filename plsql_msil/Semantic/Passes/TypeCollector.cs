@@ -28,7 +28,6 @@ namespace plsql_msil.Semantic.Passes
             this.logger = logger;
 
             CollectTypeInfo(tree);
-            CollectAnonymousTypes(tree);
 
             return !this.Error;
         }
@@ -42,25 +41,6 @@ namespace plsql_msil.Semantic.Passes
                 CollectTypeInfo(item as dynamic);
             }
 
-        }
-        private void CollectAnonymousTypes(CommonTree tree)
-        {
-
-            foreach (var item in tree.Children.OfType<ClassDefNode>())
-            {
-
-                foreach (var method in item.Defs)
-                {
-                    CollectAnonymousTypes(method);
-                }
-            }
-
-            var entryPoint = tree.Children.FirstOrDefault(x => x is EntryPointNode) as EntryPointNode;
-
-            if (entryPoint != null)
-            {
-                CollectAnonymousTypes(entryPoint);
-            }
         }
 
         private void CollectTypeInfo(ClassDeclNode node)
@@ -156,45 +136,5 @@ namespace plsql_msil.Semantic.Passes
 
         }
 
-
-        private void CollectAnonymousTypes(MethodDefNode node)
-        {
-            var decls = node.DeclareBlock.Decls
-                .Where(x => x.VarType is TableTypeNode)
-                .Select(x => x.VarType as TableTypeNode);
-
-            foreach (var item in decls)
-            {
-                types.AddType(GetType(item));
-            }
-
-
-        }
-        private void CollectAnonymousTypes(EntryPointNode node)
-        {
-            var decls = node.DeclareItems.OfType<VarDefNode>()
-                .Where(x => x.VarType is TableTypeNode)
-                .Select(x => x.VarType as TableTypeNode);
-
-            foreach (var item in decls)
-            {
-                types.AddType(GetType(item));
-            }
-
-
-        }
-
-        private TypeInfo GetType(TypeNode node)
-        {
-            return types.GetType(node.TypeName);
-        }
-        private TypeInfo GetType(TableTypeNode node)
-        {
-            var type = GetType(node.TypeNode as dynamic);
-
-            types.AddType(type);
-
-            return new TableType(node.TypeName, type);
-        }
     }
 }

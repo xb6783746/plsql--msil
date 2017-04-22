@@ -30,6 +30,7 @@ namespace plsql_msil
     {
 
         private static bool printTree;
+        private static bool all;
         private static string printTreeFile;
         private static string outFile;
 
@@ -47,6 +48,7 @@ namespace plsql_msil
     -src (path)+  задает пути к файлам, которые необходимо скомпилировать
 Опцинально:
     -libs (path)+  задает пути к библиотекам
+    -all
     -out path   выводит сообщения в файл с данным путем, по умолчанию - в консоль
     -tree (path)?   выводит дерево в консоль, если path не задан, иначе - в файл с данным путем;
     по умолчанию дерево не выводится
@@ -62,6 +64,7 @@ namespace plsql_msil
             helper.Register("src", SourceFiles);
             helper.Register("out", OutFile);
             helper.Register("libs", Libs);
+            helper.Register("all", All);
 
             try
             {
@@ -92,47 +95,79 @@ namespace plsql_msil
                 treeLogger = GetLogger(printTreeFile);
             }
 
-            foreach(var item in sourceFiles)
+            if (all)
             {
-                CompileFile(item, typeStorage.Clone(), logger, treeLogger);
+                CompileAll(sourceFiles, typeStorage.Clone(), logger, treeLogger);
             }
-            
+            else
+            {
+                foreach (var item in sourceFiles)
+                {
+                    CompileFile(item, typeStorage.Clone(), logger, treeLogger);
+                }
+            }
+
+        }
+
+        private static void CompileFile(Stream fileStream, string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger)
+        {
+
+            logger.Log(String.Format("----Файл {0}----", path));
+
+            var stream = new ANTLRInputStream(fileStream);
+            var lexer = new PlsqlLexer(stream);
+            var parser = new PlsqlParser(new CommonTokenStream(lexer));
+            var tree = parser.program().Tree as CommonTree;
+
+            if (treeLogger != null)
+            {
+                treeLogger.Log(ASTPrinter.Print(tree));
+            }
+
+            var semanticAnalyser = new SemanticAnalyser(typeStorage);
+            bool res = semanticAnalyser.Check(tree, logger);
+
+            if (res)
+            {
+                var codegenerator = new Codegenerator();
+                string code = codegenerator.Generate(tree, typeStorage);
+
+                using (var writer = new StreamWriter(path + ".il"))
+                {
+                    writer.Write(code);
+                }
+
+            }
+
+            logger.Log(string.Format("--------", path));
         }
 
         private static void CompileFile(string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger)
         {
             using (var fileStream = new FileStream(path, FileMode.Open))
             {
+                CompileFile(fileStream, path, typeStorage, logger, treeLogger);
+            }
+        }
+        private static void CompileAll(List<string> files, TypeStorage typeStorage, ILogger logger, ILogger treeLogger)
+        {
+            using (var memoryStream = new MemoryStream())
+            using (var fileWriter = new StreamWriter(memoryStream))
+            {             
 
-                logger.Log(String.Format("----Файл {0}----", path));
-
-                var stream = new ANTLRInputStream(fileStream);
-                var lexer = new PlsqlLexer(stream);
-                var parser = new PlsqlParser(new CommonTokenStream(lexer));
-                var tree = parser.program().Tree as CommonTree;
-
-                if(treeLogger != null)
+                foreach (var item in files)
                 {
-                    treeLogger.Log(ASTPrinter.Print(tree));
-                }
-
-                var semanticAnalyser = new SemanticAnalyser(typeStorage);
-                bool res = semanticAnalyser.Check(tree, logger);
-
-                if (res)
-                {
-                    var codegenerator = new Codegenerator();
-                    string code = codegenerator.Generate(tree, typeStorage);
-
-                    using (var writer = new StreamWriter(path + ".il"))
+                    using (var fileStream = new StreamReader(item))
                     {
-                        writer.Write(code);
-                    }
+                        fileWriter.WriteLine(fileStream.ReadToEnd());
 
+                        fileWriter.Flush();
+                    }
                 }
 
-                logger.Log(string.Format("--------", path));
+                memoryStream.Position = 0;
 
+                CompileFile(memoryStream, "out", typeStorage, logger, treeLogger);
             }
         }
 
@@ -153,6 +188,10 @@ namespace plsql_msil
             }
 
             libs.AddRange(args);
+        }
+        private static void All(List<string> args)
+        {
+            all = true;
         }
 
         private static void OutFile(List<string> args)

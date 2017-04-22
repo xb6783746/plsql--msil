@@ -35,13 +35,15 @@ namespace plsql_msil.Types
         public TypeInfo GetType(string name)
         {
 
-            return types.FirstOrDefault(x => x.Name == name);
+            var type = types.FirstOrDefault(x => x.Name.Equals(name)) ?? GetSpecialType(name);
+
+            return type;
         }
 
         public bool Exists(string name)
         {
 
-            return GetType(name) != null;
+            return types.FirstOrDefault(x => x.Name.Equals(name)) != null;
         }
 
         public TypeStorage Clone()
@@ -52,6 +54,34 @@ namespace plsql_msil.Types
             typeStorage.libs = new List<LibraryInfo>(libs);
 
             return typeStorage;
+        }
+
+        private TypeInfo GetSpecialType(string name)
+        {
+            if (!name.StartsWith("table"))
+            {
+                return null;
+            }
+
+            int start = name.IndexOf("(");
+            int end = name.LastIndexOf(")");
+
+            string newName = name.Substring(start + 1, name.Length - 2 - start);
+
+            var inner = GetType(newName);
+
+            TypeInfo res = null;
+
+            if (inner != null)
+            {
+                res = new TableType(name, inner);
+
+                AddType(res);
+            }
+
+            return res;
+
+
         }
 
 
