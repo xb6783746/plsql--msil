@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using plsql_msil.Loggers;
+using plsql_msil.Optimization;
 using plsql_msil.TypeLoader;
 
 /*
@@ -129,6 +130,9 @@ namespace plsql_msil
 
             if (res)
             {
+                var optimizer = new Optimizer();
+                optimizer.Optimize(tree, logger);
+
                 var codegenerator = new Codegenerator();
                 string code = codegenerator.Generate(tree, typeStorage);
 

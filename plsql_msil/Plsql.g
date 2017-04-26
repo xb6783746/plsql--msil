@@ -70,6 +70,8 @@ tokens
 	IS = 'is';
 	AS = 'as';
 	TABLE = 'table';
+	INDEX = 'index';
+	BY = 'by';
 	OF = 'of';
 	INDEX = 'index';
 	BY = 'by';
@@ -183,8 +185,12 @@ type
 	|   BOOL -> BOOL<TypeNode>
 	|   ID '.' ID
 	->  ^(TypeName<TypeNode> ID ID)
+	|	TABLE '(' type ')' INDEX BY type
+	->  ^(TypeName<DictionaryTypeNode> type type)
 	|	TABLE '(' type ')'
 	->  ^(TypeName<TableTypeNode> type)
+	|	type '[' expression? ']'
+	->  ^(TypeName<TypeNode> type expression?)
 	|   ID -> ID<TypeNode>
 	;
 

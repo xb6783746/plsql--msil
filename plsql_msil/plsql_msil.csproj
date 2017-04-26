@@ -123,6 +123,8 @@
     <Compile Include="Codegeneration\SpecialNodes\VarNode.cs" />
     <Compile Include="ConsoleHelper.cs" />
     <Compile Include="Loggers\FileLogger.cs" />
+    <Compile Include="Optimization\Optimizer.cs" />
+    <Compile Include="Optimization\Passes\ConstantConvolution.cs" />
     <Compile Include="PlsqlLexer.cs" />
     <Compile Include="PlsqlParser.cs" />
     <Compile Include="Program.cs" />
