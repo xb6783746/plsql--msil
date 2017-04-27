@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace plsql_msil.Types
 {
+    public enum GenericTypeEnum
+    {
+        Table, Dictionary, Array
+    }
+
     public enum SimpleTypeEnum
     {
         Bool, Byte, Char, Int, Float, Double, String, Void, Null, Undefined

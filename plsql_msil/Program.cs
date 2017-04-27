@@ -85,7 +85,8 @@ namespace plsql_msil
                 return;
             }
 
-            var typeLoader = new StandardLibraryTypesLoader();
+            var nameConvertor = new CSNameConvertor();
+            var typeLoader = new StandardLibraryTypesLoader(nameConvertor);
             var typeStorage = typeLoader.Load(libs);
 
             ILogger logger = GetLogger(outFile);
@@ -98,19 +99,19 @@ namespace plsql_msil
 
             if (all)
             {
-                CompileAll(sourceFiles, typeStorage.Clone(), logger, treeLogger);
+                CompileAll(sourceFiles, typeStorage.Clone(), logger, treeLogger, nameConvertor);
             }
             else
             {
                 foreach (var item in sourceFiles)
                 {
-                    CompileFile(item, typeStorage.Clone(), logger, treeLogger);
+                    CompileFile(item, typeStorage.Clone(), logger, treeLogger, nameConvertor);
                 }
             }
 
         }
 
-        private static void CompileFile(Stream fileStream, string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger)
+        private static void CompileFile(Stream fileStream, string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger, INameConvertor nameConvertor)
         {
 
             logger.Log(String.Format("----Файл {0}----", path));
@@ -133,7 +134,7 @@ namespace plsql_msil
                 var optimizer = new Optimizer();
                 optimizer.Optimize(tree, logger);
 
-                var codegenerator = new Codegenerator();
+                var codegenerator = new Codegenerator(nameConvertor);
                 string code = codegenerator.Generate(tree, typeStorage);
 
                 using (var writer = new StreamWriter(path + ".il"))
@@ -146,14 +147,14 @@ namespace plsql_msil
             logger.Log(string.Format("--------", path));
         }
 
-        private static void CompileFile(string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger)
+        private static void CompileFile(string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger, CSNameConvertor nameConvertor)
         {
             using (var fileStream = new FileStream(path, FileMode.Open))
             {
-                CompileFile(fileStream, path, typeStorage, logger, treeLogger);
+                CompileFile(fileStream, path, typeStorage, logger, treeLogger, nameConvertor);
             }
         }
-        private static void CompileAll(List<string> files, TypeStorage typeStorage, ILogger logger, ILogger treeLogger)
+        private static void CompileAll(List<string> files, TypeStorage typeStorage, ILogger logger, ILogger treeLogger, CSNameConvertor nameConvertor)
         {
             using (var memoryStream = new MemoryStream())
             using (var fileWriter = new StreamWriter(memoryStream))
@@ -171,7 +172,7 @@ namespace plsql_msil
 
                 memoryStream.Position = 0;
 
-                CompileFile(memoryStream, "out", typeStorage, logger, treeLogger);
+                CompileFile(memoryStream, "out", typeStorage, logger, treeLogger, nameConvertor);
             }
         }
 

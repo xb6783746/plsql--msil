@@ -7,19 +7,29 @@ namespace plsql_msil.TypeLoader
 {
     class StandardLibraryTypesLoader
     {
+        public StandardLibraryTypesLoader(CSNameConvertor nameConvertor)
+        {
+            this.nameConvertor = nameConvertor;
+        }
+
         public TypeStorage Load(List<string> libs)
         {
 
             var assemblies = libs.Select(Assembly.LoadFrom).ToList();
             return Load(assemblies);
         }
+
         public TypeStorage Load(List<Assembly> libs)
         {
             storage = new TypeStorage();
             GetSimpleTypes(storage);
 
-            classLoader = new ClassLoader(storage);
-            packageLoader = new PackageLoader(storage);
+            map.Add(GenericTypeEnum.Table, "List");
+            map.Add(GenericTypeEnum.Dictionary, "Dictionary");
+
+            classLoader = new ClassLoader(storage, nameConvertor);
+            packageLoader = new PackageLoader(storage, nameConvertor);
+            genericLoader = new GenericLoader(storage, nameConvertor);
 
             LoadTypes(libs);
 
@@ -27,9 +37,13 @@ namespace plsql_msil.TypeLoader
         }
 
         private TypeStorage storage;
+        private CSNameConvertor nameConvertor;
 
         private ClassLoader classLoader;
         private PackageLoader packageLoader;
+        private GenericLoader genericLoader;
+
+        private Dictionary<GenericTypeEnum, string> map = new Dictionary<GenericTypeEnum, string>();
 
         private void GetSimpleTypes(TypeStorage storage)
         {
@@ -69,7 +83,7 @@ namespace plsql_msil.TypeLoader
 
             foreach (var item in types)
             {
-                storage.AddType(GetTypeInfo(item));
+                GetTypeInfo(item);
             }
 
             foreach (var item in types)
@@ -78,25 +92,47 @@ namespace plsql_msil.TypeLoader
             }
         }
 
-        private plsql_msil.Types.TypeInfo GetTypeInfo(System.Type type)
+        private void GetTypeInfo(System.Type stype)
         {
 
-            return type.IsAbstract ? 
-                  new PackageType(type.Assembly.GetName().Name, type.Namespace, type.Name, true) 
-                : new ClassType(type.Assembly.GetName().Name, type.Namespace, type.Name, true);
+            if (stype.IsGenericType)
+            {
+                var template = new GenericTemplate(stype.Name, stype.GetGenericArguments().Length);
+
+                storage.AddTemplate(template);
+            }
+            else
+            {
+                var type = stype.IsAbstract
+                    ? new PackageType(stype.Assembly.GetName().Name, stype.Namespace, stype.Name, true)
+                    : new ClassType(stype.Assembly.GetName().Name, stype.Namespace, stype.Name, true);
+
+                storage.AddType(type);
+            }
+
+            nameConvertor.Register(stype.Assembly.GetName().Name, stype.Namespace, stype.Name, stype.Name);
         }
 
         private void BuildType(System.Type type)
         {
-            var typeInfo = storage.GetType(type.Name);
-
-            if (type.IsAbstract)
+            if (type.IsGenericType)
             {
-                packageLoader.Build(typeInfo as PackageType, type);
+                var genericTemplate = storage.GetTemplate(type.Name);
+
+                genericLoader.Build(genericTemplate, type);
             }
             else
             {
-                classLoader.Build(typeInfo as ClassType, type);
+                var typeInfo = storage.GetType(type.Name);
+
+                if (type.IsAbstract)
+                {
+                    packageLoader.Build(typeInfo as PackageType, type);
+                }
+                else
+                {
+                    classLoader.Build(typeInfo as ClassType, type);
+                }
             }
         }
 

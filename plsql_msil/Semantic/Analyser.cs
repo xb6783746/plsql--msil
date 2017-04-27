@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Loggers;
 using plsql_msil.Semantic.Passes;
 
@@ -49,24 +50,62 @@ namespace plsql_msil.Semantic
         protected VarStruct GetVar(VarDefNode node)
         {
             string name = node.VarName;
-            string typeName = node.VarType.TypeName;
+            //string typeName = node.VarType.TypeName;
 
-            var type = types.GetType(typeName);
+            var type = Visit(node.VarType as dynamic);
 
-            VarStruct var = new VarStruct(name, type);
+            VarStruct var = new VarStruct(name, type.Type);
 
-            if (type == null)
+            if (type.Type == null)
             {
                 Log(
                     String.Format("У переменной {0} тип {1} не существует",
                         name,
-                        typeName),
+                        node.VarType.TypeName),
                     node);
             }
 
             return var;
 
         }
+
+        protected TypeInfo GenerateTableType(TypeNode node)
+        {
+            var type = Visit(node as dynamic);
+
+            var tableTypeTemplate = types.GetTemplate("List`1");
+
+            return tableTypeTemplate.Generate(type.Type);
+
+        }
+        protected TypeInfo GenerateDictionaryType(TypeNode kTypeNode, TypeNode valTypeNode)
+        {
+            var type = Visit(kTypeNode as dynamic);
+
+            var valType = Visit(valTypeNode as dynamic);
+
+            var dictTypeTemplate = types.GetTemplate("Dictionary`2");
+
+            return dictTypeTemplate.Generate(type.Type, valType.Type);
+        }
+
+        private TypeDescriptor Visit(TypeNode node)
+        {
+            return new TypeDescriptor(false, types.GetType(node.TypeName), false);
+        }
+        private TypeDescriptor Visit(TableTypeNode node)
+        {
+            var tableType = GenerateTableType(node.TypeNode);
+
+            return new TypeDescriptor(false, tableType, false);
+        }
+        private TypeDescriptor Visit(DictionaryTypeNode node)
+        {
+            var dictType = GenerateDictionaryType(node.IndexTypeNode, node.TypeNode);
+
+            return new TypeDescriptor(false, dictType, false);
+        }
+
         protected MethodStruct GetMethod(MethodDeclNode node)
         {
 

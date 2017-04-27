@@ -6,8 +6,8 @@ namespace plsql_msil.Codegeneration.Builders
 {
     class PackageBuilder : ClassBuilder
     {
-        public PackageBuilder(PackageType packageType)
-            : base(packageType)
+        public PackageBuilder(PackageType packageType, INameConvertor nameConvertor)
+            : base(packageType, nameConvertor)
         {
 
             template.Replace("{__innerTypes}", GetInnerTypes(packageType));

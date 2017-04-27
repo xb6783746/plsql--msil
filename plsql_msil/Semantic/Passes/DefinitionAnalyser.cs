@@ -361,9 +361,22 @@ namespace plsql_msil.Semantic.Passes
         }
         private TypeDescriptor Visit(CreateTableNode node)
         {
-            node.TableType = context.GetType(string.Format("table({0})", node.TypeNode.TypeName));
+            //node.TableType = context.GetType(node.TypeName);
 
-            return new TypeDescriptor(false, node.TableType, true);
+            TypeInfo res;
+
+            if (!node.IsTable)
+            {
+                res = GenerateDictionaryType(node.TypeNode, node.ValueTypeNode);
+            }
+            else
+            {
+                res = GenerateTableType(node.TypeNode);
+            }
+
+            context.Types.AddType(res);
+
+            return new TypeDescriptor(false, res, true);
         }
         private TypeDescriptor Visit(MethodCallNode node)
         {

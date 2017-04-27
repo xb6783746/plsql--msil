@@ -8,7 +8,7 @@ namespace plsql_msil.Types
 {
     enum Type
     {
-        Simple, Class, Package, Record, Table
+        Simple, Class, Package, Record, Table, Generic
     }
 
     abstract class TypeInfo

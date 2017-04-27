@@ -10,9 +10,10 @@ namespace plsql_msil.Codegeneration.Builders
 {
     class CommandBuilder
     {
-        public CommandBuilder()
+        public CommandBuilder(INameConvertor nameConvertor)
         {
             commandNames = CommandNames.Instance;
+            this.nameConvertor = nameConvertor;
         }
 
         protected int counter;
@@ -20,6 +21,7 @@ namespace plsql_msil.Codegeneration.Builders
         protected int maxStack;
         protected CommandNames commandNames;
 
+        protected INameConvertor nameConvertor;
         protected List<Command> commands = new List<Command>();
 
         public int Stack { get { return currentStack; } }
@@ -477,7 +479,7 @@ namespace plsql_msil.Codegeneration.Builders
             //    return NameConvertor.Convert(type);
             //}
 
-            return NameConvertor.Convert(type);
+            return nameConvertor.Convert(type);
         }
 
         protected string GetCode()

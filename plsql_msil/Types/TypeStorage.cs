@@ -15,6 +15,7 @@ namespace plsql_msil.Types
 
         private List<TypeInfo> types = new List<TypeInfo>();
         private List<LibraryInfo> libs = new List<LibraryInfo>();
+        private List<GenericTemplate> genericTemplates = new List<GenericTemplate>();
 
         public List<TypeInfo> Types { get { return types; } }
 
@@ -32,12 +33,29 @@ namespace plsql_msil.Types
             return ok;
         }
 
+        public bool AddTemplate(GenericTemplate template)
+        {
+            bool ok = genericTemplates.Exists(x => x.Name == template.Name);
+
+            if (!ok)
+            {
+                genericTemplates.Add(template);
+            }
+
+            return ok;
+        }
+
         public TypeInfo GetType(string name)
         {
 
             var type = types.FirstOrDefault(x => x.Name.Equals(name)) ?? GetSpecialType(name);
 
             return type;
+        }
+        public GenericTemplate GetTemplate(string name)
+        {
+
+            return genericTemplates.FirstOrDefault(x => x.Name.Equals(name));
         }
 
         public bool Exists(string name)
@@ -52,6 +70,7 @@ namespace plsql_msil.Types
 
             typeStorage.types = new List<TypeInfo>(types);
             typeStorage.libs = new List<LibraryInfo>(libs);
+            typeStorage.genericTemplates = new List<GenericTemplate>(genericTemplates);
 
             return typeStorage;
         }

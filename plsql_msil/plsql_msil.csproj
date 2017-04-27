@@ -95,6 +95,8 @@
     <Compile Include="AstNodes\PackageNodes\PackageDefNode.cs" />
     <Compile Include="AstNodes\PackageNodes\PackageDeclNode.cs" />
     <Compile Include="AstNodes\TypeNodes\RecordNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\DictionaryTypeNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\ArrayTypeNode.cs" />
     <Compile Include="AstNodes\TypeNodes\TableTypeNode.cs" />
     <Compile Include="AstNodes\TypeNodes\TableNode.cs" />
     <Compile Include="AstNodes\TypeNodes\VoidNode.cs" />
@@ -113,7 +115,9 @@
     <Compile Include="Codegeneration\Codegenerator.cs" />
     <Compile Include="Codegeneration\Command.cs" />
     <Compile Include="Codegeneration\CommandNames.cs" />
-    <Compile Include="Codegeneration\GenericType.cs" />
+    <Compile Include="TypeLoader\GenericLoader.cs" />
+    <Compile Include="Types\GenericTemplate.cs" />
+    <Compile Include="Types\GenericType.cs" />
     <Compile Include="Codegeneration\IPreGenPass.cs" />
     <Compile Include="Codegeneration\NameConvertor.cs" />
     <Compile Include="Codegeneration\AssignPass.cs" />
@@ -145,13 +149,16 @@
     <Compile Include="Semantic\TypeDescriptor.cs" />
     <Compile Include="Semantic\VarTable.cs" />
     <Compile Include="Types\ClassType.cs" />
+    <Compile Include="Types\INameConvertor.cs" />
     <Compile Include="Types\LibraryInfo.cs" />
     <Compile Include="Types\ConstructorInfo.cs" />
     <Compile Include="Types\MethodInfo.cs" />
+    <Compile Include="Types\NameConvertor.cs" />
     <Compile Include="Types\OperatorTable.cs" />
     <Compile Include="Types\PackageType.cs" />
     <Compile Include="Types\SimpeType.cs" />
     <Compile Include="Types\RecordType.cs" />
+    <Compile Include="Types\GenericClassType.cs" />
     <Compile Include="Types\TableType.cs" />
     <Compile Include="Types\TypeInfo.cs" />
     <Compile Include="Types\TypeStorage.cs" />

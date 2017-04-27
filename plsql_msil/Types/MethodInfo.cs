@@ -16,6 +16,8 @@ namespace plsql_msil.Types
             IsStatic = isStatic;
 
             Where = where;
+
+            GenericArgs = new List<int>();
         }
 
         private List<VarInfo> args = new List<VarInfo>();
@@ -27,6 +29,7 @@ namespace plsql_msil.Types
         public List<VarInfo> Vars { get { return vars; } }
         public TypeInfo Ret { get; private set; }
         public ClassType Where { get; private set; }
+        public List<int> GenericArgs { get; private set; }
 
         public List<TypeInfo> ArgTypes { get { return args.Select(x => x.Type).ToList(); } }
 

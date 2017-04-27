@@ -6,34 +6,34 @@ using System.Threading.Tasks;
 
 namespace plsql_msil.Types
 {
-    class TableType :ClassType
-    {
+    //class TableType :ClassType
+    //{
 
-        public TableType(string packageName, string name, TypeInfo itemsType)
-            : this(packageName + "." + name, itemsType)
-        {
-        }
-        public TableType(string name, TypeInfo itemsType)
-            : base(name, true)
-        {
-            ItemsType = itemsType;
-        }
+    //    public TableType(string packageName, string name, TypeInfo type)
+    //        : this(packageName + "." + name, type)
+    //    {
+    //    }
+    //    public TableType(string name, TypeInfo type)
+    //        : base(name, true)
+    //    {
+    //        ItemsType = type;
+    //    }
 
-        public TypeInfo ItemsType { get; private set; }
+    //    public TypeInfo ItemsType { get; private set; }
 
-        public override Type Type
-        {
-            get
-            {
-                return Type.Table;
-            }
-        }
+    //    public override Type Type
+    //    {
+    //        get
+    //        {
+    //            return Type.Table;
+    //        }
+    //    }
 
-        public override bool Equals(object obj)
-        {
-            var type = obj as TableType;
+    //    public override bool Equals(object obj)
+    //    {
+    //        var type = obj as TableType;
 
-            return type != null && type.ItemsType.Equals(this.ItemsType);
-        }
-    }
+    //        return type != null && type.ItemsType.Equals(this.ItemsType);
+    //    }
+    //}
 }

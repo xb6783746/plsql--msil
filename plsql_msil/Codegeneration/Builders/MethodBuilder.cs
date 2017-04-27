@@ -12,7 +12,8 @@ namespace plsql_msil.Codegeneration.Builders
 
     class MethodBuilder : CommandBuilder, IBuilder
     {
-        public MethodBuilder(MethodInfo methodInfo, bool isEntryPoint)
+        public MethodBuilder(MethodInfo methodInfo, bool isEntryPoint, INameConvertor nameConvertor)
+            :base(nameConvertor)
         {
             this.methodInfo = methodInfo;
 
@@ -22,7 +23,8 @@ namespace plsql_msil.Codegeneration.Builders
             InitLocals(methodInfo);
 
         }
-        public MethodBuilder(MethodInfo methodInfo) :this(methodInfo, false)
+        public MethodBuilder(MethodInfo methodInfo, INameConvertor nameConvertor)
+            : this(methodInfo, false, nameConvertor)
         {
         }
 

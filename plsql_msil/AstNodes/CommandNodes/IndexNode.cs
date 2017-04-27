@@ -51,7 +51,7 @@ namespace plsql_msil.AstNodes.CommandNodes
             }
         }
 
-        public TableType TableType { get; set; }
+        //public TableType TableType { get; set; }
 
     }
 }

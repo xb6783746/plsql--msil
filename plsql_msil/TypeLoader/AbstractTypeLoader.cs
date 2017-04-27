@@ -11,14 +11,16 @@ namespace plsql_msil.TypeLoader
     class AbstractTypeLoader
     {
 
-        public AbstractTypeLoader(TypeStorage storage)
+        public AbstractTypeLoader(TypeStorage storage, CSNameConvertor nameConvertor)
         {
 
             this.storage = storage;
+            this.nameConvertor = nameConvertor;
         }
 
 
         protected TypeStorage storage;
+        private CSNameConvertor nameConvertor;
 
         protected void Build(ClassType classType, System.Type type, Func<FieldInfo, bool> fieldCond, Func<System.Reflection.MethodInfo, bool> methodCond)
         {

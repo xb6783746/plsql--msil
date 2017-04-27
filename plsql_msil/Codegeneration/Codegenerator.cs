@@ -11,13 +11,16 @@ namespace plsql_msil.Codegeneration
     class Codegenerator
     {
 
-        public Codegenerator()
+        public Codegenerator(INameConvertor nameConvertor)
         {
             passes.Add(new AssignPass());
+
+            this.nameConvertor = nameConvertor;
         }
 
         private List<IPreGenPass> passes = new List<IPreGenPass>();
         private Codegen codegen = new Codegen();
+        private INameConvertor nameConvertor;
 
         public string Generate(CommonTree tree, TypeStorage types)
         {
@@ -27,7 +30,7 @@ namespace plsql_msil.Codegeneration
                 item.Pass(tree);
             }
 
-            return codegen.Generate(tree, types);
+            return codegen.Generate(tree, types, nameConvertor);
         }
     }
 }

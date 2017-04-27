@@ -28,6 +28,12 @@ namespace plsql_msil.Semantic
             return Types.GetType(name);
         }
 
+        public GenericTemplate GetTemplate(string name)
+        {
+
+            return Types.GetTemplate(name);
+        }
+
         public void EnterClass(TypeInfo type)
         {
             Self = type;

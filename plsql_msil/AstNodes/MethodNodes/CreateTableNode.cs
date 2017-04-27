@@ -11,7 +11,7 @@ using plsql_msil.Types;
 
 namespace plsql_msil.AstNodes.MethodNodes
 {
-    class CreateTableNode :BasicNode
+    class CreateTableNode :TypeNode
     {
         public CreateTableNode(CommonTree node)
             : base(node)
@@ -34,10 +34,22 @@ namespace plsql_msil.AstNodes.MethodNodes
             return new CreateTableNode(Type);
         }
 
-
+        public bool IsTable
+        {
+            get { return ChildCount == 1; }
+        }
         public TypeNode TypeNode
         {
             get { return GetChild(0) as TypeNode; }
+        }
+
+        public override string TypeName
+        {
+            get { return string.Format("table({0})", TypeNode.TypeName); }
+        }
+        public TypeNode ValueTypeNode
+        {
+            get { return GetChild(1) as TypeNode; }
         }
 
         public TypeInfo TableType { get; set; }

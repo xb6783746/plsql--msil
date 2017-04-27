@@ -9,7 +9,8 @@ namespace plsql_msil.TypeLoader
 {
     class PackageLoader : AbstractTypeLoader
     {
-        public PackageLoader(TypeStorage storage) : base(storage)
+        public PackageLoader(TypeStorage storage, CSNameConvertor nameConvertor)
+            : base(storage, nameConvertor)
         {
         }
 

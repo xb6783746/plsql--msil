@@ -25,11 +25,11 @@ namespace plsql_msil.Codegeneration
         private TypeStorage types;
         private ModuleBuilder builder;
 
-        public string Generate(CommonTree tree, TypeStorage types)
+        public string Generate(CommonTree tree, TypeStorage types, INameConvertor nameConvertor)
         {
             this.types = types;
 
-            builder = new ModuleBuilder(types.Libs);
+            builder = new ModuleBuilder(types.Libs, nameConvertor);
 
             var defs = tree.Children.Where(x => x is ClassDefNode || x is PackageDefNode || x is EntryPointNode);
 

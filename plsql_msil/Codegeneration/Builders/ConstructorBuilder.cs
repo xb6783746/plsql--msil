@@ -10,7 +10,8 @@ namespace plsql_msil.Codegeneration.Builders
     class ConstructorBuilder : MethodBuilder
     {
 
-        public ConstructorBuilder(ConstructorInfo type) :base(type)
+        public ConstructorBuilder(ConstructorInfo type, INameConvertor nameConvertor)
+            : base(type, nameConvertor)
         {
 
             Fill(type);

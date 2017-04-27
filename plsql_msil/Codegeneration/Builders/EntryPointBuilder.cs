@@ -9,8 +9,8 @@ namespace plsql_msil.Codegeneration.Builders
 {
     class EntryPointBuilder :MethodBuilder
     {
-        public EntryPointBuilder(MethodInfo methodInfo)
-            : base(methodInfo, true)
+        public EntryPointBuilder(MethodInfo methodInfo, INameConvertor nameConvertor)
+            : base(methodInfo, true, nameConvertor)
         {
         }
 

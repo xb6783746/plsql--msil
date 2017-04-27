@@ -70,6 +70,7 @@ tokens
 	IS = 'is';
 	AS = 'as';
 	TABLE = 'table';
+	ARRAY = 'array';
 	INDEX = 'index';
 	BY = 'by';
 	OF = 'of';
@@ -189,10 +190,12 @@ type
 	->  ^(TypeName<DictionaryTypeNode> type type)
 	|	TABLE '(' type ')'
 	->  ^(TypeName<TableTypeNode> type)
-	|	type '[' expression? ']'
-	->  ^(TypeName<TypeNode> type expression?)
+	|	ARRAY '(' type ')' '[' expression? ']'
+	->  ^(TypeName<ArrayTypeNode> type expression?)
 	|   ID -> ID<TypeNode>
 	;
+	
+
 
 public program
 	: objOrPack* entryPoint
@@ -479,8 +482,8 @@ methodCall
 createInstance
 	: ID '(' expressionList ')'
 	-> ^(CreateInstance<CreateInstanceNode> ID expressionList)
-	| TABLE '(' type ')'
-	-> ^(CreateInstance<CreateTableNode> type)
+	| TABLE '(' type (',' type)? ')'
+	-> ^(CreateInstance<CreateTableNode> type type?)
 	;
 
 quant

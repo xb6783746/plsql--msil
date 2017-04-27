@@ -12,7 +12,8 @@ namespace plsql_msil.TypeLoader
     class ClassLoader :AbstractTypeLoader
     {
 
-        public ClassLoader(TypeStorage storage): base(storage)
+        public ClassLoader(TypeStorage storage, CSNameConvertor nameConvertor)
+            : base(storage, nameConvertor)
         {
         }
 

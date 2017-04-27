@@ -7,7 +7,7 @@ namespace plsql_msil.Codegeneration.Builders
 {
     class ClassBuilder : Builder
     {
-        public ClassBuilder(ClassType classType)
+        public ClassBuilder(ClassType classType, INameConvertor nameConvertor)
         {
             ClassType = classType;
 
@@ -29,6 +29,8 @@ namespace plsql_msil.Codegeneration.Builders
 }
 ");
 
+        private INameConvertor nameConvertor;
+
         protected virtual void Build(ClassType classType)
         {
             template.Replace("{__className}", classType.Name);
@@ -38,7 +40,7 @@ namespace plsql_msil.Codegeneration.Builders
 
         protected virtual void BuildConstructor()
         {
-            var builder = new ConstructorBuilder(ClassType.Constructors[0]); //плохо
+            var builder = new ConstructorBuilder(ClassType.Constructors[0], nameConvertor); //плохо
             template.Replace("{__constructorCode}", builder.Generate());
         }
 
@@ -60,7 +62,7 @@ namespace plsql_msil.Codegeneration.Builders
 
         public MethodBuilder BuildMethod(MethodInfo methodInfo)
         {
-            var methodBuilder = new MethodBuilder(methodInfo);
+            var methodBuilder = new MethodBuilder(methodInfo, nameConvertor);
             builders.Add(methodBuilder);
 
             return methodBuilder;
@@ -77,7 +79,7 @@ namespace plsql_msil.Codegeneration.Builders
 
         private string GetMSILTypeName(TypeInfo type)
         {
-            return NameConvertor.Convert(type);
+            return nameConvertor.Convert(type);
         }
     }
 }

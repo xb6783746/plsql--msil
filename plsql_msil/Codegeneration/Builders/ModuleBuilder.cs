@@ -8,12 +8,14 @@ namespace plsql_msil.Codegeneration.Builders
     class ModuleBuilder : Builder
     {
 
-        public ModuleBuilder(List<LibraryInfo> libs)
+        public ModuleBuilder(List<LibraryInfo> libs, INameConvertor nameConvertor)
         {
             BuildAssemblies(libs);
+            this.nameConvertor = nameConvertor;
         }
 
         private MethodBuilder entryPoint;
+        private INameConvertor nameConvertor;
 
         private string assemblyTemplate =
 @"
@@ -93,14 +95,14 @@ namespace plsql_msil.Codegeneration.Builders
 
         public ClassBuilder BuildClass(ClassType classType)
         {
-            var classBuilder = new ClassBuilder(classType);
+            var classBuilder = new ClassBuilder(classType, nameConvertor);
             builders.Add(classBuilder);
 
             return classBuilder;
         }
         public PackageBuilder BuildPackage(PackageType packageType)
         {
-            var packageBuilder = new PackageBuilder(packageType);
+            var packageBuilder = new PackageBuilder(packageType, nameConvertor);
             builders.Add(packageBuilder);
 
             return packageBuilder;
@@ -120,7 +122,7 @@ namespace plsql_msil.Codegeneration.Builders
                 methodInfo.AddVar(item.Name, item.Type);
             }
 
-            entryPoint = new EntryPointBuilder(methodInfo);
+            entryPoint = new EntryPointBuilder(methodInfo, nameConvertor);
 
             builders.Add(entryPoint);
 
