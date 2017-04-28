@@ -65,23 +65,6 @@ namespace plsql_msil.Codegeneration
 
                 replace = new AssignMemberCallNode(lvalue as MemberCallNode);
             }
-            else if (lvalue is IndexNode)
-            {
-                var indexNode = lvalue as IndexNode;
-
-                var methodInfo = new MethodInfo("set_Item", TypeInfo.Void, false, indexNode.TableType);
-                methodInfo.AddArg("a", genericFirst);
-                methodInfo.AddArg("b", genericSecond);
-
-                parent = node.Parent as CommonTree;
-                index = node.ChildIndex;
-
-                replace = new CallvirtNode(
-                    methodInfo, 
-                    indexNode.Where, 
-                    new List<ExpressionNode>() { indexNode.Index, node.Expression }
-                    );
-            }
 
 
             Replace(parent, replace, index);

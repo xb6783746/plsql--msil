@@ -76,6 +76,7 @@
     <Compile Include="AstNodes\MathNodes\PlusNode.cs" />
     <Compile Include="AstNodes\MethodNodes\CreateTableNode.cs" />
     <Compile Include="AstNodes\MethodNodes\CreateInstanceNode.cs" />
+    <Compile Include="AstNodes\MethodNodes\SpecialMethodCallNode.cs" />
     <Compile Include="AstNodes\MethodNodes\MethodCallNode.cs" />
     <Compile Include="AstNodes\MethodNodes\MethodDefNode.cs" />
     <Compile Include="AstNodes\MethodNodes\MethodDeclNode.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Codegeneration\Codegenerator.cs" />
     <Compile Include="Codegeneration\Command.cs" />
     <Compile Include="Codegeneration\CommandNames.cs" />
+    <Compile Include="Semantic\Passes\OperatorPass.cs" />
     <Compile Include="TypeLoader\GenericLoader.cs" />
     <Compile Include="Types\GenericTemplate.cs" />
     <Compile Include="Types\GenericType.cs" />

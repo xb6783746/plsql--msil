@@ -67,11 +67,11 @@ namespace plsql_msil.Types
         private string GenericType(GenericClassType type)
         {
 
-            string prefix = names[type.Name];
+            string prefix = names[type.RealName];
 
             prefix += "<" + Convert(type.ItemsType[0]);
 
-            for (int i = 0; i < type.ItemsType.Length; i++)
+            for (int i = 1; i < type.ItemsType.Length; i++)
             {
                 prefix += ", " + Convert(type.ItemsType[i]);
             }

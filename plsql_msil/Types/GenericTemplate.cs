@@ -80,6 +80,7 @@ namespace plsql_msil.Types
                 var gtype = item.type as GenericType;
 
                 res.AddArg(item.name, gtype != null ? types[gtype.Number] : item.type);
+                res.GenericArgs.Add(gtype != null ? gtype.Number : -1);
             }
 
             return res;

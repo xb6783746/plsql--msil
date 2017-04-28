@@ -374,6 +374,7 @@ namespace plsql_msil.Semantic.Passes
                 res = GenerateTableType(node.TypeNode);
             }
 
+            node.TableType = res;
             context.Types.AddType(res);
 
             return new TypeDescriptor(false, res, true);
@@ -664,31 +665,33 @@ namespace plsql_msil.Semantic.Passes
         }
         private TypeDescriptor Visit(IndexNode node)
         {
-            var obj = Visit(node.Where as dynamic);
+            //var obj = Visit(node.Where as dynamic);
 
-            var index = Visit(node.Index);
+            //var index = Visit(node.Index);
 
-            var tableType = obj.Type as TableType;
+            //var tableType = obj.Type as TableType;
 
-            if (!obj.IsObject || tableType == null)
-            {
-                Log("Оператор [] может применяться только для экземпляра типа Table", node);
+            //if (!obj.IsObject || tableType == null)
+            //{
+            //    Log("Оператор [] может применяться только для экземпляра типа Table", node);
 
-                return TypeDescriptor.Undefined;
-            }
+            //    return TypeDescriptor.Undefined;
+            //}
 
-            var indexType = index.Type as SimpleType;
+            //var indexType = index.Type as SimpleType;
 
-            if (indexType == null || indexType.SType != SimpleTypeEnum.Int)
-            {
-                Log("Индексом может быть только целое число", node);
+            //if (indexType == null || indexType.SType != SimpleTypeEnum.Int)
+            //{
+            //    Log("Индексом может быть только целое число", node);
 
-                return TypeDescriptor.Undefined;
-            }
+            //    return TypeDescriptor.Undefined;
+            //}
 
-            node.TableType = tableType;
+            //node.TableType = tableType;
 
-            return new TypeDescriptor(true, tableType.ItemsType, true);
+            //return new TypeDescriptor(true, tableType.ItemsType, true);
+
+            return TypeDescriptor.Undefined;
         }
         private TypeDescriptor Visit(MemberCallNode node)
         {

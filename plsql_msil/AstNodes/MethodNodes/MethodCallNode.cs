@@ -33,12 +33,12 @@ namespace plsql_msil.AstNodes.MethodNodes
             return new MethodCallNode(Type);
         }
 
-        public string MethodName
+        public virtual string MethodName
         {
             get { return GetChild(0).Text; }
         }
 
-        public List<BasicNode> Arguments
+        public virtual List<BasicNode> Arguments
         {
             get 
             {
@@ -55,7 +55,7 @@ namespace plsql_msil.AstNodes.MethodNodes
             }
         }
 
-        public BasicNode Where
+        public virtual BasicNode Where
         {
             get
             {

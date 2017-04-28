@@ -20,6 +20,7 @@ namespace plsql_msil.Semantic
 
             passList.Add(new TypeCollector(types));
             passList.Add(new TypeBuilder(types));
+            passList.Add(new OperatorPass());
             passList.Add(new DefinitionAnalyser(types));
         }
 

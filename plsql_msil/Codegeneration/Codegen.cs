@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Codegeneration.Builders;
 using plsql_msil.Codegeneration.SpecialNodes;
 using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
@@ -112,10 +113,47 @@ namespace plsql_msil.Codegeneration
             string name = node.VarName;
             string typeName = node.VarType.TypeName;
 
-            var type = types.GetType(typeName);
+            var type = Visit(node.VarType as dynamic);
 
-            return new VarInfo(name, type, location);
+            return new VarInfo(name, type.Type, location);
 
+        }
+
+        protected TypeInfo GenerateTableType(TypeNode node)
+        {
+            var type = Visit(node as dynamic);
+
+            var tableTypeTemplate = types.GetTemplate("List`1");
+
+            return tableTypeTemplate.Generate(type.Type);
+
+        }
+        protected TypeInfo GenerateDictionaryType(TypeNode kTypeNode, TypeNode valTypeNode)
+        {
+            var type = Visit(kTypeNode as dynamic);
+
+            var valType = Visit(valTypeNode as dynamic);
+
+            var dictTypeTemplate = types.GetTemplate("Dictionary`2");
+
+            return dictTypeTemplate.Generate(type.Type, valType.Type);
+        }
+
+        private TypeDescriptor Visit(TypeNode node)
+        {
+            return new TypeDescriptor(false, types.GetType(node.TypeName), false);
+        }
+        private TypeDescriptor Visit(TableTypeNode node)
+        {
+            var tableType = GenerateTableType(node.TypeNode);
+
+            return new TypeDescriptor(false, tableType, false);
+        }
+        private TypeDescriptor Visit(DictionaryTypeNode node)
+        {
+            var dictType = GenerateDictionaryType(node.IndexTypeNode, node.TypeNode);
+
+            return new TypeDescriptor(false, dictType, false);
         }
 
         private TypeInfo Visit(BoolNode node, MethodBuilder builder)
@@ -426,18 +464,20 @@ namespace plsql_msil.Codegeneration
         private TypeInfo Visit(IndexNode node, MethodBuilder builder)
         {
 
-            var genericFirst = new GenericType();
-            var genericSecond = new GenericType(1);
+            //var genericFirst = new GenericType();
+            //var genericSecond = new GenericType(1);
 
-            var methodInfo = new MethodInfo("get_Item", genericSecond, false, node.TableType);
-            methodInfo.AddArg("a", genericFirst);
+            //var methodInfo = new MethodInfo("get_Item", genericSecond, false, node.TableType);
+            //methodInfo.AddArg("a", genericFirst);
 
-            Visit(node.Where as dynamic, builder);
-            Visit(node.Index, builder);
+            //Visit(node.Where as dynamic, builder);
+            //Visit(node.Index, builder);
 
-            builder.Callvirt(methodInfo);
+            //builder.Callvirt(methodInfo);
 
-            return node.TableType.ItemsType;
+            //return node.TableType.ItemsType;
+
+            return null;
         }
         private TypeInfo Visit(MemberCallNode node, MethodBuilder builder)
         {

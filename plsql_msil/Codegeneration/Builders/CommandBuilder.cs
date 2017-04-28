@@ -436,7 +436,7 @@ namespace plsql_msil.Codegeneration.Builders
                 GetMSILTypeNameWithClass(method.Ret),
                 GetMSILTypeName(method.Where),
                 method.Name,
-                GetTypeList(method.Arguments.Select(x => x.Type).ToList()));
+                GetTypeList(method));
         }
         protected string GetTypeList(List<TypeInfo> types)
         {
@@ -445,6 +445,21 @@ namespace plsql_msil.Codegeneration.Builders
             foreach (var item in types)
             {
                 builder.AppendFormat(" {0},", GetMSILTypeNameWithClass(item));
+            }
+
+            builder.Remove(builder.Length - 1, 1);
+
+            return builder.ToString();
+        }
+        protected string GetTypeList(MethodInfo method)
+        {
+            StringBuilder builder = new StringBuilder(" ");
+
+            int i = 0;
+            foreach (var item in method.ArgTypes)
+            {             
+                builder.AppendFormat(" {0},", method.GenericArgs[i] >= 0 ? "!" + method.GenericArgs[i] : GetMSILTypeNameWithClass(item));
+                i++;
             }
 
             builder.Remove(builder.Length - 1, 1);

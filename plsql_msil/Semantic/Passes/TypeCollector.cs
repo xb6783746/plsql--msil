@@ -123,16 +123,16 @@ namespace plsql_msil.Semantic.Passes
         private void CollectTable(TableNode node, PackageType packageType)
         {
 
-            var tableType = new TableType(
-                                packageType.Name, node.Name, types.GetType(node.TypeNode.TypeName));
+            //var tableType = new TableType(
+            //                    packageType.Name, node.Name, types.GetType(node.TypeNode.TypeName));
 
-            bool ok = packageType.AddType(tableType);
-            types.AddType(tableType);
+            //bool ok = packageType.AddType(tableType);
+            //types.AddType(tableType);
 
-            if (!ok)
-            {
-                Log(String.Format("Таблица с именем {0} уже существует", node.Name), node);
-            }
+            //if (!ok)
+            //{
+            //    Log(String.Format("Таблица с именем {0} уже существует", node.Name), node);
+            //}
 
         }
 
