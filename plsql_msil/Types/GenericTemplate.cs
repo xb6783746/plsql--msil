@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using plsql_msil.TypeLoader;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Types
 {
     class GenericMehodInfo
     {
-        public GenericMehodInfo(List<TypeWithName> args, TypeInfo ret, string name, bool isStatic)
+        public GenericMehodInfo(List<VarInfo> args, TypeInfo ret, string name, bool isStatic)
         {
             this.args = args;
             this.ret = ret;
@@ -17,7 +18,7 @@ namespace plsql_msil.Types
             this.isStatic = isStatic;
         }
 
-        public List<TypeWithName> args;
+        public List<VarInfo> args;
         public TypeInfo ret;
         public string name;
         public bool isStatic;
@@ -38,11 +39,11 @@ namespace plsql_msil.Types
         public List<GenericMehodInfo> Methods { get; private set; }
         public List<GenericMehodInfo> Constructors { get; private set; }
 
-        public void AddMethod(string name, List<TypeWithName> args, TypeInfo ret, bool isStatic)
+        public void AddMethod(string name, List<VarInfo> args, TypeInfo ret, bool isStatic)
         {
             Methods.Add(new GenericMehodInfo(args, ret, name, isStatic));
         }
-        public void AddConstructor(List<TypeWithName> args)
+        public void AddConstructor(List<VarInfo> args)
         {
             Constructors.Add(new GenericMehodInfo(args, TypeInfo.Void, "", false));
         }
@@ -77,10 +78,18 @@ namespace plsql_msil.Types
 
             foreach (var item in method.args)
             {
-                var gtype = item.type as GenericType;
+                var gtype = item.Type as GenericType;
 
-                res.AddArg(item.name, gtype != null ? types[gtype.Number] : item.type);
-                res.GenericArgs.Add(gtype != null ? gtype.Number : -1);
+                if (gtype != null)
+                {
+                    res.AddGenericArg(item.Name, types[gtype.Number], gtype.Number);
+                }
+                else
+                {
+                    res.AddArg(item.Name, item.Type);
+                }
+
+                //res.GenericArgs.Add(gtype != null ? gtype.Number : -1);
             }
 
             return res;

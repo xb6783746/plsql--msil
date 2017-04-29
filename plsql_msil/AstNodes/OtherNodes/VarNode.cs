@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.AstNodes.OtherNodes
 {
@@ -39,6 +40,6 @@ namespace plsql_msil.AstNodes.OtherNodes
             get { return Text; }
         }
 
-        public VarInfo VarInfo { get; set; }
+        //public VarInfo VarInfo { get; set; }
     }
 }

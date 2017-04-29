@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using plsql_msil.Types;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Codegeneration.Builders
 {
@@ -15,7 +16,7 @@ namespace plsql_msil.Codegeneration.Builders
         public MethodBuilder(MethodInfo methodInfo, bool isEntryPoint, INameConvertor nameConvertor)
             :base(nameConvertor)
         {
-            this.methodInfo = methodInfo;
+            this.MethodInfo = methodInfo;
 
             template.Replace("{__entryPoint}", isEntryPoint? ".entrypoint" : "");
 
@@ -28,8 +29,8 @@ namespace plsql_msil.Codegeneration.Builders
         {
         }
 
-        private MethodInfo methodInfo;
-        
+        public MethodInfo MethodInfo { get; private set; }
+
 
         private StringBuilder template = new StringBuilder(
 @"
@@ -65,14 +66,14 @@ namespace plsql_msil.Codegeneration.Builders
 
         }
 
-        protected string GetArgsString(List<VarInfo> vars)
+        protected string GetArgsString(List<MethodVarInfo> vars)
         {
             var builder = new StringBuilder(" ");
 
             foreach (var item in vars)
             {
                 builder.AppendFormat(" {0} {1},",
-                    GetMSILTypeNameWithClass(item.Type),
+                    GetMSILTypeName(item.Type),
                     item.Name);
             }
 
@@ -84,13 +85,13 @@ namespace plsql_msil.Codegeneration.Builders
         {
             var builder = new StringBuilder(" ");
 
-            for (int i = 0; i < methodInfo.Vars.Count; i++)
+            for (int i = 0; i < methodInfo.LocalVars.Count; i++)
             {
                 builder.AppendFormat(
                     " [{0}] {1} {2},",
                     i,
-                    GetMSILTypeNameWithClass(methodInfo.Vars[i].Type),
-                    methodInfo.Vars[i].Name);
+                    GetMSILTypeName(methodInfo.LocalVars[i].Type),
+                    methodInfo.LocalVars[i].Name);
             }
 
             builder.Remove(builder.Length - 1, 1);
@@ -100,14 +101,14 @@ namespace plsql_msil.Codegeneration.Builders
 
         private void InitLocals(MethodInfo method)
         {
-            var locals = method.Vars.Where(x => x.Type.Type == Types.Type.Record || x.Type.Type == Types.Type.Table);
+            var locals = method.LocalVars.Where(x => x.Type.Type == Types.Type.Record || x.Type.Type == Types.Type.Table);
 
             foreach(var item in locals)
             {
 
                 DefaultConstructor(item.Type);
 
-                Assign(null, item);
+                Assign(item);
             }
         }
 

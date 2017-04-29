@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using plsql_msil.Types;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Codegeneration.Builders
 {

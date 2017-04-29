@@ -50,7 +50,8 @@ namespace plsql_msil.TypeLoader
         }
         protected void BuildMethod(ClassType classType, System.Reflection.MethodInfo methodInfo)
         {
-            var retType = storage.GetType(ConvertMSILNames(methodInfo.ReturnType));          
+            var retType = storage.GetType(ConvertMSILNames(methodInfo.ReturnType));
+
 
             var args =
                 methodInfo.GetParameters()

@@ -16,53 +16,63 @@ using System.Threading.Tasks;
 using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Codegeneration.Builders;
 using plsql_msil.Codegeneration.SpecialNodes;
+using plsql_msil.Types.VarTypes;
 using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
+using Type = plsql_msil.Types.Type;
 
 namespace plsql_msil.Codegeneration
 {
     class Codegen
     {
+        class CodegenContext
+        {
+            //public MethodInfo CurrentMethod { get; set; }
+            public TypeInfo CurrentClass { get; set; }
+            public VarInfo LastVar { get; set; }
+        }
 
         private TypeStorage types;
         private ModuleBuilder builder;
+        private MethodInfo entryPoint;
+        //private TypeInfo currentClass;
+        //private MethodInfo currentMethod;
 
         public string Generate(CommonTree tree, TypeStorage types, INameConvertor nameConvertor)
         {
             this.types = types;
+            //this.entryPoint = args.EntryPoint;
 
             builder = new ModuleBuilder(types.Libs, nameConvertor);
 
             var defs = tree.Children.Where(x => x is ClassDefNode || x is PackageDefNode || x is EntryPointNode);
 
+            var context = new CodegenContext();
+
             foreach(dynamic item in defs)
             {
-                Visit(item);
+                Visit(item, context);
             }
 
             return builder.Generate();
         }
 
-        private TypeInfo lastType;
-        private VarInfo lastVar;
-
-        private void Visit(EntryPointNode node)
+        private void Visit(EntryPointNode node, CodegenContext context)
         {
             var varList = new List<VarInfo>();
 
             foreach (dynamic item in node.DeclareItems)
             {
-                var varInfo = GetVar(item, VarLocation.Local);
+                var varInfo = GetVar(item);
                 varList.Add(varInfo);
             }
 
             var entryPointBuilder = builder.BuildEntryPoint(varList);
-
-            Visit(node.CodeBlock, entryPointBuilder);
+            Visit(node.CodeBlock, entryPointBuilder, context);
 
             entryPointBuilder.ClearStack();
             entryPointBuilder.Ret();
         }
-        private void Visit(ClassDefNode node)
+        private void Visit(ClassDefNode node, CodegenContext context)
         {
             var type = types.GetType(node.Name) as ClassType;
 
@@ -70,10 +80,10 @@ namespace plsql_msil.Codegeneration
 
             foreach (var item in node.Defs)
             {
-                Visit(item, classBuilder);
+                Visit(item, classBuilder, context);
             }
         }
-        private void Visit(PackageDefNode node)
+        private void Visit(PackageDefNode node, CodegenContext context)
         {
             var packageType = types.GetType(node.Name) as PackageType;
 
@@ -81,11 +91,11 @@ namespace plsql_msil.Codegeneration
 
             foreach(var item in node.Defs)
             {
-                Visit(item, packageBuilder);
+                Visit(item, packageBuilder, context);
             }
         }
 
-        private void Visit(MethodDefNode node, ClassBuilder builder)
+        private void Visit(MethodDefNode node, ClassBuilder builder, CodegenContext context)
         {
             var methodInfo = builder
                 .ClassType
@@ -97,7 +107,7 @@ namespace plsql_msil.Codegeneration
 
             var methodBuilder = builder.BuildMethod(methodInfo);
 
-            Visit(node.Commands, methodBuilder);
+            Visit(node.Commands, methodBuilder, context);
 
             if (methodInfo.Ret.Equals(TypeInfo.Void))
             {
@@ -108,14 +118,14 @@ namespace plsql_msil.Codegeneration
 
         }
 
-        private VarInfo GetVar(VarDefNode node, VarLocation location)
+        private VarInfo GetVar(VarDefNode node)
         {
             string name = node.VarName;
             string typeName = node.VarType.TypeName;
 
             var type = Visit(node.VarType as dynamic);
 
-            return new VarInfo(name, type.Type, location);
+            return new MethodVarInfo(name, type.Type, MethodVarType.Local);
 
         }
 
@@ -156,48 +166,48 @@ namespace plsql_msil.Codegeneration
             return new TypeDescriptor(false, dictType, false);
         }
 
-        private TypeInfo Visit(BoolNode node, MethodBuilder builder)
+        private TypeInfo Visit(BoolNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.LoadBool(node.Value);
 
             return SimpleType.Bool;
         }
-        private TypeInfo Visit(CharNode node, MethodBuilder builder)
+        private TypeInfo Visit(CharNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.LoadChar(node.Value);
 
             return SimpleType.Char;
         }      
-        private TypeInfo Visit(FloatNode node, MethodBuilder builder)
+        private TypeInfo Visit(FloatNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.LoadFloat(node.Value);
 
             return SimpleType.Float;
         }
-        private TypeInfo Visit(IntegerNode node, MethodBuilder builder)
+        private TypeInfo Visit(IntegerNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.LoadInt(node.Value);
 
             return SimpleType.Int;
         }
-        private TypeInfo Visit(RealNode node, MethodBuilder builder)
+        private TypeInfo Visit(RealNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.LoadDouble(node.Value);
 
             return SimpleType.Double;
         }
-        private TypeInfo Visit(StringNode node, MethodBuilder builder)
+        private TypeInfo Visit(StringNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.LoadString(node.Value);
 
             return SimpleType.String;
         }
 
-        private void Visit(CodeBlockNode node, MethodBuilder builder)
+        private void Visit(CodeBlockNode node, MethodBuilder builder, CodegenContext context)
         {
             foreach (dynamic item in node.Commands)
             {
-                Visit(item, builder);
+                Visit(item, builder, context);
 
                 if(!(item is ReturnNode))
                 {
@@ -210,39 +220,49 @@ namespace plsql_msil.Codegeneration
         {
         }
 
-        private TypeInfo Visit(VarNode node, MethodBuilder builder)
+        private TypeInfo Visit(VarNode node, MethodBuilder builder, CodegenContext context)
         {
+            context.LastVar = builder.MethodInfo.GetVar(node.VarName);
 
-            builder.LoadToStack(null, node.VarInfo);
+            if (context.LastVar == null)
+            {
+                context.LastVar = context.CurrentClass.GetField(node.VarName);
+            }
 
-            return node.TypeInfo;
+            builder.LoadToStack(context.LastVar);
+
+            return context.LastVar.Type;
         }
-        private TypeInfo Visit(PackageNameNode node, MethodBuilder builder)
+        private TypeInfo Visit(PackageNameNode node, MethodBuilder builder, CodegenContext context)
         {
-            return node.TypeInfo;
+            return types.GetType(node.PackageName);
         }
-        private TypeInfo Visit(SelfNode node, MethodBuilder builder)
+        private TypeInfo Visit(SelfNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.LoadThis();
 
-            return node.TypeInfo;
+            return context.CurrentClass;
         }
 
-        private TypeInfo Visit(CreateInstanceNode node, MethodBuilder builder)
+        private TypeInfo Visit(CreateInstanceNode node, MethodBuilder builder, CodegenContext context)
         {
+
+            var typeList = new List<TypeInfo>();
 
             foreach(dynamic item in node.Arguments)
             {
-                Visit(item, builder);
+                var type = Visit(item, builder, context);
+
+                typeList.Add(type);
             }
 
-            var classType = node.TypeInfo as ClassType;
+            var classType = types.GetType(node.TypeName);
 
-            builder.Construct(classType, node.Constructor);
+            builder.Construct(classType, typeList);
 
             return classType;
         }
-        private TypeInfo Visit(CreateTableNode node, MethodBuilder builder)
+        private TypeInfo Visit(CreateTableNode node, MethodBuilder builder, CodegenContext context)
         {
 
 
@@ -250,28 +270,33 @@ namespace plsql_msil.Codegeneration
 
             return node.TableType;
         }
-        private TypeInfo Visit(MethodCallNode node, MethodBuilder builder)
+        private TypeInfo Visit(MethodCallNode node, MethodBuilder builder, CodegenContext context)
         {
-            Visit(node.Where as dynamic, builder);
+            TypeInfo type = Visit(node.Where as dynamic, builder, context);
+
+            var argList = new List<TypeInfo>();
 
             foreach (dynamic item in node.Arguments)
             {
-                Visit(item, builder);
+                var arg = Visit(item, builder, context);
+
+                argList.Add(arg);
             }
 
-            var methodInfo = node.MethodInfo;
+            //TODO ПЛОХО
+            var methodInfo = type.GetMethod(node.MethodName, argList, type.Type == Type.Package);
 
             builder.Call(methodInfo);
 
             return methodInfo.Ret;
         }
-        private TypeInfo Visit(CallvirtNode node, MethodBuilder builder)
+        private TypeInfo Visit(CallvirtNode node, MethodBuilder builder, CodegenContext context)
         {
-            Visit(node.Where as dynamic, builder);
+            Visit(node.Where as dynamic, builder, context);
 
             foreach (dynamic item in node.Args)
             {
-                Visit(item, builder);
+                Visit(item, builder, context);
             }
 
             var methodInfo = node.Method;
@@ -281,86 +306,86 @@ namespace plsql_msil.Codegeneration
             return methodInfo.Ret;
         }
 
-        private TypeInfo Visit(ExpressionNode node, MethodBuilder builder)
+        private TypeInfo Visit(ExpressionNode node, MethodBuilder builder, CodegenContext context)
         {
-            return Visit(node.Expression as dynamic, builder);
+            return Visit(node.Expression as dynamic, builder, context);
         }
 
-        private TypeInfo Visit(PlusNode node, MethodBuilder builder)
+        private TypeInfo Visit(PlusNode node, MethodBuilder builder, CodegenContext context)
         {
 
-            return BinaryOperatorVisit(node, builder, (x) => x.Plus());
+            return BinaryOperatorVisit(node, builder, (x) => x.Plus(), context);
         }
-        private TypeInfo Visit(MinusNode node, MethodBuilder builder)
+        private TypeInfo Visit(MinusNode node, MethodBuilder builder, CodegenContext context)
         {
             if (node.isUnary)
             {
-                var res = Visit(node.LeftOperand as dynamic, builder);
+                var res = Visit(node.LeftOperand as dynamic, builder, context);
                 builder.Neg();
 
                 return res;
             }
             else
             {
-                return BinaryOperatorVisit(node, builder, (x) => x.Minus());
+                return BinaryOperatorVisit(node, builder, (x) => x.Minus(), context);
             }
         }
-        private TypeInfo Visit(MultNode node, MethodBuilder builder)
+        private TypeInfo Visit(MultNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.Mult());
+            return BinaryOperatorVisit(node, builder, (x) => x.Mult(), context);
         }
-        private TypeInfo Visit(DivNode node, MethodBuilder builder)
+        private TypeInfo Visit(DivNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.Div());
+            return BinaryOperatorVisit(node, builder, (x) => x.Div(), context);
         }
-        private TypeInfo Visit(ModNode node, MethodBuilder builder)
+        private TypeInfo Visit(ModNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.Mod());
+            return BinaryOperatorVisit(node, builder, (x) => x.Mod(), context);
         }
 
-        private TypeInfo Visit(AndNode node, MethodBuilder builder)
+        private TypeInfo Visit(AndNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.And());
+            return BinaryOperatorVisit(node, builder, (x) => x.And(), context);
         }
-        private TypeInfo Visit(OrNode node, MethodBuilder builder)
+        private TypeInfo Visit(OrNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.Or());
+            return BinaryOperatorVisit(node, builder, (x) => x.Or(), context);
         }
-        private TypeInfo Visit(GreaterNode node, MethodBuilder builder)
+        private TypeInfo Visit(GreaterNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.Greater());
+            return BinaryOperatorVisit(node, builder, (x) => x.Greater(), context);
         }
-        private TypeInfo Visit(LessNode node, MethodBuilder builder)
+        private TypeInfo Visit(LessNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.Less());
+            return BinaryOperatorVisit(node, builder, (x) => x.Less(), context);
         }
-        private TypeInfo Visit(GreaterOrEqualNode node, MethodBuilder builder)
+        private TypeInfo Visit(GreaterOrEqualNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.GreaterOrEqual());
+            return BinaryOperatorVisit(node, builder, (x) => x.GreaterOrEqual(), context);
         }
-        private TypeInfo Visit(LessOrEqualNode node, MethodBuilder builder)
+        private TypeInfo Visit(LessOrEqualNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.LessOrEqual());
+            return BinaryOperatorVisit(node, builder, (x) => x.LessOrEqual(), context);
         }
-        private TypeInfo Visit(EqualNode node, MethodBuilder builder)
+        private TypeInfo Visit(EqualNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.Equal());
+            return BinaryOperatorVisit(node, builder, (x) => x.Equal(), context);
         }
-        private TypeInfo Visit(NotEqualNode node, MethodBuilder builder)
+        private TypeInfo Visit(NotEqualNode node, MethodBuilder builder, CodegenContext context)
         {
-            return BinaryOperatorVisit(node, builder, (x) => x.NEqual());
+            return BinaryOperatorVisit(node, builder, (x) => x.NEqual(), context);
         }
-        private TypeInfo Visit(NotNode node, MethodBuilder builder)
+        private TypeInfo Visit(NotNode node, MethodBuilder builder, CodegenContext context)
         {
-            var res = Visit(node.Operand as dynamic, builder);
+            var res = Visit(node.Operand as dynamic, builder, context);
 
             builder.Not();
 
             return res;
         }
-        private TypeInfo Visit(CastNode node, MethodBuilder builder)
+        private TypeInfo Visit(CastNode node, MethodBuilder builder, CodegenContext context)
         {
-            var res = Visit(node.Expression as dynamic, builder);
+            var res = Visit(node.Expression as dynamic, builder, context);
 
             var convType = node.Type as SimpleType;
 
@@ -370,52 +395,55 @@ namespace plsql_msil.Codegeneration
         }
 
         private TypeInfo BinaryOperatorVisit(BinaryOperator binaryOperator,
-            MethodBuilder builder, Action<MethodBuilder> action)
+            MethodBuilder builder, Action<MethodBuilder> action, CodegenContext context)
         {
-            Visit(binaryOperator.LeftOperand as dynamic, builder);
-            var res = Visit(binaryOperator.RightOperand as dynamic, builder);
+            Visit(binaryOperator.LeftOperand as dynamic, builder, context);
+            var res = Visit(binaryOperator.RightOperand as dynamic, builder, context);
 
             action(builder);
 
             return res;
         }
 
-        private void Visit(AssignNode node, MethodBuilder builder)
+        private void Visit(AssignNode node, MethodBuilder builder, CodegenContext context)
         {
-            Visit(node.LValue as dynamic, builder);
-            Visit(node.Expression, builder);
+            Visit(node.LValue as dynamic, builder, context);
 
-            builder.Assign(lastType, lastVar);
+            var varInfo = context.LastVar;
+
+            Visit(node.Expression, builder, context);
+
+            builder.Assign(varInfo);
         }
-        private void Visit(ForNode node, MethodBuilder builder)
+        private void Visit(ForNode node, MethodBuilder builder, CodegenContext context)
         {
-            Visit(node.Init as dynamic, builder);
+            Visit(node.Init as dynamic, builder, context);
 
             int l1 = builder.PrepareJump(false);
 
             int nop2 = builder.Nop();
 
-            Visit(node.CodeBlock as dynamic, builder);
+            Visit(node.CodeBlock as dynamic, builder, context);
 
-            Visit(node.Iteration as dynamic, builder);
+            Visit(node.Iteration as dynamic, builder, context);
 
             int nop1 = builder.Nop();
             builder.MakeJump(l1, nop1, Jump.Always);
 
-            Visit(node.Condition as dynamic, builder);
+            Visit(node.Condition as dynamic, builder, context);
 
             int l2 = builder.PrepareJump(true);
             builder.MakeJump(l2, nop2, Jump.IfTrue);
         }
-        private void Visit(WhileNode node, MethodBuilder builder)
+        private void Visit(WhileNode node, MethodBuilder builder, CodegenContext context)
         {
             int start = builder.Nop();
 
-            Visit(node.Condition, builder);
+            Visit(node.Condition, builder, context);
 
             int exit = builder.PrepareJump(true);
 
-            Visit(node.Command, builder);
+            Visit(node.Command, builder, context);
 
             builder.MakeJump(builder.Nop(), start, Jump.Always);
 
@@ -423,23 +451,23 @@ namespace plsql_msil.Codegeneration
 
             builder.MakeJump(exit, end, Jump.IfFalse);
         }
-        private void Visit(DoWhileNode node, MethodBuilder builder)
+        private void Visit(DoWhileNode node, MethodBuilder builder, CodegenContext context)
         {
             int nop = builder.Nop();
 
-            Visit(node.Command, builder);
-            Visit(node.Condition, builder);
+            Visit(node.Command, builder, context);
+            Visit(node.Condition, builder, context);
 
             int jmp = builder.PrepareJump(true);
             builder.MakeJump(jmp, nop, Jump.IfFalse);
         }
-        private void Visit(IfNode node, MethodBuilder builder)
+        private void Visit(IfNode node, MethodBuilder builder, CodegenContext context)
         {
-            Visit(node.Condition, builder);
+            Visit(node.Condition, builder, context);
 
             int label1 = builder.PrepareJump(true);
 
-            Visit(node.IfTrue, builder);
+            Visit(node.IfTrue, builder, context);
 
             if (node.IfFalse != null)
             {
@@ -448,7 +476,7 @@ namespace plsql_msil.Codegeneration
 
                 builder.MakeJump(label1, elseLabel, Jump.IfFalse);
 
-                Visit(node.IfFalse, builder);
+                Visit(node.IfFalse, builder, context);
 
                 int label3 = builder.Nop();
 
@@ -461,7 +489,7 @@ namespace plsql_msil.Codegeneration
             }
         }
 
-        private TypeInfo Visit(IndexNode node, MethodBuilder builder)
+        private TypeInfo Visit(IndexNode node, MethodBuilder builder, CodegenContext context)
         {
 
             //var genericFirst = new GenericType();
@@ -470,8 +498,8 @@ namespace plsql_msil.Codegeneration
             //var methodInfo = new MethodInfo("get_Item", genericSecond, false, node.TableType);
             //methodInfo.AddArg("a", genericFirst);
 
-            //Visit(node.Where as dynamic, builder);
-            //Visit(node.Index, builder);
+            //Visit(node.Where as dynamic, builder, context);
+            //Visit(node.Index, builder, context);
 
             //builder.Callvirt(methodInfo);
 
@@ -479,49 +507,44 @@ namespace plsql_msil.Codegeneration
 
             return null;
         }
-        private TypeInfo Visit(MemberCallNode node, MethodBuilder builder)
+        private TypeInfo Visit(MemberCallNode node, MethodBuilder builder, CodegenContext context)
         {
-            var whereType = Visit(node.Where as dynamic, builder);
+            var whereType = Visit(node.Where as dynamic, builder, context);
 
-            VarInfo varInfo = types.GetType(whereType.Name).GetField(node.MemberName);
+            context.LastVar = types.GetType(whereType.Name).GetField(node.MemberName);
 
             //lastType = whereType;
             //lastVar = varInfo;
             // TODO Я НЕ ПОМНЮ, ЗАЧЕМ ЭТО
 
-            builder.LoadToStack(whereType, varInfo);
+            builder.LoadToStack(context.LastVar);
 
-            return varInfo.Type;
+            return context.LastVar.Type;
         }
 
-        private TypeInfo Visit(AssignIndexNode node, MethodBuilder builder)
-        {
+        //private TypeInfo Visit(AssignMemberCallNode node, MethodBuilder builder, CodegenContext context)
+        //{
+        //    var whereType = Visit(node.MemberCallNode.Where as dynamic, builder, context);
 
-            throw new NotImplementedException();
-        }
-        private TypeInfo Visit(AssignMemberCallNode node, MethodBuilder builder)
-        {
-            var whereType = Visit(node.MemberCallNode.Where as dynamic, builder);
+        //    VarInfo varInfo = types.GetType(whereType.Name).GetField(node.MemberCallNode.MemberName);
 
-            VarInfo varInfo = types.GetType(whereType.Name).GetField(node.MemberCallNode.MemberName);
+        //    lastType = whereType;
+        //    lastVar = varInfo;
 
-            lastType = whereType;
-            lastVar = varInfo;
+        //    return varInfo.Type;
+        //}
+        //private TypeInfo Visit(AssignVarNode node, MethodBuilder builder, CodegenContext context)
+        //{
+        //    lastVar = node.VarInfo;
 
-            return varInfo.Type;
-        }
-        private TypeInfo Visit(AssignVarNode node, MethodBuilder builder)
-        {
-            lastVar = node.VarInfo;
+        //    return node.VarInfo.Type;
+        //}
 
-            return node.VarInfo.Type;
-        }
-
-        private TypeInfo Visit(ReturnNode node, MethodBuilder builder)
+        private TypeInfo Visit(ReturnNode node, MethodBuilder builder, CodegenContext context)
         {
             builder.ClearStack();
 
-            var res = Visit(node.Expression, builder);
+            var res = Visit(node.Expression, builder, context);
 
             builder.Ret();
 

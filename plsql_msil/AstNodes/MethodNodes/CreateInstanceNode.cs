@@ -56,6 +56,6 @@ namespace plsql_msil.AstNodes.MethodNodes
             }
         }
 
-        public List<TypeInfo> Constructor { get; set; }
+        //public List<TypeInfo> Constructor { get; set; }
     }
 }

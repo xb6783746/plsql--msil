@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Codegeneration.Builders
 {
@@ -58,23 +59,23 @@ namespace plsql_msil.Codegeneration.Builders
                 InitFieldsFromConstructor(type, constructor.Arguments);
             }
 
-            InitFields(type, type.Fields.Where(x => x.Type.Type == Types.Type.Record).ToList(), isStatic);
-            InitFields(type, type.Fields.Where(x => x.Type.Type == Types.Type.Table).ToList(), isStatic);
+            //InitFields(type, type.Fields.Where(x => x.Type.Type == Types.Type.Record).ToList(), isStatic);
+            //InitFields(type, type.Fields.Where(x => x.Type.Type == Types.Type.Table).ToList(), isStatic);
 
             Ret();
         }
 
 
-        private void InitFieldsFromConstructor(TypeInfo where, List<VarInfo> args)
+        private void InitFieldsFromConstructor(TypeInfo where, List<MethodVarInfo> args)
         {
             foreach (var item in args)
             {
                 LoadThis();
-                LoadToStack(null, item);
+                LoadToStack(item);
 
-                var field = new VarInfo(item.Name, item.Type, VarLocation.Global);
+                //var field = new VarInfo(item.Name, item.Type, VarLocation.Global);
 
-                Assign(where, field);
+                Assign(where.GetField(item.Name));
             }
         }
 
@@ -89,7 +90,7 @@ namespace plsql_msil.Codegeneration.Builders
 
                 DefaultConstructor(item.Type);
 
-                Assign(classType, item);
+                Assign(item);
             }
         }
 

@@ -12,6 +12,7 @@ using plsql_msil.AstNodes.PackageNodes;
 using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Loggers;
 using plsql_msil.Types;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Semantic.Passes
 {
@@ -99,24 +100,24 @@ namespace plsql_msil.Semantic.Passes
         private void CollectRecord(RecordNode node, PackageType packageType)
         {
 
-            var vars = new List<VarInfo>();
+            //var vars = new List<VarInfo>();
 
-            foreach (var item in node.Vars)
-            {
-                var varInfo = GetVar(item);
+            //foreach (var item in node.Vars)
+            //{
+            //    var varInfo = GetVar(item);
 
-                vars.Add(new VarInfo(varInfo.Name, varInfo.Type, VarLocation.Global));
-            }
+            //    vars.Add(new VarInfo(varInfo.Name, varInfo.Type, VarLocation.Global));
+            //}
 
-            var record = new RecordType(packageType.Name, node.Name, vars);
+            //var record = new RecordType(packageType.Name, node.Name, vars);
 
-            bool ok = packageType.AddType(record);
-            types.AddType(record);
+            //bool ok = packageType.AddType(record);
+            //types.AddType(record);
 
-            if (!ok)
-            {
-                Log(String.Format("Запись с именем {0} уже существует", node.Name), node);
-            }
+            //if (!ok)
+            //{
+            //    Log(String.Format("Запись с именем {0} уже существует", node.Name), node);
+            //}
 
 
         }

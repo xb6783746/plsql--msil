@@ -113,6 +113,7 @@
     <Compile Include="Codegeneration\Builders\MethodBuilder.cs" />
     <Compile Include="Codegeneration\Builders\ModuleBuilder.cs" />
     <Compile Include="Codegeneration\Builders\PackageBuilder.cs" />
+    <Compile Include="Codegeneration\CodegenArgs.cs" />
     <Compile Include="Codegeneration\Codegenerator.cs" />
     <Compile Include="Codegeneration\Command.cs" />
     <Compile Include="Codegeneration\CommandNames.cs" />
@@ -164,7 +165,10 @@
     <Compile Include="Types\TableType.cs" />
     <Compile Include="Types\TypeInfo.cs" />
     <Compile Include="Types\TypeStorage.cs" />
-    <Compile Include="Types\VarInfo.cs" />
+    <Compile Include="Types\VarTypes\GenericParameterInfo.cs" />
+    <Compile Include="Types\VarTypes\MethodVarInfo.cs" />
+    <Compile Include="Types\VarTypes\GlobalVarInfo.cs" />
+    <Compile Include="Types\VarTypes\VarInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -13,6 +13,7 @@ using plsql_msil.AstNodes.PackageNodes;
 using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Loggers;
 using plsql_msil.Types;
+using plsql_msil.Types.VarTypes;
 using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
 
 namespace plsql_msil.Semantic.Passes
@@ -67,6 +68,10 @@ namespace plsql_msil.Semantic.Passes
 
         private TypeDescriptor Visit(EntryPointNode node)
         {
+            var entryPoint = new MethodInfo("", TypeInfo.Void, false, null);
+
+            context.CurrentMethod = entryPoint;
+
             foreach (dynamic item in node.DeclareItems)
             {
                 Visit(item);
@@ -201,12 +206,12 @@ namespace plsql_msil.Semantic.Passes
 
             }
 
-            context.EnterBlock();
+            //context.EnterBlock();
 
-            foreach (var item in declared.Arguments)
-            {
-                context.Vars.AddVar(item);
-            }
+            //foreach (var item in declared.Arguments)
+            //{
+            //    context.Vars.AddVar(item);
+            //}
 
             context.CurrentMethod = declared;
 
@@ -215,13 +220,13 @@ namespace plsql_msil.Semantic.Passes
             foreach (var item in locals)
             {
                 declared.AddVar(item.Name, item.Type);
-                context.Vars.AddVar(item.Name, item.Type, VarLocation.Local);
+                //context.Vars.AddVar(item.Name, item.Type, VarLocation.Local);
             }
 
             Visit(node.Commands);
 
             context.CurrentMethod = null;
-            context.ExitBlock();
+            //context.ExitBlock();
 
             return declared;
         }
@@ -272,12 +277,12 @@ namespace plsql_msil.Semantic.Passes
 
             if (context.CurrentMethod != null)
             {
-                context.CurrentMethod.AddVar(var.Name, var.Type);
-            }
+                bool res = context.CurrentMethod.AddVar(var.Name, var.Type);
 
-            if(!context.Vars.AddVar(var.Name, var.Type, VarLocation.Local))
-            {
-                Log(String.Format("Переменная {0} уже определена", node.VarName), node);
+                if (!res)
+                {
+                    Log(String.Format("Переменная {0} уже определена", node.VarName), node);
+                }
             }
 
             return null;
@@ -285,7 +290,7 @@ namespace plsql_msil.Semantic.Passes
 
         private TypeDescriptor Visit(VarNode node)
         {
-            var var = context.Vars.GetVar(node.VarName);
+            var var = context.GetVar(node.VarName);
 
             if (var == null)
             {
@@ -302,7 +307,7 @@ namespace plsql_msil.Semantic.Passes
                     int index = node.ChildIndex;
 
                     var packageNameNode = new PackageNameNode(node.VarName);
-                    packageNameNode.TypeInfo = type;
+                    //packageNameNode.TypeInfo = type;
 
                     node.Parent.ReplaceChildren(index, index, packageNameNode);
 
@@ -310,8 +315,8 @@ namespace plsql_msil.Semantic.Passes
                 }
             }
 
-            node.TypeInfo = var.Type;
-            node.VarInfo = var;
+            //node.TypeInfo = var.Type;
+            //node.VarInfo = var;
 
             return new TypeDescriptor(true, var.Type, true);
         }
@@ -324,7 +329,7 @@ namespace plsql_msil.Semantic.Passes
                 return TypeDescriptor.Undefined;
             }
 
-            node.TypeInfo = context.Self;
+            //node.TypeInfo = context.Self;
 
             return new TypeDescriptor(false, context.Self, true);
         }
@@ -354,8 +359,8 @@ namespace plsql_msil.Semantic.Passes
                 return TypeDescriptor.Undefined;
             }
 
-            node.TypeInfo = type;
-            node.Constructor = typeList;
+            //node.TypeInfo = type;
+            //node.Constructor = typeList;
 
             return new TypeDescriptor(false, type, true);
         }
@@ -400,7 +405,7 @@ namespace plsql_msil.Semantic.Passes
                 return TypeDescriptor.Undefined;
             }
 
-            node.MethodInfo = method;
+            //node.MethodInfo = method;
 
             return new TypeDescriptor(false, method.Ret);
         }

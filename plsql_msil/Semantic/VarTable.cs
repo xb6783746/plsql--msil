@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Semantic
 {
@@ -33,10 +34,10 @@ namespace plsql_msil.Semantic
 
             return res;
         }
-        public bool AddVar(string name, TypeInfo type, VarLocation loc)
-        {
-            return AddVar(new VarInfo(name, type, loc));
-        }
+        //public bool AddVar(string name, TypeInfo type, VarLocation loc)
+        //{
+        //    return AddVar(new VarInfo(name, type, loc));
+        //}
         public VarInfo GetVar(string name)
         {
             VarInfo res = vars.FirstOrDefault(x => x.Name == name);

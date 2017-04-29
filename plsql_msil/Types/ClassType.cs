@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Types
 {
@@ -65,7 +66,7 @@ namespace plsql_msil.Types
 
             if (ok)
             {
-                innerVars.Add(new VarInfo(name, type, VarLocation.Global));
+                innerVars.Add(new GlobalVarInfo(name, type, this));
             }
 
             return ok;

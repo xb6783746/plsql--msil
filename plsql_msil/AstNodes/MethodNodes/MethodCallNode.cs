@@ -63,6 +63,6 @@ namespace plsql_msil.AstNodes.MethodNodes
             }
         }
 
-        public MethodInfo MethodInfo { get; set; }
+        //public MethodInfo MethodInfo { get; set; }
     }
 }

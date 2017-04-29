@@ -25,10 +25,10 @@ namespace plsql_msil.Codegeneration
         public string Generate(CommonTree tree, TypeStorage types)
         {
 
-            foreach(var item in passes)
-            {
-                item.Pass(tree);
-            }
+            //foreach(var item in passes)
+            //{
+            //    item.Pass(tree);
+            //}
 
             return codegen.Generate(tree, types, nameConvertor);
         }

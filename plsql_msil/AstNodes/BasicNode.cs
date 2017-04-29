@@ -18,7 +18,7 @@ namespace plsql_msil.AstNodes
 
         }
 
-        public virtual TypeInfo TypeInfo { get; set; }
+        //public virtual TypeInfo TypeInfo { get; set; }
 
     }
 }

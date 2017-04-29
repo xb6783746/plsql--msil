@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Codegeneration.Builders
 {
@@ -26,32 +27,32 @@ namespace plsql_msil.Codegeneration.Builders
 
         public int Stack { get { return currentStack; } }
 
-        public void LoadToStack(TypeInfo where, VarInfo field)
+        public void LoadToStack(VarInfo field)
         {
 
             Code code = Code.Nop;
             string val = "";
             int pushCount = 1;
 
-            switch (field.Location)
+            if (field is MethodVarInfo)
             {
-                case VarLocation.Local:
-                    code = Code.LoadLocal;
-                    val = field.Name;
-                    break;
-                case VarLocation.Argument:
-                    code = Code.LoadArg;
-                    val = field.Name;
-                    break;
-                case VarLocation.Global:
-                    bool isPackage = where.Type == Types.Type.Package;
-                    code = isPackage ? Code.LoadStaticGlobal : Code.LoadGlobal;
-                    if(!isPackage)
-                    {
-                        pushCount = 0;
-                    }
-                    val = GetMemberCallString(where, field);
-                    break;
+                var methodVar = field as MethodVarInfo;
+
+                code = methodVar.VarType == MethodVarType.Local ? Code.LoadLocal : Code.LoadArg;
+                val = methodVar.Name;
+            }
+            else if(field is GlobalVarInfo)
+            {
+                var globalVar = field as GlobalVarInfo;
+
+                bool isPackage = globalVar.Where.Type == Types.Type.Package;
+                code = isPackage ? Code.LoadStaticGlobal : Code.LoadGlobal;
+                if (!isPackage)
+                {
+                    pushCount = 0;
+                }
+
+                val = GetMemberCallString(globalVar.Where, field);
             }
 
             Push(pushCount);
@@ -164,31 +165,31 @@ namespace plsql_msil.Codegeneration.Builders
             AddCommand(Code.Newobj, val);
         }
 
-        public virtual void Assign(TypeInfo where, VarInfo field)
+        public virtual void Assign(VarInfo field)
         {
             Code code = Code.Nop;
             string arg = "";
 
             int popCount = 1;
-            switch (field.Location)
+
+            if (field is MethodVarInfo)
             {
-                case VarLocation.Local:
-                    code = Code.LoadFromStackLocal;
-                    arg = field.Name;
-                    break;
-                case VarLocation.Argument:
-                    code = Code.LoadFromStackArg;
-                    arg = field.Name;
-                    break;
-                case VarLocation.Global:
-                    bool isPackage = where.Type == Types.Type.Package;
-                    code = isPackage ? Code.LoadFromStackStaticGlobal : Code.LoadFromStackGlobal;
-                    if(!isPackage)
-                    {
-                        popCount++;
-                    }
-                    arg = GetMemberAssignString(where, field);
-                    break;
+                var methodVar = field as MethodVarInfo;
+
+                code = methodVar.VarType == MethodVarType.Local ? Code.LoadFromStackLocal : Code.LoadFromStackArg;
+                arg = methodVar.Name;
+            }
+            else if (field is GlobalVarInfo)
+            {
+                var globalVar = field as GlobalVarInfo;
+
+                bool isPackage = globalVar.Where.Type == Types.Type.Package;
+                code = isPackage ? Code.LoadFromStackStaticGlobal : Code.LoadFromStackGlobal;
+                if (!isPackage)
+                {
+                    popCount++;
+                }
+                arg = GetMemberAssignString(globalVar.Where, field);
             }
 
             Pop(popCount);
@@ -433,7 +434,7 @@ namespace plsql_msil.Codegeneration.Builders
         {
             return String.Format(
                 "{0} {1}::{2}({3})",
-                GetMSILTypeNameWithClass(method.Ret),
+                GetMSILTypeName(method.Ret),
                 GetMSILTypeName(method.Where),
                 method.Name,
                 GetTypeList(method));
@@ -444,7 +445,7 @@ namespace plsql_msil.Codegeneration.Builders
 
             foreach (var item in types)
             {
-                builder.AppendFormat(" {0},", GetMSILTypeNameWithClass(item));
+                builder.AppendFormat(" {0},", GetMSILTypeName(item));
             }
 
             builder.Remove(builder.Length - 1, 1);
@@ -455,11 +456,22 @@ namespace plsql_msil.Codegeneration.Builders
         {
             StringBuilder builder = new StringBuilder(" ");
 
-            int i = 0;
-            foreach (var item in method.ArgTypes)
-            {             
-                builder.AppendFormat(" {0},", method.GenericArgs[i] >= 0 ? "!" + method.GenericArgs[i] : GetMSILTypeNameWithClass(item));
-                i++;
+            foreach (var item in method.Arguments)
+            {
+                string append;
+
+                if (item is GenericParameterInfo)
+                {
+                    var genericVar = item as GenericParameterInfo;
+
+                    append = "!" + genericVar.GenericPosition;
+                }
+                else
+                {
+                    append = GetMSILTypeName(item.Type);
+                }
+
+                builder.AppendFormat(" {0},", append);
             }
 
             builder.Remove(builder.Length - 1, 1);
@@ -468,23 +480,13 @@ namespace plsql_msil.Codegeneration.Builders
         }
         protected string GetMemberCallString(TypeInfo where, VarInfo member)
         {
-            return String.Format("{0} {1}::{2}", GetMSILTypeNameWithClass(member.Type), GetMSILTypeName(where), member.Name);
+            return String.Format("{0} {1}::{2}", GetMSILTypeName(member.Type), GetMSILTypeName(where), member.Name);
         }
         protected string GetMemberAssignString(TypeInfo where, VarInfo member)
         {
-            return String.Format("{0} {1}::{2}", GetMSILTypeNameWithClass(member.Type), GetMSILTypeName(where), member.Name);
+            return String.Format("{0} {1}::{2}", GetMSILTypeName(member.Type), GetMSILTypeName(where), member.Name);
         }
 
-        protected string GetMSILTypeNameWithClass(TypeInfo type)
-        {
-
-            //if (type.Type == Types.Type.Class || type.Type == Types.Type.Record)
-            //{
-            //    return "class " + GetMSILTypeName(type);
-            //}
-
-            return GetMSILTypeName(type);
-        }
         protected string GetMSILTypeName(TypeInfo type)
         {
            // return NameConvertor.Convert(type);

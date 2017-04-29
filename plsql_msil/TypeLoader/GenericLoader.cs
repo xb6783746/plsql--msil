@@ -5,22 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 using ConstructorInfo = plsql_msil.Types.ConstructorInfo;
 using TypeInfo = plsql_msil.Types.TypeInfo;
 
 namespace plsql_msil.TypeLoader
 {
-    class TypeWithName
-    {
-        public TypeWithName(TypeInfo type, string name)
-        {
-            this.type = type;
-            this.name = name;
-        }
-
-        public TypeInfo type;
-        public string name;
-    }
 
     class GenericLoader :AbstractTypeLoader
     {
@@ -51,15 +41,14 @@ namespace plsql_msil.TypeLoader
         private void BuildConstructor(GenericTemplate classType, System.Reflection.ConstructorInfo constructorInfo)
         {
             var args = constructorInfo.GetParameters().Select(
-              x => new TypeWithName(
-              
+              x => new VarInfo(
+                  x.Name,
                   x.ParameterType.FullName == null? 
                       GenericType.Get(x.ParameterType.GenericParameterPosition):
-                      storage.GetType(ConvertMSILNames(x.ParameterType)), 
-                  x.Name
+                      storage.GetType(ConvertMSILNames(x.ParameterType))
               )).ToList();
 
-            if (!args.Any(x => x.type == null))
+            if (!args.Any(x => x.Type == null))
             {
                 classType.AddConstructor(args);
             }
@@ -67,18 +56,18 @@ namespace plsql_msil.TypeLoader
 
         private void BuildMethod(GenericTemplate classType, System.Reflection.MethodInfo type)
         {
-            var list = new List<TypeWithName>();
+            var list = new List<VarInfo>();
 
             foreach (var item in type.GetParameters())
             {
                 if (item.ParameterType.FullName == null)
                 {
-                    list.Add(new TypeWithName(GenericType.Get(item.ParameterType.GenericParameterPosition), item.Name));
+                    list.Add(new VarInfo(item.Name, GenericType.Get(item.ParameterType.GenericParameterPosition)));
                 }
                 else
                 {
                     var itemType = storage.GetType(ConvertMSILNames(item.ParameterType));
-                    list.Add(new TypeWithName(itemType, item.Name));
+                    list.Add(new VarInfo(item.Name, itemType));
                 }
             }
 

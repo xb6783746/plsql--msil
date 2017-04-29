@@ -8,7 +8,7 @@ namespace plsql_msil.Codegeneration.SpecialNodes
     {
         public AssignVarNode(VarNode node):base(node)
         {
-            VarInfo = node.VarInfo;
+            //VarInfo = node.VarInfo;
         }
 
         public AssignVarNode(CommonTree node)

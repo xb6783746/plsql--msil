@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Types
 {
@@ -16,44 +17,75 @@ namespace plsql_msil.Types
             IsStatic = isStatic;
 
             Where = where;
-
-            GenericArgs = new List<int>();
         }
 
-        private List<VarInfo> args = new List<VarInfo>();
-        private List<VarInfo> vars = new List<VarInfo>();
+        private List<MethodVarInfo> vars = new List<MethodVarInfo>();
 
         public bool IsStatic { get; private set; }
         public string Name { get; private set; }
-        public List<VarInfo> Arguments { get { return args; } }
-        public List<VarInfo> Vars { get { return vars; } }
+
+        public List<MethodVarInfo> Arguments
+        {
+            get
+            {
+                return vars
+                    .Where(x => x.VarType == MethodVarType.Argument)
+                    .ToList();
+            }
+        }
+        public List<MethodVarInfo> LocalVars
+        {
+            get
+            {
+                return vars
+                    .Where(x => x.VarType == MethodVarType.Local)
+                    .ToList();
+            }
+        }
         public TypeInfo Ret { get; private set; }
         public ClassType Where { get; private set; }
-        public List<int> GenericArgs { get; private set; }
 
-        public List<TypeInfo> ArgTypes { get { return args.Select(x => x.Type).ToList(); } }
+        public List<TypeInfo> ArgTypes
+        {
+            get
+            {
+                return Arguments.Select(x => x.Type).ToList();
+            }
+        }
 
         public VarInfo GetVar(string name)
         {
-            return args.Union(vars).FirstOrDefault(x => x.Name == name);
+            return vars.FirstOrDefault(x => x.Name == name);
         }
 
         public bool AddArg(string name, TypeInfo type)
         {
-            return Add(name, type, VarLocation.Argument, args);
+            return Add(name, type, MethodVarType.Argument);
         }
         public bool AddVar(string name, TypeInfo type)
         {
-            return Add(name, type, VarLocation.Local, vars);
+            return Add(name, type, MethodVarType.Local);
         }
 
-        private bool Add(string name, TypeInfo type, VarLocation loc, List<VarInfo> vars)
+        public bool AddGenericArg(string name, TypeInfo type, int genericPosition)
         {
             bool res = !Exists(name);
 
             if (res)
             {
-                vars.Add(new VarInfo(name, type, loc));
+                vars.Add(new GenericParameterInfo(name, type, genericPosition));
+            }
+
+            return res;
+        }
+
+        private bool Add(string name, TypeInfo type, MethodVarType varType)
+        {
+            bool res = !Exists(name);
+
+            if (res)
+            {
+                vars.Add(new MethodVarInfo(name, type, varType));
             }
 
             return res;
@@ -67,7 +99,6 @@ namespace plsql_msil.Types
             {
                 return IsStatic == method.IsStatic
                     && Name == method.Name
-                    && CompareVarList(args, method.args)
                     && CompareVarList(vars, method.vars)
                     && Ret.Equals(method.Ret);
             }
@@ -75,7 +106,7 @@ namespace plsql_msil.Types
             return false;
         }
 
-        private bool CompareVarList(List<VarInfo> first, List<VarInfo> second)
+        private bool CompareVarList(List<MethodVarInfo> first, List<MethodVarInfo> second)
         {
             return TypeInfo.Compare(
                 first.Select(x => x.Type),

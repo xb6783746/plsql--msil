@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Semantic
 {
@@ -14,12 +15,12 @@ namespace plsql_msil.Semantic
         {
             this.Types = types;
 
-            Vars = new VarTable();
+            //Vars = new VarTable();
         }
 
         public TypeInfo Self { get; private set; }
         public MethodInfo CurrentMethod { get; set; }
-        public VarTable Vars { get; private set; }
+        //public VarTable Vars { get; private set; }
         public TypeStorage Types { get; private set; }
 
         public TypeInfo GetType(string name)
@@ -34,6 +35,23 @@ namespace plsql_msil.Semantic
             return Types.GetTemplate(name);
         }
 
+        public VarInfo GetVar(string name)
+        {
+            VarInfo res = null;
+            if (CurrentMethod != null)
+            {
+                res = CurrentMethod.GetVar(name);
+            }
+
+            if (res == null && Self != null)
+            {
+                return Self.GetField(name);
+            }
+
+            return res;
+        }
+
+
         public void EnterClass(TypeInfo type)
         {
             Self = type;
@@ -43,13 +61,13 @@ namespace plsql_msil.Semantic
             Self = null;
         }
 
-        public void EnterBlock()
-        {
-            Vars = new VarTable(Vars);
-        }
-        public void ExitBlock()
-        {
-            Vars = Vars.Inner;
-        }
+        //public void EnterBlock()
+        //{
+        //    Vars = new VarTable(Vars);
+        //}
+        //public void ExitBlock()
+        //{
+        //    Vars = Vars.Inner;
+        //}
     }
 }
