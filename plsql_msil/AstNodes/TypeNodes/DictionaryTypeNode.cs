@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace plsql_msil.AstNodes.TypeNodes
 {
-    class DictionaryTypeNode :BasicNode
+    class DictionaryTypeNode :TypeNode
     {
         public DictionaryTypeNode(CommonTree node)
             : base(node)
@@ -45,6 +45,11 @@ namespace plsql_msil.AstNodes.TypeNodes
             {
                 return GetChild(1) as TypeNode;
             }
+        }
+
+        public override string TypeName
+        {
+            get { return string.Format("dictionary({0})", TypeNode.TypeName); }
         }
     }
 }

@@ -190,7 +190,7 @@ type
 	->  ^(TypeName<DictionaryTypeNode> type type)
 	|	TABLE '(' type ')'
 	->  ^(TypeName<TableTypeNode> type)
-	|	ARRAY '(' type ')' '[' expression? ']'
+	|	ARRAY '(' type (',' expression )? ')'
 	->  ^(TypeName<ArrayTypeNode> type expression?)
 	|   ID -> ID<TypeNode>
 	;
@@ -484,6 +484,8 @@ createInstance
 	-> ^(CreateInstance<CreateInstanceNode> ID expressionList)
 	| TABLE '(' type (',' type)? ')'
 	-> ^(CreateInstance<CreateTableNode> type type?)
+	| ARRAY '(' type ',' expression')'
+	-> ^(CreateInstance<CreateArrayNode> type expression)
 	;
 
 quant

@@ -74,6 +74,7 @@
     <Compile Include="AstNodes\MathNodes\MultNode.cs" />
     <Compile Include="AstNodes\MathNodes\ExpressionNode.cs" />
     <Compile Include="AstNodes\MathNodes\PlusNode.cs" />
+    <Compile Include="AstNodes\MethodNodes\CreateArrayNode.cs" />
     <Compile Include="AstNodes\MethodNodes\CreateTableNode.cs" />
     <Compile Include="AstNodes\MethodNodes\CreateInstanceNode.cs" />
     <Compile Include="AstNodes\MethodNodes\SpecialMethodCallNode.cs" />
@@ -165,7 +166,6 @@
     <Compile Include="Types\TableType.cs" />
     <Compile Include="Types\TypeInfo.cs" />
     <Compile Include="Types\TypeStorage.cs" />
-    <Compile Include="Types\VarTypes\GenericParameterInfo.cs" />
     <Compile Include="Types\VarTypes\MethodVarInfo.cs" />
     <Compile Include="Types\VarTypes\GlobalVarInfo.cs" />
     <Compile Include="Types\VarTypes\VarInfo.cs" />

@@ -32,9 +32,9 @@ namespace plsql_msil.Semantic.Passes
                 return;
             }
 
-            foreach (var item in node.Children)
+            for(int i = 0; i < node.ChildCount; i++)
             {
-                Visit(item as dynamic);
+                Visit(node.GetChild(i) as dynamic);
             }
 
         }

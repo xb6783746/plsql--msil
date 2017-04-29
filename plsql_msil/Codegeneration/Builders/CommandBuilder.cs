@@ -432,6 +432,19 @@ namespace plsql_msil.Codegeneration.Builders
 
         protected string GetMethodSignature(MethodInfo method)
         {
+            string ret;
+
+            if (method.Ret is GenericType)
+            {
+                var genericType = method.Ret as GenericType;
+                ret = "!" + genericType.Number;
+
+            }
+            else
+            {
+                
+            }
+
             return String.Format(
                 "{0} {1}::{2}({3})",
                 GetMSILTypeName(method.Ret),
@@ -458,20 +471,7 @@ namespace plsql_msil.Codegeneration.Builders
 
             foreach (var item in method.Arguments)
             {
-                string append;
-
-                if (item is GenericParameterInfo)
-                {
-                    var genericVar = item as GenericParameterInfo;
-
-                    append = "!" + genericVar.GenericPosition;
-                }
-                else
-                {
-                    append = GetMSILTypeName(item.Type);
-                }
-
-                builder.AppendFormat(" {0},", append);
+                builder.AppendFormat(" {0},", GetMSILTypeName(item.Type));
             }
 
             builder.Remove(builder.Length - 1, 1);
@@ -495,6 +495,11 @@ namespace plsql_msil.Codegeneration.Builders
             //{
             //    return NameConvertor.Convert(type);
             //}
+            if (type is GenericType)
+            {
+                var genericType = type as GenericType;
+                return "!" + genericType.Number;
+            }
 
             return nameConvertor.Convert(type);
         }

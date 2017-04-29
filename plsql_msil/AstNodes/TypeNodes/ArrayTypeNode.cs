@@ -9,7 +9,7 @@ using plsql_msil.AstNodes.MathNodes;
 
 namespace plsql_msil.AstNodes.TypeNodes
 {
-    class ArrayTypeNode :BasicNode
+    class ArrayTypeNode :TypeNode
     {
         public ArrayTypeNode(CommonTree node)
             : base(node)
@@ -46,6 +46,11 @@ namespace plsql_msil.AstNodes.TypeNodes
             {
                 return GetChild(1) as ExpressionNode;
             }
+        }
+
+        public override string TypeName
+        {
+            get { return string.Format("array({0})", TypeNode.TypeName); }
         }
     }
 }

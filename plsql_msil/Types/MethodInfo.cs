@@ -67,17 +67,6 @@ namespace plsql_msil.Types
             return Add(name, type, MethodVarType.Local);
         }
 
-        public bool AddGenericArg(string name, TypeInfo type, int genericPosition)
-        {
-            bool res = !Exists(name);
-
-            if (res)
-            {
-                vars.Add(new GenericParameterInfo(name, type, genericPosition));
-            }
-
-            return res;
-        }
 
         private bool Add(string name, TypeInfo type, MethodVarType varType)
         {

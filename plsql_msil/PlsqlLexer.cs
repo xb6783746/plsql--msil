@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:50:56 Plsql.g 2017-04-27 01:35:31
+// $ANTLR 3.3 Nov 30, 2010 12:50:56 Plsql.g 2017-04-29 16:10:24
 
 // The variable 'variable' is assigned but its value is never used.
 #pragma warning disable 219
@@ -2495,12 +2495,12 @@ public partial class PlsqlLexer : Antlr.Runtime.Lexer
 		{
 			int _type = T__104;
 			int _channel = DefaultTokenChannel;
-			// Plsql.g:74:8: ( '[' )
+			// Plsql.g:74:8: ( ',' )
 			DebugEnterAlt(1);
-			// Plsql.g:74:10: '['
+			// Plsql.g:74:10: ','
 			{
 			DebugLocation(74, 10);
-			Match('['); 
+			Match(','); 
 
 			}
 
@@ -2530,12 +2530,12 @@ public partial class PlsqlLexer : Antlr.Runtime.Lexer
 		{
 			int _type = T__105;
 			int _channel = DefaultTokenChannel;
-			// Plsql.g:75:8: ( ']' )
+			// Plsql.g:75:8: ( ';' )
 			DebugEnterAlt(1);
-			// Plsql.g:75:10: ']'
+			// Plsql.g:75:10: ';'
 			{
 			DebugLocation(75, 10);
-			Match(']'); 
+			Match(';'); 
 
 			}
 
@@ -2565,12 +2565,12 @@ public partial class PlsqlLexer : Antlr.Runtime.Lexer
 		{
 			int _type = T__106;
 			int _channel = DefaultTokenChannel;
-			// Plsql.g:76:8: ( ',' )
+			// Plsql.g:76:8: ( '[' )
 			DebugEnterAlt(1);
-			// Plsql.g:76:10: ','
+			// Plsql.g:76:10: '['
 			{
 			DebugLocation(76, 10);
-			Match(','); 
+			Match('['); 
 
 			}
 
@@ -2600,12 +2600,12 @@ public partial class PlsqlLexer : Antlr.Runtime.Lexer
 		{
 			int _type = T__107;
 			int _channel = DefaultTokenChannel;
-			// Plsql.g:77:8: ( ';' )
+			// Plsql.g:77:8: ( ']' )
 			DebugEnterAlt(1);
-			// Plsql.g:77:10: ';'
+			// Plsql.g:77:10: ']'
 			{
 			DebugLocation(77, 10);
-			Match(';'); 
+			Match(']'); 
 
 			}
 
@@ -3747,8 +3747,8 @@ public partial class PlsqlLexer : Antlr.Runtime.Lexer
 		private static readonly string[] DFA4_transitionS =
 			{
 				"\x1\x1A\x1\x27\x2\xFFFF\x1\x16\x1\x17\x1\x28\x1\x1F\x1\x20\x1\x14\x1"+
-				"\x12\x1\x23\x1\x13\x1\x1E\x1\x15\xA\x26\x1\x1D\x1\x24\x1\x1C\x1\x19"+
-				"\x1\x1B\x2\xFFFF\x1A\x25\x1\x21\x1\xFFFF\x1\x22\x1\xFFFF\x1\x25\x1\xFFFF"+
+				"\x12\x1\x21\x1\x13\x1\x1E\x1\x15\xA\x26\x1\x1D\x1\x22\x1\x1C\x1\x19"+
+				"\x1\x1B\x2\xFFFF\x1A\x25\x1\x23\x1\xFFFF\x1\x24\x1\xFFFF\x1\x25\x1\xFFFF"+
 				"\x1\xD\x1\x1\x1\x3\x1\x4\x1\x8\x1\xB\x2\x25\x1\x2\x2\x25\x1\xA\x1\x10"+
 				"\x1\x11\x1\xE\x1\xC\x1\x25\x1\xF\x1\x5\x1\x7\x1\x25\x1\x6\x1\x9\x3\x25"+
 				"\x1\xFFFF\x1\x18",

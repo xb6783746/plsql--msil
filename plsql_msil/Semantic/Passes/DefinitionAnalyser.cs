@@ -384,6 +384,16 @@ namespace plsql_msil.Semantic.Passes
 
             return new TypeDescriptor(false, res, true);
         }
+
+        private TypeDescriptor Visit(CreateArrayNode node)
+        {
+            //node.TableType = context.GetType(node.TypeName);
+
+            TypeInfo res = GenerateArrayType(node.TypeNode);
+
+            return new TypeDescriptor(false, res, true);
+        }
+
         private TypeDescriptor Visit(MethodCallNode node)
         {
             TypeDescriptor where = Visit(node.Where as dynamic);

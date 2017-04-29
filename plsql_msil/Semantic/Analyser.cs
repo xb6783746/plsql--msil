@@ -88,6 +88,14 @@ namespace plsql_msil.Semantic
 
             return dictTypeTemplate.Generate(type.Type, valType.Type);
         }
+        protected TypeInfo GenerateArrayType(TypeNode node)
+        {
+            var type = Visit(node as dynamic);
+
+            var arrTypeTemplate = types.GetTemplate("Array`1");
+
+            return arrTypeTemplate.Generate(type.Type);
+        }
 
         private TypeDescriptor Visit(TypeNode node)
         {
@@ -104,6 +112,12 @@ namespace plsql_msil.Semantic
             var dictType = GenerateDictionaryType(node.IndexTypeNode, node.TypeNode);
 
             return new TypeDescriptor(false, dictType, false);
+        }
+        private TypeDescriptor Visit(ArrayTypeNode node)
+        {
+            var arrType = GenerateArrayType(node.TypeNode);
+
+            return new TypeDescriptor(false, arrType, false);
         }
 
         protected MethodStruct GetMethod(MethodDeclNode node)

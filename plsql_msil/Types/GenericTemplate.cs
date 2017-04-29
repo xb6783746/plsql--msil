@@ -72,22 +72,25 @@ namespace plsql_msil.Types
         {
             var gRet = method.ret as GenericType;
 
-            var realRetType = gRet != null ? types[gRet.Number] : method.ret;
+            var realRetType = gRet != null ? new GenericType(gRet.Number, types[gRet.Number]) : method.ret;
 
             var res = new MethodInfo(method.name, realRetType, method.isStatic, where);
 
             foreach (var item in method.args)
             {
                 var gtype = item.Type as GenericType;
+                TypeInfo varType;
 
                 if (gtype != null)
                 {
-                    res.AddGenericArg(item.Name, types[gtype.Number], gtype.Number);
+                    varType = new GenericType(gtype.Number, types[gtype.Number]);
                 }
                 else
                 {
-                    res.AddArg(item.Name, item.Type);
+                    varType = item.Type;
                 }
+
+                res.AddArg(item.Name, varType);
 
                 //res.GenericArgs.Add(gtype != null ? gtype.Number : -1);
             }

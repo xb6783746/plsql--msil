@@ -29,6 +29,7 @@ namespace plsql_msil.Codegeneration
             //public MethodInfo CurrentMethod { get; set; }
             public TypeInfo CurrentClass { get; set; }
             public VarInfo LastVar { get; set; }
+
         }
 
         private TypeStorage types;
@@ -148,23 +149,15 @@ namespace plsql_msil.Codegeneration
 
             return dictTypeTemplate.Generate(type.Type, valType.Type);
         }
-
-        private TypeDescriptor Visit(TypeNode node)
+        protected TypeInfo GenerateArrayType(TypeNode node)
         {
-            return new TypeDescriptor(false, types.GetType(node.TypeName), false);
-        }
-        private TypeDescriptor Visit(TableTypeNode node)
-        {
-            var tableType = GenerateTableType(node.TypeNode);
+            var type = Visit(node as dynamic);
 
-            return new TypeDescriptor(false, tableType, false);
-        }
-        private TypeDescriptor Visit(DictionaryTypeNode node)
-        {
-            var dictType = GenerateDictionaryType(node.IndexTypeNode, node.TypeNode);
+            var arrTypeTemplate = types.GetTemplate("Array`1");
 
-            return new TypeDescriptor(false, dictType, false);
+            return arrTypeTemplate.Generate(type.Type);
         }
+
 
         private TypeInfo Visit(BoolNode node, MethodBuilder builder, CodegenContext context)
         {
@@ -264,11 +257,22 @@ namespace plsql_msil.Codegeneration
         }
         private TypeInfo Visit(CreateTableNode node, MethodBuilder builder, CodegenContext context)
         {
-
-
             builder.DefaultConstructor(node.TableType);
 
             return node.TableType;
+        }
+        private TypeInfo Visit(CreateArrayNode node, MethodBuilder builder, CodegenContext context)
+        {
+            //node.TableType = context.GetType(node.TypeName);
+
+            Visit(node.Length, builder, context);
+
+            //var itemsType = Visit(node.TypeNode as dynamic);
+            var arrType = GenerateArrayType(node.TypeNode);
+
+            builder.Construct(arrType, new List<TypeInfo>() { TypeInfo.Int });
+
+            return arrType;
         }
         private TypeInfo Visit(MethodCallNode node, MethodBuilder builder, CodegenContext context)
         {
@@ -522,23 +526,28 @@ namespace plsql_msil.Codegeneration
             return context.LastVar.Type;
         }
 
-        //private TypeInfo Visit(AssignMemberCallNode node, MethodBuilder builder, CodegenContext context)
-        //{
-        //    var whereType = Visit(node.MemberCallNode.Where as dynamic, builder, context);
+        private TypeInfo Visit(AssignMemberCallNode node, MethodBuilder builder, CodegenContext context)
+        {
+            var whereType = Visit(node.MemberCallNode.Where as dynamic, builder, context);
 
-        //    VarInfo varInfo = types.GetType(whereType.Name).GetField(node.MemberCallNode.MemberName);
+            VarInfo varInfo = types.GetType(whereType.Name).GetField(node.MemberCallNode.MemberName);
 
-        //    lastType = whereType;
-        //    lastVar = varInfo;
+            //lastType = whereType;
+            context.LastVar = varInfo;
 
-        //    return varInfo.Type;
-        //}
-        //private TypeInfo Visit(AssignVarNode node, MethodBuilder builder, CodegenContext context)
-        //{
-        //    lastVar = node.VarInfo;
+            return varInfo.Type;
+        }
+        private TypeInfo Visit(AssignVarNode node, MethodBuilder builder, CodegenContext context)
+        {
+            context.LastVar = builder.MethodInfo.GetVar(node.VarName);
 
-        //    return node.VarInfo.Type;
-        //}
+            if (context.LastVar == null)
+            {
+                context.LastVar = context.CurrentClass.GetField(node.VarName);
+            }
+
+            return context.LastVar.Type;
+        }
 
         private TypeInfo Visit(ReturnNode node, MethodBuilder builder, CodegenContext context)
         {
@@ -566,6 +575,29 @@ namespace plsql_msil.Codegeneration
 
             return res;
 
+        }
+
+        private TypeDescriptor Visit(TypeNode node)
+        {
+            return new TypeDescriptor(false, types.GetType(node.TypeName), false);
+        }
+        private TypeDescriptor Visit(TableTypeNode node)
+        {
+            var tableType = GenerateTableType(node.TypeNode);
+
+            return new TypeDescriptor(false, tableType, false);
+        }
+        private TypeDescriptor Visit(DictionaryTypeNode node)
+        {
+            var dictType = GenerateDictionaryType(node.IndexTypeNode, node.TypeNode);
+
+            return new TypeDescriptor(false, dictType, false);
+        }
+        private TypeDescriptor Visit(ArrayTypeNode node)
+        {
+            var arrType = GenerateArrayType(node.TypeNode);
+
+            return new TypeDescriptor(false, arrType, false);
         }
 
         private bool IsStatic(string str)
