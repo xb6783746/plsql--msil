@@ -121,13 +121,19 @@ namespace plsql_msil
             var parser = new PlsqlParser(new CommonTokenStream(lexer));
             var tree = parser.program().Tree as CommonTree;
 
+            //if (treeLogger != null)
+            //{
+            //    treeLogger.Log(ASTPrinter.Print(tree));
+            //}
+
+            var semanticAnalyser = new SemanticAnalyser(typeStorage);
+            bool res = semanticAnalyser.Check(tree, logger);
+
+
             if (treeLogger != null)
             {
                 treeLogger.Log(ASTPrinter.Print(tree));
             }
-
-            var semanticAnalyser = new SemanticAnalyser(typeStorage);
-            bool res = semanticAnalyser.Check(tree, logger);
 
             if (res)
             {

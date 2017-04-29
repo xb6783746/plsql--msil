@@ -5,6 +5,7 @@ using Antlr.Runtime.Tree;
 using plsql_msil.AstNodes;
 using plsql_msil.AstNodes.CommandNodes;
 using plsql_msil.AstNodes.MathNodes;
+using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
 using plsql_msil.AstNodes.SpecialMethodNodes;
 using plsql_msil.Loggers;
@@ -54,18 +55,18 @@ namespace plsql_msil.Semantic.Passes
                 var where = indexNode.Where;
                 var args = new List<BasicNode>() {indexNode.Index, node.Expression};
 
-                var method = new SpecialMethodCallNode("Set", where, args);
+                var method = new MethodCallNode("Set", where, args);
 
-                node.Parent.ReplaceChildren(node.ChildIndex, node.ChildIndex, method);
+                ReplaceNode(node.Parent, node.ChildIndex, method);
 
-                Visit(indexNode.Where);
-                Visit(node.Expression);
+                Visit(indexNode.Where as dynamic);
+                Visit(node.Expression as dynamic);
             }
             else
             {
-                Visit(node.LValue);
+                Visit(node.LValue as dynamic);
 
-                Visit(node.Expression);
+                Visit(node.Expression as dynamic);
             }
         }
         //private void Visit(PlusNode node)
@@ -101,9 +102,13 @@ namespace plsql_msil.Semantic.Passes
             var where = node.Where;
             var args = new List<BasicNode>() { node.Index };
 
-            var method = new SpecialMethodCallNode("Get", where, args);
+            var method = new MethodCallNode("Get", where, args);
 
-            node.Parent.ReplaceChildren(node.ChildIndex, node.ChildIndex, method);
+            ReplaceNode(node.Parent, node.ChildIndex, method);
+
+            Visit(where as dynamic);
+            Visit(node.Index as dynamic);
+
         }
 
         private void BinaryOperator(BinaryOperator node, string methodName)
@@ -113,14 +118,18 @@ namespace plsql_msil.Semantic.Passes
 
             var method = new SpecialMethodCallNode(methodName, where, args);
 
-            node.Parent.ReplaceChildren(node.ChildIndex, node.ChildIndex, method);
+            ReplaceNode(node.Parent, node.ChildIndex, method);
+
+
         }
 
        
 
         void ReplaceNode(ITree parent, int index, BasicNode node)
         {
-           
+            parent.ReplaceChildren(index, index, node);
+            node.Parent = parent;
+            node.ChildIndex = index;
         }
 
     }

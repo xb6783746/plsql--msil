@@ -4,15 +4,15 @@ using plsql_msil.Types;
 
 namespace plsql_msil.AstNodes
 {
-    abstract class BasicNode :CommonTree
+    class BasicNode :CommonTree
     {
-        protected BasicNode(CommonTree node)
+        public BasicNode(CommonTree node)
             : base(node)
         {
 
         }
 
-        protected BasicNode(IToken t)
+        public BasicNode(IToken t)
             : base(t)
         {
 

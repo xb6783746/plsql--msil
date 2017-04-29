@@ -27,6 +27,28 @@ namespace plsql_msil.AstNodes.MethodNodes
         {
 
         }
+        public MethodCallNode(string name, BasicNode where, List<BasicNode> args )
+            : base(new CommonToken(0, "MethodCall"))
+        {
+            var node = new BasicNode(new CommonToken(0, name));
+            this.InsertChild(0, node);
+            node.Parent = this;
+
+            var argsNode = new BasicNode(new CommonToken(0, "Args"));
+            this.InsertChild(1, argsNode);
+            argsNode.Parent = this;
+
+            for (int i = 0; i < args.Count; i++)
+            {
+                argsNode.InsertChild(i, args[i]);
+                args[i].Parent = argsNode;
+            }
+
+            this.InsertChild(2, where);
+            where.Parent = this;
+
+
+        }
 
         public override ITree DupNode()
         {

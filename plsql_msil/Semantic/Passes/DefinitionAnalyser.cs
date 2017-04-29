@@ -417,7 +417,7 @@ namespace plsql_msil.Semantic.Passes
 
             //node.MethodInfo = method;
 
-            return new TypeDescriptor(false, method.Ret);
+            return new TypeDescriptor(false, method.Ret, true);
         }
 
         private TypeDescriptor Visit(ExpressionNode node)
