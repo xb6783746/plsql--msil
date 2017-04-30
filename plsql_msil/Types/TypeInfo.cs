@@ -27,6 +27,18 @@ namespace plsql_msil.Types
         public virtual List<VarInfo> Fields { get { return null; } }      
         public virtual List<TypeInfo> Types { get { return null; } }
         public bool IsImplemented { get; set; }
+        public virtual bool IsGenericImplementation { get; private set; }
+        public int GenericPosition { get; private set; }
+
+        public TypeInfo Generic(int pos)
+        {
+            var res = MemberwiseClone() as TypeInfo;
+
+            res.IsGenericImplementation = true;
+            res.GenericPosition = pos;
+
+            return res;
+        }
 
         public virtual string LibName { get; protected set; }
         public virtual string Namespace { get; protected set; }

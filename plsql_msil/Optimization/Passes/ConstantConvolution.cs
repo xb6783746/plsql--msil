@@ -51,9 +51,9 @@ namespace plsql_msil.Optimization.Passes
                 return null;
             }
 
-            foreach (var item in node.Children)
+            for(int i = 0; i < node.ChildCount; i++)
             {
-                Visit(item as dynamic);
+                Visit(node.GetChild(i) as dynamic);
             }
 
             return null;
@@ -125,6 +125,11 @@ namespace plsql_msil.Optimization.Passes
             ValInfo lV = Visit(node.LeftOperand as dynamic);
             ValInfo rV = Visit(node.RightOperand as dynamic);
 
+            if (lV == null || rV == null)
+            {
+                return null;
+            }
+
             if (lV.isConst && rV.isConst && lV.type == rV.type)
             {
                 object val = func(lV.val, rV.val);
@@ -189,6 +194,11 @@ namespace plsql_msil.Optimization.Passes
             ValInfo val = Visit(node.Expression);
 
             var type = node.Type as SimpleType;
+
+            if (val == null)
+            {
+                return null;
+            }
 
             if (val.isConst && type != null)
             {

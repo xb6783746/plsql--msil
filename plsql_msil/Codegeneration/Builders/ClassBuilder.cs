@@ -11,6 +11,7 @@ namespace plsql_msil.Codegeneration.Builders
         public ClassBuilder(ClassType classType, INameConvertor nameConvertor)
         {
             ClassType = classType;
+            this.nameConvertor = nameConvertor;
 
             Build(classType);
 

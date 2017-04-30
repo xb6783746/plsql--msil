@@ -292,6 +292,8 @@ methodDef
 typeDecl
 	: TYPE ID IS TABLE OF type
 	-> ^(Table<TableNode> ID type)
+	| TYPE ID IS TABLE OF type INDEX BY type
+	-> ^(Table<DictionaryNode> ID type type)
 	| TYPE ID IS RECORD '(' varList ')'
 	-> ^(Record<RecordNode> ID varList)
 	;
@@ -309,8 +311,8 @@ objectDecl
 	;
 
 objectBody
-	: CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )+ END ';'
-	-> ^(ClassDef<ClassDefNode> ID methodDef+)
+	: CREATE TYPE BODY ID isOrAs OBJECT ( methodDef ';' )* END ';'
+	-> ^(ClassDef<ClassDefNode> ID methodDef*)
 	;
 
 objectDeclItem
@@ -332,8 +334,8 @@ packageDecl
 	;
 
 packageDef
-	: CREATE PACKAGE BODY ID isOrAs packageBodyItem+ END ';'
-	-> ^(PackageDef<PackageDefNode> ID packageBodyItem+)
+	: CREATE PACKAGE BODY ID isOrAs packageBodyItem* END ';'
+	-> ^(PackageDef<PackageDefNode> ID packageBodyItem*)
 	;
 
 packageDeclItem

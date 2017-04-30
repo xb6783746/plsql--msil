@@ -55,7 +55,12 @@ namespace plsql_msil.Types
                 return SimpleTypes(type as SimpleType);
             }
 
-            throw new Exception();
+            if (type is RecordType)
+            {
+                return RecordTypes(type as RecordType);
+            }
+
+            return string.Format("class {0}.{1}", defaultNamespace, type.Name);
 
         }
 
@@ -63,6 +68,11 @@ namespace plsql_msil.Types
         {
             return simpleTypes[type.SType];
         }
+        private string RecordTypes(RecordType type)
+        {
+            return string.Format("class {0}.{1}/{2}", defaultNamespace, type.PackageName, type.RecordName);
+        }
+
 
         private string GenericType(GenericClassType type)
         {

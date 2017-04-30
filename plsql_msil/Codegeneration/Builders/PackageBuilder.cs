@@ -67,7 +67,7 @@ namespace plsql_msil.Codegeneration.Builders
                 builder = new StringBuilder(innerTypeTemplate);
 
                 builder.Replace("{__className}", item.RecordName);
-                builder.Replace("{__fields}", GetFields(item.Vars, false));
+                builder.Replace("{__fields}", GetFields(item.Fields, false));
 
                 result.AppendLine(builder.ToString());
             }

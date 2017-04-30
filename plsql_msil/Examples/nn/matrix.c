@@ -1,10 +1,12 @@
 create type Matrix as object (
 	
-	matrix table(table(double));
+	matrix array(double);
 	i int;
 	j int;
 	
 	member procedure Init();
+	member function Get(i int, j int) return double;
+	member procedure Set(i int, j int, val double);
 	
 );
 
@@ -12,151 +14,140 @@ create type body Matrix as object
 
 	member procedure Init() is
 		i int;
-		j int;
 	begin
-		for (i := 0; i < self.i; i := i + 1)
-			self.matrix[i] := table(double);
-		
-			for (j := 0; j < self.j; j := j + 1)
-				self.matrix[i][j] := Utils.RandDouble();
-			end for;
+		for (i := 0; i < self.i * self.j; i := i + 1)
+			self.matrix[i] := Utils.RandDouble();
 		end for;
 	end;
-end;
-
-create type Vector as object (
 	
-	vec table(double);
-	len int;
+	member function Get(i int, j int) return double is
 	
-	member procedure Init();
-	
-);
-
-create type body Vector as object
-
-	member procedure Init() is
-		i int;
 	begin
-		for (i := 0; i < self.len; i := i + 1)
-			self.vec[i] := Utils.RandDouble();
-		end for;
+		return self.matrix[self.j*i + j];
+	end;
+	
+	
+	member procedure Set(i int, j int, val double) is
+	
+	begin
+		self.matrix[self.j*i + j] := val;
 	end;
 end;
 
 create package MatrixUtils as
 		
-	function Sum(vec1 Vector, vec2 Vector) return Vector;
-	function Minus(vec1 Vector, vec2 Vector) return Vector;
-	function Mul(m Matrix, vec Vector) return Vector;
-	function Mul(vec1 Vector, vec2 Vector) return Vector;
-	function Mul(vec1 Vector, d double) return Vector;
 	
-	function Softmax(arr Vector) return Vector;
-	function DSoftmax(arr Vector) return Vector;
+	function Sum(vec1 array(double), vec2 array(double)) return array(double);
+	function Minus(vec1 array(double), vec2 array(double)) return array(double);
+	function Mul(m Matrix, vec array(double)) return array(double);
+	function Mul(vec1 array(double), vec2 array(double)) return array(double);
+	function Mul(vec1 array(double), d double) return array(double);
 	
-	function MaxIndex(arr Vector) return int;
+	function Softmax(arr array(double)) return array(double);
+	function DSoftmax(arr array(double)) return array(double);
+	
+	function MaxIndex(arr array(double)) return int;
+	
+	procedure Init(arr array(double));
 	
 end;
 
 create package body MatrixUtils is
 
-	function Sum(vec1 Vector, vec2 Vector) return Vector is
-		res Vector;
+	function Sum(vec1 array(double), vec2 array(double)) return array(double) is
+		res array(double);
 		i int;
 	begin
-		res := Vector(table(double), vec1.len);
+		res := array(double, vec1.Count());
 
-		for (i := 0; i < vec1.len; i := i + 1)
+		for (i := 0; i < vec1.Count(); i := i + 1)
 		
-			res.vec[i] := vec1.vec[i] + vec2.vec[i];
+			res[i] := vec1[i] + vec2[i];
 		end for;
 
 		return res;
 	end;
 	
 	
-	function Minus(vec1 Vector, vec2 Vector) return Vector is
-		res Vector;
+	function Minus(vec1 array(double), vec2 array(double)) return array(double) is
+		res array(double);
 		i int;
 	begin
-		res := Vector(table(double), vec1.len);
+		res := array(double, vec1.Count());
 
-		for (i := 0; i < vec1.len; i := i + 1)
+		for (i := 0; i < vec1.Count(); i := i + 1)
 		
-			res.vec[i] := vec1.vec[i] - vec2.vec[i];
+			res[i] := vec1[i] - vec2[i];
 		end for;
 
 		return res;
 	end;
 	
 	
-	function Mul(m Matrix, vec Vector) return Vector is
-		res Vector;
+	function Mul(m Matrix, vec array(double)) return array(double) is
+		res array(double);
 		i int;
 		j int;
 	begin
-		res := Vector(table(double), m.i);
-		res.Init();
+		res := array(double, m.i);
 		
 		for(i := 0; i < m.i; i := i + 1)
 			
 			for(j := 0; j < m.j; j := j + 1)
-				res.vec[i] := res.vec[i] + m.matrix[i][j] * vec.vec[j];
+				res[i] := res[i] + m.Get(i,j) * vec[j];
 				
 			end for;
 		end for;
 
 		return res;
 	end;
-	function Mul(vec1 Vector, vec2 Vector) return Vector is
-		res Vector;
+	function Mul(vec1 array(double), vec2 array(double)) return array(double) is
+		res array(double);
 		i int;
 	begin
-		res := Vector(table(double), vec1.len);
-		res.Init();
+		res := array(double, vec1.Count());
 		
-		for (i := 0; i < vec1.len; i := i + 1)
+		for (i := 0; i < vec1.Count(); i := i + 1)
 		
-			res.vec[i] := vec1.vec[i] * vec2.vec[i];
+			res[i] := vec1[i] * vec2[i];
 		end for;
 
 		return res;
 	end;
 	
 	
-	function Mul(vec1 Vector, d double) return Vector is 
-		res Vector;
+	function Mul(vec1 array(double), d double) return array(double) is 
+		res array(double);
 		i int;
 	begin
-		res := Vector(table(double), vec1.len);
+		res := array(double, vec1.Count());
 		
-		for (i := 0; i < vec1.len; i := i + 1)
+		for (i := 0; i < vec1.Count(); i := i + 1)
 		
-			res.vec[i] := vec1.vec[i] * d;
+			res[i] := vec1[i] * d;
 		end for;
 
 		return res;
 	
 	end;
 	
-	function Softmax(arr Vector) return Vector is
-		res Vector;
+	function Softmax(arr array(double)) return array(double) is
+		res array(double);
 		i int;
 		sum double;
 	begin
-		res := Vector(table(double), arr.len);
+		res := array(double, arr.Count());
 
 		sum := (double)0;
 
-		for(i := 0; i < arr.len; i := i + 1)
+		for(i := 0; i < arr.Count(); i := i + 1)
 		
-			sum := sum + Math.Exp(arr.vec[i]);
+			sum := sum + Math.Exp(arr[i]);
 		end for;
 
-		for(i := 0; i < arr.len; i := i + 1)
+		for(i := 0; i < arr.Count(); i := i + 1)
 		
-			res.vec[i] := Math.Exp(arr.vec[i]) / sum;
+			res[i] := Math.Exp(arr[i]) / sum;
 		end for;
 
 		return res;
@@ -164,39 +155,47 @@ create package body MatrixUtils is
 	end;
 	
 	
-	function DSoftmax(arr Vector) return Vector is
-		res Vector;
+	function DSoftmax(arr array(double)) return array(double) is
+		res array(double);
 		i int;
 	begin
 		res := MatrixUtils.Softmax(arr);
-		res.Init();
 		
-		for(i := 0; i < arr.len; i := i + 1)
+		for(i := 0; i < arr.Count(); i := i + 1)
 		
-			res.vec[i] := res.vec[i] * (1 - res.vec[i]);
+			res[i] := res[i] * (1 - res[i]);
 		end for;
 
 		return res;
 	
 	end;
 	
-	function MaxIndex(arr Vector) return int is
+	function MaxIndex(arr array(double)) return int is
 		max double;
 		i int;
 		ind int;
 	begin
 	
-		max := arr.vec[0];
+		max := arr[0];
 		ind := 0;
 		
-		for(i := 1; i < arr.len; i := i + 1)
+		for(i := 1; i < arr.Count(); i := i + 1)
 		
-			if max < arr.vec[i] then
-				max := arr.vec[i];
+			if max < arr[i] then
+				max := arr[i];
 				ind := i;
 			end if;
 		end for;
 	
 		return ind;
+	end;
+	
+	procedure Init(arr array(double)) is
+		i int;
+	begin
+		for( i := 0; i < arr.Count(); i := i + 1)
+			
+			arr[i] := Utils.RandDouble();
+		end for;
 	end;
 end;

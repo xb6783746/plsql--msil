@@ -99,6 +99,7 @@
     <Compile Include="AstNodes\TypeNodes\RecordNode.cs" />
     <Compile Include="AstNodes\TypeNodes\DictionaryTypeNode.cs" />
     <Compile Include="AstNodes\TypeNodes\ArrayTypeNode.cs" />
+    <Compile Include="AstNodes\TypeNodes\DictionaryNode.cs" />
     <Compile Include="AstNodes\TypeNodes\TableTypeNode.cs" />
     <Compile Include="AstNodes\TypeNodes\TableNode.cs" />
     <Compile Include="AstNodes\TypeNodes\VoidNode.cs" />

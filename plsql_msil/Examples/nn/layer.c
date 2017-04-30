@@ -1,14 +1,14 @@
 create type Layer as object (
 	
 	matrix Matrix;
-	bias Vector;
+	bias array(double);
 	
-	input Vector;
-	inputM Vector;
+	input array(double);
+	inputM array(double);
 	
 	member procedure Init();
-	member function Calc(inpt Vector) return Vector;
-	member procedure ChangeWeights(arr Vector);
+	member function Calc(inpt array(double)) return array(double);
+	member procedure ChangeWeights(arr array(double));
 	
 );
 
@@ -18,10 +18,10 @@ create type body Layer as object
 	
 	begin
 		self.matrix.Init();
-		self.bias.Init();
+		MatrixUtils.Init(self.bias);
 	end;
 	
-	member function Calc(inpt Vector) return Vector is
+	member function Calc(inpt array(double)) return array(double) is
 	
 	begin
 		self.input := inpt;
@@ -31,7 +31,7 @@ create type body Layer as object
 	
 	end;
 	
-	member procedure ChangeWeights(arr Vector) is
+	member procedure ChangeWeights(arr array(double)) is
 		i int;
 		j int;
 		delta double;
@@ -40,13 +40,13 @@ create type body Layer as object
 		
 			for(j := 0; j < self.matrix.j; j := j + 1)
 			
-				delta := self.input.vec[j] * arr.vec[i];
+				delta := self.input[j] * arr[i];
 
-				self.matrix.matrix[i][j] := self.matrix.matrix[i][j] + delta;
+				self.matrix.Set(i, j, self.matrix.Get(i, j) + delta);
 
 			end for;
 
-			self.bias.vec[i] := self.bias.vec[i] + arr.vec[i];
+			self.bias.Set(i, self.bias.Get(i) + arr.Get(i)));
 		end for;
 	
 	end;

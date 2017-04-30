@@ -77,6 +77,8 @@ namespace plsql_msil.Codegeneration
         {
             var type = types.GetType(node.Name) as ClassType;
 
+            context.CurrentClass = type;
+
             var classBuilder = builder.BuildClass(type);
 
             foreach (var item in node.Defs)
@@ -130,13 +132,13 @@ namespace plsql_msil.Codegeneration
 
         }
 
-        protected TypeInfo GenerateTableType(TypeNode node)
+        protected TypeInfo GenerateTableType(TypeNode node, string name = null)
         {
             var type = Visit(node as dynamic);
 
             var tableTypeTemplate = types.GetTemplate("List`1");
 
-            return tableTypeTemplate.Generate(type.Type);
+            return tableTypeTemplate.Generate(name, type.Type);
 
         }
         protected TypeInfo GenerateDictionaryType(TypeNode kTypeNode, TypeNode valTypeNode)
@@ -149,13 +151,13 @@ namespace plsql_msil.Codegeneration
 
             return dictTypeTemplate.Generate(type.Type, valType.Type);
         }
-        protected TypeInfo GenerateArrayType(TypeNode node)
+        protected TypeInfo GenerateArrayType(TypeNode node, string name = null)
         {
             var type = Visit(node as dynamic);
 
             var arrTypeTemplate = types.GetTemplate("Array`1");
 
-            return arrTypeTemplate.Generate(type.Type);
+            return arrTypeTemplate.Generate(name, type.Type);
         }
 
 
@@ -395,7 +397,7 @@ namespace plsql_msil.Codegeneration
 
             builder.Convert(convType.SType);
 
-            return res;
+            return convType;
         }
 
         private TypeInfo BinaryOperatorVisit(BinaryOperator binaryOperator,
@@ -568,9 +570,9 @@ namespace plsql_msil.Codegeneration
 
             foreach (var item in node.Vars)
             {
-                var type = types.GetType(item.VarType.TypeName);
+                var type = Visit(item.VarType as dynamic);
 
-                res.Add(type);
+                res.Add(type.Type);
             }
 
             return res;

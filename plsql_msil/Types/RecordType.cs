@@ -7,28 +7,19 @@ using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Types
 {
-    class RecordType :TypeInfo
+    class RecordType : ClassType
     {
-        public RecordType(string libName, string namespace_, string packageName, string name)
-            : this(packageName, name, new List<VarInfo>())
-        {
-            LibName = libName;
-            Namespace = namespace_;
-            IsLibClass = true;
-        }
-        public RecordType(string packageName, string name, List<VarInfo> vars)
+        public RecordType(string packageName, string name)
             : base(packageName + "." + name, true)
         {
 
             PackageName = packageName;
             RecordName = name;
-            Vars = vars;
         }
 
 
         public string PackageName { get; private set; }
         public string RecordName { get; private set; }
-        public List<VarInfo> Vars { get; private set; }
 
         public override Type Type
         {
@@ -36,25 +27,6 @@ namespace plsql_msil.Types
             {
                 return Type.Record;
             }
-        }
-
-        public bool AddVar(string name, TypeInfo type)
-        {
-            var varInfo = Vars.FirstOrDefault(x => x.Name == name);
-
-            bool res = varInfo == null;
-
-            if(res)
-            {
-                Vars.Add(new GlobalVarInfo(name, type, this));
-            }
-
-            return res;
-        }
-
-        public override VarInfo GetField(string memberName)
-        {
-            return Vars.FirstOrDefault(x => x.Name == memberName);
         }
     }
 }

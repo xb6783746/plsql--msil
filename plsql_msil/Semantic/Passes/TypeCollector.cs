@@ -100,42 +100,51 @@ namespace plsql_msil.Semantic.Passes
         private void CollectRecord(RecordNode node, PackageType packageType)
         {
 
-            //var vars = new List<VarInfo>();
+            var record = new RecordType(packageType.Name, node.Name);
 
-            //foreach (var item in node.Vars)
-            //{
-            //    var varInfo = GetVar(item);
+            foreach (var item in node.Vars)
+            {
+                var varInfo = GetVar(item);
 
-            //    vars.Add(new VarInfo(varInfo.Name, varInfo.Type, VarLocation.Global));
-            //}
+                record.AddField(varInfo.Name, varInfo.Type);
+            }
 
-            //var record = new RecordType(packageType.Name, node.Name, vars);
+            bool ok = packageType.AddType(record);
+            types.AddType(record);
 
-            //bool ok = packageType.AddType(record);
-            //types.AddType(record);
-
-            //if (!ok)
-            //{
-            //    Log(String.Format("Запись с именем {0} уже существует", node.Name), node);
-            //}
+            if (!ok)
+            {
+                Log(String.Format("Запись с именем {0} уже существует", node.Name), node);
+            }
 
 
         }
         private void CollectTable(TableNode node, PackageType packageType)
         {
+            var tableType = GenerateTableType(node.TypeNode, packageType.Name + "." + node.Name);
 
-            //var tableType = new TableType(
-            //                    packageType.Name, node.Name, types.GetType(node.TypeNode.TypeName));
+            bool ok = packageType.AddType(tableType);
+            types.AddType(tableType);
 
-            //bool ok = packageType.AddType(tableType);
-            //types.AddType(tableType);
-
-            //if (!ok)
-            //{
-            //    Log(String.Format("Таблица с именем {0} уже существует", node.Name), node);
-            //}
+            if (!ok)
+            {
+                Log(String.Format("Таблица с именем {0} уже существует", node.Name), node);
+            }
 
         }
+        //private void CollectDictionary(DictionaryNode node, PackageType packageType)
+        //{
+        //    var dictType = GenerateDictionaryType(node.TypeNode, node.Name);
+
+        //    bool ok = packageType.AddType(tableType);
+        //    types.AddType(tableType);
+
+        //    if (!ok)
+        //    {
+        //        Log(String.Format("Таблица с именем {0} уже существует", node.Name), node);
+        //    }
+
+        //}
 
     }
 }

@@ -69,16 +69,16 @@ namespace plsql_msil.Semantic
 
         }
 
-        protected TypeInfo GenerateTableType(TypeNode node)
+        protected TypeInfo GenerateTableType(TypeNode node, string name = null)
         {
             var type = Visit(node as dynamic);
 
             var tableTypeTemplate = types.GetTemplate("List`1");
 
-            return tableTypeTemplate.Generate(type.Type);
+            return tableTypeTemplate.Generate(name, type.Type);
 
         }
-        protected TypeInfo GenerateDictionaryType(TypeNode kTypeNode, TypeNode valTypeNode)
+        protected TypeInfo GenerateDictionaryType(TypeNode kTypeNode, TypeNode valTypeNode, string name = null)
         {
             var type = Visit(kTypeNode as dynamic);
 
@@ -86,15 +86,15 @@ namespace plsql_msil.Semantic
 
             var dictTypeTemplate = types.GetTemplate("Dictionary`2");
 
-            return dictTypeTemplate.Generate(type.Type, valType.Type);
+            return dictTypeTemplate.Generate(name, type.Type, valType.Type);
         }
-        protected TypeInfo GenerateArrayType(TypeNode node)
+        protected TypeInfo GenerateArrayType(TypeNode node, string name = null)
         {
             var type = Visit(node as dynamic);
 
             var arrTypeTemplate = types.GetTemplate("Array`1");
 
-            return arrTypeTemplate.Generate(type.Type);
+            return arrTypeTemplate.Generate(name, type.Type);
         }
 
         private TypeDescriptor Visit(TypeNode node)
@@ -123,9 +123,9 @@ namespace plsql_msil.Semantic
         protected MethodStruct GetMethod(MethodDeclNode node)
         {
 
-            var type = types.GetType(node.Ret.TypeName);
+            var type = Visit(node.Ret as dynamic);
 
-            if (type == null)
+            if (type.Type == null)
             {
                 Log(
                     String.Format(
@@ -153,7 +153,7 @@ namespace plsql_msil.Semantic
                 args.Add(varInfo);
             }
 
-            return new MethodStruct(node.MethodName, type, args);
+            return new MethodStruct(node.MethodName, type.Type, args);
 
         }
 

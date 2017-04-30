@@ -37,5 +37,12 @@ namespace plsql_msil.Types
 
         //    return type != null && type.ItemsType.Equals(this.ItemsType);
         //}
+
+        public override bool CanBeAssignedWith(TypeInfo info)
+        {
+            var genericType = info as GenericClassType;
+
+            return genericType != null && TypeInfo.Compare(ItemsType, genericType.ItemsType);
+        }
     }
 }

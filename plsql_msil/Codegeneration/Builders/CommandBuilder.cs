@@ -495,10 +495,9 @@ namespace plsql_msil.Codegeneration.Builders
             //{
             //    return NameConvertor.Convert(type);
             //}
-            if (type is GenericType)
+            if (type.IsGenericImplementation)
             {
-                var genericType = type as GenericType;
-                return "!" + genericType.Number;
+                return "!" + type.GenericPosition;
             }
 
             return nameConvertor.Convert(type);

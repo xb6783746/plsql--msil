@@ -48,16 +48,20 @@ namespace plsql_msil.Types
             Constructors.Add(new GenericMehodInfo(args, TypeInfo.Void, "", false));
         }
 
-        public TypeInfo Generate(params TypeInfo[] types)
+        public TypeInfo Generate(string typeName, params TypeInfo[] types)
         {
-            string name = Name;
-            foreach (var item in types)
+            if (typeName == null)
             {
-                name += item.Name;
+
+                typeName = Name;
+                foreach (var item in types)
+                {
+                    typeName += item.Name;
+                }
             }
 
 
-            var res = new GenericClassType(Name, name, types);
+            var res = new GenericClassType(Name, typeName, types);
 
             foreach (var item in Methods)
             {
@@ -72,7 +76,7 @@ namespace plsql_msil.Types
         {
             var gRet = method.ret as GenericType;
 
-            var realRetType = gRet != null ? new GenericType(gRet.Number, types[gRet.Number]) : method.ret;
+            var realRetType = gRet != null ? types[gRet.Number].Generic(gRet.Number) : method.ret;
 
             var res = new MethodInfo(method.name, realRetType, method.isStatic, where);
 
@@ -83,7 +87,7 @@ namespace plsql_msil.Types
 
                 if (gtype != null)
                 {
-                    varType = new GenericType(gtype.Number, types[gtype.Number]);
+                    varType = types[gtype.Number].Generic(gtype.Number);
                 }
                 else
                 {
