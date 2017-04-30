@@ -1,8 +1,6 @@
 ﻿using Antlr.Runtime;
 using Antlr.Runtime.Tree;
 using plsql_msil.AstNodes;
-using plsql_msil.Codegeneration;
-using plsql_msil.Semantic;
 using plsql_msil.Types;
 using System;
 using System.Collections.Generic;
@@ -10,7 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using plsql_msil.Loggers;
+using plsqlBasic.Loggers;
+using plsqlSemanticAnalyser.Semantic;
+using plsql_msil.Codegeneration;
 using plsql_msil.Optimization;
 using plsql_msil.TypeLoader;
 
@@ -61,11 +61,11 @@ namespace plsql_msil
             }
 
             var helper = new ConsoleHelper();
-            helper.Register("tree", TreeOut);
-            helper.Register("src", SourceFiles);
-            helper.Register("out", OutFile);
-            helper.Register("libs", Libs);
-            helper.Register("all", All);
+            helper.Register("tree", TreeOut)
+                .Register("src", SourceFiles)
+                .Register("out", OutFile)
+                .Register("libs", Libs)
+                .Register("all", All);
 
             try
             {
@@ -78,104 +78,22 @@ namespace plsql_msil
                 return;
             }
 
-            if(sourceFiles.Count == 0)
-            {
-                Console.WriteLine("Файлы для компиляции не заданы");
+            var compiler = new Compiler();
+            var compilerArgs = new CompilerArgs(
+                libs, 
+                sourceFiles, 
+                printTree, 
+                printTreeFile, 
+                outFile, 
+                all); 
 
-                return;
-            }
+            compiler.Compile(compilerArgs);
+           
 
-            var nameConvertor = new CSNameConvertor();
-            var typeLoader = new StandardLibraryTypesLoader(nameConvertor);
-            var typeStorage = typeLoader.Load(libs);
-
-            ILogger logger = GetLogger(outFile);
-            ILogger treeLogger = null;
-
-            if(printTree)
-            {
-                treeLogger = GetLogger(printTreeFile);
-            }
-
-            if (all)
-            {
-                CompileAll(sourceFiles, typeStorage.Clone(), logger, treeLogger, nameConvertor);
-            }
-            else
-            {
-                foreach (var item in sourceFiles)
-                {
-                    CompileFile(item, typeStorage.Clone(), logger, treeLogger, nameConvertor);
-                }
-            }
 
         }
 
-        private static void CompileFile(Stream fileStream, string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger, INameConvertor nameConvertor)
-        {
 
-            logger.Log(String.Format("----Файл {0}----", path));
-
-            var stream = new ANTLRInputStream(fileStream);
-            var lexer = new PlsqlLexer(stream);
-            var parser = new PlsqlParser(new CommonTokenStream(lexer));
-            var tree = parser.program().Tree as CommonTree;
-
-            if (treeLogger != null)
-            {
-                treeLogger.Log(ASTPrinter.Print(tree));
-            }
-
-            var semanticAnalyser = new SemanticAnalyser(typeStorage, logger);
-            bool res = semanticAnalyser.Check(tree);
-
-
-            if (res)
-            {
-                var optimizer = new Optimizer();
-                optimizer.Optimize(tree);
-
-                var codegenerator = new Codegenerator(nameConvertor);
-                string code = codegenerator.Generate(tree, typeStorage);
-
-                using (var writer = new StreamWriter(path + ".il"))
-                {
-                    writer.Write(code);
-                }
-
-            }
-
-            logger.Log(string.Format("--------", path));
-        }
-
-        private static void CompileFile(string path, TypeStorage typeStorage, ILogger logger, ILogger treeLogger, CSNameConvertor nameConvertor)
-        {
-            using (var fileStream = new FileStream(path, FileMode.Open))
-            {
-                CompileFile(fileStream, path, typeStorage, logger, treeLogger, nameConvertor);
-            }
-        }
-        private static void CompileAll(List<string> files, TypeStorage typeStorage, ILogger logger, ILogger treeLogger, CSNameConvertor nameConvertor)
-        {
-            using (var memoryStream = new MemoryStream())
-            using (var fileWriter = new StreamWriter(memoryStream))
-            {             
-
-                foreach (var item in files)
-                {
-                    using (var fileStream = new StreamReader(item))
-                    {
-                        fileWriter.WriteLine(fileStream.ReadToEnd());
-
-                        fileWriter.Flush();
-                    }
-                }
-
-                memoryStream.Position = 0;
-
-                CompileFile(memoryStream, "out", typeStorage, logger, treeLogger, nameConvertor);
-            }
-        }
 
         private static void TreeOut(List<string> args)
         {

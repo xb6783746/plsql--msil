@@ -82,12 +82,7 @@ namespace plsql_msil
 
         private bool IsCommand(string str)
         {
-            if(str == null)
-            {
-                return false;
-            }
-
-            return str.StartsWith(commandPrefix);
+            return str != null && str.StartsWith(commandPrefix);
         }
 
 

@@ -5,6 +5,14 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plsql_msil", "plsql_msil\plsql_msil.csproj", "{1D29F5AA-F96F-4011-A9E3-4298375089E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plsqlBasic", "plsqlBasic\plsqlBasic.csproj", "{3744FC43-4A11-49E1-A0C8-719B92B3FFD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plsqlSemanticAnalyser", "plsqlSemanticAnalyser\plsqlSemanticAnalyser.csproj", "{CB451475-4BC7-4751-BBB7-812A8C672DF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plsqlOptimization", "plsqlOptimization\plsqlOptimization.csproj", "{5F1AF173-B63F-4BF5-BCDE-443854660F26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plsqlCodegenerator", "plsqlCodegenerator\plsqlCodegenerator.csproj", "{FB005B82-68E1-4E12-8356-EC42A77B2F0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{1D29F5AA-F96F-4011-A9E3-4298375089E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D29F5AA-F96F-4011-A9E3-4298375089E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D29F5AA-F96F-4011-A9E3-4298375089E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3744FC43-4A11-49E1-A0C8-719B92B3FFD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3744FC43-4A11-49E1-A0C8-719B92B3FFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3744FC43-4A11-49E1-A0C8-719B92B3FFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3744FC43-4A11-49E1-A0C8-719B92B3FFD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB451475-4BC7-4751-BBB7-812A8C672DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB451475-4BC7-4751-BBB7-812A8C672DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB451475-4BC7-4751-BBB7-812A8C672DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB451475-4BC7-4751-BBB7-812A8C672DF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F1AF173-B63F-4BF5-BCDE-443854660F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1AF173-B63F-4BF5-BCDE-443854660F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1AF173-B63F-4BF5-BCDE-443854660F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1AF173-B63F-4BF5-BCDE-443854660F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB005B82-68E1-4E12-8356-EC42A77B2F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB005B82-68E1-4E12-8356-EC42A77B2F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB005B82-68E1-4E12-8356-EC42A77B2F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB005B82-68E1-4E12-8356-EC42A77B2F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
