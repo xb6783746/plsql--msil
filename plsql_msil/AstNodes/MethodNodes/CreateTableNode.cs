@@ -52,6 +52,5 @@ namespace plsql_msil.AstNodes.MethodNodes
             get { return GetChild(1) as TypeNode; }
         }
 
-        public TypeInfo TableType { get; set; }
     }
 }

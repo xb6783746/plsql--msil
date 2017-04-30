@@ -386,7 +386,6 @@ namespace plsql_msil.Semantic.Passes
                 res = builder.GenerateTableType(node.TypeNode);
             }
 
-            node.TableType = res;
             context.Types.AddType(res);
 
             return new TypeDescriptor(false, res, true);
