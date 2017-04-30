@@ -19,14 +19,14 @@ namespace plsql_msil.Semantic.Passes
     class TypeCollector : Analyser, IPass
     {
 
-        public TypeCollector(TypeStorage types)
+        public TypeCollector(TypeStorage types, ILogger logger)
+            :base(types, logger)
         {
             this.types = types;
         }
 
-        public bool Check(CommonTree tree, ILogger logger)
+        public bool Check(CommonTree tree)
         {
-            this.logger = logger;
 
             CollectTypeInfo(tree);
 
@@ -61,17 +61,17 @@ namespace plsql_msil.Semantic.Passes
         }
         private void CollectTypeInfo(PackageDeclNode node)
         {
-            bool exists = types.Exists(node.PackageName);
+            bool exists = types.Exists(node.ClassName);
 
             if (!exists)
             {
-                types.AddType(new PackageType(node.PackageName));
+                types.AddType(new PackageType(node.ClassName));
 
                 CollectPackageTypes(node);
             }
             else
             {
-                Log(String.Format("Пакет с именем {0} уже существует", node.PackageName), node);
+                Log(String.Format("Пакет с именем {0} уже существует", node.ClassName), node);
             }
 
         }
@@ -79,7 +79,7 @@ namespace plsql_msil.Semantic.Passes
         private void CollectPackageTypes(PackageDeclNode node)
         {
 
-            var packageType = types.GetType(node.PackageName) as PackageType;
+            var packageType = types.GetType(node.ClassName) as PackageType;
 
             foreach (var item in node.Children)
             {
@@ -121,7 +121,7 @@ namespace plsql_msil.Semantic.Passes
         }
         private void CollectTable(TableNode node, PackageType packageType)
         {
-            var tableType = GenerateTableType(node.TypeNode, packageType.Name + "." + node.Name);
+            var tableType = builder.GenerateTableType(node.TypeNode, packageType.Name + "." + node.Name);
 
             bool ok = packageType.AddType(tableType);
             types.AddType(tableType);

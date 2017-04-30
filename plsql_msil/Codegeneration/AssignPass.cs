@@ -20,7 +20,7 @@ namespace plsql_msil.Codegeneration
     class AssignPass :IPreGenPass
     {
 
-        private GenericType genericFirst = new GenericType();
+        private GenericType genericFirst = new GenericType(0);
         private GenericType genericSecond = new GenericType(1);
 
         public void Pass(CommonTree tree)

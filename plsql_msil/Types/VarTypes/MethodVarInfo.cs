@@ -11,14 +11,9 @@
         public MethodVarInfo(string name, TypeInfo type, MethodVarType varType)
             :base(name, type)
         {
-            Name = name;
-            Type = type;
             VarType = varType;
         }
 
-        public string Name { get; private set; }
-        public TypeInfo Type { get; private set; }
-        //public MethodInfo Where { get; private set; }
         public MethodVarType VarType { get; private set; }
 
         public override bool Equals(object obj)
@@ -30,6 +25,15 @@
                 && Name == varInfo.Name;
         }
 
-
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Name != null ? Name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Type != null ? Type.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (int) VarType;
+                return hashCode;
+            }
+        }
     }
 }

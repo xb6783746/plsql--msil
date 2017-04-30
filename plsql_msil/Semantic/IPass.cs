@@ -10,6 +10,6 @@ namespace plsql_msil.Semantic
 {
     interface IPass
     {
-        bool Check(CommonTree tree, ILogger logger);
+        bool Check(CommonTree tree);
     }
 }

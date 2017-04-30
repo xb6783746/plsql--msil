@@ -48,7 +48,7 @@ namespace plsql_msil.TypeLoader
                       storage.GetType(ConvertMSILNames(x.ParameterType))
               )).ToList();
 
-            if (!args.Any(x => x.Type == null))
+            if (args.All(x => x.Type != null))
             {
                 classType.AddConstructor(args);
             }

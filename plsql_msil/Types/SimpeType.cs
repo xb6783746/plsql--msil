@@ -20,7 +20,7 @@ namespace plsql_msil.Types
     {
 
 
-        public SimpleType(SimpleTypeEnum type) :base(type.ToString().ToLower(), true)
+        public SimpleType(SimpleTypeEnum type) :base(type.ToString().ToLower())
         {
             this.SType = type;
         }

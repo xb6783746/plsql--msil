@@ -37,7 +37,7 @@ namespace plsql_msil.Optimization.Passes
     {
 
 
-        public bool Check(CommonTree tree, ILogger logger)
+        public bool Check(CommonTree tree)
         {
             Visit(tree);
 

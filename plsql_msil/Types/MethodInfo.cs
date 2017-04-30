@@ -62,7 +62,7 @@ namespace plsql_msil.Types
         {
             return Add(name, type, MethodVarType.Argument);
         }
-        public bool AddVar(string name, TypeInfo type)
+        public bool AddLocalVar(string name, TypeInfo type)
         {
             return Add(name, type, MethodVarType.Local);
         }

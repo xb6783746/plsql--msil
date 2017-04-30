@@ -18,14 +18,14 @@ namespace plsql_msil.Semantic.Passes
     }
     class TypeBuilder :Analyser, IPass
     {
-        public TypeBuilder(TypeStorage types)
+        public TypeBuilder(TypeStorage types, ILogger logger)
+            :base(types, logger)
         {
-            this.types = types;
+
         }
 
-        public bool Check(CommonTree tree, ILogger logger)
+        public bool Check(CommonTree tree)
         {
-            this.logger = logger;
 
             foreach(dynamic node in tree.Children)
             {
@@ -44,9 +44,9 @@ namespace plsql_msil.Semantic.Passes
 
         private void Visit(PackageDeclNode node, TypeInfo type) 
         {
-            var packageType = types.GetType(node.PackageName) as ClassType;
+            var packageType = types.GetType(node.ClassName) as ClassType;
 
-            foreach (dynamic item in node.PackageDecls)
+            foreach (dynamic item in node.ClassDecls)
             {
                 Visit(item, packageType);
             }

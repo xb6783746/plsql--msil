@@ -14,10 +14,9 @@ namespace plsql_msil.Types
 
     abstract class TypeInfo
     {
-        public TypeInfo(string name, bool isImplemented = false)
+        public TypeInfo(string name)
         {
             Name = name;
-            IsImplemented = isImplemented;
         }
 
         public string Name { get; protected set; }
@@ -26,8 +25,7 @@ namespace plsql_msil.Types
         public virtual List<MethodInfo> Methods { get { return null;} }
         public virtual List<VarInfo> Fields { get { return null; } }      
         public virtual List<TypeInfo> Types { get { return null; } }
-        public bool IsImplemented { get; set; }
-        public virtual bool IsGenericImplementation { get; private set; }
+        public bool IsGenericImplementation { get; private set; }
         public int GenericPosition { get; private set; }
 
         public TypeInfo Generic(int pos)
@@ -39,10 +37,6 @@ namespace plsql_msil.Types
 
             return res;
         }
-
-        public virtual string LibName { get; protected set; }
-        public virtual string Namespace { get; protected set; }
-        public virtual bool IsLibClass { get; protected set; }
 
         public virtual bool CanBeAssignedWith(TypeInfo info)
         {
@@ -76,7 +70,7 @@ namespace plsql_msil.Types
         }
         public override string ToString()
         {
-            return Type.ToString() + "." + Name;
+            return Type + "." + Name;
         }
 
         private static TypeInfo bool_ = new SimpleType(SimpleTypeEnum.Bool);

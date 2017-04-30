@@ -10,7 +10,7 @@ namespace plsql_msil.Types
     class RecordType : ClassType
     {
         public RecordType(string packageName, string name)
-            : base(packageName + "." + name, true)
+            : base(packageName + "." + name)
         {
 
             PackageName = packageName;

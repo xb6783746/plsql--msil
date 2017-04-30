@@ -13,15 +13,15 @@ namespace plsql_msil.Semantic
 {
     class SemanticAnalyser
     {
-        public SemanticAnalyser(TypeStorage types)
+        public SemanticAnalyser(TypeStorage types, ILogger logger)
         {
             this.types = types;
 
 
-            passList.Add(new TypeCollector(types));
-            passList.Add(new TypeBuilder(types));
+            passList.Add(new TypeCollector(types, logger));
+            passList.Add(new TypeBuilder(types, logger));
             passList.Add(new OperatorPass());
-            passList.Add(new DefinitionAnalyser(types));
+            passList.Add(new DefinitionAnalyser(types, logger));
         }
 
 
@@ -29,13 +29,13 @@ namespace plsql_msil.Semantic
 
         private List<IPass> passList = new List<IPass>();
 
-        public bool Check(CommonTree tree, ILogger logger)
+        public bool Check(CommonTree tree)
         {
             bool result = true;
 
             foreach (var item in passList)
             {
-                result &= item.Check(tree, logger);
+                result &= item.Check(tree);
             }
 
             return result;

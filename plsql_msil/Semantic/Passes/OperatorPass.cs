@@ -19,7 +19,7 @@ namespace plsql_msil.Semantic.Passes
     {
 
 
-        public bool Check(CommonTree tree, ILogger logger)
+        public bool Check(CommonTree tree)
         {
             Visit(tree);
 

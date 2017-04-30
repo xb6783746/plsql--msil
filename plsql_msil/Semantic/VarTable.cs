@@ -34,9 +34,9 @@ namespace plsql_msil.Semantic
 
             return res;
         }
-        //public bool AddVar(string name, TypeInfo type, VarLocation loc)
+        //public bool AddLocalVar(string name, TypeInfo type, VarLocation loc)
         //{
-        //    return AddVar(new VarInfo(name, type, loc));
+        //    return AddLocalVar(new VarInfo(name, type, loc));
         //}
         public VarInfo GetVar(string name)
         {

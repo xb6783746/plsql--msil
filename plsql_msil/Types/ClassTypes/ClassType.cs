@@ -10,14 +10,7 @@ namespace plsql_msil.Types
     class ClassType :TypeInfo
     {
 
-        public ClassType(string libName, string namespace_, string name, bool isImplemented = false)
-            : base(name, isImplemented)
-        {
-            LibName = libName;
-            Namespace = namespace_;
-            IsLibClass = true;
-        }
-        public ClassType(string name, bool isImplemented = false) :base(name, isImplemented)
+        public ClassType(string name) :base(name)
         {
         }
 

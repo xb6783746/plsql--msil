@@ -20,6 +20,18 @@ namespace plsql_msil.Types
             {SimpleTypeEnum.Void, "void"}
         };
 
+        private static Dictionary<string, string> platformNames = new Dictionary<string, string>()
+        {
+            {"Int32", "int"},
+            {"Byte", "byte"},
+            {"Char", "char"},
+            {"Double", "double"},
+            {"Float", "float"},
+            {"String", "string"},
+            {"Void", "void"}
+
+        };
+
         public CSNameConvertor()
         {
             this.defaultNamespace = "commands";
@@ -93,7 +105,14 @@ namespace plsql_msil.Types
 
         public string FromPlatformName(string name)
         {
-            throw new NotImplementedException();
+
+            if (platformNames.ContainsKey(name))
+            {
+
+                return platformNames[name];
+            }
+
+            return name;
         }
     }
 }

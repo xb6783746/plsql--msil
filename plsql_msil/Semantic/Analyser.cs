@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using plsql_msil.AstNodes.TypeNodes;
 using plsql_msil.Loggers;
 using plsql_msil.Semantic.Passes;
 
@@ -41,22 +40,29 @@ namespace plsql_msil.Semantic
             public List<VarStruct> Args;
         }
 
+        public Analyser(TypeStorage types, ILogger logger)
+        {
+            this.logger = logger;
+            this.types = types;
+
+            builder = new TypesBuilder(types);
+        }
 
         public bool Error { get; protected set; }
         protected ILogger logger;
 
         protected TypeStorage types;
+        protected TypesBuilder builder;
 
         protected VarStruct GetVar(VarDefNode node)
         {
             string name = node.VarName;
-            //string typeName = node.VarType.TypeName;
 
-            var type = Visit(node.VarType as dynamic);
+            var type = builder.Build(node.VarType);
 
-            VarStruct var = new VarStruct(name, type.Type);
+            VarStruct var = new VarStruct(name, type);
 
-            if (type.Type == null)
+            if (type == null)
             {
                 Log(
                     String.Format("У переменной {0} тип {1} не существует",
@@ -69,63 +75,12 @@ namespace plsql_msil.Semantic
 
         }
 
-        protected TypeInfo GenerateTableType(TypeNode node, string name = null)
-        {
-            var type = Visit(node as dynamic);
-
-            var tableTypeTemplate = types.GetTemplate("List`1");
-
-            return tableTypeTemplate.Generate(name, type.Type);
-
-        }
-        protected TypeInfo GenerateDictionaryType(TypeNode kTypeNode, TypeNode valTypeNode, string name = null)
-        {
-            var type = Visit(kTypeNode as dynamic);
-
-            var valType = Visit(valTypeNode as dynamic);
-
-            var dictTypeTemplate = types.GetTemplate("Dictionary`2");
-
-            return dictTypeTemplate.Generate(name, type.Type, valType.Type);
-        }
-        protected TypeInfo GenerateArrayType(TypeNode node, string name = null)
-        {
-            var type = Visit(node as dynamic);
-
-            var arrTypeTemplate = types.GetTemplate("Array`1");
-
-            return arrTypeTemplate.Generate(name, type.Type);
-        }
-
-        private TypeDescriptor Visit(TypeNode node)
-        {
-            return new TypeDescriptor(false, types.GetType(node.TypeName), false);
-        }
-        private TypeDescriptor Visit(TableTypeNode node)
-        {
-            var tableType = GenerateTableType(node.TypeNode);
-
-            return new TypeDescriptor(false, tableType, false);
-        }
-        private TypeDescriptor Visit(DictionaryTypeNode node)
-        {
-            var dictType = GenerateDictionaryType(node.IndexTypeNode, node.TypeNode);
-
-            return new TypeDescriptor(false, dictType, false);
-        }
-        private TypeDescriptor Visit(ArrayTypeNode node)
-        {
-            var arrType = GenerateArrayType(node.TypeNode);
-
-            return new TypeDescriptor(false, arrType, false);
-        }
-
         protected MethodStruct GetMethod(MethodDeclNode node)
         {
 
-            var type = Visit(node.Ret as dynamic);
+            var type = builder.Build(node.Ret);
 
-            if (type.Type == null)
+            if (type == null)
             {
                 Log(
                     String.Format(
@@ -134,7 +89,7 @@ namespace plsql_msil.Semantic
                         node.Ret.TypeName),
                     node);
 
-                type = SimpleType.Undefined;
+                type = TypeInfo.Undefined;
             }
 
             var args = new List<VarStruct>();
@@ -153,7 +108,7 @@ namespace plsql_msil.Semantic
                 args.Add(varInfo);
             }
 
-            return new MethodStruct(node.MethodName, type.Type, args);
+            return new MethodStruct(node.MethodName, type, args);
 
         }
 
@@ -178,4 +133,6 @@ namespace plsql_msil.Semantic
         }
 
     }
+
+   
 }

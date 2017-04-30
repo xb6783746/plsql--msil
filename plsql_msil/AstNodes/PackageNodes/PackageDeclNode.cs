@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using plsql_msil.AstNodes.ClassNodes;
 
 namespace plsql_msil.AstNodes.PackageNodes
 {
-    class PackageDeclNode :BasicNode
+    class PackageDeclNode :ClassDeclNode
     {
         public PackageDeclNode(CommonTree node)
             : base(node)
@@ -32,27 +33,5 @@ namespace plsql_msil.AstNodes.PackageNodes
             return new PackageDeclNode(Token);
         }
 
-        public string PackageName
-        {
-            get
-            {
-                return GetChild(0).Text;
-            }
-        }
-
-        public List<BasicNode> PackageDecls
-        {
-            get
-            {
-                List<BasicNode> res = new List<BasicNode>();
-
-                for(int i = 1; i < ChildCount; i++)
-                {
-                    res.Add(GetChild(i) as BasicNode);
-                }
-
-                return res;
-            }
-        }
     }
 }

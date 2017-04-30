@@ -21,11 +21,11 @@ namespace plsql_msil.Optimization
 
         private List<IPass> passes;
 
-        public void Optimize(CommonTree tree, ILogger logger)
+        public void Optimize(CommonTree tree)
         {
             foreach (var item in passes)
             {
-                item.Check(tree, logger);
+                item.Check(tree);
             }
         }
     }

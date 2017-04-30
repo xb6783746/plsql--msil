@@ -126,14 +126,14 @@ namespace plsql_msil
                 treeLogger.Log(ASTPrinter.Print(tree));
             }
 
-            var semanticAnalyser = new SemanticAnalyser(typeStorage);
-            bool res = semanticAnalyser.Check(tree, logger);
+            var semanticAnalyser = new SemanticAnalyser(typeStorage, logger);
+            bool res = semanticAnalyser.Check(tree);
 
 
             if (res)
             {
                 var optimizer = new Optimizer();
-                optimizer.Optimize(tree, logger);
+                optimizer.Optimize(tree);
 
                 var codegenerator = new Codegenerator(nameConvertor);
                 string code = codegenerator.Generate(tree, typeStorage);

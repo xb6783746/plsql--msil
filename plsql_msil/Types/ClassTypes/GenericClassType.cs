@@ -9,12 +9,8 @@ namespace plsql_msil.Types
     class GenericClassType :ClassType
     {
 
-        //public GenericClassType(string packageName, string name, TypeInfo[] types)
-        //    : this(packageName + "." + name, types)
-        //{
-        //}
         public GenericClassType(string realName, string name, TypeInfo[] types)
-            : base(name, true)
+            : base(name)
         {
             ItemsType = types;
             RealName = realName;
@@ -30,13 +26,6 @@ namespace plsql_msil.Types
                 return Type.Generic;
             }
         }
-
-        //public override bool Equals(object obj)
-        //{
-        //    var type = obj as GenericClassType;
-
-        //    return type != null && type.ItemsType.Equals(this.ItemsType);
-        //}
 
         public override bool CanBeAssignedWith(TypeInfo info)
         {

@@ -15,12 +15,12 @@ namespace plsql_msil.Semantic
         {
             this.Types = types;
 
-            //Vars = new VarTable();
+            NotImplementedTypes = new List<TypeInfo>();
         }
 
+        public List<TypeInfo> NotImplementedTypes { get; set; }
         public TypeInfo Self { get; private set; }
         public MethodInfo CurrentMethod { get; set; }
-        //public VarTable Vars { get; private set; }
         public TypeStorage Types { get; private set; }
 
         public TypeInfo GetType(string name)
@@ -61,13 +61,5 @@ namespace plsql_msil.Semantic
             Self = null;
         }
 
-        //public void EnterBlock()
-        //{
-        //    Vars = new VarTable(Vars);
-        //}
-        //public void ExitBlock()
-        //{
-        //    Vars = Vars.Inner;
-        //}
     }
 }

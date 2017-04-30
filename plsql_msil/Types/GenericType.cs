@@ -11,10 +11,6 @@ namespace plsql_msil.Types
             Number = num;
 
         }
-        public GenericType():base("!0")
-        {
-
-        }
 
         public int Number { get; private set; }
 

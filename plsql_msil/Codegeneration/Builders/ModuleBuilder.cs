@@ -120,7 +120,7 @@ namespace plsql_msil.Codegeneration.Builders
 
             foreach(var item in localVars)
             {
-                methodInfo.AddVar(item.Name, item.Type);
+                methodInfo.AddLocalVar(item.Name, item.Type);
             }
 
             entryPoint = new EntryPointBuilder(methodInfo, nameConvertor);

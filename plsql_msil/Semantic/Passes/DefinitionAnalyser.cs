@@ -21,25 +21,26 @@ namespace plsql_msil.Semantic.Passes
     class DefinitionAnalyser : Analyser, IPass
     {
 
-        public DefinitionAnalyser(TypeStorage types)
+        public DefinitionAnalyser(TypeStorage types, ILogger logger)
+            :base(types, logger)
         {
-            this.types = types;
 
             context = new Context(types);
-            operatorTable = new OperatorTable();
         }
 
         private Context context;
-        private OperatorTable operatorTable;
 
-        public bool Check(CommonTree tree, ILogger logger)
+        public bool Check(CommonTree tree)
         {
-            this.logger = logger;
+
+            context.NotImplementedTypes = tree.Children
+                .OfType<ClassDeclNode>()
+                .Select(x => context.Types.GetType(x.ClassName))
+                .ToList();
 
             Func<ITree, bool> predicate = x =>
                    x is DeclareBlockNode
                 || x is ClassDefNode
-                || x is PackageDefNode
                 || x is EntryPointNode;
 
 
@@ -48,15 +49,13 @@ namespace plsql_msil.Semantic.Passes
                 Visit(item);
             }
 
-            var notImplemented = context.Types.Types.Where(x => !x.IsImplemented);
-
-            if (notImplemented.Count() != 0)
+            if (context.NotImplementedTypes.Count > 0)
             {
                 string names = "";
 
-                foreach (var item in notImplemented)
+                foreach (var item in context.NotImplementedTypes)
                 {
-                    names += item.ToString() + " ";
+                    names += item + " ";
                 }
 
                 Log(String.Format("Типы {0} не реализованы", names), null);
@@ -65,6 +64,13 @@ namespace plsql_msil.Semantic.Passes
 
             return !Error;
         }
+
+
+        private void CollectDeclaredTypes(ClassDeclNode node)
+        {
+            
+        }
+
 
         private TypeDescriptor Visit(EntryPointNode node)
         {
@@ -93,12 +99,14 @@ namespace plsql_msil.Semantic.Passes
                 return null;
             }
 
-            if (type.IsImplemented)
+            if (!context.NotImplementedTypes.Contains(type))
             {
                 Log(String.Format("Класс {0} уже определил тело", node.Name), node);
 
                 return null;
             }
+
+            context.NotImplementedTypes.Remove(type);
 
             context.EnterClass(type);
 
@@ -128,8 +136,6 @@ namespace plsql_msil.Semantic.Passes
 
             context.ExitClass();
 
-            type.IsImplemented = true;
-
             var constructor = new ConstructorInfo(false, type);
 
             foreach (var item in type.Fields)
@@ -152,12 +158,14 @@ namespace plsql_msil.Semantic.Passes
                 return null;
             }
 
-            if (type.IsImplemented)
+            if (!context.NotImplementedTypes.Contains(type))
             {
                 Log(String.Format("Пакет {0} уже определил тело", node.Name), node);
 
                 return null;
             }
+
+            context.NotImplementedTypes.Remove(type);
 
             List<MethodInfo> allMethods = new List<MethodInfo>(type.Methods);
 
@@ -183,7 +191,6 @@ namespace plsql_msil.Semantic.Passes
                 Log(String.Format("В пакете {0} методы {1} объявлены, но не реализованы", node.Name, methods), node);
             }
 
-            type.IsImplemented = true;
 
             return null;
 
@@ -210,7 +217,7 @@ namespace plsql_msil.Semantic.Passes
 
             //foreach (var item in declared.Arguments)
             //{
-            //    context.Vars.AddVar(item);
+            //    context.Vars.AddLocalVar(item);
             //}
 
             context.CurrentMethod = declared;
@@ -219,8 +226,8 @@ namespace plsql_msil.Semantic.Passes
 
             foreach (var item in locals)
             {
-                declared.AddVar(item.Name, item.Type);
-                //context.Vars.AddVar(item.Name, item.Type, VarLocation.Local);
+                declared.AddLocalVar(item.Name, item.Type);
+                //context.Vars.AddLocalVar(item.Name, item.Type, VarLocation.Local);
             }
 
             Visit(node.Commands);
@@ -277,7 +284,7 @@ namespace plsql_msil.Semantic.Passes
 
             if (context.CurrentMethod != null)
             {
-                bool res = context.CurrentMethod.AddVar(var.Name, var.Type);
+                bool res = context.CurrentMethod.AddLocalVar(var.Name, var.Type);
 
                 if (!res)
                 {
@@ -372,11 +379,11 @@ namespace plsql_msil.Semantic.Passes
 
             if (!node.IsTable)
             {
-                res = GenerateDictionaryType(node.TypeNode, node.ValueTypeNode);
+                res = builder.GenerateDictionaryType(node.TypeNode, node.ValueTypeNode);
             }
             else
             {
-                res = GenerateTableType(node.TypeNode);
+                res = builder.GenerateTableType(node.TypeNode);
             }
 
             node.TableType = res;
@@ -389,7 +396,7 @@ namespace plsql_msil.Semantic.Passes
         {
             //node.TableType = context.GetType(node.TypeName);
 
-            TypeInfo res = GenerateArrayType(node.TypeNode);
+            TypeInfo res = builder.GenerateArrayType(node.TypeNode);
 
             return new TypeDescriptor(false, res, true);
         }

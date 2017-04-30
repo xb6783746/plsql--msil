@@ -48,7 +48,7 @@ namespace plsql_msil.Types
         public TypeInfo GetType(string name)
         {
 
-            var type = types.FirstOrDefault(x => x.Name.Equals(name));// ?? GetSpecialType(name);
+            var type = types.FirstOrDefault(x => x.Name.Equals(name));
 
             return type;
         }
@@ -73,35 +73,6 @@ namespace plsql_msil.Types
             typeStorage.genericTemplates = new List<GenericTemplate>(genericTemplates);
 
             return typeStorage;
-        }
-
-        private TypeInfo GetSpecialType(string name)
-        {
-            //if (!name.StartsWith("table"))
-            //{
-            //    return null;
-            //}
-
-            //int start = name.IndexOf("(");
-            //int end = name.LastIndexOf(")");
-
-            //string newName = name.Substring(start + 1, name.Length - 2 - start);
-
-            //var inner = GetType(newName);
-
-            //TypeInfo res = null;
-
-            //if (inner != null)
-            //{
-            //    res = new TableType(name, inner);
-
-            //    AddType(res);
-            //}
-
-            //return res;
-
-            return null;
-
         }
 
 

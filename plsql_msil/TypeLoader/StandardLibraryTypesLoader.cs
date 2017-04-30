@@ -104,8 +104,8 @@ namespace plsql_msil.TypeLoader
             else
             {
                 var type = stype.IsAbstract
-                    ? new PackageType(stype.Assembly.GetName().Name, stype.Namespace, stype.Name, true)
-                    : new ClassType(stype.Assembly.GetName().Name, stype.Namespace, stype.Name, true);
+                    ? new PackageType(stype.Name)
+                    : new ClassType(stype.Name);
 
                 storage.AddType(type);
             }
