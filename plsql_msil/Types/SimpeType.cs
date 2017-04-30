@@ -34,11 +34,6 @@ namespace plsql_msil.Types
             SimpleTypeEnum.Double
         };
 
-        public override Type Type
-        {
-            get { return Type.Simple; }
-        }
-
         public SimpleTypeEnum SType
         {
             get;

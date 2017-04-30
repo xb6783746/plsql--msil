@@ -14,12 +14,7 @@ namespace plsql_msil.Types
 
         private List<TypeInfo> innerTypes = new List<TypeInfo>();
 
-        public override Type Type
-        {
-            get { return Type.Package; }
-        }
-
-        public override List<TypeInfo> Types
+        public List<TypeInfo> Types
         {
             get
             {
@@ -27,7 +22,7 @@ namespace plsql_msil.Types
             }
         }
 
-        public override TypeInfo GetType(string typeName)
+        public TypeInfo GetType(string typeName)
         {
             return innerTypes.FirstOrDefault(x => x.Name == typeName);
         }

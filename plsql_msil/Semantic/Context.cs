@@ -19,7 +19,7 @@ namespace plsql_msil.Semantic
         }
 
         public List<TypeInfo> NotImplementedTypes { get; set; }
-        public TypeInfo Self { get; private set; }
+        public ClassType Self { get; private set; }
         public MethodInfo CurrentMethod { get; set; }
         public TypeStorage Types { get; private set; }
 
@@ -52,7 +52,7 @@ namespace plsql_msil.Semantic
         }
 
 
-        public void EnterClass(TypeInfo type)
+        public void EnterClass(ClassType type)
         {
             Self = type;
         }

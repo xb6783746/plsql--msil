@@ -21,12 +21,5 @@ namespace plsql_msil.Types
         public string PackageName { get; private set; }
         public string RecordName { get; private set; }
 
-        public override Type Type
-        {
-            get
-            {
-                return Type.Record;
-            }
-        }
     }
 }

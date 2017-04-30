@@ -45,7 +45,7 @@ namespace plsql_msil.Codegeneration.Builders
             {
                 var globalVar = field as GlobalVarInfo;
 
-                bool isPackage = globalVar.Where.Type == Types.Type.Package;
+                bool isPackage = globalVar.Where is PackageType;
                 code = isPackage ? Code.LoadStaticGlobal : Code.LoadGlobal;
                 if (!isPackage)
                 {
@@ -119,7 +119,7 @@ namespace plsql_msil.Codegeneration.Builders
         {
             string val = String.Format(
                 "{0} {1}",
-                method.Where.Type == Types.Type.Package ? "" : "instance",
+                method.Where is PackageType ? "" : "instance",
                 GetMethodSignature(method)
                 );
 
@@ -183,7 +183,7 @@ namespace plsql_msil.Codegeneration.Builders
             {
                 var globalVar = field as GlobalVarInfo;
 
-                bool isPackage = globalVar.Where.Type == Types.Type.Package;
+                bool isPackage = globalVar.Where is PackageType;
                 code = isPackage ? Code.LoadFromStackStaticGlobal : Code.LoadFromStackGlobal;
                 if (!isPackage)
                 {

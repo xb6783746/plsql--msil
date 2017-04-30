@@ -60,7 +60,7 @@ namespace plsql_msil.Codegeneration.Builders
             StringBuilder result = new StringBuilder();
             StringBuilder builder;
 
-            var records = packageType.Types.Where(x => x.Type == Types.Type.Record).Select(x => x as RecordType);
+            var records = packageType.Types.OfType<RecordType>();
 
             foreach (var item in records)
             {

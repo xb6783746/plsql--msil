@@ -18,7 +18,6 @@ using plsql_msil.Codegeneration.Builders;
 using plsql_msil.Codegeneration.SpecialNodes;
 using plsql_msil.Types.VarTypes;
 using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
-using Type = plsql_msil.Types.Type;
 
 namespace plsql_msil.Codegeneration
 {
@@ -26,8 +25,7 @@ namespace plsql_msil.Codegeneration
     {
         class CodegenContext
         {
-            //public MethodInfo CurrentMethod { get; set; }
-            public TypeInfo CurrentClass { get; set; }
+            public ClassType CurrentClass { get; set; }
             public VarInfo LastVar { get; set; }
 
         }
@@ -278,7 +276,7 @@ namespace plsql_msil.Codegeneration
         }
         private TypeInfo Visit(MethodCallNode node, MethodBuilder builder, CodegenContext context)
         {
-            TypeInfo type = Visit(node.Where as dynamic, builder, context);
+            ClassType type = Visit(node.Where as dynamic, builder, context) as ClassType;
 
             var argList = new List<TypeInfo>();
 
@@ -290,7 +288,7 @@ namespace plsql_msil.Codegeneration
             }
 
             //TODO ПЛОХО
-            var methodInfo = type.GetMethod(node.MethodName, argList, type.Type == Type.Package);
+            var methodInfo = type.GetMethod(node.MethodName, argList, type is PackageType);
 
             builder.Call(methodInfo);
 

@@ -66,7 +66,7 @@ namespace plsql_msil.Codegeneration.Builders
         }
 
 
-        private void InitFieldsFromConstructor(TypeInfo where, List<MethodVarInfo> args)
+        private void InitFieldsFromConstructor(ClassType where, List<MethodVarInfo> args)
         {
             foreach (var item in args)
             {

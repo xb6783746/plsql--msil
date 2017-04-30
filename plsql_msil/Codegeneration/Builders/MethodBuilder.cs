@@ -21,7 +21,6 @@ namespace plsql_msil.Codegeneration.Builders
             template.Replace("{__entryPoint}", isEntryPoint? ".entrypoint" : "");
 
             Build(methodInfo);
-            InitLocals(methodInfo);
 
         }
         public MethodBuilder(MethodInfo methodInfo, INameConvertor nameConvertor)
@@ -97,19 +96,6 @@ namespace plsql_msil.Codegeneration.Builders
             builder.Remove(builder.Length - 1, 1);
 
             return builder.ToString();
-        }
-
-        private void InitLocals(MethodInfo method)
-        {
-            var locals = method.LocalVars.Where(x => x.Type.Type == Types.Type.Record || x.Type.Type == Types.Type.Table);
-
-            foreach(var item in locals)
-            {
-
-                DefaultConstructor(item.Type);
-
-                Assign(item);
-            }
         }
 
     }

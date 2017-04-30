@@ -19,14 +19,6 @@ namespace plsql_msil.Types
         public TypeInfo[] ItemsType { get; private set; }
         public string RealName { get; private set; }
 
-        public override Type Type
-        {
-            get
-            {
-                return Type.Generic;
-            }
-        }
-
         public override bool CanBeAssignedWith(TypeInfo info)
         {
             var genericType = info as GenericClassType;

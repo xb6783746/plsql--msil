@@ -18,34 +18,30 @@ namespace plsql_msil.Types
         protected List<VarInfo> innerVars = new List<VarInfo>();
         private List<ConstructorInfo> constructors = new List<ConstructorInfo>();
 
-        public override Type Type
-        {
-            get { return Type.Class; }
-        }
-        public override List<MethodInfo> Methods
+        public List<MethodInfo> Methods
         {
             get
             {
                 return innerMethods;
             }
         }
-        public override List<VarInfo> Fields
+        public List<VarInfo> Fields
         {
             get
             {
                 return innerVars;
             }
         }
-        public override List<ConstructorInfo> Constructors
+        public List<ConstructorInfo> Constructors
         {
             get { return constructors; }
         }
 
-        public override VarInfo GetField(string memberName)
+        public VarInfo GetField(string memberName)
         {
             return innerVars.FirstOrDefault(x => x.Name == memberName);
         }
-        public override MethodInfo GetMethod(string methodName, List<TypeInfo> args, bool isStatic)
+        public MethodInfo GetMethod(string methodName, List<TypeInfo> args, bool isStatic)
         {
             return innerMethods.FirstOrDefault(x => 
                    x.Name == methodName 
@@ -76,7 +72,7 @@ namespace plsql_msil.Types
             return ok;
         }
 
-        public override bool ContainsConstructor(List<TypeInfo> args)
+        public bool ContainsConstructor(List<TypeInfo> args)
         {
             return constructors.Exists(x => TypeInfo.Compare(x.ArgTypes, args));
         }

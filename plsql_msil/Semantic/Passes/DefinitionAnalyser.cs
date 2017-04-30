@@ -343,9 +343,9 @@ namespace plsql_msil.Semantic.Passes
 
         private TypeDescriptor Visit(CreateInstanceNode node)
         {
-            var type = context.GetType(node.TypeName);
+            var type = context.GetType(node.TypeName) as ClassType;
 
-            if(type == null || type.Type != Types.Type.Class)
+            if(type == null)
             {
                 Log(String.Format("Класс {0} не существует", node.TypeName), node);
 
@@ -405,6 +405,15 @@ namespace plsql_msil.Semantic.Passes
         {
             TypeDescriptor where = Visit(node.Where as dynamic);
 
+            var whereType = where.Type as ClassType;
+
+            if (whereType == null)
+            {
+                Log(String.Format("Невозможно вызвать метод {0}", node.MethodName), node);
+
+                return TypeDescriptor.Undefined;
+            }
+
             List<TypeInfo> types = new List<TypeInfo>();
             foreach (dynamic item in node.Arguments)
             {
@@ -413,7 +422,7 @@ namespace plsql_msil.Semantic.Passes
                 types.Add(argType.Type);
             }
 
-            var method = where.Type.GetMethod(node.MethodName, types, !where.IsObject);
+            var method = whereType.GetMethod(node.MethodName, types, !where.IsObject);
 
             if (method == null)
             {
@@ -727,7 +736,7 @@ namespace plsql_msil.Semantic.Passes
                 return TypeDescriptor.Undefined;
             }
 
-            if (!where.IsObject && where.Type.Type != Types.Type.Package)
+            if (!where.IsObject && !(where.Type is PackageType))
             {
                 Log(String.Format("Невозможно вызвать поле {0} не на экземпляре", node.MemberName), node);
 

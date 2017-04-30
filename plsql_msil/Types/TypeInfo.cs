@@ -7,11 +7,6 @@ using plsql_msil.Types.VarTypes;
 
 namespace plsql_msil.Types
 {
-    enum Type
-    {
-        Simple, Class, Package, Record, Table, Generic
-    }
-
     abstract class TypeInfo
     {
         public TypeInfo(string name)
@@ -20,11 +15,6 @@ namespace plsql_msil.Types
         }
 
         public string Name { get; protected set; }
-        public virtual Type Type { get; protected set; }
-        public virtual List<ConstructorInfo> Constructors { get { return null; } }
-        public virtual List<MethodInfo> Methods { get { return null;} }
-        public virtual List<VarInfo> Fields { get { return null; } }      
-        public virtual List<TypeInfo> Types { get { return null; } }
         public bool IsGenericImplementation { get; private set; }
         public int GenericPosition { get; private set; }
 
@@ -43,25 +33,6 @@ namespace plsql_msil.Types
             return Equals(info);
         }
 
-
-        public virtual TypeInfo GetType(string typeName)
-        {
-            return null;
-        }
-        public virtual VarInfo GetField(string memberName)
-        {
-            return null;
-        }
-        public virtual MethodInfo GetMethod(string methodName, List<TypeInfo> args, bool isStatic)
-        {
-            return null;
-        }
-
-        public virtual bool ContainsConstructor(List<TypeInfo> args)
-        {
-            return false;
-        }
-
         public override bool Equals(object obj)
         {
             var type = obj as TypeInfo;
@@ -70,7 +41,7 @@ namespace plsql_msil.Types
         }
         public override string ToString()
         {
-            return Type + "." + Name;
+            return Name;
         }
 
         private static TypeInfo bool_ = new SimpleType(SimpleTypeEnum.Bool);
