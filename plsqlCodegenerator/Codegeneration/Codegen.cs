@@ -1,4 +1,8 @@
-﻿using Antlr.Runtime.Tree;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Antlr.Runtime.Tree;
+using plsqlBasic;
 using plsql_msil.AstNodes;
 using plsql_msil.AstNodes.ClassNodes;
 using plsql_msil.AstNodes.CommandNodes;
@@ -6,17 +10,13 @@ using plsql_msil.AstNodes.MathNodes;
 using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
 using plsql_msil.AstNodes.PackageNodes;
-using plsql_msil.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using plsqlBasic;
 using plsql_msil.Codegeneration.Builders;
 using plsql_msil.Codegeneration.SpecialNodes;
+using plsql_msil.Types;
 using plsql_msil.Types.VarTypes;
 using BinaryOperator = plsql_msil.AstNodes.MathNodes.BinaryOperator;
 
-namespace plsql_msil.Codegeneration
+namespace plsqlCodegenerator.Codegeneration
 {
     class Codegen
     {
@@ -256,11 +256,8 @@ namespace plsql_msil.Codegeneration
         }
         private TypeInfo Visit(CreateArrayNode node, MethodBuilder builder, CodegenContext context)
         {
-            //node.TableType = context.GetType(node.TypeName);
-
             Visit(node.Length, builder, context);
 
-            //var itemsType = Visit(node.TypeNode as dynamic);
             var arrType = typeBuilder.GenerateArrayType(node.TypeNode);
 
             builder.Construct(arrType, new List<TypeInfo>() { TypeInfo.Int });
@@ -486,24 +483,6 @@ namespace plsql_msil.Codegeneration
             }
         }
 
-        private TypeInfo Visit(IndexNode node, MethodBuilder builder, CodegenContext context)
-        {
-
-            //var genericFirst = new GenericType();
-            //var genericSecond = new GenericType(1);
-
-            //var methodInfo = new MethodInfo("get_Item", genericSecond, false, node.TableType);
-            //methodInfo.AddArg("a", genericFirst);
-
-            //Visit(node.Where as dynamic, builder, context);
-            //Visit(node.Index, builder, context);
-
-            //builder.Callvirt(methodInfo);
-
-            //return node.TableType.ItemsType;
-
-            return null;
-        }
         private TypeInfo Visit(MemberCallNode node, MethodBuilder builder, CodegenContext context)
         {
             var whereType = Visit(node.Where as dynamic, builder, context);

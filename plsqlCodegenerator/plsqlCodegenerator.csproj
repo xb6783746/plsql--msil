@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Codegeneration\AssignPass.cs" />
     <Compile Include="Codegeneration\Builders\Builder.cs" />
     <Compile Include="Codegeneration\Builders\ClassBuilder.cs" />
@@ -59,7 +58,6 @@
     <Compile Include="Codegeneration\Command.cs" />
     <Compile Include="Codegeneration\CommandNames.cs" />
     <Compile Include="Codegeneration\IPreGenPass.cs" />
-    <Compile Include="Codegeneration\NameConvertor.cs" />
     <Compile Include="Codegeneration\SpecialNodes\AssignIndexNode.cs" />
     <Compile Include="Codegeneration\SpecialNodes\CallvirtNode.cs" />
     <Compile Include="Codegeneration\SpecialNodes\MemberCallNode.cs" />
