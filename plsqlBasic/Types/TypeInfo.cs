@@ -102,5 +102,18 @@ namespace plsql_msil.Types
             return first.SequenceEqual(second);
         }
 
+        public static bool IsNumeric(TypeInfo type)
+        {
+            var simpleType = type as SimpleType;
+
+            return simpleType != null && simpleType.IsNumeric();
+        }
+        public static bool IsBool(TypeInfo type)
+        {
+            var simpleType = type as SimpleType;
+
+            return simpleType != null && simpleType.SType == SimpleTypeEnum.Bool;
+        }
+
     }
 }

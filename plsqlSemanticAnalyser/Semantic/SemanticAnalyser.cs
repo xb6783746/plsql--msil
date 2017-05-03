@@ -3,7 +3,6 @@ using Antlr.Runtime.Tree;
 using plsqlBasic.Loggers;
 using plsqlSemanticAnalyser.Semantic.Passes;
 using plsql_msil.Semantic;
-using plsql_msil.Semantic.Passes;
 using plsql_msil.Types;
 
 namespace plsqlSemanticAnalyser.Semantic
@@ -17,7 +16,7 @@ namespace plsqlSemanticAnalyser.Semantic
 
             passList.Add(new TypeCollector(types, logger));
             passList.Add(new TypeBuilder(types, logger));
-            passList.Add(new OperatorPass());
+            passList.Add(new OperatorPass(types, logger));
             passList.Add(new DefinitionAnalyser(types, logger));
         }
 

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using plsqlBasic.Loggers;
-using plsql_msil.Semantic.Passes;
 
 namespace plsql_msil.Semantic
 {
@@ -17,27 +16,29 @@ namespace plsql_msil.Semantic
 
         protected struct VarStruct
         {
-            public VarStruct(string name, TypeInfo type)
+            public VarStruct(string name, TypeInfo type) : this()
             {
-                Name = name;
-                Type = type;
+                this.Name = name;
+                this.Type = type;
             }
 
-            public string Name;
-            public TypeInfo Type;
+            public string Name { get; private set; }
+            public TypeInfo Type { get; private set; }
         }
         protected struct MethodStruct
         {
-            public MethodStruct(string name, TypeInfo ret, List<VarStruct> args)
+            public MethodStruct(string name, TypeInfo ret, List<VarStruct> args, bool isStatic) : this()
             {
-                Name = name;
-                Ret = ret;
-                Args = args;
+                this.Name = name;
+                this.Ret = ret;
+                this.Args = args;
+                Static = isStatic;
             }
 
-            public string Name;
-            public TypeInfo Ret;
-            public List<VarStruct> Args;
+            public string Name { get; private set; }
+            public TypeInfo Ret { get; private set; }
+            public List<VarStruct> Args { get; private set; }
+            public bool Static { get; private set; }
         }
 
         public Analyser(TypeStorage types, ILogger logger)
@@ -54,8 +55,6 @@ namespace plsql_msil.Semantic
         protected TypeStorage types;
         protected TypesBuilder builder;
 
-        protected string currentFile;
-
         protected VarStruct GetVar(VarDefNode node)
         {
             string name = node.VarName;
@@ -67,7 +66,7 @@ namespace plsql_msil.Semantic
             if (type == null)
             {
                 Log(
-                    String.Format("У переменной {0} тип {1} не существует",
+                    string.Format("У переменной {0} тип {1} не существует",
                         name,
                         node.VarType.TypeName),
                     node);
@@ -85,7 +84,7 @@ namespace plsql_msil.Semantic
             if (type == null)
             {
                 Log(
-                    String.Format(
+                    string.Format(
                         "В методе {0} возвращаемый тип {1} не существует",
                         node.MethodName,
                         node.Ret.TypeName),
@@ -103,14 +102,14 @@ namespace plsql_msil.Semantic
                 if (args.Exists(x => x.Name == varInfo.Name))
                 {
                     Log(
-                        String.Format("В методе {0} аргумент с именем {1} уже встречается", node.MethodName, varInfo.Name),
+                        string.Format("В методе {0} аргумент с именем {1} уже встречается", node.MethodName, varInfo.Name),
                         node);
                 }
 
                 args.Add(varInfo);
             }
 
-            return new MethodStruct(node.MethodName, type, args);
+            return new MethodStruct(node.MethodName, type, args, IsStatic(node.Modifier));
 
         }
 
@@ -129,7 +128,7 @@ namespace plsql_msil.Semantic
 
             if (node != null)
             {
-                message = String.Format("{0}, строка {1}", message, node.Line);
+                message = string.Format("{0}, строка {1}", message, node.Line);
             }
 
             logger.Log(message, logLevel);

@@ -10,6 +10,11 @@ namespace plsql_msil.Types
     public class MethodInfo
     {
 
+        public MethodInfo(string name, TypeInfo ret, bool isStatic, ClassType where, List<MethodVarInfo> args)
+            :this(name, ret, isStatic, where)
+        {
+            vars = args;
+        }
         public MethodInfo(string name, TypeInfo ret, bool isStatic, ClassType where)
         {
             Name = name;

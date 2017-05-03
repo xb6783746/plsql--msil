@@ -1,12 +1,8 @@
-﻿using plsql_msil.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using plsql_msil.Types;
 using plsql_msil.Types.VarTypes;
 
-namespace plsql_msil.Semantic
+namespace plsqlSemanticAnalyser.Semantic
 {
     class Context
     {
@@ -19,9 +15,10 @@ namespace plsql_msil.Semantic
         }
 
         public List<TypeInfo> NotImplementedTypes { get; set; }
-        public ClassType Self { get; private set; }
+        public ClassType Self { get; set; }
         public MethodInfo CurrentMethod { get; set; }
         public TypeStorage Types { get; private set; }
+        public string CurrentFile { get; set; }
 
         public TypeInfo GetType(string name)
         {
@@ -49,16 +46,6 @@ namespace plsql_msil.Semantic
             }
 
             return res;
-        }
-
-
-        public void EnterClass(ClassType type)
-        {
-            Self = type;
-        }
-        public void ExitClass()
-        {
-            Self = null;
         }
 
     }

@@ -34,6 +34,7 @@ namespace plsql_msil
         private static bool all;
         private static string printTreeFile;
         private static string outFile;
+        private static string outLogFile;
 
         private static List<string> sourceFiles = new List<string>();
         private static List<string> libs = new List<string>();
@@ -50,7 +51,8 @@ namespace plsql_msil
 Опцинально:
     -libs (path)+  задает пути к библиотекам
     -all
-    -out path   выводит сообщения в файл с данным путем, по умолчанию - в консоль
+    -out  записывает сгенерированный код в файл с данным путем
+    -outLog path   выводит сообщения в файл с данным путем, по умолчанию - в консоль
     -tree (path)?   выводит дерево в консоль, если path не задан, иначе - в файл с данным путем;
     по умолчанию дерево не выводится
 ";
@@ -64,6 +66,7 @@ namespace plsql_msil
             helper.Register("tree", TreeOut)
                 .Register("src", SourceFiles)
                 .Register("out", OutFile)
+                .Register("outLog", OutLogFile)
                 .Register("libs", Libs)
                 .Register("all", All);
 
@@ -85,6 +88,7 @@ namespace plsql_msil
                 printTree, 
                 printTreeFile, 
                 outFile, 
+                outLogFile,
                 all); 
 
             compiler.Compile(compilerArgs);
@@ -118,6 +122,13 @@ namespace plsql_msil
             all = true;
         }
 
+        private static void OutLogFile(List<string> args)
+        {
+            if (args.Count > 0)
+            {
+                outLogFile = args[0];
+            }
+        }
         private static void OutFile(List<string> args)
         {
             if (args.Count > 0)

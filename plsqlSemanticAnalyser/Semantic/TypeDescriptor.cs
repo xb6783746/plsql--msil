@@ -9,13 +9,10 @@ namespace plsql_msil.Semantic
 {
     class TypeDescriptor
     {
-        public TypeDescriptor(bool isLvalue, TypeInfo type)
+        public TypeDescriptor(bool isLvalue, TypeInfo type, bool isObject = false)
         {
             IsLvalue = isLvalue;
             Type = type;
-        }
-        public TypeDescriptor(bool isLvalue, TypeInfo type, bool isObject) :this(isLvalue, type)
-        {
             IsObject = isObject;
         }
 

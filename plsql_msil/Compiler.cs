@@ -33,7 +33,7 @@ namespace plsql_msil
             var typeLoader = new StandardLibraryTypesLoader(nameConvertor);
             var typeStorage = typeLoader.Load(args.Libs);
 
-            ILogger logger = GetLogger(args.OutFile);
+            ILogger logger = GetLogger(args.OutLogFile);
             ILogger treeLogger = GetLogger(args.PrintTreeFile);
 
             var tree = Parse(args.SourceFiles);

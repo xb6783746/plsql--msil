@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Antlr.Runtime.Tree;
 using plsqlBasic.Loggers;
@@ -8,9 +7,11 @@ using plsql_msil.AstNodes.MethodNodes;
 using plsql_msil.AstNodes.OtherNodes;
 using plsql_msil.AstNodes.PackageNodes;
 using plsql_msil.AstNodes.TypeNodes;
+using plsql_msil.Semantic;
 using plsql_msil.Types;
+using plsql_msil.Types.VarTypes;
 
-namespace plsql_msil.Semantic.Passes
+namespace plsqlSemanticAnalyser.Semantic.Passes
 {
   
     class TypeBuilder :Analyser, IPass
@@ -24,12 +25,9 @@ namespace plsql_msil.Semantic.Passes
         public bool Check(CommonTree tree)
         {
 
-            foreach(dynamic node in tree.Children)
+            foreach(dynamic node in tree.Children.OfType<ClassDeclNode>())
             {
-                if (node is ClassDeclNode || node is PackageDeclNode)
-                {
-                    Visit(node, null);
-                }
+                Visit(node, null);
             }
 
             return !Error;
@@ -39,14 +37,24 @@ namespace plsql_msil.Semantic.Passes
         private void Visit(TableNode node, TypeInfo type) { }
         private void Visit(TypeNode node, TypeInfo type) { }
 
-        private void Visit(PackageDeclNode node, TypeInfo type) 
+
+        private void Visit(ClassDeclNode node, TypeInfo type)
         {
-            var packageType = types.GetType(node.ClassName) as ClassType;
+            var classType = types.GetType(node.ClassName) as ClassType;
 
             foreach (dynamic item in node.ClassDecls)
             {
-                Visit(item, packageType);
+                Visit(item, classType);
             }
+
+            var constructor = new ConstructorInfo(false, classType);
+
+            foreach (var item in classType.Fields)
+            {
+                constructor.AddArg(item.Name, item.Type);
+            }
+
+            classType.AddConstructor(constructor);
 
         }
 
@@ -59,7 +67,9 @@ namespace plsql_msil.Semantic.Passes
             if (!classType.AddField(var.Name, var.Type))
             {
                 Log(
-                    String.Format("В типе {0} поле {1} уже существует", classType.Name, var.Name),
+                    string.Format("В типе {0} поле {1} уже существует", 
+                        classType.Name, 
+                        var.Name),
                     node);
             }
 
@@ -70,30 +80,24 @@ namespace plsql_msil.Semantic.Passes
 
             var method = GetMethod(node);
 
-            var methodInfo = new MethodInfo(method.Name, method.Ret, IsStatic(node.Modifier), classType);
-
-            foreach(var item in method.Args)
-            {
-                methodInfo.AddArg(item.Name, item.Type);
-            }
+            var methodInfo = new MethodInfo(
+                method.Name, 
+                method.Ret, 
+                method.Static, 
+                classType,
+                method.Args
+                    .Select(x => new MethodVarInfo(x.Name, x.Type, MethodVarType.Argument))
+                    .ToList());
 
             if (!classType.AddMethod(methodInfo))
             {
                 Log(
-                    String.Format("В типе {0} метод {1} уже существует", classType.Name, method.Name),
+                    string.Format("В типе {0} метод {1} уже существует", 
+                        classType.Name, 
+                        method.Name),
                     node);
             }
         }
 
-        private void Visit(ClassDeclNode node, TypeInfo type) 
-        {
-            var classType = types.GetType(node.ClassName) as ClassType;
-
-            foreach (dynamic item in node.ClassDecls)
-            {
-                Visit(item, classType);
-            }
-
-        }
     }
 }

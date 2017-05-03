@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
 using Antlr.Runtime.Tree;
+using plsqlBasic.Loggers;
 using plsql_msil.AstNodes;
 using plsql_msil.AstNodes.CommandNodes;
 using plsql_msil.AstNodes.MathNodes;
 using plsql_msil.AstNodes.MethodNodes;
-using plsql_msil.AstNodes.SpecialMethodNodes;
+using plsql_msil.Semantic;
+using plsql_msil.Types;
 
-namespace plsql_msil.Semantic.Passes
+namespace plsqlSemanticAnalyser.Semantic.Passes
 {
 
-    class OperatorPass: IPass
+    class OperatorPass: Analyser, IPass
     {
 
+        public OperatorPass(TypeStorage types, ILogger logger)
+            :base(types, logger)
+        {
+        }
 
         public bool Check(CommonTree tree)
         {
@@ -37,7 +43,6 @@ namespace plsql_msil.Semantic.Passes
         private void Visit(ExpressionNode node)
         {
             Visit(node.Expression as dynamic);
-
         }
 
         private void Visit(AssignNode node)
@@ -62,34 +67,35 @@ namespace plsql_msil.Semantic.Passes
 
                 Visit(node.Expression as dynamic);
             }
+
         }
-        //private void Visit(PlusNode node)
+        //private TypeInfo Visit(PlusNode node)
         //{
-        //     BinaryOperator(node, "Plus");
+        //    return BinaryOperator(node, "Plus");
         //}
-        //private void Visit(MinusNode node)
+        //private TypeInfo Visit(MinusNode node)
         //{
-        //    BinaryOperator(node, "Minus");
+        //    return BinaryOperator(node, "Minus");
         //}
-        //private void Visit(MultNode node)
+        //private TypeInfo Visit(MultNode node)
         //{
-        //     BinaryOperator(node, "Mul");
+        //    return BinaryOperator(node, "Mul");
         //}
-        //private void Visit(DivNode node)
+        //private TypeInfo Visit(DivNode node)
         //{
-        //     BinaryOperator(node, "Div");
+        //    return BinaryOperator(node, "Div");
         //}
-        //private void Visit(ModNode node)
+        //private TypeInfo Visit(ModNode node)
         //{
-        //     BinaryOperator(node, "Mod");
+        //    return BinaryOperator(node, "Mod");
         //}
-        //private void Visit(EqualNode node)
+        //private TypeInfo Visit(EqualNode node)
         //{
-        //     BinaryOperator(node, "Equals");
+        //    return BinaryOperator(node, "Equals");
         //}
-        //private void Visit(NotEqualNode node)
+        //private TypeInfo Visit(NotEqualNode node)
         //{
-        //     BinaryOperator(node, "NotEquals");
+        //    return BinaryOperator(node, "NotEquals");
         //}
         private void Visit(IndexNode node)
         {
@@ -105,17 +111,43 @@ namespace plsql_msil.Semantic.Passes
 
         }
 
-        private void BinaryOperator(BinaryOperator node, string methodName)
-        {
-            var where = node.LeftOperand;
-            var args = new List<BasicNode>() {node.RightOperand};
+        //private TypeInfo BinaryOperator(BinaryOperator node, string methodName)
+        //{
 
-            var method = new SpecialMethodCallNode(methodName, where, args);
+        //    var lType = Visit(node.LeftOperand as dynamic);
+        //    var rType = Visit(node.RightOperand as dynamic);
 
-            ReplaceNode(node.Parent, node.ChildIndex, method);
+        //    if (TypeInfo.IsNumeric(lType))
+        //    {
+        //        return lType;
+        //    }
 
+        //    var where = node.LeftOperand;
+        //    var args = new List<BasicNode>() { node.RightOperand };
 
-        }
+        //    var method = new SpecialMethodCallNode(methodName, where, args);
+
+        //    ReplaceNode(node.Parent, node.ChildIndex, method);
+
+        //    var classType = lType as ClassType;
+
+        //    if (classType == null)
+        //    {
+        //        Log("Индексная операция не может быть применена", node);
+        //        return TypeInfo.Undefined;
+        //    }
+
+        //    var methodInfo = classType.GetMethod(methodName, new List<TypeInfo>() { rType }, false);
+
+        //    if (methodInfo == null)
+        //    {
+        //        Log(string.Format("Операция {0} не может быть применена", methodName), node);
+        //        return TypeInfo.Undefined;
+        //    }
+
+        //    return methodInfo.Ret;
+
+        //}
 
        
 

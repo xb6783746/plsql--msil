@@ -27,7 +27,7 @@ namespace plsqlSemanticAnalyser.Semantic.Passes
                 CollectTypeInfo(node as dynamic);
             }
 
-            return !this.Error;
+            return !Error;
         }
 
         private void CollectTypeInfo(ClassDeclNode node)
@@ -57,7 +57,7 @@ namespace plsqlSemanticAnalyser.Semantic.Passes
             }
             else
             {
-                Log(String.Format("Пакет с именем {0} уже существует", node.ClassName), node);
+                Log(string.Format("Пакет с именем {0} уже существует", node.ClassName), node);
             }
 
         }
@@ -67,23 +67,20 @@ namespace plsqlSemanticAnalyser.Semantic.Passes
 
             var packageType = types.GetType(node.ClassName) as PackageType;
 
-            foreach (var item in node.Children)
+            var innerTypes = node.Children
+                .Where(x => 
+                       x is RecordNode 
+                    || x is TableNode 
+                    || x is DictionaryNode);
+
+            foreach (var item in innerTypes)
             {
 
-                if (item is TableNode)
-                {
-
-                    CollectTable(item as TableNode, packageType);
-                }
-                else if (item is RecordNode)
-                {
-
-                    CollectRecord(item as RecordNode, packageType);
-                }
+                CollectInnerType(item as dynamic, packageType);
             }
         }
 
-        private void CollectRecord(RecordNode node, PackageType packageType)
+        private void CollectInnerType(RecordNode node, PackageType packageType)
         {
 
             var record = new RecordType(packageType.Name, node.Name);
@@ -105,9 +102,11 @@ namespace plsqlSemanticAnalyser.Semantic.Passes
 
 
         }
-        private void CollectTable(TableNode node, PackageType packageType)
+        private void CollectInnerType(TableNode node, PackageType packageType)
         {
-            var tableType = builder.GenerateTableType(node.TypeNode, packageType.Name + "." + node.Name);
+            var tableType = builder.GenerateTableType(
+                node.TypeNode, 
+                packageType.Name + "." + node.Name);
 
             bool ok = packageType.AddType(tableType);
             types.AddType(tableType);
@@ -118,19 +117,22 @@ namespace plsqlSemanticAnalyser.Semantic.Passes
             }
 
         }
-        //private void CollectDictionary(DictionaryNode node, PackageType packageType)
-        //{
-        //    var dictType = GenerateDictionaryType(node.TypeNode, node.Name);
+        private void CollectInnerType(DictionaryNode node, PackageType packageType)
+        {
+            var dictType = builder.GenerateDictionaryType(
+                node.TypeNode, 
+                node.ValTypeNode, 
+                packageType.Name + "." + node.Name);
 
-        //    bool ok = packageType.AddType(tableType);
-        //    types.AddType(tableType);
+            bool ok = packageType.AddType(dictType);
+            types.AddType(dictType);
 
-        //    if (!ok)
-        //    {
-        //        Log(String.Format("Таблица с именем {0} уже существует", node.Name), node);
-        //    }
+            if (!ok)
+            {
+                Log(String.Format("Таблица с именем {0} уже существует", node.Name), node);
+            }
 
-        //}
+        }
 
     }
 }

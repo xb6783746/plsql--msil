@@ -46,6 +46,7 @@
     <Compile Include="Semantic\Analyser.cs" />
     <Compile Include="Semantic\Context.cs" />
     <Compile Include="Semantic\IPass.cs" />
+    <Compile Include="Semantic\Passes\TypeAnalyser.cs" />
     <Compile Include="Semantic\Passes\DefinitionAnalyser.cs" />
     <Compile Include="Semantic\Passes\OperatorPass.cs" />
     <Compile Include="Semantic\Passes\TypeBuilder.cs" />
